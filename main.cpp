@@ -1,5 +1,5 @@
 ﻿#include "ApplicationManager.h"
-#include "GUI\GUI.h"
+#include "GUI/GUI.h"
 
 int main()
 {
@@ -11,15 +11,14 @@ int main()
 	w->WaitMouseClick(x, y);
 	*/
 
-	//Sarrah
-	//randa والله اني شاطرة 
+	//Mrym
+	//Randa والله اني شاطرة 
 	//Yasser
-	//khaled
-	//Sarrah 2
+	//Khaled
+	//Sarrah
 	
 	ApplicationManager AppManager;
 	AppManager.Run();	
 	
 	return 0;
 }
-

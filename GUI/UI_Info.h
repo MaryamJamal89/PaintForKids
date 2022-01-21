@@ -19,6 +19,7 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	//If you want to change the menu items order, change the order here
 	ITM_SQUR,		//Square item in menu
 	ITM_ELPS,		//Ellipse item in menu
+	ITM_HEX,		//Hex item in menu
 	
 	//TODO: Add more items names here
 
@@ -36,12 +37,7 @@ enum PlayMenuItem //The items of the Play menu (you should add more items)
 	//TODO: Add more items names here
 
 	PLAY_ITM_COUNT		//no. of menu items ==> This should be the last line in this enum
-	
 };
-
-
-
-
 
 __declspec(selectany) //This line to prevent "redefinition error"
 
@@ -55,7 +51,6 @@ struct UI_Info	//User Interface Info.
 		ToolBarHeight,		//Tool Bar Height (distance from top of window to bottom line of toolbar)
 		MenuItemWidth;		//Width of each item in toolbar menu
 	
-
 	color DrawColor;		//Drawing color
 	color FillColor;		//Filling color
 	color HighlightColor;	//Highlighting color

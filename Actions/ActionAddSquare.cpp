@@ -2,7 +2,6 @@
 #include "..\Figures\CSquare.h"
 
 #include "..\ApplicationManager.h"
-
 #include "..\GUI\GUI.h"
 
 ActionAddSquare::ActionAddSquare(ApplicationManager * pApp):Action(pApp)
@@ -16,14 +15,12 @@ void ActionAddSquare::Execute()
 	//Get a Pointer to the Interface
 	GUI* pGUI = pManager->GetGUI();
 
-
 	GfxInfo SqrGfxInfo;
 	SqrGfxInfo.isFilled = false;	//default is not filled
 	//get drawing, filling colors and pen width from the interface
 	SqrGfxInfo.DrawClr = pGUI->getCrntDrawColor();
 	SqrGfxInfo.FillClr = pGUI->getCrntFillColor();
 	SqrGfxInfo.BorderWdth = pGUI->getCrntPenWidth();
-
 
 	//Step 1 - Read Square data from the user
 
@@ -37,9 +34,9 @@ void ActionAddSquare::Execute()
 
 	pGUI->ClearStatusBar();
 
-
 	//Step 2 - prepare square data
 	//User has entered two points P1&P2
+	// 
 	//2.1- Identify the Top left corner of the square
 	Point topLeft ;
 	topLeft.x = P1.x<P2.x? P1.x: P2.x;
@@ -49,7 +46,6 @@ void ActionAddSquare::Execute()
 	//The square side length would be the longer distance between the two points coordinates
 	int SideLength = max(abs(P1.x-P2.x), abs(P1.y-P2.y));
 
-		
 	//Step 3 - Create a Square with the parameters read from the user
 	CSquare *R=new CSquare(topLeft, SideLength, SqrGfxInfo);
 

@@ -6,7 +6,6 @@
 
 class Action;	//Forward Declaration
 
-
 //Main class that manages everything in the application.
 class ApplicationManager
 {
@@ -18,7 +17,6 @@ private:
 
 	//Pointers to Input and Output classes
 	GUI* pGUI;
-	
 
 public:	
 	ApplicationManager(); 
