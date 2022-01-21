@@ -12,10 +12,9 @@ int main()
 	*/
 
 	//Sarrah
-  
 	//randa والله اني شاطرة 
 	//Yasser
-	
+	//khaled
 	ApplicationManager AppManager;
 	AppManager.Run();	
 	
