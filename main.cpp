@@ -1,4 +1,4 @@
-#include "ApplicationManager.h"
+﻿#include "ApplicationManager.h"
 #include "GUI\GUI.h"
 
 int main()
@@ -10,7 +10,11 @@ int main()
 	int x, y;
 	w->WaitMouseClick(x, y);
 	*/
-	
+
+	//Sarrah
+	//randa والله اني شاطرة 
+	//Yasser
+	//khaled
 	ApplicationManager AppManager;
 	AppManager.Run();	
 	
