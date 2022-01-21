@@ -1,6 +1,8 @@
 #include "ApplicationManager.h"
-#include "Actions\ActionAddSquare.h"
 
+#include "Actions/ActionAddSquare.h"
+#include "Actions/ActionAddEllipse.h"
+#include "Actions/ActionAddHexagon.h"
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -33,9 +35,7 @@ void ApplicationManager::Run()
 		UpdateInterface();	
 
 	}while(ActType != EXIT);
-	
 }
-
 
 //==================================================================================//
 //								Actions Related Functions							//
@@ -53,13 +53,15 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			break;
 
 		case DRAW_ELPS:
-			///create AddLineAction here
+			newAct = new ActionAddEllipse(this);
+			break;
 
+		case DRAW_HEX:
+			newAct = new ActionAddHexagon(this);
 			break;
 
 		case EXIT:
 			///create ExitAction here
-			
 			break;
 		
 		case STATUS:	//a click on the status bar ==> no action
@@ -68,7 +70,9 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 	}	
 	return newAct;
 }
+
 //////////////////////////////////////////////////////////////////////
+
 //Executes the created Action
 void ApplicationManager::ExecuteAction(Action* &pAct) 
 {	
@@ -80,6 +84,7 @@ void ApplicationManager::ExecuteAction(Action* &pAct)
 		pAct = NULL;
 	}
 }
+
 //==================================================================================//
 //						Figures Management Functions								//
 //==================================================================================//
@@ -90,17 +95,19 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 	if(FigCount < MaxFigCount )
 		FigList[FigCount++] = pFig;	
 }
+
 ////////////////////////////////////////////////////////////////////////////////////
+
 CFigure *ApplicationManager::GetFigure(int x, int y) const
 {
 	//If a figure is found return a pointer to it.
 	//if this point (x,y) does not belong to any figure return NULL
 
-
 	///Add your code here to search for a figure given a point x,y	
 
 	return NULL;
 }
+
 //==================================================================================//
 //							Interface Management Functions							//
 //==================================================================================//
@@ -111,11 +118,15 @@ void ApplicationManager::UpdateInterface() const
 	for(int i=0; i<FigCount; i++)
 		FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
 }
+
 ////////////////////////////////////////////////////////////////////////////////////
+
 //Return a pointer to the interface
 GUI *ApplicationManager::GetGUI() const
 {	return pGUI; }
+
 ////////////////////////////////////////////////////////////////////////////////////
+
 //Destructor
 ApplicationManager::~ApplicationManager()
 {

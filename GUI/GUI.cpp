@@ -10,7 +10,6 @@ GUI::GUI()
 	UI.height = 700;
 	UI.wx = 5;
 	UI.wy =5;
-
 	
 	UI.StatusBarHeight = 50;
 	UI.ToolBarHeight = 50;
@@ -24,22 +23,19 @@ GUI::GUI()
 	UI.StatusBarColor = TURQUOISE;
 	UI.PenWidth = 3;	//width of the figures frames
 
-	
 	//Create the output window
 	pWind = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
+
 	//Change the title
 	pWind->ChangeTitle("Paint for Kids - Programming Techniques Project");
 	
 	CreateDrawToolBar();
 	CreateStatusBar();
-	
 }
-
 
 //======================================================================================//
 //								Input Functions										    //
 //======================================================================================//
-
 
 void GUI::GetPointClicked(int &x, int &y) const
 {
@@ -86,7 +82,8 @@ ActionType GUI::MapInputToActionType() const
 			{
 			case ITM_SQUR: return DRAW_SQUARE;
 			case ITM_ELPS: return DRAW_ELPS;
-			case ITM_EXIT: return EXIT;	
+			case ITM_HEX: return DRAW_HEX;
+			case ITM_EXIT: return EXIT;
 			
 			default: return EMPTY;	//A click on empty place in desgin toolbar
 			}
@@ -108,8 +105,8 @@ ActionType GUI::MapInputToActionType() const
 		//and return the correspoding action
 		return TO_PLAY;	//just for now. This should be updated
 	}	
-
 }
+
 //======================================================================================//
 //								Output Functions										//
 //======================================================================================//
@@ -122,14 +119,18 @@ window* GUI::CreateWind(int w, int h, int x, int y) const
 	pW->DrawRectangle(0, UI.ToolBarHeight, w, h);	
 	return pW;
 }
+
 //////////////////////////////////////////////////////////////////////////////////////////
+
 void GUI::CreateStatusBar() const
 {
 	pWind->SetPen(UI.StatusBarColor, 1);
 	pWind->SetBrush(UI.StatusBarColor);
 	pWind->DrawRectangle(0, UI.height - UI.StatusBarHeight, UI.width, UI.height);
 }
+
 //////////////////////////////////////////////////////////////////////////////////////////
+
 void GUI::ClearStatusBar() const
 {
 	//Clear Status bar by drawing a filled white Square
@@ -137,7 +138,9 @@ void GUI::ClearStatusBar() const
 	pWind->SetBrush(UI.StatusBarColor);
 	pWind->DrawRectangle(0, UI.height - UI.StatusBarHeight, UI.width, UI.height);
 }
+
 //////////////////////////////////////////////////////////////////////////////////////////
+
 void GUI::CreateDrawToolBar() const
 {
 	UI.InterfaceMode = MODE_DRAW;
@@ -151,6 +154,7 @@ void GUI::CreateDrawToolBar() const
 	string MenuItemImages[DRAW_ITM_COUNT];
 	MenuItemImages[ITM_SQUR] = "images\\MenuItems\\Menu_Sqr.jpg";
 	MenuItemImages[ITM_ELPS] = "images\\MenuItems\\Menu_Elps.jpg";
+	MenuItemImages[ITM_HEX] = "images\\MenuItems\\Menu_Hex.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
 
 	//TODO: Prepare images for each menu item and add it to the list
@@ -159,13 +163,12 @@ void GUI::CreateDrawToolBar() const
 	for(int i=0; i<DRAW_ITM_COUNT; i++)
 		pWind->DrawImage(MenuItemImages[i], i*UI.MenuItemWidth,0,UI.MenuItemWidth, UI.ToolBarHeight);
 
-
-
 	//Draw a line under the toolbar
 	pWind->SetPen(RED, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);	
 
 }
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
 void GUI::CreatePlayToolBar() const
@@ -173,6 +176,7 @@ void GUI::CreatePlayToolBar() const
 	UI.InterfaceMode = MODE_PLAY;
 	///TODO: write code to create Play mode menu
 }
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
 void GUI::ClearDrawArea() const
@@ -180,8 +184,8 @@ void GUI::ClearDrawArea() const
 	pWind->SetPen(UI.BkGrndColor, 1);
 	pWind->SetBrush(UI.BkGrndColor);
 	pWind->DrawRectangle(0, UI.ToolBarHeight, UI.width, UI.height - UI.StatusBarHeight);	
-	
 }
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
 void GUI::PrintMessage(string msg) const	//Prints a message on status bar
@@ -192,14 +196,17 @@ void GUI::PrintMessage(string msg) const	//Prints a message on status bar
 	pWind->SetFont(20, BOLD , BY_NAME, "Arial");   
 	pWind->DrawString(10, UI.height - (int)(UI.StatusBarHeight/1.5), msg);
 }
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
 color GUI::getCrntDrawColor() const	//get current drwawing color
 {	return UI.DrawColor;	}
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
 color GUI::getCrntFillColor() const	//get current filling color
 {	return UI.FillColor;	}
+
 //////////////////////////////////////////////////////////////////////////////////////////
 	
 int GUI::getCrntPenWidth() const		//get current pen width
@@ -228,16 +235,13 @@ void GUI::DrawSquare(Point P1, int length, GfxInfo RectGfxInfo, bool selected) c
 	else	
 		style = FRAME;
 
-	
 	pWind->DrawRectangle(P1.x, P1.y, P1.x +length, P1.y+length, style);
 	pWind->DrawLine(P1.x, P1.y, P1.x + length, P1.y + length, style);
-
 }
 
-
 //////////////////////////////////////////////////////////////////////////////////////////
+
 GUI::~GUI()
 {
 	delete pWind;
 }
-
