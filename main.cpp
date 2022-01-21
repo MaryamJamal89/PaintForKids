@@ -1,4 +1,4 @@
-#include "ApplicationManager.h"
+﻿#include "ApplicationManager.h"
 #include "GUI\GUI.h"
 
 int main()
@@ -12,6 +12,8 @@ int main()
 	*/
 
 	//Sarrah
+  
+	//randa والله اني شاطرة 
 	//Yasser
 	
 	ApplicationManager AppManager;
