@@ -10,6 +10,8 @@ int main()
 	int x, y;
 	w->WaitMouseClick(x, y);
 	*/
+
+	//Sarrah
 	
 	ApplicationManager AppManager;
 	AppManager.Run();	
