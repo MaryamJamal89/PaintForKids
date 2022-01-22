@@ -145,6 +145,7 @@
     <ClCompile Include="Actions\ActionAddEllipse.cpp" />
     <ClCompile Include="Actions\ActionAddHexagon.cpp" />
     <ClCompile Include="Figures\CHexagon.cpp" />
+    <ClCompile Include="Figures\CEllipse.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -232,5 +233,6 @@
     <ClInclude Include="Actions\ActionAddEllipse.h" />
     <ClInclude Include="Actions\ActionAddHexagon.h" />
     <ClInclude Include="Figures\CHexagon.h" />
+    <ClInclude Include="Figures\CEllipse.h" />
   </ItemGroup>
 </Project>

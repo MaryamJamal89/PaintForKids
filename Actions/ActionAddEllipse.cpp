@@ -1,4 +1,4 @@
-#include "ActionAddEllipse.h"
+#include "./ActionAddEllipse.h"
 #include "../Figures/CEllipse.h"
 #include "../ApplicationManager.h"
 #include "../GUI/GUI.h"
