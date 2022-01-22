@@ -15,7 +15,6 @@ int main()
 	//Randa والله اني شاطرة 
 	//Yasser
 	//Khaled
-	//Sarrah
 	
 	ApplicationManager AppManager;
 	AppManager.Run();	
