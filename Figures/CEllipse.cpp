@@ -20,5 +20,17 @@ void CEllipse::DrawMe(GUI* pOut) const
 
 void CEllipse::Load(ifstream& loadedFile, GUI* pGUI)
 {
-	//load
+	string drawColor, fillColor;
+	loadedFile >> ID >> Center.x >> Center.y >> P.x >> P.y >> drawColor >> fillColor;
+	FigGfxInfo.DrawClr = pGUI->StringToColor(drawColor);
+	if (fillColor == "NO_FILL")
+	{
+		FigGfxInfo.isFilled = false;
+	}
+	else
+	{
+		FigGfxInfo.isFilled = true;
+		FigGfxInfo.FillClr = pGUI->StringToColor(fillColor);
+	}
+	CEllipse::SetSelected(false);
 }

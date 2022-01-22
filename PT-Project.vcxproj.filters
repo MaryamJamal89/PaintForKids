@@ -253,6 +253,8 @@
     <ClInclude Include="Actions\ActionAddHexagon.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
-    <ClInclude Include="Actions\ActionLoad.h" />
+    <ClInclude Include="Actions\ActionLoad.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
