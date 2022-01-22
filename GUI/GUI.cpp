@@ -219,24 +219,93 @@ int GUI::getCrntPenWidth() const		//get current pen width
 void GUI::DrawSquare(Point P1, int length, GfxInfo RectGfxInfo, bool selected) const
 {
 	color DrawingClr;
-	if(selected)	
+	if (selected)
 		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
-	else			
+	else
 		DrawingClr = RectGfxInfo.DrawClr;
-	
+
 	pWind->SetPen(DrawingClr, RectGfxInfo.BorderWdth);	//Set Drawing color & width
-	
+
 	drawstyle style;
-	if (RectGfxInfo.isFilled)	
+	if (RectGfxInfo.isFilled)
 	{
-		style = FILLED;		
+		style = FILLED;
 		pWind->SetBrush(RectGfxInfo.FillClr);
 	}
-	else	
+	else
 		style = FRAME;
 
-	pWind->DrawRectangle(P1.x, P1.y, P1.x +length, P1.y+length, style);
-	pWind->DrawLine(P1.x, P1.y, P1.x + length, P1.y + length, style);
+	pWind->DrawRectangle(P1.x, P1.y, P1.x + length, P1.y + length, style);
+	//pWind->DrawLine(P1.x, P1.y, P1.x + length, P1.y + length, style);
+
+}
+
+void GUI::DrawEllip(Point P1, Point P2, GfxInfo ElliGfxInfo, bool selected) const
+{
+	color DrawingClr;
+	if (selected)
+		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
+	else
+		DrawingClr = ElliGfxInfo.DrawClr;
+
+	pWind->SetPen(DrawingClr, 3);
+	drawstyle style;
+	if (ElliGfxInfo.isFilled)
+	{
+		style = FILLED;
+		pWind->SetBrush(ElliGfxInfo.FillClr);
+	}
+	else
+		style = FRAME;
+
+	pWind->DrawEllipse(P1.x - P2.x, P1.y - P2.y, P1.x + P2.x, P1.y + P2.y, style);
+}
+
+void GUI::DrawHex(Point center, GfxInfo HexGfxInfo, bool selected) const
+{
+	color DrawingClr;
+	if (selected)
+		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
+	else
+		DrawingClr = HexGfxInfo.DrawClr;
+
+	pWind->SetPen(DrawingClr, 3);
+	drawstyle style;
+	if (HexGfxInfo.isFilled)
+	{
+		style = FILLED;
+		pWind->SetBrush(HexGfxInfo.FillClr);
+	}
+	else
+		style = FRAME;
+
+	int d = 50;
+
+	//Randa
+	Point point1;
+	point1.x = center.x - d;
+	point1.y = center.y;
+	Point point2;
+	point2.x = center.x - d / 2;
+	point2.y = center.y - (d - d / 20 * 3);
+	Point point3;
+	point3.x = center.x + d / 2;
+	point3.y = center.y - (d - d / 20 * 3);
+	Point point4;
+	point4.x = center.x + d;
+	point4.y = center.y;
+	Point point5;
+	point5.x = center.x + d / 2;
+	point5.y = center.y + (d - d / 20 * 3);
+	Point point6;
+	point6.x = center.x - d / 2;
+	point6.y = center.y + (d - d / 20 * 3);
+
+	int Xpoints[6] = { point1.x, point2.x, point3.x, point4.x, point5.x, point6.x };
+	int Ypoints[6] = { point1.y, point2.y, point3.y, point4.y, point5.y, point6.y };
+
+	// Draw the polygon.
+	pWind->DrawPolygon(Xpoints, Ypoints, 6, style);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////

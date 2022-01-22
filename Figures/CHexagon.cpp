@@ -5,7 +5,6 @@ CHexagon::CHexagon(Point C, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo)
 {
 	Center = C;
 	HexCnt++;
-	//FigGfxInfo.Resize_Factor = 1;
 	P.x = 80; P.y = 30;
 }
 
