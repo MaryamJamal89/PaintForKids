@@ -3,6 +3,7 @@
 #include "Actions/ActionAddSquare.h"
 #include "Actions/ActionAddEllipse.h"
 #include "Actions/ActionAddHexagon.h"
+#include "Actions/ActionLoad.h"
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -68,7 +69,7 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			break;
 
 		case LOAD:
-			//newAct = new ActionLoad(this);
+			newAct = new ActionLoad(this);
 			break;
 
 		case EXIT:
