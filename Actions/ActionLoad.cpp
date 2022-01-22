@@ -48,14 +48,14 @@ void ActionLoad::Execute()
 	pManager->ResetFigList();
 
 	loadedFile >> figsNum;
-	while (figsNum>0)
+	while (figsNum > 0)
 	{
 		CFigure* fig;
 		loadedFile >> figType;
 		if (figType == "SQR") fig = new CSquare;
 		//add other figures
 		//----
-		fig->Load(loadedFile,pGUI);
+		fig->Load(loadedFile, pGUI);
 		pManager->AddFigure(fig);
 		figsNum--;
 	}

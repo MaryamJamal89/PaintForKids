@@ -3,15 +3,15 @@
 
 #include "Action.h"
 
-class ActionLoad: public Action
+class ActionLoad : public Action
 {
 public:
-	ActionLoad(ApplicationManager *pApp);
+	ActionLoad(ApplicationManager* pApp);
 
 	virtual string ReadFileName();
 
-	virtual void Execute() ;
-	
+	virtual void Execute();
+
 };
 
 #endif

@@ -157,6 +157,7 @@
     <ClCompile Include="Actions\ActionAddHexagon.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\ActionLoad1.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -241,9 +242,6 @@
     <ClInclude Include="Actions\ActionAddSquare.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
-    <ClInclude Include="Actions\ActionLoad.h">
-      <Filter>Action Classes</Filter>
-    </ClInclude>
     <ClInclude Include="Figures\CEllipse.h">
       <Filter>Figures Classes</Filter>
     </ClInclude>
@@ -256,5 +254,7 @@
     <ClInclude Include="Actions\ActionAddHexagon.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
+    <ClInclude Include="Actions\ActionLoad1.h" />
+    <ClInclude Include="Actions\ActionLoad.h" />
   </ItemGroup>
 </Project>
