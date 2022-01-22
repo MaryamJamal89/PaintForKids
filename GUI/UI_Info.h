@@ -43,24 +43,27 @@ __declspec(selectany) //This line to prevent "redefinition error"
 
 struct UI_Info	//User Interface Info.
 {
-	GUI_MODE InterfaceMode;
-	
-	int	width, height,	//Window width and height
-		wx , wy,			//Window starting coordinates
-		StatusBarHeight,	//Status Bar Height
-		ToolBarHeight,		//Tool Bar Height (distance from top of window to bottom line of toolbar)
-		MenuItemWidth;		//Width of each item in toolbar menu
-	
-	color DrawColor;		//Drawing color
-	color FillColor;		//Filling color
-	color HighlightColor;	//Highlighting color
-	color MsgColor;			//Messages color
-	color BkGrndColor;		//Background color
-	color StatusBarColor;	//Status bar color
-	int PenWidth;			//width of the pen that draws shapes
+	GUI_MODE InterfaceMode = MODE_DRAW;
+
+	int	width = 1300;
+	int height = 700;	//Window width and height
+	int wx = 5;
+	int wy = 5;		//Window starting coordinates
+	int StatusBarHeight = 50;	//Status Bar Height
+	int ToolBarHeight = 50;		//Tool Bar Height (distance from top of window to bottom line of toolbar)
+	int MenuItemWidth = 80;		//Width of each item in toolbar menu
+
+
+	color DrawColor = BLUE;		//Drawing color
+	color FillColor = GREEN;		//Filling color
+	color HighlightColor = MAGENTA;	//Highlighting color
+	color MsgColor = RED;			//Messages color
+	color BkGrndColor = LIGHTGOLDENRODYELLOW;		//Background color
+	color StatusBarColor = TURQUOISE;	//Status bar color
+	int PenWidth = 3;			//width of the pen that draws shapes
 
 	/// Add more members if needed
-	
+
 }UI;	//create a global object UI
 
 #endif

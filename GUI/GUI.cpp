@@ -4,24 +4,24 @@
 GUI::GUI()
 {
 	//Initialize user interface parameters
-	UI.InterfaceMode = MODE_DRAW;
-	
-	UI.width = 1300;
-	UI.height = 700;
-	UI.wx = 5;
-	UI.wy =5;
-	
-	UI.StatusBarHeight = 50;
-	UI.ToolBarHeight = 50;
-	UI.MenuItemWidth = 80;
-	
-	UI.DrawColor = BLUE;	//Drawing color
-	UI.FillColor = GREEN;	//Filling color
-	UI.MsgColor = RED;		//Messages color
-	UI.BkGrndColor = LIGHTGOLDENRODYELLOW;	//Background color
-	UI.HighlightColor = MAGENTA;	//This color should NOT be used to draw figures. use if for highlight only
-	UI.StatusBarColor = TURQUOISE;
-	UI.PenWidth = 3;	//width of the figures frames
+	//UI.InterfaceMode = MODE_DRAW;
+	//
+	//UI.width = 1300;
+	//UI.height = 700;
+	//UI.wx = 5;
+	//UI.wy =5;
+	//
+	//UI.StatusBarHeight = 50;
+	//UI.ToolBarHeight = 50;
+	//UI.MenuItemWidth = 80;
+	//
+	//UI.DrawColor = BLUE;	//Drawing color
+	//UI.FillColor = GREEN;	//Filling color
+	//UI.MsgColor = RED;		//Messages color
+	//UI.BkGrndColor = LIGHTGOLDENRODYELLOW;	//Background color
+	//UI.HighlightColor = MAGENTA;	//This color should NOT be used to draw figures. use if for highlight only
+	//UI.StatusBarColor = TURQUOISE;
+	//UI.PenWidth = 3;	//width of the figures frames
 
 	//Create the output window
 	pWind = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
@@ -156,6 +156,7 @@ void GUI::CreateDrawToolBar() const
 	MenuItemImages[ITM_SQUR] = "images\\MenuItems\\Menu_Sqr.jpg";
 	MenuItemImages[ITM_ELPS] = "images\\MenuItems\\Menu_Elps.jpg";
 	MenuItemImages[ITM_HEX] = "images\\MenuItems\\Menu_Hex.jpg";
+	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\Menu_Load.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
 
 	//TODO: Prepare images for each menu item and add it to the list

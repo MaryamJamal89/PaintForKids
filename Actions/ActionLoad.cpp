@@ -17,7 +17,6 @@ string ActionLoad::ReadFileName()
 }
 
 
-
 //Execute the action
 void ActionLoad::Execute()
 {
