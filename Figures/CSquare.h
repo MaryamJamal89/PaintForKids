@@ -9,8 +9,10 @@ private:
 	Point TopLeftCorner;	
 	int length;
 public:
+	CSquare();
 	CSquare(Point , int, GfxInfo FigureGfxInfo );
 	virtual void DrawMe(GUI* pOut) const;
+	virtual void Load(ifstream& loadedFile, GUI* pGUI); //load figure from file
 };
 
 #endif
