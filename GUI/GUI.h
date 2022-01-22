@@ -40,6 +40,7 @@ public:
 	
 	void PrintMessage(string msg) const;	//Print a message on Status bar
 
+	color StringToColor(string colorStr); //convert string to color type
 	color getCrntDrawColor() const;	//get current drwawing color
 	color getCrntFillColor() const;	//get current filling color
 	int getCrntPenWidth() const;		//get current pen width

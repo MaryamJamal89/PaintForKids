@@ -22,6 +22,8 @@ public:
 	ApplicationManager(); 
 	~ApplicationManager();
 
+	void ResetFigList(); //deletes all old figures
+	
 	void Run();		//to run the application
 	
 	// -- Action-Related Functions

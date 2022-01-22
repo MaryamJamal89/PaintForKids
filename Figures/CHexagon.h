@@ -10,8 +10,10 @@ private:
 
 public:
 	static int HexCnt;                      //static variable to determine the number of objects
+	CHexagon();
 	CHexagon(Point, GfxInfo FigureGfxInfo);
 	virtual void DrawMe(GUI* pOut) const;  //draw the figure 
+	virtual void Load(ifstream& loadedFile, GUI* pGUI); //load figure from file
 };
 
 #endif

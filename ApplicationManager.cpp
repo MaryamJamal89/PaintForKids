@@ -10,11 +10,18 @@ ApplicationManager::ApplicationManager()
 	//Create Input and output
 	pGUI = new GUI;	
 	
+	//delete all old figures
+	ApplicationManager::ResetFigList();
+}
+
+//delete all old figures
+void ApplicationManager::ResetFigList()
+{
 	FigCount = 0;
-		
+
 	//Create an array of figure pointers and set them to NULL		
-	for(int i=0; i<MaxFigCount; i++)
-		FigList[i] = NULL;	
+	for (int i = 0; i < MaxFigCount; i++)
+		FigList[i] = NULL;
 }
 
 void ApplicationManager::Run()
@@ -58,6 +65,10 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 
 		case DRAW_HEX:
 			newAct = new ActionAddHexagon(this);
+			break;
+
+		case LOAD:
+			//newAct = new ActionLoad(this);
 			break;
 
 		case EXIT:
