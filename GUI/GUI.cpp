@@ -83,6 +83,7 @@ ActionType GUI::MapInputToActionType() const
 			case ITM_SQUR: return DRAW_SQUARE;
 			case ITM_ELPS: return DRAW_ELPS;
 			case ITM_HEX: return DRAW_HEX;
+			case ITM_SAVE: return SAVE;
 			case ITM_LOAD: return LOAD;
 			case ITM_EXIT: return EXIT;
 			
@@ -156,6 +157,7 @@ void GUI::CreateDrawToolBar() const
 	MenuItemImages[ITM_SQUR] = "images\\MenuItems\\Menu_Sqr.jpg";
 	MenuItemImages[ITM_ELPS] = "images\\MenuItems\\Menu_Elps.jpg";
 	MenuItemImages[ITM_HEX] = "images\\MenuItems\\Menu_Hex.jpg";
+	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\MenuSave.jpg";
 	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\Menu_Load.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
 
@@ -226,6 +228,18 @@ color GUI::StringToColor(string colorStr)    //convert string to color type
 	else if (colorStr == "GREEN") return GREEN;
 	else if (colorStr == "ORANGE") return ORANGE;
 }
+////////////////////////////////////////////////////////////////////  covert color to  string
+string GUI::ColorToString(color clr)    //convert string to color type
+{
+	if (clr == BLUE) return "BLUE";
+	else if (clr == BLACK) return "BLACK";
+	else if (clr == RED) return "RED";
+	else if (clr == YELLOW) return "YELLOW";
+	else if (clr == WHITE) return "WHITE";
+	else if (clr == GREEN) return "GREEN";
+	else if (clr == ORANGE) return "ORANGE";
+}
+
 
 //======================================================================================//
 //								Figures Drawing Functions								//

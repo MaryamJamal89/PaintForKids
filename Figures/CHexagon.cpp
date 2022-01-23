@@ -18,6 +18,13 @@ void CHexagon::DrawMe(GUI* pOut) const
 	pOut->DrawHex(Center, FigGfxInfo, Selected);
 }
 
+// save figure in the file
+void CHexagon::Save(ofstream& file)
+{
+	//file << "Square " << ID << "  " << TopLeftCorner.x << "  " << TopLeftCorner.y << "  " << length << "  " << endl;
+	// << FigGfxInfo.DrawClr << "  " << FigGfxInfo.FillClr << endl;
+}
+
 void CHexagon::Load(ifstream& loadedFile, GUI* pGUI)
 {
 	string drawColor, fillColor;

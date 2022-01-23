@@ -15,6 +15,14 @@ void CSquare::DrawMe(GUI* pGUI) const
 	pGUI->DrawSquare(TopLeftCorner, length, FigGfxInfo, Selected);
 }
 
+// save figure in the file
+void CSquare::Save(ofstream& file)
+{
+	file << "Square " << ID << "  " << TopLeftCorner.x << "  " << TopLeftCorner.y << "  " << length << "  " << endl;
+		// << FigGfxInfo.DrawClr << "  " << FigGfxInfo.FillClr << endl;
+}
+
+
 void CSquare::Load(ifstream& loadedFile, GUI* pGUI)
 {
 	string drawColor, fillColor;

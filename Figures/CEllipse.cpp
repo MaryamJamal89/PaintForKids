@@ -18,6 +18,13 @@ void CEllipse::DrawMe(GUI* pOut) const
 	pOut->DrawEllip(Center, P, FigGfxInfo, Selected);
 }
 
+// save figure in the file
+void CEllipse::Save(ofstream& file)
+{
+	//file << "Square " << ID << "  " << TopLeftCorner.x << "  " << TopLeftCorner.y << "  " << length << "  " << endl;
+	// << FigGfxInfo.DrawClr << "  " << FigGfxInfo.FillClr << endl;
+}
+
 void CEllipse::Load(ifstream& loadedFile, GUI* pGUI)
 {
 	string drawColor, fillColor;

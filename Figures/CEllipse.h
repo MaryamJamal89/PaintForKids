@@ -13,6 +13,7 @@ public:
 	CEllipse();
 	CEllipse(Point, GfxInfo FigureGfxInfo);
 	virtual void DrawMe(GUI* pOut) const;  //draw the figure 
+	virtual void Save(ofstream& file);                   // save figure to file
 	virtual void Load(ifstream& loadedFile, GUI* pGUI); //load figure from file
 };
 

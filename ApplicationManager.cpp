@@ -1,8 +1,9 @@
 #include "ApplicationManager.h"
-
+#include <fstream>
 #include "Actions/ActionAddSquare.h"
 #include "Actions/ActionAddEllipse.h"
 #include "Actions/ActionAddHexagon.h"
+#include "Actions/ActionSave.h"
 #include "Actions/ActionLoad.h"
 
 //Constructor
@@ -68,9 +69,14 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			newAct = new ActionAddHexagon(this);
 			break;
 
+		case SAVE:
+			newAct = new ActionSave(this);
+			break;
+
 		case LOAD:
 			newAct = new ActionLoad(this);
 			break;
+
 
 		case EXIT:
 			///create ExitAction here
@@ -119,7 +125,18 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 
 	return NULL;
 }
+////////////////////////////////////////////////////////////////////////////////////asmaa
+void ApplicationManager::SaveAll(ofstream& File) const
+{
+	File << FigCount << endl;
+	for (int i = 0; i < FigCount; i++)
+	{
+		//FigList[i]->Save(File);
+	}
+}
 
+
+////////////////////////////////////////////////////////////////////////////////////
 //==================================================================================//
 //							Interface Management Functions							//
 //==================================================================================//

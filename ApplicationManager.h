@@ -37,6 +37,10 @@ public:
 	// -- Interface Management Functions	
 	GUI *GetGUI() const; //Return pointer to the interface
 	void UpdateInterface() const;	//Redraws all the drawing window	
+
+	// Saving function
+	void SaveAll(ofstream& File)const;       //Save All Figures To The File :Asmaa
+
 };
 
 #endif
