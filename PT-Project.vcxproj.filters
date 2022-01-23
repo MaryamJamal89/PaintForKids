@@ -157,6 +157,7 @@
     <ClCompile Include="Actions\ActionAddHexagon.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\ActionExit.cpp">
     <ClCompile Include="Actions\ActionSelect.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
@@ -256,6 +257,8 @@
     <ClInclude Include="Actions\ActionAddHexagon.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
+    <ClInclude Include="Actions\ActionLoad.h" />
+    <ClInclude Include="Actions\ActionExit.h">
     <ClInclude Include="Actions\ActionLoad.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
