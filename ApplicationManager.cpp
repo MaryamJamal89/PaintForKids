@@ -84,7 +84,7 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			// Khaled
 		case  DRAWING_AREA:
 			Point P;
-			pGUI->GetPointClicked(P.x, P.y);
+			pGUI->GetPointClicked(P.x, P.y); // this is the reason of double click // first click for entering this case and seconed one to send it to Action object  
 			newAct = new ActionSelect(this, P);
 			break;
 	}	
