@@ -231,15 +231,28 @@ color GUI::StringToColor(string colorStr)    //convert string to color type
 ////////////////////////////////////////////////////////////////////  covert color to  string
 string GUI::ColorToString(color clr)    //convert string to color type
 {
-	if (clr == BLUE) return "BLUE";
-	else if (clr == BLACK) return "BLACK";
-	else if (clr == RED) return "RED";
-	else if (clr == YELLOW) return "YELLOW";
-	else if (clr == WHITE) return "WHITE";
-	else if (clr == GREEN) return "GREEN";
-	else if (clr == ORANGE) return "ORANGE";
+	
+	if (isMatchedColors(clr,BLUE)) return "BLUE";
+	else if (isMatchedColors(clr,BLACK)) return "BLACK";
+	else if (isMatchedColors(clr, RED)) return "RED";
+	else if (isMatchedColors(clr,YELLOW)) return "YELLOW";
+	else if (isMatchedColors(clr, WHITE)) return "WHITE";
+	else if (isMatchedColors(clr, GREEN)) return "GREEN";
+	else if (isMatchedColors(clr,ORANGE)) return "ORANGE";
+	
 }
 
+bool GUI::isMatchedColors(color c1, color c2)
+{
+	if (c1.ucBlue == c2.ucBlue && c1.ucRed == c2.ucRed && c1.ucGreen == c2.ucGreen)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
 
 //======================================================================================//
 //								Figures Drawing Functions								//

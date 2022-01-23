@@ -19,7 +19,7 @@ void CHexagon::DrawMe(GUI* pOut) const
 }
 
 // save figure in the file
-void CHexagon::Save(ofstream& file)
+void CHexagon::Save(ofstream& file, GUI* pGUI)
 {
 	//file << "Square " << ID << "  " << TopLeftCorner.x << "  " << TopLeftCorner.y << "  " << length << "  " << endl;
 	// << FigGfxInfo.DrawClr << "  " << FigGfxInfo.FillClr << endl;

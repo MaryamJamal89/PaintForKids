@@ -131,7 +131,7 @@ void ApplicationManager::SaveAll(ofstream& File) const
 	File << FigCount << endl;
 	for (int i = 0; i < FigCount; i++)
 	{
-		//FigList[i]->Save(File);
+		FigList[i]->Save(File, GetGUI());
 	}
 }
 

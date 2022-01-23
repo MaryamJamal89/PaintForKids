@@ -42,6 +42,7 @@ public:
 
 	color StringToColor(string colorStr); //convert string to color type
 	string ColorToString(color clr);     //convert color to string
+	bool isMatchedColors(color c1, color c2);        //check if two colors are the same
 	color getCrntDrawColor() const;	//get current drwawing color
 	color getCrntFillColor() const;	//get current filling color
 	int getCrntPenWidth() const;		//get current pen width

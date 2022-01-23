@@ -34,7 +34,7 @@ void ActionSave::Execute()
 	GUI* pGUI = pManager->GetGUI();
 	ReadActionParameters();
 
-	file.open(file_name, ios::out);
+	file.open(file_name+".txt", ios::out);
 
 		file << pGUI->ColorToString( UI.DrawColor) << " " << pGUI->ColorToString(UI.FillColor) << "  " << pGUI->ColorToString(UI.BkGrndColor )<< endl;
 
