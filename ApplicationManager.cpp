@@ -4,6 +4,7 @@
 #include "Actions/ActionAddEllipse.h"
 #include "Actions/ActionAddHexagon.h"
 #include "Actions/ActionLoad.h"
+#include "Actions/ActionExit.h"
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -73,7 +74,7 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			break;
 
 		case EXIT:
-			///create ExitAction here
+			newAct = new ActionExit(this);
 			break;
 		
 		case STATUS:	//a click on the status bar ==> no action
