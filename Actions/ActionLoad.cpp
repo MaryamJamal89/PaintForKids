@@ -2,6 +2,8 @@
 #include<windows.h>
 #include "ActionLoad.h"
 #include "..\Figures\CSquare.h"
+#include "..\Figures\CHexagon.h"
+#include "..\Figures\CEllipse.h"
 #include "..\ApplicationManager.h"
 #include "..\GUI\GUI.h"
 
@@ -53,6 +55,8 @@ void ActionLoad::Execute()
 		CFigure* fig;
 		loadedFile >> figType;
 		if (figType == "SQR") fig = new CSquare;
+		else if (figType == "HEX") fig = new CHexagon;
+		else if (figType == "ELPS") fig = new CEllipse;
 		//add other figures
 		//----
 		fig->Load(loadedFile, pGUI);

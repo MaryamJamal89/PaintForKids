@@ -158,6 +158,7 @@
       <Filter>Action Classes</Filter>
     </ClCompile>
     <ClCompile Include="Actions\ActionExit.cpp">
+    <ClCompile Include="Actions\ActionSelect.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
   </ItemGroup>
@@ -258,6 +259,10 @@
     </ClInclude>
     <ClInclude Include="Actions\ActionLoad.h" />
     <ClInclude Include="Actions\ActionExit.h">
+    <ClInclude Include="Actions\ActionLoad.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ActionSelect.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
   </ItemGroup>
