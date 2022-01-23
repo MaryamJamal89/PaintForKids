@@ -122,19 +122,28 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 CFigure *ApplicationManager::GetFigure(int x, int y) const
 {
 	// remove selected Figure first
-	for (int i = FigCount - 1; i >= 0; i--) {
+	/*for (int i = FigCount - 1; i >= 0; i--) {
 		FigList[i]->SetSelected(false);
-	}
+	}*/
 
 	// return Selected Figure
 	for (int i = FigCount - 1; i >= 0; i--) {
 		if (FigList[i]->InFig(x, y))
 		{
-			FigList[i]->SetSelected(true);
-			return FigList[i];
+			if (FigList[i]->IsSelected()) {
+				FigList[i]->SetSelected(false);
+				return FigList[i];
+			}else{
+				FigList[i]->SetSelected(true);
+				return FigList[i];
+			}
 		}
 	}
 	//cout << "No Figure Selected" << endl;
+	// click out figurs
+	for (int i = FigCount - 1; i >= 0; i--) {
+		FigList[i]->SetSelected(false);
+	}
 	return NULL;
 }
 
