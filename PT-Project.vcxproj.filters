@@ -157,6 +157,7 @@
     <ClCompile Include="Actions\ActionAddHexagon.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\ActionSelect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -256,5 +257,6 @@
     <ClInclude Include="Actions\ActionLoad.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
+    <ClInclude Include="Actions\ActionSelect.h" />
   </ItemGroup>
 </Project>

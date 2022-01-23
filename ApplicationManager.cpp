@@ -4,6 +4,7 @@
 #include "Actions/ActionAddEllipse.h"
 #include "Actions/ActionAddHexagon.h"
 #include "Actions/ActionLoad.h"
+#include "Actions/ActionSelect.h"
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -79,6 +80,13 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 		case STATUS:	//a click on the status bar ==> no action
 			return NULL;
 			break;
+
+			// Khaled
+		case  DRAWING_AREA:
+			Point P;
+			pGUI->GetPointClicked(P.x, P.y);
+			newAct = new ActionSelect(this, P);
+			break;
 	}	
 	return newAct;
 }
@@ -109,14 +117,24 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
-
+// khaled
+// func to return Selected Figure
 CFigure *ApplicationManager::GetFigure(int x, int y) const
 {
-	//If a figure is found return a pointer to it.
-	//if this point (x,y) does not belong to any figure return NULL
+	// remove selected Figure first
+	for (int i = FigCount - 1; i >= 0; i--) {
+		FigList[i]->SetSelected(false);
+	}
 
-	///Add your code here to search for a figure given a point x,y	
-
+	// return Selected Figure
+	for (int i = FigCount - 1; i >= 0; i--) {
+		if (FigList[i]->InFig(x, y))
+		{
+			FigList[i]->SetSelected(true);
+			return FigList[i];
+		}
+	}
+	//cout << "No Figure Selected" << endl;
 	return NULL;
 }
 

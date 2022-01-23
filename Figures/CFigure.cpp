@@ -22,3 +22,8 @@ void CFigure::ChngFillClr(color Fclr)
 	FigGfxInfo.isFilled = true;
 	FigGfxInfo.FillClr = Fclr; 
 }
+
+//khaled
+//ID should be a static value ??
+//it's a rubsh data because it not intialize
+//int CFigure::ID = 0;

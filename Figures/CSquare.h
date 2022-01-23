@@ -13,6 +13,11 @@ public:
 	CSquare(Point , int, GfxInfo FigureGfxInfo );
 	virtual void DrawMe(GUI* pOut) const;
 	virtual void Load(ifstream& loadedFile, GUI* pGUI); //load figure from file
+	
+	// khaled
+	virtual bool InFig(int, int);
+	virtual string PrintInfo();
+
 };
 
 #endif
