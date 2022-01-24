@@ -41,7 +41,15 @@ void ActionLoad::Execute()
 	//reading and setting window colors
 	loadedFile >> drawColor >> fillColor >> bgColor;
 	UI.DrawColor = pGUI->StringToColor(drawColor);
-	UI.FillColor = pGUI->StringToColor(fillColor);
+	//UI.FillColor = pGUI->StringToColor(fillColor);
+	/*if (fillColor == "NO_FILL")
+	{
+		
+	}
+	else
+	{
+		UI.FillColor = pGUI->StringToColor(fillColor);
+	}*/
 	UI.BkGrndColor = pGUI->StringToColor(bgColor);
 
 	//update window to change background color

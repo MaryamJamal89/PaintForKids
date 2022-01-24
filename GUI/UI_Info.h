@@ -62,7 +62,22 @@ struct UI_Info	//User Interface Info.
 	color StatusBarColor = TURQUOISE;	//Status bar color
 	int PenWidth = 3;			//width of the pen that draws shapes
 
-	/// Add more members if needed
+	///// Add more members if needed
+	//GUI_MODE InterfaceMode;
+
+	//int	width, height,	//Window width and height
+	//	wx, wy,			//Window starting coordinates
+	//	StatusBarHeight,	//Status Bar Height
+	//	ToolBarHeight,		//Tool Bar Height (distance from top of window to bottom line of toolbar)
+	//	MenuItemWidth;		//Width of each item in toolbar menu
+
+	//color DrawColor;		//Drawing color
+	//color FillColor;		//Filling color
+	//color HighlightColor;	//Highlighting color
+	//color MsgColor;			//Messages color
+	//color BkGrndColor;		//Background color
+	//color StatusBarColor;	//Status bar color
+	//int PenWidth;			//width of the pen that draws shapes
 
 }UI;	//create a global object UI
 
