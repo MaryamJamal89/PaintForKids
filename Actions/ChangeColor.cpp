@@ -27,7 +27,8 @@ void ChangeColor::Execute() {
 	else if (DrawOrFill == 3) {
 		GUI* pGUI = pManager->GetGUI();
 		UI.BkGrndColor = colour;
-		pManager->UpdateInterface();
+		//update window to change background color
+		pGUI->ClearDrawArea();
 	}
 
 
