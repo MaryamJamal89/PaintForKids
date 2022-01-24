@@ -158,6 +158,8 @@
       <Filter>Action Classes</Filter>
     </ClCompile>
     <ClCompile Include="Actions\ActionExit.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
     <ClCompile Include="Actions\ActionSelect.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
