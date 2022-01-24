@@ -158,9 +158,12 @@
       <Filter>Action Classes</Filter>
     </ClCompile>
     <ClCompile Include="Actions\ActionExit.cpp">
-    <Filter>Action Classes</Filter>
+      <Filter>Action Classes</Filter>
     </ClCompile>
     <ClCompile Include="Actions\ActionSelect.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\ChangeColor.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
   </ItemGroup>
@@ -260,12 +263,15 @@
       <Filter>Action Classes</Filter>
     </ClInclude>
     <ClInclude Include="Actions\ActionExit.h">
-    <Filter>Action Classes</Filter>
+      <Filter>Action Classes</Filter>
     </ClInclude>
     <ClInclude Include="Actions\ActionLoad.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
     <ClInclude Include="Actions\ActionSelect.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ChangeColor.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
   </ItemGroup>

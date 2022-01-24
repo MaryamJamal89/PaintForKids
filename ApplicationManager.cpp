@@ -6,6 +6,7 @@
 #include "Actions/ActionLoad.h"
 #include "Actions/ActionExit.h"
 #include "Actions/ActionSelect.h"
+#include "Actions/ChangeColor.h"
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -68,6 +69,31 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 
 		case DRAW_HEX:
 			newAct = new ActionAddHexagon(this);
+			break;
+		case COLOR_RED:
+			newAct = new ChangeColor(this, RED, DORF);
+			break;
+
+		case COLOR_BLUE:
+			//create AddLineAction here
+			newAct = new ChangeColor(this, BLUE, DORF);
+			break;
+
+		case COLOR_GREEN:
+			//create AddLineAction here
+			newAct = new ChangeColor(this, GREEN, DORF);
+			break;
+
+		case CHNG_DRAW_CLR:
+			DORF = 1;
+			break;
+
+		case CHNG_FILL_CLR:
+			DORF = 2;
+			break;
+
+		case CHNG_BK_CLR:
+			DORF = 3;
 			break;
 
 		case LOAD:
@@ -155,6 +181,7 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
 {	
+	
 	for(int i=0; i<FigCount; i++)
 		FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
 }
