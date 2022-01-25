@@ -33,8 +33,8 @@ public:
 	
 	// -- Figures Drawing functions
 	void DrawSquare(Point P1, int length, GfxInfo RectGfxInfo, bool selected = false) const;  //Draw a Square
-	void DrawEllip(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected = false) const;	//Draw a Ellipse
-	void DrawHex(Point center, GfxInfo RectGfxInfo, bool selected = false) const;			//Draw a Hex
+	void DrawEllip(Point P1, Point P2, GfxInfo ElliGfxInfo, bool selected = false) const;	//Draw a Ellipse
+	void DrawHex(Point center, GfxInfo HexGfxInfo, bool selected = false) const;			//Draw a Hex
 
 	///TODO: Make similar functions for drawing all other figures.
 	
@@ -45,6 +45,8 @@ public:
 	bool isMatchedColors(color c1, color c2);        //check if two colors are the same
 	color getCrntDrawColor() const;	//get current drwawing color
 	color getCrntFillColor() const;	//get current filling color
+	color getBackgroungColor() const;	//get current background color
+	bool getColorisFilled() const;
 	int getCrntPenWidth() const;		//get current pen width
 
 };

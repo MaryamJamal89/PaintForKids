@@ -15,7 +15,7 @@ void ActionAddHexagon::Execute()
 	GUI* pGUI = pManager->GetGUI();
 
 	GfxInfo HexGfxInfo;
-	HexGfxInfo.isFilled = false;	//default is not filled
+	HexGfxInfo.isFilled = pGUI->getColorisFilled();	//default is not filled
 	//get drawing, filling colors and pen width from the interface
 	HexGfxInfo.DrawClr = pGUI->getCrntDrawColor();
 	HexGfxInfo.FillClr = pGUI->getCrntFillColor();

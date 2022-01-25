@@ -49,3 +49,33 @@ void CEllipse::Load(ifstream& loadedFile, GUI* pGUI)
 	}
 	CEllipse::SetSelected(false);
 }
+
+
+// InFig return boolian to check point inside Figure 
+bool CEllipse::InFig(int x, int y)  //Determine the position of the point
+{
+	if (pow(x - Center.x, 2) / pow(P.x, 2) + pow(y - Center.y, 2) / pow(P.y, 2) <= 1)
+	{
+		return true;
+	}
+	return false;
+}
+
+// Print to return all info about figure
+string CEllipse::PrintInfo()
+{
+
+	string id = to_string(ID);
+	string x = to_string(Center.x);
+	string y = to_string(Center.y);
+	//string clr = getColor(this->FigGfxInfo.DrawClr);
+
+	//if (FigGfxInfo.isFilled)
+	//{
+	//	//pOut->PrintMessage(" - FillColor: ");
+	//	//string clrF = getColor(this->FigGfxInfo.FillClr);
+	//	return ("Ellipse -ID: " + id + " Center: (" + x + ", " + y + ") DrawColor:");
+	//}
+	//else
+	return ("Ellipse -ID: " + id + " Center: (" + x + ", " + y + ") DrawColor:");
+}
