@@ -13,6 +13,7 @@ class ApplicationManager
 
 private:
 	int FigCount;		//Actual number of figures
+	int DORF =0;		//Draw or fill or backgoround 
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
 
 	//Pointers to Input and Output classes
@@ -37,6 +38,10 @@ public:
 	// -- Interface Management Functions	
 	GUI *GetGUI() const; //Return pointer to the interface
 	void UpdateInterface() const;	//Redraws all the drawing window	
+
+	// Saving function
+	void SaveAll(ofstream& File)const;       //Save All Figures To The File :Asmaa
+
 };
 
 #endif

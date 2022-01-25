@@ -1,6 +1,7 @@
 #ifndef CFIGURE_H
 #define CFIGURE_H
 
+#include <fstream>
 #include "..\defs.h"
 #include "..\GUI\GUI.h"
 
@@ -34,9 +35,12 @@ public:
 	//virtual void Resize() = 0;	//Resize the figure
 	//virtual void Move() = 0;		//Move the figure
 
-	//virtual void Save(ofstream &OutFile) = 0;	//Save the figure parameters to the file
+	virtual void Save(ofstream &OutFile, GUI* pGUI) = 0;	//Save the figure parameters to the file
 	virtual void Load(ifstream& loadedFile, GUI* pGUI) = 0;	//Load the figure parameters to the file
 
+	// khaled
+	virtual bool InFig(int, int) = 0; //Determine the position of the Point
+	virtual string PrintInfo() = 0; //print all figure info on the status bar
 	//virtual void PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar
 };
 

@@ -18,6 +18,21 @@ void CEllipse::DrawMe(GUI* pOut) const
 	pOut->DrawEllip(Center, P, FigGfxInfo, Selected);
 }
 
+// save figure in the file
+void CEllipse::Save(ofstream& file, GUI* pGUI)
+{
+	file << "ELPS " << ID << " " << Center.x << " " << Center.y << " " << P.x << " " << P.y << " " << pGUI->ColorToString(FigGfxInfo.DrawClr) << " ";
+
+	if (FigGfxInfo.isFilled == true)
+	{
+		file << pGUI->ColorToString(FigGfxInfo.FillClr) << endl;
+	}
+	else
+	{
+		file << "NO_FILL" << endl;
+	}
+}
+
 void CEllipse::Load(ifstream& loadedFile, GUI* pGUI)
 {
 	string drawColor, fillColor;
@@ -33,4 +48,34 @@ void CEllipse::Load(ifstream& loadedFile, GUI* pGUI)
 		FigGfxInfo.FillClr = pGUI->StringToColor(fillColor);
 	}
 	CEllipse::SetSelected(false);
+}
+
+
+// InFig return boolian to check point inside Figure 
+bool CEllipse::InFig(int x, int y)  //Determine the position of the point
+{
+	if (pow(x - Center.x, 2) / pow(P.x, 2) + pow(y - Center.y, 2) / pow(P.y, 2) <= 1)
+	{
+		return true;
+	}
+	return false;
+}
+
+// Print to return all info about figure
+string CEllipse::PrintInfo()
+{
+
+	string id = to_string(ID);
+	string x = to_string(Center.x);
+	string y = to_string(Center.y);
+	//string clr = getColor(this->FigGfxInfo.DrawClr);
+
+	//if (FigGfxInfo.isFilled)
+	//{
+	//	//pOut->PrintMessage(" - FillColor: ");
+	//	//string clrF = getColor(this->FigGfxInfo.FillClr);
+	//	return ("Ellipse -ID: " + id + " Center: (" + x + ", " + y + ") DrawColor:");
+	//}
+	//else
+	return ("Ellipse -ID: " + id + " Center: (" + x + ", " + y + ") DrawColor:");
 }

@@ -42,6 +42,10 @@ void GUI::GetPointClicked(int &x, int &y) const
 	pWind->WaitMouseClick(x, y);	//Wait for mouse click
 }
 
+bool GUI::getColorisFilled() const {
+
+	return UI.isFilled;
+}
 string GUI::GetSrting() const 
 {
 	string Label;
@@ -83,6 +87,13 @@ ActionType GUI::MapInputToActionType() const
 			case ITM_SQUR: return DRAW_SQUARE;
 			case ITM_ELPS: return DRAW_ELPS;
 			case ITM_HEX: return DRAW_HEX;
+			case ITM_DROWCLR: return CHNG_DRAW_CLR;
+			case ITM_FILLCLR: return CHNG_FILL_CLR;
+			case ITM_BGCLR: return CHNG_BK_CLR;
+			case ITM_RED: return COLOR_RED;
+			case ITM_BLUE: return COLOR_BLUE;
+			case ITM_GREEN: return COLOR_GREEN;
+			case ITM_SAVE: return SAVE;
 			case ITM_LOAD: return LOAD;
 			case ITM_EXIT: return EXIT;
 			
@@ -156,6 +167,13 @@ void GUI::CreateDrawToolBar() const
 	MenuItemImages[ITM_SQUR] = "images\\MenuItems\\Menu_Sqr.jpg";
 	MenuItemImages[ITM_ELPS] = "images\\MenuItems\\Menu_Elps.jpg";
 	MenuItemImages[ITM_HEX] = "images\\MenuItems\\Menu_Hex.jpg";
+	MenuItemImages[ITM_DROWCLR] = "images\\MenuItems\\Menu_ChangeColor.jpg";
+	MenuItemImages[ITM_FILLCLR] = "images\\MenuItems\\Menu_FillColor.jpg";
+	MenuItemImages[ITM_BGCLR] = "images\\MenuItems\\Menu_BGColor.jpg";
+	MenuItemImages[ITM_RED] = "images\\MenuItems\\Menu_Red.jpg";
+	MenuItemImages[ITM_BLUE] = "images\\MenuItems\\Menu_Blue.jpg";
+	MenuItemImages[ITM_GREEN] = "images\\MenuItems\\Menu_Green.jpg";
+	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\MenuSave.jpg";
 	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\Menu_Load.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
 
@@ -210,6 +228,11 @@ color GUI::getCrntFillColor() const	//get current filling color
 {	return UI.FillColor;	}
 
 //////////////////////////////////////////////////////////////////////////////////////////
+color GUI::getBackgroungColor() const	//get current filling color
+{
+	return UI.BkGrndColor;
+}
+//////////////////////////////////////////////////////////////////////////////////////////
 	
 int GUI::getCrntPenWidth() const		//get current pen width
 {	return UI.PenWidth;	}
@@ -225,6 +248,32 @@ color GUI::StringToColor(string colorStr)    //convert string to color type
 	else if (colorStr == "WHITE") return WHITE;
 	else if (colorStr == "GREEN") return GREEN;
 	else if (colorStr == "ORANGE") return ORANGE;
+}
+////////////////////////////////////////////////////////////////////  covert color to  string
+string GUI::ColorToString(color clr)    //convert string to color type
+{
+	
+	if (isMatchedColors(clr,BLUE)) return "BLUE";
+	else if (isMatchedColors(clr,BLACK)) return "BLACK";
+	else if (isMatchedColors(clr, RED)) return "RED";
+	else if (isMatchedColors(clr,YELLOW)) return "YELLOW";
+	else if (isMatchedColors(clr, WHITE)) return "WHITE";
+	else if (isMatchedColors(clr, GREEN)) return "GREEN";
+	else if (isMatchedColors(clr, ORANGE)) return "ORANGE";
+	else if (isMatchedColors(clr, LIGHTGOLDENRODYELLOW)) return "LIGHTGOLDENRODYELLOW";
+	
+}
+
+bool GUI::isMatchedColors(color c1, color c2)
+{
+	if (c1.ucBlue == c2.ucBlue && c1.ucRed == c2.ucRed && c1.ucGreen == c2.ucGreen)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 //======================================================================================//
@@ -296,7 +345,6 @@ void GUI::DrawHex(Point center, GfxInfo HexGfxInfo, bool selected) const
 
 	int d = 50;
 
-	//Randa
 	Point point1;
 	point1.x = center.x - d;
 	point1.y = center.y;

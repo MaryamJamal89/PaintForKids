@@ -21,7 +21,18 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	ITM_ELPS,		//Ellipse item in menu
 	ITM_HEX,		//Hex item in menu
 	
+
+	//Colors "randa"
+	ITM_DROWCLR,
+	ITM_FILLCLR,
+	ITM_BGCLR,
+
+	ITM_RED,
+	ITM_BLUE,
+	ITM_GREEN,
+
 	//TODO: Add more items names here
+	ITM_SAVE,       //save item
 	ITM_LOAD,       //Load item
 	ITM_EXIT,		//Exit item
 	
@@ -52,7 +63,8 @@ struct UI_Info	//User Interface Info.
 	int StatusBarHeight = 50;	//Status Bar Height
 	int ToolBarHeight = 50;		//Tool Bar Height (distance from top of window to bottom line of toolbar)
 	int MenuItemWidth = 80;		//Width of each item in toolbar menu
-
+	
+	bool isFilled = false; 
 
 	color DrawColor = BLUE;		//Drawing color
 	color FillColor = GREEN;		//Filling color
