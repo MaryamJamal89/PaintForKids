@@ -7,7 +7,7 @@
 #include "Actions/ActionLoad.h"
 #include "Actions/ActionExit.h"
 #include "Actions/ActionSelect.h"
-#include "Actions/ChangeColor.h"
+#include "Actions/ActionChangeColor.h"
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -72,17 +72,17 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			newAct = new ActionAddHexagon(this);
 			break;
 		case COLOR_RED:
-			newAct = new ChangeColor(this, RED, DORF);
+			newAct = new ActionChangeColor(this, RED, DORF);
 			break;
 
 		case COLOR_BLUE:
 			//create AddLineAction here
-			newAct = new ChangeColor(this, BLUE, DORF);
+			newAct = new ActionChangeColor(this, BLUE, DORF);
 			break;
 
 		case COLOR_GREEN:
 			//create AddLineAction here
-			newAct = new ChangeColor(this, GREEN, DORF);
+			newAct = new ActionChangeColor(this, GREEN, DORF);
 			break;
 
 		case CHNG_DRAW_CLR:
