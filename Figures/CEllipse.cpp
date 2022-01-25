@@ -21,8 +21,16 @@ void CEllipse::DrawMe(GUI* pOut) const
 // save figure in the file
 void CEllipse::Save(ofstream& file, GUI* pGUI)
 {
-	//file << "Square " << ID << "  " << TopLeftCorner.x << "  " << TopLeftCorner.y << "  " << length << "  " << endl;
-	// << FigGfxInfo.DrawClr << "  " << FigGfxInfo.FillClr << endl;
+	file << "ELPS " << ID << " " << Center.x << " " << Center.y << " " << P.x << " " << P.y << " " << pGUI->ColorToString(FigGfxInfo.DrawClr) << " ";
+
+	if (FigGfxInfo.isFilled == true)
+	{
+		file << pGUI->ColorToString(FigGfxInfo.FillClr) << endl;
+	}
+	else
+	{
+		file << "NO_FILL" << endl;
+	}
 }
 
 void CEllipse::Load(ifstream& loadedFile, GUI* pGUI)

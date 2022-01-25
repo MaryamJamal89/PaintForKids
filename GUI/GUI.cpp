@@ -238,7 +238,8 @@ string GUI::ColorToString(color clr)    //convert string to color type
 	else if (isMatchedColors(clr,YELLOW)) return "YELLOW";
 	else if (isMatchedColors(clr, WHITE)) return "WHITE";
 	else if (isMatchedColors(clr, GREEN)) return "GREEN";
-	else if (isMatchedColors(clr,ORANGE)) return "ORANGE";
+	else if (isMatchedColors(clr, ORANGE)) return "ORANGE";
+	else if (isMatchedColors(clr, LIGHTGOLDENRODYELLOW)) return "LIGHTGOLDENRODYELLOW";
 	
 }
 

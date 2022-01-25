@@ -1,5 +1,5 @@
 #include<fstream>
-#include <iostream>
+#include<iostream>
 #include<windows.h>
 #include<string>
 #include "ActionSave.h"
@@ -36,9 +36,8 @@ void ActionSave::Execute()
 
 	file.open(file_name+".txt", ios::out);
 
-		file << pGUI->ColorToString( UI.DrawColor) << " " << pGUI->ColorToString(UI.FillColor) << "  " << pGUI->ColorToString(UI.BkGrndColor )<< endl;
-
-	pManager->SaveAll(file);
-	file.close();
+	file << pGUI->ColorToString( UI.DrawColor) << " " << pGUI->ColorToString(UI.FillColor) << "  " << pGUI->ColorToString(UI.BkGrndColor )<< endl;
+    pManager->SaveAll(file);
+    file.close();
 }
 

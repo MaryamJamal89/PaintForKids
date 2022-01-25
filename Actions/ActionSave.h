@@ -1,7 +1,8 @@
 #ifndef ACTION_Save_H
 #define ACTION_Save_H
 
-#include <fstream>
+#include<fstream>
+#include<iostream>
 #include "Action.h"
 #include <string>
 
