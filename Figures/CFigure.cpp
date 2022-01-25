@@ -5,9 +5,10 @@ CFigure::CFigure() {}
 CFigure::CFigure(GfxInfo FigureGfxInfo)
 { 
 	FigGfxInfo = FigureGfxInfo;	//Default status is non-filled.
-	Selected = false;
+	Selected = true; // Figure is selected after created
+	ID = id++; // Figure ID starts from 1
 }
-
+//CFigure::Selected = true;
 void CFigure::SetSelected(bool s)
 {	Selected = s; }
 
@@ -23,7 +24,5 @@ void CFigure::ChngFillClr(color Fclr)
 	FigGfxInfo.FillClr = Fclr; 
 }
 
-//khaled
-//ID should be a static value ??
-//it's a rubsh data because it not intialize
-//int CFigure::ID = 0;
+//static value to give Figure ID it's start Value   
+int CFigure::id = 1;

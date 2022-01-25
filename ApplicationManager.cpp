@@ -33,9 +33,9 @@ void ApplicationManager::Run()
 {
 	ActionType ActType;
 	do
-	{		
+	{
 		//1- Read user action
-		ActType = pGUI->MapInputToActionType();
+		ActType = pGUI->MapInputToActionType(x,y);
 
 		//2- Create the corresponding Action
 		Action *pAct = CreateAction(ActType);
@@ -117,7 +117,8 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			// Khaled
 		case  DRAWING_AREA:
 			Point P;
-			pGUI->GetPointClicked(P.x, P.y); // this is the reason of double click // first click for entering this case and seconed one to send it to Action object  
+			P.x = x; P.y = y;
+			//pGUI->GetPointClicked(P.x, P.y); // this is the reason of double click // first click for entering this case and seconed one to send it to Action object  
 			newAct = new ActionSelect(this, P);
 			break;
 	}	
@@ -149,34 +150,25 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 		FigList[FigCount++] = pFig;	
 }
 
-////////////////////////////////////////////////////////////////////////////////////
+//unSelect Figures
+void ApplicationManager::UnSelectFigures()const {
+	for (int i = 0; i < FigCount; i++) {
+		FigList[i]->SetSelected(false);
+	}
+}
+///////////////////////////////////////////////////////
 // khaled
 // func to return Selected Figure
 CFigure *ApplicationManager::GetFigure(int x, int y) const
 {
-	// remove selected Figure first
-	/*for (int i = FigCount - 1; i >= 0; i--) {
-		FigList[i]->SetSelected(false);
-	}*/
-
-	// return Selected Figure
+	// if the point in figure will return Pointer on Figure
 	for (int i = FigCount - 1; i >= 0; i--) {
 		if (FigList[i]->InFig(x, y))
 		{
-			if (FigList[i]->IsSelected()) {
-				FigList[i]->SetSelected(false);
-				return FigList[i];
-			}else{
-				FigList[i]->SetSelected(true);
-				return FigList[i];
-			}
+			return FigList[i];
 		}
 	}
-	//cout << "No Figure Selected" << endl;
-	// click out figurs
-	for (int i = FigCount - 1; i >= 0; i--) {
-		FigList[i]->SetSelected(false);
-	}
+	// if point not in any figure will return NULL
 	return NULL;
 }
 ////////////////////////////////////////////////////////////////////////////////////asmaa

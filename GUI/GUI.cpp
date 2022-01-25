@@ -66,9 +66,9 @@ string GUI::GetSrting() const
 }
 
 //This function reads the position where the user clicks to determine the desired action
-ActionType GUI::MapInputToActionType() const
+ActionType GUI::MapInputToActionType(int &x,int &y) const
 {	
-	int x,y;
+	//int x,y;
 	pWind->WaitMouseClick(x, y);	//Get the coordinates of the user click
 
 	if(UI.InterfaceMode == MODE_DRAW)	//GUI in the DRAW mode
