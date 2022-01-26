@@ -35,9 +35,6 @@ public:
 	// -- Figures Management Functions
 	void AddFigure(CFigure* pFig); //Adds a new figure to the FigList
 	CFigure *GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
-
-	CFigure* GetSelectedFigureByFlag(int& selectedIndex);
-	void InsertFigure(bool isFront);  //change location of selected figure to back or front
 		
 	// -- Interface Management Functions	
 	GUI *GetGUI() const; //Return pointer to the interface
