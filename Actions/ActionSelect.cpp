@@ -1,12 +1,5 @@
 #include "ActionSelect.h"
-
-//#include "..\Figures\CSquare.h"
-//
-//#include "..\ApplicationManager.h"
-//
-//#include "..\GUI\GUI.h"
 #include <iostream>
-//#include "../ApplicationManager.cpp"
 
 
 

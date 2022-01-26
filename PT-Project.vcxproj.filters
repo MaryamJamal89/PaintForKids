@@ -52,6 +52,7 @@
     <ClCompile Include="ApplicationManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Actions\ActionChangeLocation.cpp" />
+    <ClCompile Include="Actions\ActionMultiSelect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\ActionSelect.h" />
@@ -92,5 +93,6 @@
     <ClInclude Include="ApplicationManager.h" />
     <ClInclude Include="DEFS.h" />
     <ClInclude Include="Actions\ActionChangeLocation.h" />
+    <ClInclude Include="Actions\ActionMultiSelect.h" />
   </ItemGroup>
 </Project>

@@ -33,8 +33,9 @@ void ActionAddEllipse::Execute()
 	CEllipse* E = new CEllipse(C, ElliGfxInfo);
 	
 	//and unselect All Previous Figures
-	pManager->UnSelectFigures();
-
+	if(!pManager->multiSelect){
+		pManager->UnSelectFigures();
+	}
 	//Step 3 - Add the Ellipse to the list of figures
 	pManager->AddFigure(E);
 }

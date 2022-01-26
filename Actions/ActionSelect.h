@@ -1,6 +1,4 @@
 #pragma once
-//#ifndef ACTION_SELECT_H
-//#define ACTION_SELECT_H
 #include"..\ApplicationManager.h"
 #include "Action.h"
 class ActionSelect :

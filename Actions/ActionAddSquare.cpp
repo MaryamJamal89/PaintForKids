@@ -50,7 +50,9 @@ void ActionAddSquare::Execute()
 	CSquare *R=new CSquare(topLeft, SideLength, SqrGfxInfo);
 	
 	//and unselect All Previous Figures
-	pManager->UnSelectFigures();
+	if (!pManager->multiSelect) {
+		pManager->UnSelectFigures();
+	}
 	//Step 4 - Add the Square to the list of figures
 	pManager->AddFigure(R);
 	
