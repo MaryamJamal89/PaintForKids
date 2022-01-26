@@ -11,6 +11,7 @@ enum GUI_MODE	//Graphical user interface mode
 {
 	MODE_DRAW,	//Drawing mode (startup mode)
 	MODE_COLOR,
+	MODE_SHAPES,
 	MODE_PLAY	//Playing mode
 };
 
@@ -18,9 +19,8 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 {
 	//Note: Items are ordered here as they appear in menu
 	//If you want to change the menu items order, change the order here
-	ITM_SQUR,		//Square item in menu
-	ITM_ELPS,		//Ellipse item in menu
-	ITM_HEX,		//Hex item in menu
+	ITM_SHAPES,		//Square item in menu
+
 	
 	ITM_MULSELECT,   //button for multiselection
 	ITM_BACK,
@@ -41,13 +41,21 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	DRAW_ITM_COUNT		//no. of menu items ==> This should be the last line in this enum
 	
 };
+enum ShapesItem //The items of the Draw menu (you should add more items)
+{
+	ITM_SQUR,		//Square item in menu
+	ITM_ELPS,		//Ellipse item in menu
+	ITM_HEX,		//Hex item in menu
+
+	Shapes_COUNT
+};
 enum DrawColorItem //The items of the Draw menu (you should add more items)
 {
 	ITM_RED,
 	ITM_BLUE,
 	ITM_GREEN,
-	ITM_BACKDROWING,
-	
+
+
 	Color_COUNT
 };
 
