@@ -11,6 +11,7 @@ enum GUI_MODE	//Graphical user interface mode
 {
 	MODE_DRAW,	//Drawing mode (startup mode)
 	MODE_COLOR,
+	MODE_SHAPES,
 	MODE_PLAY	//Playing mode
 };
 
@@ -18,9 +19,8 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 {
 	//Note: Items are ordered here as they appear in menu
 	//If you want to change the menu items order, change the order here
-	ITM_SQUR,		//Square item in menu
-	ITM_ELPS,		//Ellipse item in menu
-	ITM_HEX,		//Hex item in menu
+	ITM_SHAPES,		//Square item in menu
+
 	
 	ITM_MULSELECT,   //button for multiselection
 	ITM_BACK,
@@ -36,18 +36,27 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	//TODO: Add more items names here
 	ITM_SAVE,       //save item
 	ITM_LOAD,       //Load item
+	ITM_PLAY,       //Switch Play Item Edit By 'Mahmoud'
 	ITM_EXIT,		//Exit item
 	
 	DRAW_ITM_COUNT		//no. of menu items ==> This should be the last line in this enum
 	
+};
+enum ShapesItem //The items of the Draw menu (you should add more items)
+{
+	ITM_SQUR,		//Square item in menu
+	ITM_ELPS,		//Ellipse item in menu
+	ITM_HEX,		//Hex item in menu
+
+	Shapes_COUNT
 };
 enum DrawColorItem //The items of the Draw menu (you should add more items)
 {
 	ITM_RED,
 	ITM_BLUE,
 	ITM_GREEN,
-	ITM_BACKDROWING,
-	
+
+
 	Color_COUNT
 };
 
@@ -57,8 +66,11 @@ enum PlayMenuItem //The items of the Play menu (you should add more items)
 	//If you want to change the menu items order, change the order here
 	
 	//TODO: Add more items names here
-
-	PLAY_ITM_COUNT		//no. of menu items ==> This should be the last line in this enum
+	ITM_PICK_IMAGE,			//Pick Item Edit By 'Mahmoud'
+	ITM_PICK_FILL_COLOR,	//Pick Fill Color Edit By 'Mahmoud'
+	ITM_PICK_IMAGE_COLOR,   //Pick Item And Color Edit By 'Mahmoud'
+	ITM_DRAW,				//Switch Draw Item Edit By 'Mahmoud'
+	PLAY_ITM_COUNT			//no. of menu items ==> This should be the last line in this enum
 };
 
 __declspec(selectany) //This line to prevent "redefinition error"
