@@ -1,6 +1,7 @@
 #ifndef CFIGURE_H
 #define CFIGURE_H
 
+#include <fstream>
 #include "..\defs.h"
 #include "..\GUI\GUI.h"
 
@@ -9,6 +10,7 @@ class CFigure
 {
 protected:
 	int ID;		//Each figure has an ID
+	int static id;
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
 	
@@ -34,7 +36,7 @@ public:
 	//virtual void Resize() = 0;	//Resize the figure
 	//virtual void Move() = 0;		//Move the figure
 
-	//virtual void Save(ofstream &OutFile) = 0;	//Save the figure parameters to the file
+	virtual void Save(ofstream &OutFile, GUI* pGUI) = 0;	//Save the figure parameters to the file
 	virtual void Load(ifstream& loadedFile, GUI* pGUI) = 0;	//Load the figure parameters to the file
 
 	// khaled

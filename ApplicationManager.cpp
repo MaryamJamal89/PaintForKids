@@ -1,12 +1,16 @@
 #include "ApplicationManager.h"
-
+#include <fstream>
 #include "Actions/ActionAddSquare.h"
 #include "Actions/ActionAddEllipse.h"
 #include "Actions/ActionAddHexagon.h"
+#include "Actions/ActionSave.h"
 #include "Actions/ActionLoad.h"
+#include "Actions/ActionChangeLocation.h"
 #include "Actions/ActionExit.h"
 #include "Actions/ActionSelect.h"
-#include "Actions/ChangeColor.h"
+#include "Actions/ActionMultiSelect.h"
+#include "Actions/ActionChangeColor.h"
+
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -16,6 +20,9 @@ ApplicationManager::ApplicationManager()
 	
 	//delete all old figures
 	ApplicationManager::ResetFigList();
+
+
+	multiSelect = 0;
 }
 
 //delete all old figures
@@ -32,9 +39,9 @@ void ApplicationManager::Run()
 {
 	ActionType ActType;
 	do
-	{		
+	{
 		//1- Read user action
-		ActType = pGUI->MapInputToActionType();
+		ActType = pGUI->MapInputToActionType(x,y);
 
 		//2- Create the corresponding Action
 		Action *pAct = CreateAction(ActType);
@@ -70,18 +77,33 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 		case DRAW_HEX:
 			newAct = new ActionAddHexagon(this);
 			break;
+
+		case MUL_SELECT:
+			newAct = new ActionMultiSelect(this,multiSelect);
+			break;
+
+		case SEND_BACK:
+			//send to back
+			newAct = new ActionChangeLocation(this,false);
+			break;
+
+		case BRNG_FRNT:
+			//bring to front
+			newAct = new ActionChangeLocation(this, true);
+			break;
+
 		case COLOR_RED:
-			newAct = new ChangeColor(this, RED, DORF);
+			newAct = new ActionChangeColor(this, RED, DORF);
 			break;
 
 		case COLOR_BLUE:
 			//create AddLineAction here
-			newAct = new ChangeColor(this, BLUE, DORF);
+			newAct = new ActionChangeColor(this, BLUE, DORF);
 			break;
 
 		case COLOR_GREEN:
 			//create AddLineAction here
-			newAct = new ChangeColor(this, GREEN, DORF);
+			newAct = new ActionChangeColor(this, GREEN, DORF);
 			break;
 
 		case CHNG_DRAW_CLR:
@@ -96,9 +118,14 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			DORF = 3;
 			break;
 
+		case SAVE:
+			newAct = new ActionSave(this);
+			break;
+
 		case LOAD:
 			newAct = new ActionLoad(this);
 			break;
+
 
 		case EXIT:
 			newAct = new ActionExit(this);
@@ -111,8 +138,9 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			// Khaled
 		case  DRAWING_AREA:
 			Point P;
-			pGUI->GetPointClicked(P.x, P.y); // this is the reason of double click // first click for entering this case and seconed one to send it to Action object  
-			newAct = new ActionSelect(this, P);
+			P.x = x; P.y = y;
+			//pGUI->GetPointClicked(P.x, P.y); // this is the reason of double click // first click for entering this case and seconed one to send it to Action object  
+			newAct = new ActionSelect(this, P, multiSelect);
 			break;
 	}	
 	return newAct;
@@ -135,7 +163,8 @@ void ApplicationManager::ExecuteAction(Action* &pAct)
 //==================================================================================//
 //						Figures Management Functions								//
 //==================================================================================//
-
+// multiSelect filed
+//bool ApplicationManager::multiSelect = false;
 //Add a figure to the list of figures
 void ApplicationManager::AddFigure(CFigure* pFig)
 {
@@ -143,37 +172,81 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 		FigList[FigCount++] = pFig;	
 }
 
-////////////////////////////////////////////////////////////////////////////////////
+//unSelect Figures
+void ApplicationManager::UnSelectFigures()const {
+	for (int i = 0; i < FigCount ; i++) {
+		FigList[i]->SetSelected(false);
+	}
+}
+///////////////////////////////////////////////////////
 // khaled
 // func to return Selected Figure
-CFigure *ApplicationManager::GetFigure(int x, int y) const
+CFigure *ApplicationManager::GetFigure(int x, int y) const         //get one selected figure by clicked point indexes
 {
-	// remove selected Figure first
-	/*for (int i = FigCount - 1; i >= 0; i--) {
-		FigList[i]->SetSelected(false);
-	}*/
-
-	// return Selected Figure
+	// if the point in figure will return Pointer on Figure
 	for (int i = FigCount - 1; i >= 0; i--) {
 		if (FigList[i]->InFig(x, y))
 		{
-			if (FigList[i]->IsSelected()) {
-				FigList[i]->SetSelected(false);
-				return FigList[i];
-			}else{
-				FigList[i]->SetSelected(true);
-				return FigList[i];
-			}
+			return FigList[i];
 		}
 	}
-	//cout << "No Figure Selected" << endl;
-	// click out figurs
-	for (int i = FigCount - 1; i >= 0; i--) {
-		FigList[i]->SetSelected(false);
-	}
+	// if point not in any figure will return NULL
 	return NULL;
 }
 
+
+CFigure *ApplicationManager::GetSelectedFigureByFlag(int& selectedIndex)     //get one selected figure by checking isSelected prop
+{
+	for (int i = FigCount - 1; i >= 0; i--) {
+		if (FigList[i]->IsSelected())
+		{
+			selectedIndex = i;
+			return FigList[i];
+		}
+	}
+	// if no figure is selected return null
+	return NULL;
+}
+
+void ApplicationManager::InsertFigure(bool isFront)          //insert figure in front or back of all figuers
+{
+	int selectedIndex;
+	CFigure* temp = GetSelectedFigureByFlag(selectedIndex);
+	if (temp == NULL)
+	{
+
+	}
+	else
+	{
+		if (isFront)
+		{
+			for (int i =selectedIndex; i < FigCount; i++) {
+				FigList[i] = FigList[i + 1];
+			}
+			FigList[FigCount - 1] = temp;
+		}
+		else
+		{
+			for (int i = selectedIndex; i >=0 ; i--) {
+				FigList[i] = FigList[i - 1];
+			}
+			FigList[0] = temp;
+		}
+	}
+}
+
+////////////////////////////////////////////////////////////////////////////////////asmaa
+void ApplicationManager::SaveAll(ofstream& File) const
+{
+	File << FigCount << endl;
+	for (int i = 0; i < FigCount; i++)
+	{
+		FigList[i]->Save(File, GetGUI());
+	}
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////
 //==================================================================================//
 //							Interface Management Functions							//
 //==================================================================================//

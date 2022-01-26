@@ -31,7 +31,11 @@ void ActionAddEllipse::Execute()
 
 	//Step 2 - Create a Ellipse with the parameters read from the user
 	CEllipse* E = new CEllipse(C, ElliGfxInfo);
-
+	
+	//and unselect All Previous Figures
+	if(!pManager->multiSelect){
+		pManager->UnSelectFigures();
+	}
 	//Step 3 - Add the Ellipse to the list of figures
 	pManager->AddFigure(E);
 }

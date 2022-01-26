@@ -48,7 +48,13 @@ void ActionAddSquare::Execute()
 
 	//Step 3 - Create a Square with the parameters read from the user
 	CSquare *R=new CSquare(topLeft, SideLength, SqrGfxInfo);
-
+	
+	//and unselect All Previous Figures
+	if (!pManager->multiSelect) {
+		pManager->UnSelectFigures();
+	}
 	//Step 4 - Add the Square to the list of figures
 	pManager->AddFigure(R);
+	
+
 }

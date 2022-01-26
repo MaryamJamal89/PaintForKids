@@ -21,6 +21,9 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	ITM_ELPS,		//Ellipse item in menu
 	ITM_HEX,		//Hex item in menu
 	
+	ITM_MULSELECT,   //button for multiselection
+	ITM_BACK,
+	ITM_FRONT,
 
 	//Colors "randa"
 	ITM_DROWCLR,
@@ -32,6 +35,7 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	ITM_GREEN,
 
 	//TODO: Add more items names here
+	ITM_SAVE,       //save item
 	ITM_LOAD,       //Load item
 	ITM_EXIT,		//Exit item
 	
@@ -73,7 +77,22 @@ struct UI_Info	//User Interface Info.
 	color StatusBarColor = TURQUOISE;	//Status bar color
 	int PenWidth = 3;			//width of the pen that draws shapes
 
-	/// Add more members if needed
+	///// Add more members if needed
+	//GUI_MODE InterfaceMode;
+
+	//int	width, height,	//Window width and height
+	//	wx, wy,			//Window starting coordinates
+	//	StatusBarHeight,	//Status Bar Height
+	//	ToolBarHeight,		//Tool Bar Height (distance from top of window to bottom line of toolbar)
+	//	MenuItemWidth;		//Width of each item in toolbar menu
+
+	//color DrawColor;		//Drawing color
+	//color FillColor;		//Filling color
+	//color HighlightColor;	//Highlighting color
+	//color MsgColor;			//Messages color
+	//color BkGrndColor;		//Background color
+	//color StatusBarColor;	//Status bar color
+	//int PenWidth;			//width of the pen that draws shapes
 
 }UI;	//create a global object UI
 

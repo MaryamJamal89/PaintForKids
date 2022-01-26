@@ -29,7 +29,11 @@ void ActionAddHexagon::Execute()
 
 	//Step 2 - Create a Ellipse with the parameters read from the user
 	CHexagon* H = new CHexagon(C, HexGfxInfo);
-
+	
+	//and unselect All Previous Figures
+	if (!pManager->multiSelect) {
+		pManager->UnSelectFigures();
+	}
 	//Step 3 - Add the Ellipse to the list of figures
 	pManager->AddFigure(H);
 }

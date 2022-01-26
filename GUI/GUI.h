@@ -21,7 +21,7 @@ public:
 	/////////// Input Functoinality  /////////////////
 	void GetPointClicked(int &x, int &y) const;//Get coordinate where user clicks
 	string GetSrting() const ;	 //Returns a string entered by the user
-	ActionType MapInputToActionType() const; //Read the user click and map to an action
+	ActionType MapInputToActionType(int& x, int& y) const; //Read the user click and map to an action
 
 	/////////// Output Functoinality  ////////////////
 	void CreateDrawToolBar() const;	//creates Draw mode toolbar & menu
@@ -41,12 +41,16 @@ public:
 	void PrintMessage(string msg) const;	//Print a message on Status bar
 
 	color StringToColor(string colorStr); //convert string to color type
+	string ColorToString(color clr);     //convert color to string
+	bool isMatchedColors(color c1, color c2);        //check if two colors are the same
 	color getCrntDrawColor() const;	//get current drwawing color
 	color getCrntFillColor() const;	//get current filling color
 	color getBackgroungColor() const;	//get current background color
 	bool getColorisFilled() const;
 	int getCrntPenWidth() const;		//get current pen width
-
+	
+	string ReadFileName(string msg);    //read file name to save or load
+	string Confirm(string msg);         //get yes or no response
 };
 
 #endif

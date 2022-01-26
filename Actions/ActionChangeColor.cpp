@@ -1,13 +1,13 @@
-#include "ChangeColor.h"
+#include "ActionChangeColor.h"
 #include "../ApplicationManager.h"
 #include "../GUI/GUI.h"
 
 
-ChangeColor::ChangeColor(ApplicationManager* pApp, color c, int drawORfill) : Action(pApp), colour(c), DrawOrFill(drawORfill)
+ActionChangeColor::ActionChangeColor(ApplicationManager* pApp, color c, int drawORfill) : Action(pApp), colour(c), DrawOrFill(drawORfill)
 {
 }
 
-void ChangeColor::Execute() {
+void ActionChangeColor::Execute() {
 
 
 	// Check If The Mode if Change Drawing Color
