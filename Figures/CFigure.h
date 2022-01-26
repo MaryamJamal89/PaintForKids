@@ -10,6 +10,7 @@ class CFigure
 {
 protected:
 	int ID;		//Each figure has an ID
+	int static id;
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
 	

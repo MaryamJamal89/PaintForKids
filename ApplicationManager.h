@@ -12,6 +12,7 @@ class ApplicationManager
 	enum { MaxFigCount = 200 };	//Max no of figures
 
 private:
+	int x, y;
 	int FigCount;		//Actual number of figures
 	int DORF =0;		//Draw or fill or backgoround 
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
@@ -42,6 +43,7 @@ public:
 	// Saving function
 	void SaveAll(ofstream& File)const;       //Save All Figures To The File :Asmaa
 
+	void UnSelectFigures() const;
 };
 
 #endif

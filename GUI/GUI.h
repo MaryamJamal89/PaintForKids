@@ -21,7 +21,7 @@ public:
 	/////////// Input Functoinality  /////////////////
 	void GetPointClicked(int &x, int &y) const;//Get coordinate where user clicks
 	string GetSrting() const ;	 //Returns a string entered by the user
-	ActionType MapInputToActionType() const; //Read the user click and map to an action
+	ActionType MapInputToActionType(int& x, int& y) const; //Read the user click and map to an action
 
 	/////////// Output Functoinality  ////////////////
 	void CreateDrawToolBar() const;	//creates Draw mode toolbar & menu
