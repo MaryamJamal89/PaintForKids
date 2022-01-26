@@ -195,26 +195,38 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const         //get one sel
 }
 
 
-CFigure *ApplicationManager::GetSelectedFigureByFlag(int& selectedIndex)     //get one selected figure by checking isSelected prop
+CFigure *ApplicationManager::GetSelectedFigureByFlag(int& selectedIndex, int& selectedNum)     //get one selected figure by checking isSelected prop
 {
+	selectedNum = 0;
 	for (int i = FigCount - 1; i >= 0; i--) {
 		if (FigList[i]->IsSelected())
 		{
 			selectedIndex = i;
-			return FigList[i];
+			selectedNum++;
 		}
 	}
-	// if no figure is selected return null
-	return NULL;
+	if (selectedNum == 0)
+	{
+		// if no figure is selected return null
+		return NULL;
+	}
+	else
+	{
+		return FigList[selectedIndex];
+	}
 }
 
 void ApplicationManager::InsertFigure(bool isFront)          //insert figure in front or back of all figuers
 {
-	int selectedIndex;
-	CFigure* temp = GetSelectedFigureByFlag(selectedIndex);
+	int selectedIndex,selectedNum;
+	CFigure* temp = GetSelectedFigureByFlag(selectedIndex,selectedNum);
 	if (temp == NULL)
 	{
-
+		pGUI->PrintMessage("No selected figure to move!");
+	}
+	else if (selectedNum > 1)
+	{
+		pGUI->PrintMessage("Select only one figure to move!");
 	}
 	else
 	{
@@ -224,6 +236,7 @@ void ApplicationManager::InsertFigure(bool isFront)          //insert figure in 
 				FigList[i] = FigList[i + 1];
 			}
 			FigList[FigCount - 1] = temp;
+			pGUI->PrintMessage("Bring to front!");
 		}
 		else
 		{
@@ -231,6 +244,7 @@ void ApplicationManager::InsertFigure(bool isFront)          //insert figure in 
 				FigList[i] = FigList[i - 1];
 			}
 			FigList[0] = temp;
+			pGUI->PrintMessage("Send to back!");
 		}
 	}
 }
