@@ -87,6 +87,7 @@ ActionType GUI::MapInputToActionType(int &x,int &y) const
 			case ITM_SQUR: return DRAW_SQUARE;
 			case ITM_ELPS: return DRAW_ELPS;
 			case ITM_HEX: return DRAW_HEX;
+			case ITM_MULSELECT: return MUL_SELECT;
 			case ITM_DROWCLR: return CHNG_DRAW_CLR;
 			case ITM_FILLCLR: return CHNG_FILL_CLR;
 			case ITM_BGCLR: return CHNG_BK_CLR;
@@ -167,6 +168,7 @@ void GUI::CreateDrawToolBar() const
 	MenuItemImages[ITM_SQUR] = "images\\MenuItems\\Menu_Sqr.jpg";
 	MenuItemImages[ITM_ELPS] = "images\\MenuItems\\Menu_Elps.jpg";
 	MenuItemImages[ITM_HEX] = "images\\MenuItems\\Menu_Hex.jpg";
+	MenuItemImages[ITM_MULSELECT] = "images\\MenuItems\\Menu_MultiSelect.jpg";
 	MenuItemImages[ITM_DROWCLR] = "images\\MenuItems\\Menu_ChangeColor.jpg";
 	MenuItemImages[ITM_FILLCLR] = "images\\MenuItems\\Menu_FillColor.jpg";
 	MenuItemImages[ITM_BGCLR] = "images\\MenuItems\\Menu_BGColor.jpg";
@@ -228,7 +230,7 @@ color GUI::getCrntFillColor() const	//get current filling color
 {	return UI.FillColor;	}
 
 //////////////////////////////////////////////////////////////////////////////////////////
-color GUI::getBackgroungColor() const	//get current filling color
+color GUI::getBackgroungColor() const	//get current background color
 {
 	return UI.BkGrndColor;
 }
@@ -264,7 +266,7 @@ string GUI::ColorToString(color clr)    //convert string to color type
 	
 }
 
-bool GUI::isMatchedColors(color c1, color c2)
+bool GUI::isMatchedColors(color c1, color c2)      //check if two color objects are matched
 {
 	if (c1.ucBlue == c2.ucBlue && c1.ucRed == c2.ucRed && c1.ucGreen == c2.ucGreen)
 	{
@@ -372,6 +374,27 @@ void GUI::DrawHex(Point center, GfxInfo HexGfxInfo, bool selected) const
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
+
+string GUI::ReadFileName(string msg)       //read file name to save or load
+{
+	PrintMessage(msg);
+	return GetSrting();
+}
+
+string GUI::Confirm(string msg)          //get yes or no response
+{
+	PrintMessage(msg);
+
+	string response;
+	do {
+		response = GetSrting();
+		PrintMessage("Please enter (Y/N)?");
+	} while (!(response == "N" || response == "n" || response == "Y" || response == "y"));
+
+	return response;
+}
+
+//////////////////////////////////////////
 
 GUI::~GUI()
 {

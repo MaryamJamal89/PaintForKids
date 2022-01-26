@@ -6,30 +6,35 @@
 #include "..\Figures\CEllipse.h"
 #include "..\ApplicationManager.h"
 #include "..\GUI\GUI.h"
+#include "ActionChangeColor.h"
+#include "ActionSave.h"
 
 ActionLoad::ActionLoad(ApplicationManager* pApp) :Action(pApp)
 {}
 
-//Read target file name
-string ActionLoad::ReadFileName()
-{
-	GUI* pGUI = pManager->GetGUI();
-	pGUI->PrintMessage("Enter file name...");
-	return pGUI->GetSrting();
-}
-
-
 //Execute the action
 void ActionLoad::Execute()
 {
-	//ask user to save first
-	// ---
 	GUI* pGUI = pManager->GetGUI();
+
+	//ask user if they want to save current graph
+	string response = pGUI->Confirm("Do you want save current file (Y/N)?");
+	if (response == "Y" || response == "y")
+	{
+		//saving curreng graph
+		Action* save = new ActionSave(pManager);
+		save->Execute();
+	}
+
+	//deleting old figures
+	pManager->ResetFigList();
+
+	//loading the file
 	string drawColor, fillColor, bgColor, figType;
 	int figsNum;
 	ifstream loadedFile;
 	do {
-		string fileName = ReadFileName();
+		string fileName = pGUI->ReadFileName("Load: Enter file name to load from...");
 		loadedFile.open(fileName + ".txt");
 		if (loadedFile.fail())
 		{
@@ -38,24 +43,21 @@ void ActionLoad::Execute()
 		}
 	} while (loadedFile.fail());
 
-	//reading and setting window colors
+	//reading window colors
 	loadedFile >> drawColor >> fillColor >> bgColor;
-	UI.DrawColor = pGUI->StringToColor(drawColor);
-	//UI.FillColor = pGUI->StringToColor(fillColor);
-	/*if (fillColor == "NO_FILL")
-	{
-		
-	}
-	else
-	{
-		UI.FillColor = pGUI->StringToColor(fillColor);
-	}*/
-	UI.BkGrndColor = pGUI->StringToColor(bgColor);
 
-	//update window to change background color
-	pGUI->ClearDrawArea();
-	//delete all old figures
-	pManager->ResetFigList();
+	//using coloring actions to apply new colors
+	Action* changeDrawColor = new ActionChangeColor(pManager, pGUI->StringToColor(drawColor), 1);
+	changeDrawColor->Execute();
+
+	if (fillColor != "NO_FILL")
+	{
+		Action* changeFillColor = new ActionChangeColor(pManager, pGUI->StringToColor(fillColor), 2);
+		changeFillColor->Execute();
+	}
+
+	Action* changeBgColor = new ActionChangeColor(pManager, pGUI->StringToColor(bgColor), 3);
+	changeBgColor->Execute();
 
 	loadedFile >> figsNum;
 	while (figsNum > 0)

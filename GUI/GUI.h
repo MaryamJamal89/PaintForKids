@@ -48,7 +48,9 @@ public:
 	color getBackgroungColor() const;	//get current background color
 	bool getColorisFilled() const;
 	int getCrntPenWidth() const;		//get current pen width
-
+	
+	string ReadFileName(string msg);    //read file name to save or load
+	string Confirm(string msg);         //get yes or no response
 };
 
 #endif
