@@ -5,16 +5,16 @@ GUI::GUI()
 {
 	//Initialize user interface parameters
 	//UI.InterfaceMode = MODE_DRAW;
-	//
+	
 	//UI.width = 1300;
 	//UI.height = 700;
 	//UI.wx = 5;
-	//UI.wy =5;
-	//
+	//UI.wy = 5;
+	
 	//UI.StatusBarHeight = 50;
 	//UI.ToolBarHeight = 50;
 	//UI.MenuItemWidth = 80;
-	//
+	
 	//UI.DrawColor = BLUE;	//Drawing color
 	//UI.FillColor = GREEN;	//Filling color
 	//UI.MsgColor = RED;		//Messages color
@@ -93,9 +93,6 @@ ActionType GUI::MapInputToActionType(int &x,int &y) const
 			case ITM_DROWCLR: return CHNG_DRAW_CLR;
 			case ITM_FILLCLR: return CHNG_FILL_CLR;
 			case ITM_BGCLR: return CHNG_BK_CLR;
-			case ITM_RED: return COLOR_RED;
-			case ITM_BLUE: return COLOR_BLUE;
-			case ITM_GREEN: return COLOR_GREEN;
 			case ITM_SAVE: return SAVE;
 			case ITM_LOAD: return LOAD;
 			case ITM_PLAY: return TO_PLAY;
@@ -113,6 +110,17 @@ ActionType GUI::MapInputToActionType(int &x,int &y) const
 		
 		//[3] User clicks on the status bar
 		return STATUS;
+	}
+	else if (UI.InterfaceMode == MODE_COLOR) {
+		int ClickedItemOrder = (x / UI.MenuItemWidth);
+
+		switch (ClickedItemOrder)
+		{
+		case ITM_RED: return COLOR_RED;
+		case ITM_BLUE: return COLOR_BLUE;
+		case ITM_GREEN: return COLOR_GREEN;
+		case ITM_BACKDROWING: return GO_BACK;
+		}
 	}
 	else	//GUI is in PLAY mode
 	{
@@ -185,6 +193,16 @@ void GUI::ClearStatusBar() const
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
+void GUI::ClearToolBar() const
+{
+	//Clear Status bar by drawing a filled white Square
+	pWind->SetPen(UI.ToolBarColor, 1);
+	pWind->SetBrush(UI.ToolBarColor);
+	pWind->DrawRectangle( 0, 0 , UI.width, UI.ToolBarHeight);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
 void GUI::CreateDrawToolBar() const
 {
 	//ClearDrawArea();
@@ -207,9 +225,6 @@ void GUI::CreateDrawToolBar() const
 	MenuItemImages[ITM_DROWCLR] = "images\\MenuItems\\Menu_ChangeColor.jpg";
 	MenuItemImages[ITM_FILLCLR] = "images\\MenuItems\\Menu_FillColor.jpg";
 	MenuItemImages[ITM_BGCLR] = "images\\MenuItems\\Menu_BGColor.jpg";
-	MenuItemImages[ITM_RED] = "images\\MenuItems\\Menu_Red.jpg";
-	MenuItemImages[ITM_BLUE] = "images\\MenuItems\\Menu_Blue.jpg";
-	MenuItemImages[ITM_GREEN] = "images\\MenuItems\\Menu_Green.jpg";
 	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\MenuSave.jpg";
 	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\Menu_Load.jpg";
 	MenuItemImages[ITM_PLAY] = "images\\MenuItems\\Menu_Switch2.jpg";
@@ -227,6 +242,24 @@ void GUI::CreateDrawToolBar() const
 
 }
 
+void GUI::CreateDrawColorBar() const {
+
+	UI.InterfaceMode = MODE_COLOR;
+
+	string DrawColorItem[Color_COUNT];
+
+	DrawColorItem[ITM_RED] = "images\\MenuItems\\Menu_Red.jpg";
+	DrawColorItem[ITM_BLUE] = "images\\MenuItems\\Menu_Blue.jpg";
+	DrawColorItem[ITM_GREEN] = "images\\MenuItems\\Menu_Green.jpg";
+	DrawColorItem[ITM_BACKDROWING] = "images\\MenuItems\\Menu_Back.jpg";
+
+	//Draw menu item one image at a time
+	for (int i = 0; i < Color_COUNT; i++)
+		pWind->DrawImage(DrawColorItem[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+
+	pWind->SetPen(RED, 3);
+	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+}
 //////////////////////////////////////////////////////////////////////////////////////////
 
 void GUI::CreatePlayToolBar() const
@@ -309,7 +342,6 @@ color GUI::StringToColor(string colorStr)    //convert string to color type
 ////////////////////////////////////////////////////////////////////  covert color to  string
 string GUI::ColorToString(color clr)    //convert string to color type
 {
-	
 	if (isMatchedColors(clr,BLUE)) return "BLUE";
 	else if (isMatchedColors(clr,BLACK)) return "BLACK";
 	else if (isMatchedColors(clr, RED)) return "RED";
@@ -317,8 +349,7 @@ string GUI::ColorToString(color clr)    //convert string to color type
 	else if (isMatchedColors(clr, WHITE)) return "WHITE";
 	else if (isMatchedColors(clr, GREEN)) return "GREEN";
 	else if (isMatchedColors(clr, ORANGE)) return "ORANGE";
-	else if (isMatchedColors(clr, LIGHTGOLDENRODYELLOW)) return "LIGHTGOLDENRODYELLOW";
-	
+	else if (isMatchedColors(clr, LIGHTGOLDENRODYELLOW)) return "LIGHTGOLDENRODYELLOW";	
 }
 
 bool GUI::isMatchedColors(color c1, color c2)      //check if two color objects are matched
@@ -358,10 +389,9 @@ void GUI::DrawSquare(Point P1, int length, GfxInfo RectGfxInfo, bool selected) c
 
 	pWind->DrawRectangle(P1.x, P1.y, P1.x + length, P1.y + length, style);
 	//pWind->DrawLine(P1.x, P1.y, P1.x + length, P1.y + length, style);
-
 }
 
-void GUI::DrawEllip(Point P1, Point P2, GfxInfo ElliGfxInfo, bool selected) const
+void GUI::DrawEllip(Point center, int length, int height, GfxInfo ElliGfxInfo, bool selected) const
 {
 	color DrawingClr;
 	if (selected)
@@ -379,10 +409,10 @@ void GUI::DrawEllip(Point P1, Point P2, GfxInfo ElliGfxInfo, bool selected) cons
 	else
 		style = FRAME;
 
-	pWind->DrawEllipse(P1.x - P2.x, P1.y - P2.y, P1.x + P2.x, P1.y + P2.y, style);
+	pWind->DrawEllipse(center.x - height, center.y - length, center.x + height, center.y + length, style);
 }
 
-void GUI::DrawHex(Point center, GfxInfo HexGfxInfo, bool selected) const
+void GUI::DrawHex(Point center, int length, GfxInfo HexGfxInfo, bool selected) const
 {
 	color DrawingClr;
 	if (selected)
@@ -400,7 +430,7 @@ void GUI::DrawHex(Point center, GfxInfo HexGfxInfo, bool selected) const
 	else
 		style = FRAME;
 
-	int d = 50;
+	int d = length;
 
 	Point point1;
 	point1.x = center.x - d;
