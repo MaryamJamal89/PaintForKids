@@ -1,12 +1,15 @@
 #include "CSquare.h"
 #include<fstream>
 
+int CSquare::SqrCnt = 0;  //static variable to determine the number of objects
+
 CSquare::CSquare(){}
 
 CSquare::CSquare(Point P1, int len, GfxInfo FigureGfxInfo):CFigure(FigureGfxInfo)
 {
 	TopLeftCorner = P1;
 	length = len;
+	SqrCnt++;
 }
 	
 void CSquare::DrawMe(GUI* pGUI) const
@@ -48,7 +51,6 @@ void CSquare::Load(ifstream& loadedFile, GUI* pGUI)
 	CSquare::SetSelected(false);
 }
 
-// khaled
 // check point inside the figure our Not
 bool CSquare::InFig(int x, int y)
 {

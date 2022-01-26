@@ -5,16 +5,16 @@ GUI::GUI()
 {
 	//Initialize user interface parameters
 	//UI.InterfaceMode = MODE_DRAW;
-	//
+	
 	//UI.width = 1300;
 	//UI.height = 700;
 	//UI.wx = 5;
-	//UI.wy =5;
-	//
+	//UI.wy = 5;
+	
 	//UI.StatusBarHeight = 50;
 	//UI.ToolBarHeight = 50;
 	//UI.MenuItemWidth = 80;
-	//
+	
 	//UI.DrawColor = BLUE;	//Drawing color
 	//UI.FillColor = GREEN;	//Filling color
 	//UI.MsgColor = RED;		//Messages color
@@ -258,7 +258,6 @@ color GUI::StringToColor(string colorStr)    //convert string to color type
 ////////////////////////////////////////////////////////////////////  covert color to  string
 string GUI::ColorToString(color clr)    //convert string to color type
 {
-	
 	if (isMatchedColors(clr,BLUE)) return "BLUE";
 	else if (isMatchedColors(clr,BLACK)) return "BLACK";
 	else if (isMatchedColors(clr, RED)) return "RED";
@@ -266,8 +265,7 @@ string GUI::ColorToString(color clr)    //convert string to color type
 	else if (isMatchedColors(clr, WHITE)) return "WHITE";
 	else if (isMatchedColors(clr, GREEN)) return "GREEN";
 	else if (isMatchedColors(clr, ORANGE)) return "ORANGE";
-	else if (isMatchedColors(clr, LIGHTGOLDENRODYELLOW)) return "LIGHTGOLDENRODYELLOW";
-	
+	else if (isMatchedColors(clr, LIGHTGOLDENRODYELLOW)) return "LIGHTGOLDENRODYELLOW";	
 }
 
 bool GUI::isMatchedColors(color c1, color c2)      //check if two color objects are matched
@@ -307,10 +305,9 @@ void GUI::DrawSquare(Point P1, int length, GfxInfo RectGfxInfo, bool selected) c
 
 	pWind->DrawRectangle(P1.x, P1.y, P1.x + length, P1.y + length, style);
 	//pWind->DrawLine(P1.x, P1.y, P1.x + length, P1.y + length, style);
-
 }
 
-void GUI::DrawEllip(Point P1, Point P2, GfxInfo ElliGfxInfo, bool selected) const
+void GUI::DrawEllip(Point center, int length, int height, GfxInfo ElliGfxInfo, bool selected) const
 {
 	color DrawingClr;
 	if (selected)
@@ -328,7 +325,7 @@ void GUI::DrawEllip(Point P1, Point P2, GfxInfo ElliGfxInfo, bool selected) cons
 	else
 		style = FRAME;
 
-	pWind->DrawEllipse(P1.x - P2.x, P1.y - P2.y, P1.x + P2.x, P1.y + P2.y, style);
+	pWind->DrawEllipse(center.x - height, center.y - length, center.x + height, center.y + length, style);
 }
 
 void GUI::DrawHex(Point center, int length, GfxInfo HexGfxInfo, bool selected) const

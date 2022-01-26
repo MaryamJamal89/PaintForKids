@@ -10,12 +10,11 @@ CHexagon::CHexagon(Point C, int len, GfxInfo FigureGfxInfo) : CFigure(FigureGfxI
 	Center = C;
 	length = len;
 	HexCnt++;
-	P.x = 80; P.y = 30;
 }
 
 void CHexagon::DrawMe(GUI* pOut) const
 {
-	//Call Output::DrawEllipse to draw a ellipse on the screen	
+	//Call Output::DrawHex to draw a Hexagon on the screen	
 	pOut->DrawHex(Center, length, FigGfxInfo, Selected);
 }
 
@@ -51,14 +50,11 @@ void CHexagon::Load(ifstream& loadedFile, GUI* pGUI)
 	CHexagon::SetSelected(false);
 }
 
-
-// khaled
 double area1(int x1, int y1, int x2, int y2, int x3, int y3)
 {
 	return abs((x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2.0);
 }
 
-// khaled 
 // InFig return boolian to check point inside Figure 
 bool CHexagon::InFig(int x, int y)
 {
@@ -75,7 +71,6 @@ bool CHexagon::InFig(int x, int y)
 	return false;
 }
 
-// khaled
 // Print to return all info about figure
 void CHexagon::PrintInfo(GUI* pGUI)
 {
@@ -94,5 +89,3 @@ void CHexagon::PrintInfo(GUI* pGUI)
 	}
 	pGUI->PrintMessage("Ellipse / ID: " + id + " Center: (" + x + ", " + y + ") / Drawing Color:" + pGUI->ColorToString(FigGfxInfo.DrawClr) + " / Filling Color: " + fillingColor);
 }
-
-
