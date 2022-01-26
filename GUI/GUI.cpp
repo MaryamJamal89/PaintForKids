@@ -46,6 +46,7 @@ bool GUI::getColorisFilled() const {
 
 	return UI.isFilled;
 }
+
 string GUI::GetSrting() const 
 {
 	string Label;
@@ -205,13 +206,12 @@ void GUI::CreateDrawToolBar() const
 		pWind->DrawImage(MenuItemImages[i], i*UI.MenuItemWidth,0,UI.MenuItemWidth, UI.ToolBarHeight);
 
 	//Draw a line under the toolbar
-	pWind->SetPen(RED, 3);
+	pWind->SetPen(BLACK, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);	
-
 }
 
-void GUI::CreateDrawColorBar() const {
-
+void GUI::CreateDrawColorBar() const 
+{
 	UI.InterfaceMode = MODE_COLOR;
 
 	string DrawColorItem[Color_COUNT];
@@ -225,7 +225,7 @@ void GUI::CreateDrawColorBar() const {
 	for (int i = 0; i < Color_COUNT; i++)
 		pWind->DrawImage(DrawColorItem[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 
-	pWind->SetPen(RED, 3);
+	pWind->SetPen(BLACK, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
