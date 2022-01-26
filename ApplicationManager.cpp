@@ -5,6 +5,7 @@
 #include "Actions/ActionAddHexagon.h"
 #include "Actions/ActionSave.h"
 #include "Actions/ActionLoad.h"
+#include "Actions/ActionChangeLocation.h"
 #include "Actions/ActionExit.h"
 #include "Actions/ActionSelect.h"
 #include "Actions/ActionChangeColor.h"
@@ -74,6 +75,16 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 
 		case MUL_SELECT:
 			//multiselect
+			break;
+
+		case SEND_BACK:
+			//send to back
+			newAct = new ActionChangeLocation(this,false);
+			break;
+
+		case BRNG_FRNT:
+			//bring to front
+			newAct = new ActionChangeLocation(this, true);
 			break;
 
 		case COLOR_RED:
@@ -164,7 +175,7 @@ void ApplicationManager::UnSelectFigures()const {
 ///////////////////////////////////////////////////////
 // khaled
 // func to return Selected Figure
-CFigure *ApplicationManager::GetFigure(int x, int y) const
+CFigure *ApplicationManager::GetFigure(int x, int y) const         //get one selected figure by clicked point indexes
 {
 	// if the point in figure will return Pointer on Figure
 	for (int i = FigCount - 1; i >= 0; i--) {
@@ -176,6 +187,48 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 	// if point not in any figure will return NULL
 	return NULL;
 }
+
+
+CFigure *ApplicationManager::GetSelectedFigureByFlag(int& selectedIndex)     //get one selected figure by checking isSelected prop
+{
+	for (int i = FigCount - 1; i >= 0; i--) {
+		if (FigList[i]->IsSelected())
+		{
+			selectedIndex = i;
+			return FigList[i];
+		}
+	}
+	// if no figure is selected return null
+	return NULL;
+}
+
+void ApplicationManager::InsertFigure(bool isFront)          //insert figure in front or back of all figuers
+{
+	int selectedIndex;
+	CFigure* temp = GetSelectedFigureByFlag(selectedIndex);
+	if (temp == NULL)
+	{
+
+	}
+	else
+	{
+		if (isFront)
+		{
+			for (int i =selectedIndex; i < FigCount; i++) {
+				FigList[i] = FigList[i + 1];
+			}
+			FigList[FigCount - 1] = temp;
+		}
+		else
+		{
+			for (int i = selectedIndex; i >=0 ; i--) {
+				FigList[i] = FigList[i - 1];
+			}
+			FigList[0] = temp;
+		}
+	}
+}
+
 ////////////////////////////////////////////////////////////////////////////////////asmaa
 void ApplicationManager::SaveAll(ofstream& File) const
 {

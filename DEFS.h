@@ -10,7 +10,7 @@ enum ActionType //The actions supported (you can add more if needed)
 	DRAW_ELPS,		//Draw an Ellipse
 	DRAW_HEX,		//Draw a Hexagon
 
-	MUL_SELECT,     //multiselect
+	MUL_SELECT,    //multiselect
 
 	//Coloring
 	COLOR_WHITE,
