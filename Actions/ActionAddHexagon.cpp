@@ -9,7 +9,7 @@ ActionAddHexagon::ActionAddHexagon(ApplicationManager* pApp) :Action(pApp)
 //Execute the action
 void ActionAddHexagon::Execute()
 {
-	Point C;
+	Point C, P1;
 
 	//Get a Pointer to the Interface
 	GUI* pGUI = pManager->GetGUI();
@@ -21,20 +21,27 @@ void ActionAddHexagon::Execute()
 	HexGfxInfo.FillClr = pGUI->getCrntFillColor();
 	HexGfxInfo.BorderWdth = pGUI->getCrntPenWidth();
 
-	//Step 1 - Read Ellipse data from the user
-	pGUI->PrintMessage("New Ellipse: Click at center point");
-	//Read 1st point and store in point P1
+	//Step 1 - Read Hexagon data from the user
+	pGUI->PrintMessage("New Hexagon: Click at center point");
+	//Read 1st point and store in point center
 	pGUI->GetPointClicked(C.x, C.y);
+
+	pGUI->PrintMessage("New Hexagon: Click at second point");
+	//Read 1st point and store in point P1
+	pGUI->GetPointClicked(P1.x, P1.y);
+
 	pGUI->ClearStatusBar();
 
-	//Step 2 - Create a Ellipse with the parameters read from the user
-	CHexagon* H = new CHexagon(C, HexGfxInfo);
+	int SideLength = max(abs(C.x - P1.x), abs(C.y - P1.y));
+
+	//Step 2 - Create a Hexagon with the parameters read from the user
+	CHexagon* H = new CHexagon(C, SideLength, HexGfxInfo);
 	
 	//and unselect All Previous Figures
 	if (!pManager->multiSelect) {
 		pManager->UnSelectFigures();
 	}
-	//Step 3 - Add the Ellipse to the list of figures
+	//Step 3 - Add the Hexagon to the list of figures
 	pManager->AddFigure(H);
 
 	//Step 5 - print new figure info in status bar

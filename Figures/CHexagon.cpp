@@ -5,9 +5,10 @@ int CHexagon::HexCnt = 0;  //static variable to determine the number of objects
 
 CHexagon::CHexagon(){}
 
-CHexagon::CHexagon(Point C, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo)
+CHexagon::CHexagon(Point C, int len, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo)
 {
 	Center = C;
+	length = len;
 	HexCnt++;
 	P.x = 80; P.y = 30;
 }
@@ -15,7 +16,7 @@ CHexagon::CHexagon(Point C, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo)
 void CHexagon::DrawMe(GUI* pOut) const
 {
 	//Call Output::DrawEllipse to draw a ellipse on the screen	
-	pOut->DrawHex(Center, FigGfxInfo, Selected);
+	pOut->DrawHex(Center, length, FigGfxInfo, Selected);
 }
 
 // save figure in the file
