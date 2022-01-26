@@ -12,9 +12,10 @@ class ApplicationManager
 	enum { MaxFigCount = 200 };	//Max no of figures
 
 private:
-	int x, y;
+	int x, y;			//click points on Screen
 	int FigCount;		//Actual number of figures
 	int DORF =0;		//Draw or fill or backgoround 
+	bool static multiSelect; //enabling multiSelect
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
 
 	//Pointers to Input and Output classes

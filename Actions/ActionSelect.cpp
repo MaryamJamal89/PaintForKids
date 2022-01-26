@@ -10,8 +10,9 @@
 
 
 
-ActionSelect::ActionSelect(ApplicationManager* pApp, Point _P) :Action(pApp)
+ActionSelect::ActionSelect(ApplicationManager* pApp, Point _P, bool _multiSelect) :Action(pApp)
 {
+	multiSelect = _multiSelect;
 	P = _P;
 }
 void ActionSelect::Execute()
@@ -35,11 +36,15 @@ void ActionSelect::Execute()
 	//if returns a figure
 	//(fig != NULL)
 	else{
+
 		if (fig->IsSelected()) {
 			fig->SetSelected(false);
 		}
 		else{
-			pManager->UnSelectFigures();
+			// Enabling Multiple select
+			if (!multiSelect) {
+				pManager->UnSelectFigures();
+			}
 			fig->SetSelected(true);
 			pGUI->PrintMessage(fig->PrintInfo());
 			cout << (fig->PrintInfo()) << endl;

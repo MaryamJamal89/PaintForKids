@@ -75,6 +75,17 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 
 		case MUL_SELECT:
 			//multiselect
+			Point P;
+			P.x = x; P.y = y;
+			if (multiSelect)
+			{
+				multiSelect = false;
+			}
+			else
+			{
+				multiSelect = true;
+			}
+			newAct = new ActionSelect(this, P, multiSelect);
 			break;
 
 		case SEND_BACK:
@@ -132,10 +143,10 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 
 			// Khaled
 		case  DRAWING_AREA:
-			Point P;
+			//Point P;
 			P.x = x; P.y = y;
 			//pGUI->GetPointClicked(P.x, P.y); // this is the reason of double click // first click for entering this case and seconed one to send it to Action object  
-			newAct = new ActionSelect(this, P);
+			newAct = new ActionSelect(this, P, multiSelect);
 			break;
 	}	
 	return newAct;
@@ -158,7 +169,8 @@ void ApplicationManager::ExecuteAction(Action* &pAct)
 //==================================================================================//
 //						Figures Management Functions								//
 //==================================================================================//
-
+// multiSelect filed
+bool ApplicationManager::multiSelect = false;
 //Add a figure to the list of figures
 void ApplicationManager::AddFigure(CFigure* pFig)
 {
@@ -168,7 +180,7 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 
 //unSelect Figures
 void ApplicationManager::UnSelectFigures()const {
-	for (int i = 0; i < FigCount; i++) {
+	for (int i = 0; i < FigCount && !multiSelect; i++) {
 		FigList[i]->SetSelected(false);
 	}
 }
