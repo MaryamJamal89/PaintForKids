@@ -13,8 +13,6 @@ class ActionSave : public Action
 public:
 	ActionSave(ApplicationManager* pApp);
 
-	virtual bool ReadActionParameters();
-
 	virtual void Execute();
 
 };

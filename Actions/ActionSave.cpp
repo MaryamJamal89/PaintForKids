@@ -9,35 +9,25 @@
 #include "..\ApplicationManager.h"
 #include "..\GUI\GUI.h"
 #include "..\GUI\UI_Info.h"
+#include<windows.h>
 
 
 ActionSave::ActionSave(ApplicationManager* pApp) :Action(pApp) {
 
 }
 
-bool ActionSave::ReadActionParameters()
-{
-	// return pointer to GUI 
-	// in future i will make one instance from GUI
-	GUI* pGUIOut = pManager->GetGUI();
-	GUI* pGUIIN = pManager->GetGUI();
-	// this massage will appeare in status bar
-	pGUIOut->PrintMessage("Save: Enter file name");
-	file_name = pGUIIN->GetSrting();
-	pGUIOut->PrintMessage("File Saved Successfully");
-	return true;
-}
-
-
 void ActionSave::Execute()
 {
 	GUI* pGUI = pManager->GetGUI();
-	ReadActionParameters();
+	file_name= pGUI->ReadFileName("Save: Enter file name to save...");
 
 	file.open(file_name+".txt", ios::out);
 
 	file << pGUI->ColorToString( UI.DrawColor) << " " << pGUI->ColorToString(UI.FillColor) << "  " << pGUI->ColorToString(UI.BkGrndColor )<< endl;
     pManager->SaveAll(file);
     file.close();
+
+	pGUI->PrintMessage("File Saved Successfully");
+	Sleep(500);
 }
 

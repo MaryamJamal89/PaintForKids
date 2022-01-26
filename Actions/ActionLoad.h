@@ -8,8 +8,6 @@ class ActionLoad : public Action
 public:
 	ActionLoad(ApplicationManager* pApp);
 
-	virtual string ReadFileName();
-
 	virtual void Execute();
 
 };
