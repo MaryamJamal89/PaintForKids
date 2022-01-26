@@ -76,21 +76,22 @@ bool CHexagon::InFig(int x, int y)
 
 // khaled
 // Print to return all info about figure
-string CHexagon::PrintInfo()
+void CHexagon::PrintInfo(GUI* pGUI)
 {
 	string id = to_string(ID);
 	string x = to_string(Center.x);
 	string y = to_string(Center.y);
-	/*string clr = getColor(this->FigGfxInfo.DrawClr);
 
+	string fillingColor;
 	if (FigGfxInfo.isFilled)
 	{
-		pOut->PrintMessage(" - FillColor: ");
-		string clrF = getColor(this->FigGfxInfo.FillClr);
-		return ("Ellipse -ID: " + id + " Center: (" + x + ", " + y + ") DrawColor:" + clr + " FillColor: " + clrF);
+		fillingColor = pGUI->ColorToString(FigGfxInfo.FillClr);
 	}
-	else*/
-		return ("Ellipse -ID: " + id + " Center: (" + x + ", " + y + ") DrawColor:");
+	else
+	{
+		fillingColor = "NO_FILL";
+	}
+	pGUI->PrintMessage("Ellipse / ID: " + id + " Center: (" + x + ", " + y + ") / Drawing Color:" + pGUI->ColorToString(FigGfxInfo.DrawClr) + " / Filling Color: " + fillingColor);
 }
 
 

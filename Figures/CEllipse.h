@@ -21,7 +21,7 @@ public:
 	// InFig return boolian to check point inside Figure our Not
 	virtual bool InFig(int, int);
 	// Print to return all info about figure
-	virtual string PrintInfo();
+	virtual void PrintInfo(GUI* pGUI);
 
 };
 

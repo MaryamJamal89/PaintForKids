@@ -62,20 +62,21 @@ bool CEllipse::InFig(int x, int y)  //Determine the position of the point
 }
 
 // Print to return all info about figure
-string CEllipse::PrintInfo()
+void CEllipse::PrintInfo(GUI* pGUI)
 {
 
 	string id = to_string(ID);
 	string x = to_string(Center.x);
 	string y = to_string(Center.y);
-	//string clr = getColor(this->FigGfxInfo.DrawClr);
 
-	//if (FigGfxInfo.isFilled)
-	//{
-	//	//pOut->PrintMessage(" - FillColor: ");
-	//	//string clrF = getColor(this->FigGfxInfo.FillClr);
-	//	return ("Ellipse -ID: " + id + " Center: (" + x + ", " + y + ") DrawColor:");
-	//}
-	//else
-	return ("Ellipse -ID: " + id + " Center: (" + x + ", " + y + ") DrawColor:");
+	string fillingColor;
+	if (FigGfxInfo.isFilled)
+	{
+		fillingColor = pGUI->ColorToString(FigGfxInfo.FillClr);
+	}
+	else
+	{
+		fillingColor = "NO_FILL";
+	}
+	pGUI->PrintMessage("Ellipse / ID: " + id + " Center: (" + x + ", " + y + ") / Drawing Color: " + pGUI->ColorToString(FigGfxInfo.DrawClr) + " / Filling Color: " + fillingColor);
 }

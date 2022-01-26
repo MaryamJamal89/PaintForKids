@@ -36,4 +36,7 @@ void ActionAddHexagon::Execute()
 	}
 	//Step 3 - Add the Ellipse to the list of figures
 	pManager->AddFigure(H);
+
+	//Step 5 - print new figure info in status bar
+	H->PrintInfo(pGUI);
 }

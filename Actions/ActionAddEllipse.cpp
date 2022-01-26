@@ -38,4 +38,7 @@ void ActionAddEllipse::Execute()
 	}
 	//Step 3 - Add the Ellipse to the list of figures
 	pManager->AddFigure(E);
+
+	//Step 5 - print new figure info in status bar
+	E->PrintInfo(pGUI);
 }

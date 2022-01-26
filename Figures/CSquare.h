@@ -17,7 +17,7 @@ public:
 	
 	// khaled
 	virtual bool InFig(int, int);
-	virtual string PrintInfo();
+	virtual void PrintInfo(GUI* pGUI);
 
 };
 
