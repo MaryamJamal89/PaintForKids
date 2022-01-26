@@ -112,16 +112,27 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			newAct = new ActionChangeColor(this, GREEN, DORF);
 			break;
 
+		case GO_BACK:
+			pGUI->ClearToolBar();
+			pGUI->CreateDrawToolBar();
+			break;
+
 		case CHNG_DRAW_CLR:
 			DORF = 1;
+			pGUI->ClearToolBar();
+			pGUI->CreateDrawColorBar();
 			break;
 
 		case CHNG_FILL_CLR:
 			DORF = 2;
+			pGUI->ClearToolBar();
+			pGUI->CreateDrawColorBar();
 			break;
 
 		case CHNG_BK_CLR:
 			DORF = 3;
+			pGUI->ClearToolBar();
+			pGUI->CreateDrawColorBar();
 			break;
 
 		case SAVE:
@@ -260,7 +271,6 @@ void ApplicationManager::SaveAll(ofstream& File) const
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
 {	
-	
 	for(int i=0; i<FigCount; i++)
 		FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
 }

@@ -25,10 +25,12 @@ public:
 
 	/////////// Output Functoinality  ////////////////
 	void CreateDrawToolBar() const;	//creates Draw mode toolbar & menu
+	void CreateDrawColorBar() const; //creates color mode toolbar & menu
 	void CreatePlayToolBar() const;	//creates Play mode toolbar & menu
 	void CreateStatusBar() const;	//create the status bar
 
 	void ClearStatusBar() const;	//Clears the status bar
+	void ClearToolBar() const;		//Clears the tool bar
 	void ClearDrawArea() const;	//Clears the drawing area
 	
 	// -- Figures Drawing functions
