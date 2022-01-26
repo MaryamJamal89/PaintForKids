@@ -8,7 +8,9 @@
 #include "Actions/ActionChangeLocation.h"
 #include "Actions/ActionExit.h"
 #include "Actions/ActionSelect.h"
+#include "Actions/ActionMultiSelect.h"
 #include "Actions/ActionChangeColor.h"
+
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -18,6 +20,9 @@ ApplicationManager::ApplicationManager()
 	
 	//delete all old figures
 	ApplicationManager::ResetFigList();
+
+
+	multiSelect = 0;
 }
 
 //delete all old figures
@@ -74,18 +79,7 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			break;
 
 		case MUL_SELECT:
-			//multiselect
-			Point P;
-			P.x = x; P.y = y;
-			if (multiSelect)
-			{
-				multiSelect = false;
-			}
-			else
-			{
-				multiSelect = true;
-			}
-			newAct = new ActionSelect(this, P, multiSelect);
+			newAct = new ActionMultiSelect(this,multiSelect);
 			break;
 
 		case SEND_BACK:
@@ -143,7 +137,7 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 
 			// Khaled
 		case  DRAWING_AREA:
-			//Point P;
+			Point P;
 			P.x = x; P.y = y;
 			//pGUI->GetPointClicked(P.x, P.y); // this is the reason of double click // first click for entering this case and seconed one to send it to Action object  
 			newAct = new ActionSelect(this, P, multiSelect);
@@ -170,7 +164,7 @@ void ApplicationManager::ExecuteAction(Action* &pAct)
 //						Figures Management Functions								//
 //==================================================================================//
 // multiSelect filed
-bool ApplicationManager::multiSelect = false;
+//bool ApplicationManager::multiSelect = false;
 //Add a figure to the list of figures
 void ApplicationManager::AddFigure(CFigure* pFig)
 {
@@ -180,7 +174,7 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 
 //unSelect Figures
 void ApplicationManager::UnSelectFigures()const {
-	for (int i = 0; i < FigCount && !multiSelect; i++) {
+	for (int i = 0; i < FigCount ; i++) {
 		FigList[i]->SetSelected(false);
 	}
 }

@@ -31,7 +31,9 @@ void ActionAddHexagon::Execute()
 	CHexagon* H = new CHexagon(C, HexGfxInfo);
 	
 	//and unselect All Previous Figures
-	pManager->UnSelectFigures();
+	if (!pManager->multiSelect) {
+		pManager->UnSelectFigures();
+	}
 	//Step 3 - Add the Ellipse to the list of figures
 	pManager->AddFigure(H);
 }

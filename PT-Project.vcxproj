@@ -129,6 +129,7 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Actions\ActionMultiSelect.cpp" />
     <ClCompile Include="Actions\ActionChangeLocation.cpp" />
     <ClCompile Include="Actions\ActionSelect.cpp" />
     <ClCompile Include="Actions\ActionAddEllipse.cpp" />
@@ -182,6 +183,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Actions\ActionMultiSelect.h" />
     <ClInclude Include="Actions\ActionChangeLocation.h" />
     <ClInclude Include="Actions\ActionSelect.h" />
     <ClInclude Include="Actions\ActionAddEllipse.h" />
