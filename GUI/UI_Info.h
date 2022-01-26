@@ -22,6 +22,8 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	ITM_HEX,		//Hex item in menu
 	
 	ITM_MULSELECT,   //button for multiselection
+	ITM_BACK,
+	ITM_FRONT,
 
 	//Colors "randa"
 	ITM_DROWCLR,

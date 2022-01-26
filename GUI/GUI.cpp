@@ -88,6 +88,8 @@ ActionType GUI::MapInputToActionType(int &x,int &y) const
 			case ITM_ELPS: return DRAW_ELPS;
 			case ITM_HEX: return DRAW_HEX;
 			case ITM_MULSELECT: return MUL_SELECT;
+			case ITM_BACK: return SEND_BACK;
+			case ITM_FRONT: return BRNG_FRNT;
 			case ITM_DROWCLR: return CHNG_DRAW_CLR;
 			case ITM_FILLCLR: return CHNG_FILL_CLR;
 			case ITM_BGCLR: return CHNG_BK_CLR;
@@ -169,6 +171,8 @@ void GUI::CreateDrawToolBar() const
 	MenuItemImages[ITM_ELPS] = "images\\MenuItems\\Menu_Elps.jpg";
 	MenuItemImages[ITM_HEX] = "images\\MenuItems\\Menu_Hex.jpg";
 	MenuItemImages[ITM_MULSELECT] = "images\\MenuItems\\Menu_MultiSelect.jpg";
+	MenuItemImages[ITM_BACK] = "images\\MenuItems\\Menu_Back.jpg";
+	MenuItemImages[ITM_FRONT] = "images\\MenuItems\\Menu_Front.jpg";
 	MenuItemImages[ITM_DROWCLR] = "images\\MenuItems\\Menu_ChangeColor.jpg";
 	MenuItemImages[ITM_FILLCLR] = "images\\MenuItems\\Menu_FillColor.jpg";
 	MenuItemImages[ITM_BGCLR] = "images\\MenuItems\\Menu_BGColor.jpg";
