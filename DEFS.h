@@ -9,9 +9,21 @@ enum ActionType //The actions supported (you can add more if needed)
 	DRAW_SQUARE,	//Draw a Square
 	DRAW_ELPS,		//Draw an Ellipse
 	DRAW_HEX,		//Draw a Hexagon
+
+	MUL_SELECT,    //multiselect
+
+	//Coloring
+	COLOR_WHITE,
+	COLOR_BLACK,
+	COLOR_RED,
+	COLOR_GREEN,
+	COLOR_BLUE,
 	CHNG_DRAW_CLR,	//Change the drawing color
 	CHNG_FILL_CLR,	//Change the filling color
 	CHNG_BK_CLR,	//Change background color
+
+
+
 	DEL,			//Delete a figure(s)
 	MOVE,			//Move a figure(s)
 	RESIZE,			//Resize a figure(s)
@@ -40,7 +52,7 @@ struct GfxInfo	//Graphical info of each figure (you may add more members)
 	color DrawClr;	//Draw color of the figure
 	color FillClr;	//Fill color of the figure
 	bool isFilled;	//Figure Filled or not
-	int BorderWdth;	//Width of figure borders
+	int BorderWdth=3;	//Width of figure borders
 };
 
 #endif
