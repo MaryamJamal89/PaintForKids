@@ -175,7 +175,7 @@ void ApplicationManager::UnSelectFigures()const {
 ///////////////////////////////////////////////////////
 // khaled
 // func to return Selected Figure
-CFigure *ApplicationManager::GetFigure(int x, int y) const
+CFigure *ApplicationManager::GetFigure(int x, int y) const         //get one selected figure by clicked point indexes
 {
 	// if the point in figure will return Pointer on Figure
 	for (int i = FigCount - 1; i >= 0; i--) {
@@ -189,7 +189,7 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 }
 
 
-CFigure *ApplicationManager::GetSelectedFigureByFlag(int& selectedIndex)
+CFigure *ApplicationManager::GetSelectedFigureByFlag(int& selectedIndex)     //get one selected figure by checking isSelected prop
 {
 	for (int i = FigCount - 1; i >= 0; i--) {
 		if (FigList[i]->IsSelected())
@@ -202,7 +202,7 @@ CFigure *ApplicationManager::GetSelectedFigureByFlag(int& selectedIndex)
 	return NULL;
 }
 
-void ApplicationManager::InsertFigure(bool isFront)
+void ApplicationManager::InsertFigure(bool isFront)          //insert figure in front or back of all figuers
 {
 	int selectedIndex;
 	CFigure* temp = GetSelectedFigureByFlag(selectedIndex);
@@ -214,19 +214,20 @@ void ApplicationManager::InsertFigure(bool isFront)
 	{
 		if (isFront)
 		{
-			FigList[FigCount] = temp;
+			for (int i =selectedIndex; i < FigCount; i++) {
+				FigList[i] = FigList[i + 1];
+			}
 			FigList[FigCount - 1] = temp;
 		}
 		else
 		{
-			FigList[selectedIndex] = FigList[0];
+			for (int i = selectedIndex; i >=0 ; i--) {
+				FigList[i] = FigList[i - 1];
+			}
 			FigList[0] = temp;
 		}
-		delete temp;
 	}
 }
-
-
 
 ////////////////////////////////////////////////////////////////////////////////////asmaa
 void ApplicationManager::SaveAll(ofstream& File) const
