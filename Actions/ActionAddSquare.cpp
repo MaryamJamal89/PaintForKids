@@ -23,7 +23,6 @@ void ActionAddSquare::Execute()
 	SqrGfxInfo.BorderWdth = pGUI->getCrntPenWidth();
 
 	//Step 1 - Read Square data from the user
-
 	pGUI->PrintMessage("New Square: Click at first point");	
 	//Read 1st point and store in point P1
 	pGUI->GetPointClicked(P1.x, P1.y);
@@ -36,7 +35,7 @@ void ActionAddSquare::Execute()
 
 	//Step 2 - prepare square data
 	//User has entered two points P1&P2
-	// 
+	 
 	//2.1- Identify the Top left corner of the square
 	Point topLeft ;
 	topLeft.x = P1.x<P2.x? P1.x: P2.x;

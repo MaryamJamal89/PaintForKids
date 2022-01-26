@@ -331,7 +331,7 @@ void GUI::DrawEllip(Point P1, Point P2, GfxInfo ElliGfxInfo, bool selected) cons
 	pWind->DrawEllipse(P1.x - P2.x, P1.y - P2.y, P1.x + P2.x, P1.y + P2.y, style);
 }
 
-void GUI::DrawHex(Point center, GfxInfo HexGfxInfo, bool selected) const
+void GUI::DrawHex(Point center, int length, GfxInfo HexGfxInfo, bool selected) const
 {
 	color DrawingClr;
 	if (selected)
@@ -349,7 +349,7 @@ void GUI::DrawHex(Point center, GfxInfo HexGfxInfo, bool selected) const
 	else
 		style = FRAME;
 
-	int d = 50;
+	int d = length;
 
 	Point point1;
 	point1.x = center.x - d;

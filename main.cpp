@@ -4,11 +4,11 @@
 int main()
 {
 	/*
-	GUI* g=new GUI();
+	GUI* g = new GUI();
 	
-	window* w=g->CreateWind(200, 300, 10, 10);
+	window* w = g -> CreateWind(200, 300, 10, 10);
 	int x, y;
-	w->WaitMouseClick(x, y);
+	w -> WaitMouseClick(x, y);
 	*/
 
 	//Mrym
