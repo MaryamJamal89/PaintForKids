@@ -93,6 +93,7 @@ ActionType GUI::MapInputToActionType(int &x,int &y) const
 			case ITM_BGCLR: return CHNG_BK_CLR;
 			case ITM_SAVE: return SAVE;
 			case ITM_LOAD: return LOAD;
+			case ITM_PLAY: return TO_PLAY;
 			case ITM_EXIT: return EXIT;
 			
 			default: return EMPTY;	//A click on empty place in desgin toolbar
@@ -132,8 +133,29 @@ ActionType GUI::MapInputToActionType(int &x,int &y) const
 		///TODO:
 		//perform checks similar to Draw mode checks above
 		//and return the correspoding action
-		return TO_PLAY;	//just for now. This should be updated
-	}	
+		//return TO_PLAY;	//just for now. This should be updated
+		if (y >= 0 && y < UI.ToolBarHeight)
+		{
+			//Check whick Menu item was clicked
+			//==> This assumes that menu items are lined up horizontally <==
+			int ClickedItemOrder = (x / UI.MenuItemWidth);
+			//Divide x coord of the point clicked by the menu item width (int division)
+			//if division result is 0 ==> first item is clicked, if 1 ==> 2nd item and so on
+
+			switch (ClickedItemOrder)
+			{
+			case ITM_PICK_IMAGE: return TO_PICK_IMAGE;
+			case ITM_PICK_FILL_COLOR: return TO_PICK_COLOR;
+			case ITM_PICK_IMAGE_COLOR: return TO_PICK_IMAGE_COLOR;
+			case ITM_DRAW: return TO_DRAW;
+
+
+			default: return EMPTY;	//A click on empty place in desgin toolbar
+			}
+		}
+
+	}
+
 }
 
 //======================================================================================//
@@ -151,6 +173,13 @@ window* GUI::CreateWind(int w, int h, int x, int y) const
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
+void GUI::CreateToolBar() const
+{
+	pWind->SetPen(WHITE, 1);
+	pWind->SetBrush(WHITE);
+	pWind->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight);
+}
+//////////////////////////////////////////////////////////////////////////////////////////
 void GUI::CreateStatusBar() const
 {
 	pWind->SetPen(UI.StatusBarColor, 1);
@@ -182,6 +211,8 @@ void GUI::ClearToolBar() const
 
 void GUI::CreateDrawToolBar() const
 {
+	//ClearDrawArea();
+	CreateToolBar();
 	UI.InterfaceMode = MODE_DRAW;
 
 	//You can draw the tool bar icons in any way you want.
@@ -200,6 +231,7 @@ void GUI::CreateDrawToolBar() const
 	MenuItemImages[ITM_BGCLR] = "images\\MenuItems\\Menu_BGColor.jpg";
 	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\MenuSave.jpg";
 	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\Menu_Load.jpg";
+	MenuItemImages[ITM_PLAY] = "images\\MenuItems\\Menu_Switch2.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
 
 	//TODO: Prepare images for each menu item and add it to the list
@@ -252,8 +284,27 @@ void GUI::CreateDrawColorBar() const {
 
 void GUI::CreatePlayToolBar() const
 {
+	ClearDrawArea();
+	CreateToolBar();
 	UI.InterfaceMode = MODE_PLAY;
 	///TODO: write code to create Play mode menu
+	string MenuItemImages[PLAY_ITM_COUNT];
+	MenuItemImages[ITM_PICK_IMAGE] = "images\\MenuItems\\Pick_Image.jpg";
+	MenuItemImages[ITM_PICK_FILL_COLOR] = "images\\MenuItems\\Pick_Color.jpg";
+	MenuItemImages[ITM_PICK_IMAGE_COLOR] = "images\\MenuItems\\Pick_All.jpg";
+	MenuItemImages[ITM_DRAW] = "images\\MenuItems\\Menu_Switch2.jpg";
+
+	//TODO: Prepare images for each menu item and add it to the list
+
+	//Draw menu item one image at a time
+	for (int i = 0; i < PLAY_ITM_COUNT; i++)
+		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+
+
+
+	//Draw a line under the toolbar
+	pWind->SetPen(RED, 3);
+	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
