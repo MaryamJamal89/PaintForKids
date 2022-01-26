@@ -27,21 +27,23 @@ void ActionAddHexagon::Execute()
 	pGUI->GetPointClicked(C.x, C.y);
 
 	pGUI->PrintMessage("New Hexagon: Click at second point");
-	//Read 1st point and store in point P1
+	//Read 2nd point and store in point P1
 	pGUI->GetPointClicked(P1.x, P1.y);
 
 	pGUI->ClearStatusBar();
 
+	//Step 2 - prepare Ellipse data
+	//Calcuate hexagon Side Length
 	int SideLength = max(abs(C.x - P1.x), abs(C.y - P1.y));
 
-	//Step 2 - Create a Hexagon with the parameters read from the user
+	//Step 3 - Create a Hexagon with the parameters read from the user
 	CHexagon* H = new CHexagon(C, SideLength, HexGfxInfo);
 	
 	//and unselect All Previous Figures
 	if (!pManager->multiSelect) {
 		pManager->UnSelectFigures();
 	}
-	//Step 3 - Add the Hexagon to the list of figures
+	//Step 4 - Add the Hexagon to the list of figures
 	pManager->AddFigure(H);
 
 	//Step 5 - print new figure info in status bar

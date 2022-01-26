@@ -9,12 +9,12 @@
 class CFigure
 {
 protected:
-	int ID;		//Each figure has an ID
+	int ID;				//Each figure has an ID
 	int static id;
-	bool Selected;	//true if the figure is selected.
+	bool Selected;		//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
 	
-	/// Add more parameters if needed.
+	// Add more parameters if needed.
 
 public:
 	CFigure();
@@ -39,8 +39,7 @@ public:
 	virtual void Save(ofstream &OutFile, GUI* pGUI) = 0;	//Save the figure parameters to the file
 	virtual void Load(ifstream& loadedFile, GUI* pGUI) = 0;	//Load the figure parameters to the file
 
-	// khaled
-	virtual bool InFig(int, int) = 0; //Determine the position of the Point
+	virtual bool InFig(int, int) = 0;		//Determine the position of the Point
 	virtual void PrintInfo(GUI* pGUI) = 0; //print all figure info on the status bar
 	//virtual void PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar
 };

@@ -5,20 +5,21 @@ int CEllipse::ElliCnt = 0;  //static variable to determine the number of objects
 
 CEllipse::CEllipse(){}
 
-CEllipse::CEllipse(Point C, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo)
+CEllipse::CEllipse(Point C, int len, int hght, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo)
 {
 	Center = C;
+	length = len;
+	height = hght;
 	ElliCnt++;
-	P.x = 80; P.y = 30;
 }
 
 void CEllipse::DrawMe(GUI* pOut) const
 {
 	//Call Output::DrawEllipse to draw a ellipse on the screen	
-	pOut->DrawEllip(Center, P, FigGfxInfo, Selected);
+	pOut->DrawEllip(Center, length, height, FigGfxInfo, Selected);
 }
 
-// save figure in the file
+//save figure in the file
 void CEllipse::Save(ofstream& file, GUI* pGUI)
 {
 	file << "ELPS " << ID << " " << Center.x << " " << Center.y << " " << P.x << " " << P.y << " " << pGUI->ColorToString(FigGfxInfo.DrawClr) << " ";
@@ -64,7 +65,6 @@ bool CEllipse::InFig(int x, int y)  //Determine the position of the point
 // Print to return all info about figure
 void CEllipse::PrintInfo(GUI* pGUI)
 {
-
 	string id = to_string(ID);
 	string x = to_string(Center.x);
 	string y = to_string(Center.y);

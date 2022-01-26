@@ -35,10 +35,8 @@ public:
 	
 	// -- Figures Drawing functions
 	void DrawSquare(Point P1, int length, GfxInfo RectGfxInfo, bool selected = false) const;	//Draw a Square
-	void DrawEllip(Point P1, Point P2, GfxInfo ElliGfxInfo, bool selected = false) const;		//Draw a Ellipse
+	void DrawEllip(Point P1, int length, int height, GfxInfo ElliGfxInfo, bool selected = false) const;		//Draw a Ellipse
 	void DrawHex(Point center, int length, GfxInfo HexGfxInfo, bool selected = false) const;	//Draw a Hex
-
-	///TODO: Make similar functions for drawing all other figures.
 	
 	void PrintMessage(string msg) const;	//Print a message on Status bar
 
