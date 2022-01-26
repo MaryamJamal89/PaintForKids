@@ -71,6 +71,11 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 		case DRAW_HEX:
 			newAct = new ActionAddHexagon(this);
 			break;
+
+		case MUL_SELECT:
+			//multiselect
+			break;
+
 		case COLOR_RED:
 			newAct = new ActionChangeColor(this, RED, DORF);
 			break;
