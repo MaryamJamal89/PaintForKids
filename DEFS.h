@@ -9,6 +9,7 @@ enum ActionType //The actions supported (you can add more if needed)
 	DRAW_SQUARE,	//Draw a Square
 	DRAW_ELPS,		//Draw an Ellipse
 	DRAW_HEX,		//Draw a Hexagon
+	DRAW_SHAPES,
 
 	MUL_SELECT,    //multiselect
 
@@ -18,6 +19,8 @@ enum ActionType //The actions supported (you can add more if needed)
 	COLOR_RED,
 	COLOR_GREEN,
 	COLOR_BLUE,
+	
+
 	CHNG_DRAW_CLR,	//Change the drawing color
 	CHNG_FILL_CLR,	//Change the filling color
 	CHNG_BK_CLR,	//Change background color
@@ -37,7 +40,9 @@ enum ActionType //The actions supported (you can add more if needed)
 	DRAWING_AREA,	//A click on the drawing area
 	STATUS,			//A click on the status bar
 	EMPTY,			//A click on empty place in the toolbar
-
+	TO_PICK_IMAGE,        //to pick Image Edit By 'Mahmoud'
+	TO_PICK_COLOR,  //to pick fill color Edit By 'Mahmoud' 
+	TO_PICK_IMAGE_COLOR,  // to Pick Image And Color Edit By 'Mahmoud'
 	TO_DRAW,		//Switch interface to Draw mode
 	TO_PLAY			//Switch interface to Play mode
 

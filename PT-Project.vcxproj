@@ -129,6 +129,10 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Actions\ActionPickColor.cpp" />
+    <ClCompile Include="Actions\ActionPickImage_Color.cpp" />
+    <ClCompile Include="Actions\ActionSwitchDraw.cpp" />
+    <ClCompile Include="Actions\ActionSwitchPlay.cpp" />
     <ClCompile Include="Actions\ActionMultiSelect.cpp" />
     <ClCompile Include="Actions\ActionChangeLocation.cpp" />
     <ClCompile Include="Actions\ActionSelect.cpp" />
@@ -138,6 +142,7 @@
     <ClCompile Include="Actions\ActionLoad.cpp" />
     <ClCompile Include="Actions\ActionChangeColor.cpp" />
     <ClCompile Include="Actions\ActionSave.cpp" />
+    <ClCompile Include="Actions\ActionPickImage.cpp" />
     <ClCompile Include="CMUgraphicsLib\auxil.cpp" />
     <ClCompile Include="CMUgraphicsLib\CMUgraphics.cpp" />
     <ClCompile Include="CMUgraphicsLib\image.cpp" />
@@ -183,6 +188,10 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Actions\ActionPickImage.h" />
+    <ClInclude Include="Actions\ActionPickImage_Color.h" />
+    <ClInclude Include="Actions\ActionSwitchDraw.h" />
+    <ClInclude Include="Actions\ActionSwitchPlay.h" />
     <ClInclude Include="Actions\ActionMultiSelect.h" />
     <ClInclude Include="Actions\ActionChangeLocation.h" />
     <ClInclude Include="Actions\ActionSelect.h" />
@@ -192,6 +201,7 @@
     <ClInclude Include="Actions\ActionLoad.h" />
     <ClInclude Include="Actions\ActionChangeColor.h" />
     <ClInclude Include="Actions\ActionSave.h" />
+    <ClInclude Include="Actions\ActionPickColor.h" />
     <ClInclude Include="CMUgraphicsLib\auxil.h" />
     <ClInclude Include="CMUgraphicsLib\CMUgraphics.h" />
     <ClInclude Include="CMUgraphicsLib\colors.h" />

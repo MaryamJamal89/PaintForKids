@@ -9,16 +9,14 @@ ActionChangeColor::ActionChangeColor(ApplicationManager* pApp, color c, int draw
 
 void ActionChangeColor::Execute() {
 
-
+	
 	// Check If The Mode if Change Drawing Color
 	if (DrawOrFill == 1) {
-		GUI* pGUI = pManager->GetGUI();
 		UI.DrawColor = colour;
 		pManager->UpdateInterface();
 	}
 	// Check If The Mode if Change Filling Color
 	else if (DrawOrFill == 2) {
-		GUI* pGUI = pManager->GetGUI();
 		UI.isFilled = true;
 		UI.FillColor = colour;
 		pManager->UpdateInterface();
@@ -27,8 +25,8 @@ void ActionChangeColor::Execute() {
 	else if (DrawOrFill == 3) {
 		GUI* pGUI = pManager->GetGUI();
 		UI.BkGrndColor = colour;
-		//update window to change background color
 		pGUI->ClearDrawArea();
+		pManager->UpdateInterface();
 	}
 
 

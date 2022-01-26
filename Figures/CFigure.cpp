@@ -4,7 +4,7 @@ CFigure::CFigure() {}
 
 CFigure::CFigure(GfxInfo FigureGfxInfo)
 { 
-	FigGfxInfo = FigureGfxInfo;	//Default status is non-filled.
+	FigGfxInfo = FigureGfxInfo;	// Default status is non-filled.
 	Selected = true; // Figure is selected after created
 	ID = id++; // Figure ID starts from 1
 }

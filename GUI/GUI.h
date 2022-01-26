@@ -24,19 +24,21 @@ public:
 	ActionType MapInputToActionType(int& x, int& y) const; //Read the user click and map to an action
 
 	/////////// Output Functoinality  ////////////////
+	void CreateToolBar() const;      //create New Toolbar When Switch From Mode_Draw To Mode_play Edit BY 'Mahmoud' 
 	void CreateDrawToolBar() const;	//creates Draw mode toolbar & menu
+	void CreateDrawColorBar() const; //creates color mode toolbar & menu
+	void CreateShapesBar() const;
 	void CreatePlayToolBar() const;	//creates Play mode toolbar & menu
 	void CreateStatusBar() const;	//create the status bar
 
 	void ClearStatusBar() const;	//Clears the status bar
+	void ClearToolBar() const;		//Clears the tool bar
 	void ClearDrawArea() const;	//Clears the drawing area
 	
 	// -- Figures Drawing functions
-	void DrawSquare(Point P1, int length, GfxInfo RectGfxInfo, bool selected = false) const;  //Draw a Square
-	void DrawEllip(Point P1, Point P2, GfxInfo ElliGfxInfo, bool selected = false) const;	//Draw a Ellipse
-	void DrawHex(Point center, GfxInfo HexGfxInfo, bool selected = false) const;			//Draw a Hex
-
-	///TODO: Make similar functions for drawing all other figures.
+	void DrawSquare(Point P1, int length, GfxInfo RectGfxInfo, bool selected = false) const;	//Draw a Square
+	void DrawEllip(Point P1, int length, int height, GfxInfo ElliGfxInfo, bool selected = false) const;		//Draw a Ellipse
+	void DrawHex(Point center, int length, GfxInfo HexGfxInfo, bool selected = false) const;	//Draw a Hex
 	
 	void PrintMessage(string msg) const;	//Print a message on Status bar
 

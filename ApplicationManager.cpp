@@ -10,6 +10,11 @@
 #include "Actions/ActionSelect.h"
 #include "Actions/ActionMultiSelect.h"
 #include "Actions/ActionChangeColor.h"
+#include "Actions/ActionPickImage.h"
+#include "Actions/ActionPickColor.h"
+#include "Actions/ActionPickImage_Color.h"
+#include "Actions/ActionSwitchPlay.h"
+#include "Actions/ActionSwitchDraw.h"
 
 
 //Constructor
@@ -68,14 +73,25 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 	{
 		case DRAW_SQUARE:
 			newAct = new ActionAddSquare(this);
+			pGUI->ClearToolBar();
+			pGUI->CreateDrawToolBar();
 			break;
 
 		case DRAW_ELPS:
 			newAct = new ActionAddEllipse(this);
+			pGUI->ClearToolBar();
+			pGUI->CreateDrawToolBar();
 			break;
 
 		case DRAW_HEX:
 			newAct = new ActionAddHexagon(this);
+			pGUI->ClearToolBar();
+			pGUI->CreateDrawToolBar();
+			break;
+
+		case DRAW_SHAPES:
+			pGUI->ClearToolBar();
+			pGUI->CreateShapesBar();
 			break;
 
 		case MUL_SELECT:
@@ -94,28 +110,40 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 
 		case COLOR_RED:
 			newAct = new ActionChangeColor(this, RED, DORF);
+			pGUI->ClearToolBar();
+			pGUI->CreateDrawToolBar();
 			break;
 
 		case COLOR_BLUE:
-			//create AddLineAction here
 			newAct = new ActionChangeColor(this, BLUE, DORF);
+			pGUI->ClearToolBar();
+			pGUI->CreateDrawToolBar();
 			break;
 
 		case COLOR_GREEN:
 			//create AddLineAction here
 			newAct = new ActionChangeColor(this, GREEN, DORF);
+			pGUI->ClearToolBar();
+			pGUI->CreateDrawToolBar();
 			break;
+
 
 		case CHNG_DRAW_CLR:
 			DORF = 1;
+			pGUI->ClearToolBar();
+			pGUI->CreateDrawColorBar();
 			break;
 
 		case CHNG_FILL_CLR:
 			DORF = 2;
+			pGUI->ClearToolBar();
+			pGUI->CreateDrawColorBar();
 			break;
 
 		case CHNG_BK_CLR:
 			DORF = 3;
+			pGUI->ClearToolBar();
+			pGUI->CreateDrawColorBar();
 			break;
 
 		case SAVE:
@@ -126,6 +154,26 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			newAct = new ActionLoad(this);
 			break;
 
+
+		case TO_PICK_IMAGE:
+			newAct = new ActionPickImage(this);
+			break;
+
+		case TO_PICK_COLOR:
+			newAct = new ActionPickColor(this);
+			break;
+
+		case TO_PICK_IMAGE_COLOR:
+			newAct = new ActionPickImage_Color(this);
+			break;
+
+		case TO_PLAY:
+			newAct = new ActionSwitchPlay(this);
+			break;
+
+		case TO_DRAW:
+			newAct = new ActionSwitchDraw(this);
+			break;
 
 		case EXIT:
 			newAct = new ActionExit(this);
@@ -195,26 +243,38 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const         //get one sel
 }
 
 
-CFigure *ApplicationManager::GetSelectedFigureByFlag(int& selectedIndex)     //get one selected figure by checking isSelected prop
+CFigure *ApplicationManager::GetSelectedFigureByFlag(int& selectedIndex, int& selectedNum)     //get one selected figure by checking isSelected prop
 {
+	selectedNum = 0;
 	for (int i = FigCount - 1; i >= 0; i--) {
 		if (FigList[i]->IsSelected())
 		{
 			selectedIndex = i;
-			return FigList[i];
+			selectedNum++;
 		}
 	}
-	// if no figure is selected return null
-	return NULL;
+	if (selectedNum == 0)
+	{
+		// if no figure is selected return null
+		return NULL;
+	}
+	else
+	{
+		return FigList[selectedIndex];
+	}
 }
 
 void ApplicationManager::InsertFigure(bool isFront)          //insert figure in front or back of all figuers
 {
-	int selectedIndex;
-	CFigure* temp = GetSelectedFigureByFlag(selectedIndex);
+	int selectedIndex,selectedNum;
+	CFigure* temp = GetSelectedFigureByFlag(selectedIndex,selectedNum);
 	if (temp == NULL)
 	{
-
+		pGUI->PrintMessage("No selected figure to move!");
+	}
+	else if (selectedNum > 1)
+	{
+		pGUI->PrintMessage("Select only one figure to move!");
 	}
 	else
 	{
@@ -224,6 +284,7 @@ void ApplicationManager::InsertFigure(bool isFront)          //insert figure in 
 				FigList[i] = FigList[i + 1];
 			}
 			FigList[FigCount - 1] = temp;
+			pGUI->PrintMessage("Bring to front!");
 		}
 		else
 		{
@@ -231,6 +292,7 @@ void ApplicationManager::InsertFigure(bool isFront)          //insert figure in 
 				FigList[i] = FigList[i - 1];
 			}
 			FigList[0] = temp;
+			pGUI->PrintMessage("Send to back!");
 		}
 	}
 }
@@ -254,7 +316,6 @@ void ApplicationManager::SaveAll(ofstream& File) const
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
 {	
-	
 	for(int i=0; i<FigCount; i++)
 		FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
 }

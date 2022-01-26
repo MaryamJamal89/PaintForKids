@@ -53,6 +53,11 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Actions\ActionChangeLocation.cpp" />
     <ClCompile Include="Actions\ActionMultiSelect.cpp" />
+    <ClCompile Include="Actions\ActionSwitchPlay.cpp" />
+    <ClCompile Include="Actions\ActionSwitchDraw.cpp" />
+    <ClCompile Include="Actions\ActionPickImage.cpp" />
+    <ClCompile Include="Actions\ActionPickColor.cpp" />
+    <ClCompile Include="Actions\ActionPickImage_Color.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\ActionSelect.h" />
@@ -94,5 +99,10 @@
     <ClInclude Include="DEFS.h" />
     <ClInclude Include="Actions\ActionChangeLocation.h" />
     <ClInclude Include="Actions\ActionMultiSelect.h" />
+    <ClInclude Include="Actions\ActionSwitchPlay.h" />
+    <ClInclude Include="Actions\ActionSwitchDraw.h" />
+    <ClInclude Include="Actions\ActionPickImage.h" />
+    <ClInclude Include="Actions\ActionPickColor.h" />
+    <ClInclude Include="Actions\ActionPickImage_Color.h" />
   </ItemGroup>
 </Project>

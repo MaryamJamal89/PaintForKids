@@ -3,7 +3,7 @@
 
 #include "Action.h"
 
-//Add Square Action class
+//Add Ellipse Action class
 class ActionAddEllipse : public Action
 {
 public:
