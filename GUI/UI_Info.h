@@ -37,6 +37,7 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	//TODO: Add more items names here
 	ITM_SAVE,       //save item
 	ITM_LOAD,       //Load item
+	ITM_PLAY,       //Switch Play Item Edit By 'Mahmoud'
 	ITM_EXIT,		//Exit item
 	
 	DRAW_ITM_COUNT		//no. of menu items ==> This should be the last line in this enum
@@ -49,8 +50,11 @@ enum PlayMenuItem //The items of the Play menu (you should add more items)
 	//If you want to change the menu items order, change the order here
 	
 	//TODO: Add more items names here
-
-	PLAY_ITM_COUNT		//no. of menu items ==> This should be the last line in this enum
+	ITM_PICK_IMAGE,			//Pick Item Edit By 'Mahmoud'
+	ITM_PICK_FILL_COLOR,	//Pick Fill Color Edit By 'Mahmoud'
+	ITM_PICK_IMAGE_COLOR,   //Pick Item And Color Edit By 'Mahmoud'
+	ITM_DRAW,				//Switch Draw Item Edit By 'Mahmoud'
+	PLAY_ITM_COUNT			//no. of menu items ==> This should be the last line in this enum
 };
 
 __declspec(selectany) //This line to prevent "redefinition error"

@@ -24,6 +24,7 @@ public:
 	ActionType MapInputToActionType(int& x, int& y) const; //Read the user click and map to an action
 
 	/////////// Output Functoinality  ////////////////
+	void CreateToolBar() const;      //create New Toolbar When Switch From Mode_Draw To Mode_play Edit BY 'Mahmoud' 
 	void CreateDrawToolBar() const;	//creates Draw mode toolbar & menu
 	void CreatePlayToolBar() const;	//creates Play mode toolbar & menu
 	void CreateStatusBar() const;	//create the status bar

@@ -10,6 +10,11 @@
 #include "Actions/ActionSelect.h"
 #include "Actions/ActionMultiSelect.h"
 #include "Actions/ActionChangeColor.h"
+#include "Actions/ActionPickImage.h"
+#include "Actions/ActionPickColor.h"
+#include "Actions/ActionPickImage_Color.h"
+#include "Actions/ActionSwitchPlay.h"
+#include "Actions/ActionSwitchDraw.h"
 
 
 //Constructor
@@ -126,6 +131,25 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			newAct = new ActionLoad(this);
 			break;
 
+		case TO_PICK_IMAGE:
+			newAct = new ActionPickImage(this);
+			break;
+
+		case TO_PICK_COLOR:
+			newAct = new ActionPickColor(this);
+			break;
+
+		case TO_PICK_IMAGE_COLOR:
+			newAct = new ActionPickImage_Color(this);
+			break;
+
+		case TO_PLAY:
+			newAct = new ActionSwitchPlay(this);
+			break;
+
+		case TO_DRAW:
+			newAct = new ActionSwitchDraw(this);
+			break;
 
 		case EXIT:
 			newAct = new ActionExit(this);
@@ -254,7 +278,7 @@ void ApplicationManager::SaveAll(ofstream& File) const
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
 {	
-	
+	pGUI->ClearDrawArea(); // BY 'Mahmoud' If It Cause Problem
 	for(int i=0; i<FigCount; i++)
 		FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
 }
