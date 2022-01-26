@@ -15,7 +15,7 @@ void ActionAddEllipse::Execute()
 	GUI* pGUI = pManager->GetGUI();
 
 	GfxInfo ElliGfxInfo;
-	ElliGfxInfo.isFilled = false;	//default is not filled
+	ElliGfxInfo.isFilled = pGUI->getColorisFilled();		//default is not filled
 	//get drawing, filling colors and pen width from the interface
 	ElliGfxInfo.DrawClr = pGUI->getCrntDrawColor();
 	ElliGfxInfo.FillClr = pGUI->getCrntFillColor();
@@ -31,7 +31,14 @@ void ActionAddEllipse::Execute()
 
 	//Step 2 - Create a Ellipse with the parameters read from the user
 	CEllipse* E = new CEllipse(C, ElliGfxInfo);
-
+	
+	//and unselect All Previous Figures
+	if(!pManager->multiSelect){
+		pManager->UnSelectFigures();
+	}
 	//Step 3 - Add the Ellipse to the list of figures
 	pManager->AddFigure(E);
+
+	//Step 5 - print new figure info in status bar
+	E->PrintInfo(pGUI);
 }

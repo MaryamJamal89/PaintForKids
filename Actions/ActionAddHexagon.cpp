@@ -15,7 +15,7 @@ void ActionAddHexagon::Execute()
 	GUI* pGUI = pManager->GetGUI();
 
 	GfxInfo HexGfxInfo;
-	HexGfxInfo.isFilled = false;	//default is not filled
+	HexGfxInfo.isFilled = pGUI->getColorisFilled();	//default is not filled
 	//get drawing, filling colors and pen width from the interface
 	HexGfxInfo.DrawClr = pGUI->getCrntDrawColor();
 	HexGfxInfo.FillClr = pGUI->getCrntFillColor();
@@ -29,7 +29,14 @@ void ActionAddHexagon::Execute()
 
 	//Step 2 - Create a Ellipse with the parameters read from the user
 	CHexagon* H = new CHexagon(C, HexGfxInfo);
-
+	
+	//and unselect All Previous Figures
+	if (!pManager->multiSelect) {
+		pManager->UnSelectFigures();
+	}
 	//Step 3 - Add the Ellipse to the list of figures
 	pManager->AddFigure(H);
+
+	//Step 5 - print new figure info in status bar
+	H->PrintInfo(pGUI);
 }

@@ -4,24 +4,24 @@
 GUI::GUI()
 {
 	//Initialize user interface parameters
-	UI.InterfaceMode = MODE_DRAW;
-	
-	UI.width = 1300;
-	UI.height = 700;
-	UI.wx = 5;
-	UI.wy =5;
-	
-	UI.StatusBarHeight = 50;
-	UI.ToolBarHeight = 50;
-	UI.MenuItemWidth = 80;
-	
-	UI.DrawColor = BLUE;	//Drawing color
-	UI.FillColor = GREEN;	//Filling color
-	UI.MsgColor = RED;		//Messages color
-	UI.BkGrndColor = LIGHTGOLDENRODYELLOW;	//Background color
-	UI.HighlightColor = MAGENTA;	//This color should NOT be used to draw figures. use if for highlight only
-	UI.StatusBarColor = TURQUOISE;
-	UI.PenWidth = 3;	//width of the figures frames
+	//UI.InterfaceMode = MODE_DRAW;
+	//
+	//UI.width = 1300;
+	//UI.height = 700;
+	//UI.wx = 5;
+	//UI.wy =5;
+	//
+	//UI.StatusBarHeight = 50;
+	//UI.ToolBarHeight = 50;
+	//UI.MenuItemWidth = 80;
+	//
+	//UI.DrawColor = BLUE;	//Drawing color
+	//UI.FillColor = GREEN;	//Filling color
+	//UI.MsgColor = RED;		//Messages color
+	//UI.BkGrndColor = LIGHTGOLDENRODYELLOW;	//Background color
+	//UI.HighlightColor = MAGENTA;	//This color should NOT be used to draw figures. use if for highlight only
+	//UI.StatusBarColor = TURQUOISE;
+	//UI.PenWidth = 3;	//width of the figures frames
 
 	//Create the output window
 	pWind = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
@@ -42,6 +42,10 @@ void GUI::GetPointClicked(int &x, int &y) const
 	pWind->WaitMouseClick(x, y);	//Wait for mouse click
 }
 
+bool GUI::getColorisFilled() const {
+
+	return UI.isFilled;
+}
 string GUI::GetSrting() const 
 {
 	string Label;
@@ -62,9 +66,9 @@ string GUI::GetSrting() const
 }
 
 //This function reads the position where the user clicks to determine the desired action
-ActionType GUI::MapInputToActionType() const
+ActionType GUI::MapInputToActionType(int &x,int &y) const
 {	
-	int x,y;
+	//int x,y;
 	pWind->WaitMouseClick(x, y);	//Get the coordinates of the user click
 
 	if(UI.InterfaceMode == MODE_DRAW)	//GUI in the DRAW mode
@@ -83,6 +87,17 @@ ActionType GUI::MapInputToActionType() const
 			case ITM_SQUR: return DRAW_SQUARE;
 			case ITM_ELPS: return DRAW_ELPS;
 			case ITM_HEX: return DRAW_HEX;
+			case ITM_MULSELECT: return MUL_SELECT;
+			case ITM_BACK: return SEND_BACK;
+			case ITM_FRONT: return BRNG_FRNT;
+			case ITM_DROWCLR: return CHNG_DRAW_CLR;
+			case ITM_FILLCLR: return CHNG_FILL_CLR;
+			case ITM_BGCLR: return CHNG_BK_CLR;
+			case ITM_RED: return COLOR_RED;
+			case ITM_BLUE: return COLOR_BLUE;
+			case ITM_GREEN: return COLOR_GREEN;
+			case ITM_SAVE: return SAVE;
+			case ITM_LOAD: return LOAD;
 			case ITM_EXIT: return EXIT;
 			
 			default: return EMPTY;	//A click on empty place in desgin toolbar
@@ -155,6 +170,17 @@ void GUI::CreateDrawToolBar() const
 	MenuItemImages[ITM_SQUR] = "images\\MenuItems\\Menu_Sqr.jpg";
 	MenuItemImages[ITM_ELPS] = "images\\MenuItems\\Menu_Elps.jpg";
 	MenuItemImages[ITM_HEX] = "images\\MenuItems\\Menu_Hex.jpg";
+	MenuItemImages[ITM_MULSELECT] = "images\\MenuItems\\Menu_MultiSelect.jpg";
+	MenuItemImages[ITM_BACK] = "images\\MenuItems\\Menu_Back.jpg";
+	MenuItemImages[ITM_FRONT] = "images\\MenuItems\\Menu_Front.jpg";
+	MenuItemImages[ITM_DROWCLR] = "images\\MenuItems\\Menu_ChangeColor.jpg";
+	MenuItemImages[ITM_FILLCLR] = "images\\MenuItems\\Menu_FillColor.jpg";
+	MenuItemImages[ITM_BGCLR] = "images\\MenuItems\\Menu_BGColor.jpg";
+	MenuItemImages[ITM_RED] = "images\\MenuItems\\Menu_Red.jpg";
+	MenuItemImages[ITM_BLUE] = "images\\MenuItems\\Menu_Blue.jpg";
+	MenuItemImages[ITM_GREEN] = "images\\MenuItems\\Menu_Green.jpg";
+	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\MenuSave.jpg";
+	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\Menu_Load.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
 
 	//TODO: Prepare images for each menu item and add it to the list
@@ -208,9 +234,53 @@ color GUI::getCrntFillColor() const	//get current filling color
 {	return UI.FillColor;	}
 
 //////////////////////////////////////////////////////////////////////////////////////////
+color GUI::getBackgroungColor() const	//get current background color
+{
+	return UI.BkGrndColor;
+}
+//////////////////////////////////////////////////////////////////////////////////////////
 	
 int GUI::getCrntPenWidth() const		//get current pen width
 {	return UI.PenWidth;	}
+
+/// //////////////////////////////////////////////////////////////////////////////////////
+
+color GUI::StringToColor(string colorStr)    //convert string to color type
+{
+	if (colorStr == "BLUE") return BLUE;
+	else if (colorStr == "BLACK") return BLACK;
+	else if (colorStr == "RED") return RED;
+	else if (colorStr == "YELLOW") return YELLOW;
+	else if (colorStr == "WHITE") return WHITE;
+	else if (colorStr == "GREEN") return GREEN;
+	else if (colorStr == "ORANGE") return ORANGE;
+}
+////////////////////////////////////////////////////////////////////  covert color to  string
+string GUI::ColorToString(color clr)    //convert string to color type
+{
+	
+	if (isMatchedColors(clr,BLUE)) return "BLUE";
+	else if (isMatchedColors(clr,BLACK)) return "BLACK";
+	else if (isMatchedColors(clr, RED)) return "RED";
+	else if (isMatchedColors(clr,YELLOW)) return "YELLOW";
+	else if (isMatchedColors(clr, WHITE)) return "WHITE";
+	else if (isMatchedColors(clr, GREEN)) return "GREEN";
+	else if (isMatchedColors(clr, ORANGE)) return "ORANGE";
+	else if (isMatchedColors(clr, LIGHTGOLDENRODYELLOW)) return "LIGHTGOLDENRODYELLOW";
+	
+}
+
+bool GUI::isMatchedColors(color c1, color c2)      //check if two color objects are matched
+{
+	if (c1.ucBlue == c2.ucBlue && c1.ucRed == c2.ucRed && c1.ucGreen == c2.ucGreen)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
 
 //======================================================================================//
 //								Figures Drawing Functions								//
@@ -281,7 +351,6 @@ void GUI::DrawHex(Point center, GfxInfo HexGfxInfo, bool selected) const
 
 	int d = 50;
 
-	//Randa
 	Point point1;
 	point1.x = center.x - d;
 	point1.y = center.y;
@@ -309,6 +378,27 @@ void GUI::DrawHex(Point center, GfxInfo HexGfxInfo, bool selected) const
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
+
+string GUI::ReadFileName(string msg)       //read file name to save or load
+{
+	PrintMessage(msg);
+	return GetSrting();
+}
+
+string GUI::Confirm(string msg)          //get yes or no response
+{
+	PrintMessage(msg);
+
+	string response;
+	do {
+		response = GetSrting();
+		PrintMessage("Please enter (Y/N)?");
+	} while (!(response == "N" || response == "n" || response == "Y" || response == "y"));
+
+	return response;
+}
+
+//////////////////////////////////////////
 
 GUI::~GUI()
 {

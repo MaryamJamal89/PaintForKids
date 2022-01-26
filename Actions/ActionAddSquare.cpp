@@ -16,7 +16,7 @@ void ActionAddSquare::Execute()
 	GUI* pGUI = pManager->GetGUI();
 
 	GfxInfo SqrGfxInfo;
-	SqrGfxInfo.isFilled = false;	//default is not filled
+	SqrGfxInfo.isFilled = pGUI->getColorisFilled();  //default is not filled
 	//get drawing, filling colors and pen width from the interface
 	SqrGfxInfo.DrawClr = pGUI->getCrntDrawColor();
 	SqrGfxInfo.FillClr = pGUI->getCrntFillColor();
@@ -48,7 +48,14 @@ void ActionAddSquare::Execute()
 
 	//Step 3 - Create a Square with the parameters read from the user
 	CSquare *R=new CSquare(topLeft, SideLength, SqrGfxInfo);
-
+	
+	//and unselect All Previous Figures
+	if (!pManager->multiSelect) {
+		pManager->UnSelectFigures();
+	}
 	//Step 4 - Add the Square to the list of figures
 	pManager->AddFigure(R);
+	
+	//Step 5 - print new figure info in status bar
+	R->PrintInfo(pGUI);
 }
