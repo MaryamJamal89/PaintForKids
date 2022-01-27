@@ -23,12 +23,21 @@ void ActionAddHexagon::Execute()
 
 	//Step 1 - Read Hexagon data from the user
 	pGUI->PrintMessage("New Hexagon: Click at center point");
-	//Read 1st point and store in point center
-	pGUI->GetPointClicked(C.x, C.y);
+	
+	
+	
+	do  {
+		//Read 1st point and store in point center
+		pGUI->GetPointClicked(C.x, C.y);
 
-	pGUI->PrintMessage("New Hexagon: Click at second point");
-	//Read 2nd point and store in point P1
-	pGUI->GetPointClicked(P1.x, P1.y);
+		//Read 2nd point and store in point P1
+		pGUI->GetPointClicked(P1.x, P1.y);
+		pGUI->PrintMessage("You Clicked In Tool Bar!!");
+
+	}while (C.y >= 0 && C.y < UI.ToolBarHeight || P1.y >= 0 && P1.y < UI.ToolBarHeight);
+	
+
+	pGUI->PrintMessage("New Hexagon");
 
 	pGUI->ClearStatusBar();
 
