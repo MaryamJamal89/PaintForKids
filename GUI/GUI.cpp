@@ -46,6 +46,7 @@ bool GUI::getColorisFilled() const {
 
 	return UI.isFilled;
 }
+
 string GUI::GetSrting() const 
 {
 	string Label;
@@ -241,11 +242,12 @@ void GUI::CreateDrawToolBar() const
 		pWind->DrawImage(MenuItemImages[i], i*UI.MenuItemWidth,0,UI.MenuItemWidth, UI.ToolBarHeight);
 
 	//Draw a line under the toolbar
-	pWind->SetPen(RED, 3);
+	pWind->SetPen(BLACK, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);	
-
 }
+
 //////////////////////////////////////////////////////////////////////////////////////////
+
 void GUI::CreateShapesBar() const {
 
 	UI.InterfaceMode = MODE_SHAPES;
@@ -263,7 +265,9 @@ void GUI::CreateShapesBar() const {
 	pWind->SetPen(RED, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 }
+
 //////////////////////////////////////////////////////////////////////////////////////////
+
 void GUI::CreateDrawColorBar() const {
 
 	UI.InterfaceMode = MODE_COLOR;
@@ -277,9 +281,10 @@ void GUI::CreateDrawColorBar() const {
 	for (int i = 0; i < Color_COUNT; i++)
 		pWind->DrawImage(DrawColorItem[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 
-	pWind->SetPen(RED, 3);
+	pWind->SetPen(BLACK, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 }
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
 void GUI::CreatePlayToolBar() const
@@ -299,8 +304,6 @@ void GUI::CreatePlayToolBar() const
 	//Draw menu item one image at a time
 	for (int i = 0; i < PLAY_ITM_COUNT; i++)
 		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
-
-
 
 	//Draw a line under the toolbar
 	pWind->SetPen(RED, 3);
