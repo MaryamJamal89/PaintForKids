@@ -22,15 +22,19 @@ void ActionAddSquare::Execute()
 	SqrGfxInfo.FillClr = pGUI->getCrntFillColor();
 	SqrGfxInfo.BorderWdth = pGUI->getCrntPenWidth();
 
-	//Step 1 - Read Square data from the user
-	pGUI->PrintMessage("New Square: Click at first point");	
-	//Read 1st point and store in point P1
-	pGUI->GetPointClicked(P1.x, P1.y);
+	do {
+		//Read 1st point and store in point P1
+		pGUI->GetPointClicked(P1.x, P1.y);
 
-	pGUI->PrintMessage("New Square: Click at second point");
-	//Read 2nd point and store in point P2
-	pGUI->GetPointClicked(P2.x, P2.y);
-
+		//Read 2nd point and store in point P2
+		pGUI->GetPointClicked(P2.x, P2.y);
+		//Step 1 - Read Square data from the user
+		pGUI->PrintMessage("You Clicked In Tool Bar!!");	
+	
+	} while (P2.y >= 0 && P2.y < UI.ToolBarHeight || P1.y >= 0 && P1.y < UI.ToolBarHeight);
+	
+	pGUI->PrintMessage("New Square");
+	
 	pGUI->ClearStatusBar();
 
 	//Step 2 - prepare square data
