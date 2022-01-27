@@ -79,5 +79,5 @@ void CSquare::PrintInfo(GUI* pGUI)
 	{
 		fillingColor = "NO_FILL";
 	}
-	pGUI->PrintMessage("Rectangle / ID:" + id + " Corner1: (" + x1 + ", " + y1 + ") /" + " Corner2: (" + x2 + ", " + y2 + ") /" + " Drawing Color: " + pGUI->ColorToString(FigGfxInfo.DrawClr) + " / Filling Color: " + fillingColor);
+	pGUI->PrintMessage("Square / ID:" + id + " Corner1: (" + x1 + ", " + y1 + ") /" + " Corner2: (" + x2 + ", " + y2 + ") /" + " Drawing Color: " + pGUI->ColorToString(FigGfxInfo.DrawClr) + " / Filling Color: " + fillingColor);
 }
