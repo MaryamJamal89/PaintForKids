@@ -116,9 +116,10 @@ ActionType GUI::MapInputToActionType(int &x,int &y) const
 
 		switch (ClickedItemOrder)
 		{
-		case ITM_RED: return COLOR_RED;
-		case ITM_BLUE: return COLOR_BLUE;
-		case ITM_GREEN: return COLOR_GREEN;
+		case ITM_TOMATO: return COLOR_TOMATO;
+		case ITM_DEEPSKYBLUE: return COLOR_DEEPSKYBLUE;
+		case ITM_LIGHTGREEN: return COLOR_LIGHTGREEN;
+		case ITM_ORANGE: return COLOR_ORANGE;
 		}
 	}
 	else if (UI.InterfaceMode == MODE_SHAPES) {
@@ -224,20 +225,18 @@ void GUI::CreateDrawToolBar() const
 	//To control the order of these images in the menu, 
 	//reoder them in UI_Info.h ==> enum DrawMenuItem
 	string MenuItemImages[DRAW_ITM_COUNT];
-	MenuItemImages[ITM_SHAPES] = "images\\MenuItems\\Menu_Sqr.jpg";
-	MenuItemImages[ITM_MULSELECT] = "images\\MenuItems\\Menu_MultiSelect.jpg";
-	MenuItemImages[ITM_DEL] = "images\\MenuItems\\Menu_Delete.jpg";
-	MenuItemImages[ITM_BACK] = "images\\MenuItems\\Menu_Back.jpg";
-	MenuItemImages[ITM_FRONT] = "images\\MenuItems\\Menu_Front.jpg";
-	MenuItemImages[ITM_DROWCLR] = "images\\MenuItems\\Menu_ChangeColor.jpg";
-	MenuItemImages[ITM_FILLCLR] = "images\\MenuItems\\Menu_FillColor.jpg";
-	MenuItemImages[ITM_BGCLR] = "images\\MenuItems\\Menu_BGColor.jpg";
-	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\MenuSave.jpg";
-	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\Menu_Load.jpg";
-	MenuItemImages[ITM_PLAY] = "images\\MenuItems\\Menu_Switch2.jpg";
-	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
-
-	//TODO: Prepare images for each menu item and add it to the list
+	MenuItemImages[ITM_SHAPES] = "images\\MenuItems\\\shapesMenu\\shapes-color.jpg";
+	MenuItemImages[ITM_MULSELECT] = "images\\MenuItems\\multiselect-color.jpg";
+	MenuItemImages[ITM_DEL] = "images\\MenuItems\\delete-color.jpg";
+	MenuItemImages[ITM_BACK] = "images\\MenuItems\\sendback-color.jpg";
+	MenuItemImages[ITM_FRONT] = "images\\MenuItems\\bringfront-color.jpg";
+	MenuItemImages[ITM_DROWCLR] = "images\\MenuItems\\draw-color.jpg";
+	MenuItemImages[ITM_FILLCLR] = "images\\MenuItems\\fillingColor-color.jpg";
+	MenuItemImages[ITM_BGCLR] = "images\\MenuItems\\BGcolor-color.jpg";
+	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\save-color.jpg";
+	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\load-color.jpg";
+	MenuItemImages[ITM_PLAY] = "images\\MenuItems\\playmood-color.jpg";
+	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\exit-color.jpg";
 
 	//Draw menu item one image at a time
 	for(int i=0; i<DRAW_ITM_COUNT; i++)
@@ -256,15 +255,15 @@ void GUI::CreateShapesBar() const {
 
 	string DrawShapesItem[Shapes_COUNT];
 
-	DrawShapesItem[ITM_SQUR] = "images\\MenuItems\\Menu_Sqr.jpg";
-	DrawShapesItem[ITM_ELPS] = "images\\MenuItems\\Menu_Elps.jpg";
-	DrawShapesItem[ITM_HEX] = "images\\MenuItems\\Menu_Hex.jpg";
+	DrawShapesItem[ITM_SQUR] = "images\\MenuItems\\shapesMenu\\square-color.jpg";
+	DrawShapesItem[ITM_ELPS] = "images\\MenuItems\\shapesMenu\\ellipse-color.jpg";
+	DrawShapesItem[ITM_HEX] = "images\\MenuItems\\shapesMenu\\hexagon-color.jpg";
 
 	//Draw menu item one image at a time
 	for (int i = 0; i < Shapes_COUNT; i++)
 		pWind->DrawImage(DrawShapesItem[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 
-	pWind->SetPen(RED, 3);
+	pWind->SetPen(BLACK, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 }
 
@@ -275,9 +274,10 @@ void GUI::CreateDrawColorBar() const {
 	UI.InterfaceMode = MODE_COLOR;
 
 	string DrawColorItem[Color_COUNT];
-	DrawColorItem[ITM_RED] = "images\\MenuItems\\Menu_Red.jpg";
-	DrawColorItem[ITM_BLUE] = "images\\MenuItems\\Menu_Blue.jpg";
-	DrawColorItem[ITM_GREEN] = "images\\MenuItems\\Menu_Green.jpg";
+	DrawColorItem[ITM_TOMATO] = "images\\MenuItems\\colorMenu\\TOMATO.jpg";
+	DrawColorItem[ITM_DEEPSKYBLUE] = "images\\MenuItems\\colorMenu\\DEEPSKYBLUE.jpg";
+	DrawColorItem[ITM_LIGHTGREEN] = "images\\MenuItems\\colorMenu\\LIGHTGREEN.jpg";
+	DrawColorItem[ITM_ORANGE] = "images\\MenuItems\\colorMenu\\ORANGE.jpg";
 
 	//Draw menu item one image at a time
 	for (int i = 0; i < Color_COUNT; i++)
@@ -294,21 +294,18 @@ void GUI::CreatePlayToolBar() const
 	ClearDrawArea();
 	CreateToolBar();
 	UI.InterfaceMode = MODE_PLAY;
-	///TODO: write code to create Play mode menu
 	string MenuItemImages[PLAY_ITM_COUNT];
-	MenuItemImages[ITM_PICK_IMAGE] = "images\\MenuItems\\Pick_Image.jpg";
-	MenuItemImages[ITM_PICK_FILL_COLOR] = "images\\MenuItems\\Pick_Color.jpg";
-	MenuItemImages[ITM_PICK_IMAGE_COLOR] = "images\\MenuItems\\Pick_All.jpg";
-	MenuItemImages[ITM_DRAW] = "images\\MenuItems\\Menu_Switch2.jpg";
-
-	//TODO: Prepare images for each menu item and add it to the list
+	MenuItemImages[ITM_PICK_IMAGE] = "images\\MenuItems\\selectShape-color.jpg";
+	MenuItemImages[ITM_PICK_FILL_COLOR] = "images\\MenuItems\\selectColor-color.jpg";
+	MenuItemImages[ITM_PICK_IMAGE_COLOR] = "images\\MenuItems\\selectAll-color.jpg";
+	MenuItemImages[ITM_DRAW] = "images\\MenuItems\\return-color.jpg";
 
 	//Draw menu item one image at a time
 	for (int i = 0; i < PLAY_ITM_COUNT; i++)
 		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 
 	//Draw a line under the toolbar
-	pWind->SetPen(RED, 3);
+	pWind->SetPen(BLACK, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 }
 
@@ -356,30 +353,36 @@ int GUI::getCrntPenWidth() const		//get current pen width
 
 color GUI::StringToColor(string colorStr)    //convert string to color type
 {
-	if (colorStr == "BLUE") return BLUE;
+	if (colorStr == "DEEPSKYBLUE") return DEEPSKYBLUE;
 	else if (colorStr == "BLACK") return BLACK;
 	else if (colorStr == "RED") return RED;
+	else if (colorStr == "BLUE") return BLUE;
+	else if (colorStr == "GREEN") return GREEN;
+	else if (colorStr == "TOMATO") return TOMATO;
 	else if (colorStr == "YELLOW") return YELLOW;
 	else if (colorStr == "WHITE") return WHITE;
-	else if (colorStr == "GREEN") return GREEN;
+	else if (colorStr == "LIGHTGREEN") return LIGHTGREEN;
 	else if (colorStr == "ORANGE") return ORANGE;
 }
 ////////////////////////////////////////////////////////////////////  covert color to  string
 string GUI::ColorToString(color clr)    //convert string to color type
 {
-	if (isMatchedColors(clr,BLUE)) return "BLUE";
+	if (isMatchedColors(clr,DEEPSKYBLUE)) return "DEEPSKYBLUE";
 	else if (isMatchedColors(clr,BLACK)) return "BLACK";
-	else if (isMatchedColors(clr, RED)) return "RED";
+	else if (isMatchedColors(clr, RED)) return "RED"; 
+	else if (isMatchedColors(clr, BLUE)) return "BLUE";
+	else if (isMatchedColors(clr, GREEN)) return "GREEN";
+	else if (isMatchedColors(clr, TOMATO)) return "TOMATO";
 	else if (isMatchedColors(clr,YELLOW)) return "YELLOW";
 	else if (isMatchedColors(clr, WHITE)) return "WHITE";
-	else if (isMatchedColors(clr, GREEN)) return "GREEN";
+	else if (isMatchedColors(clr, LIGHTGREEN)) return "LIGHTGREEN";
 	else if (isMatchedColors(clr, ORANGE)) return "ORANGE";
 	else if (isMatchedColors(clr, LIGHTGOLDENRODYELLOW)) return "LIGHTGOLDENRODYELLOW";	
 }
 
 bool GUI::isMatchedColors(color c1, color c2)      //check if two color objects are matched
 {
-	if (c1.ucBlue == c2.ucBlue && c1.ucRed == c2.ucRed && c1.ucGreen == c2.ucGreen)
+	if (c1.ucBlue == c2.ucBlue && c1.ucRed == c2.ucRed && c1.ucGreen == c2.ucGreen )
 	{
 		return true;
 	}
