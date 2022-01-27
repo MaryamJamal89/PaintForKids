@@ -93,7 +93,7 @@ ActionType GUI::MapInputToActionType(int &x,int &y) const
 			case ITM_BGCLR: return CHNG_BK_CLR;
 			case ITM_SAVE: return SAVE;
 			case ITM_LOAD: return LOAD;
-			//case ITM_PLAY: return TO_PLAY;
+			case ITM_PLAY: return TO_PLAY;
 			case ITM_EXIT: return EXIT;
 			
 			default: return EMPTY;	//A click on empty place in desgin toolbar

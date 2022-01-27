@@ -10,6 +10,11 @@
 #include "Actions/ActionSelect.h"
 #include "Actions/ActionMultiSelect.h"
 #include "Actions/ActionChangeColor.h"
+#include "Actions/ActionPickImage.h"
+#include "Actions/ActionPickColor.h"
+#include "Actions/ActionPickImage_Color.h"
+#include "Actions/ActionSwitchPlay.h"
+#include "Actions/ActionSwitchDraw.h"
 
 
 //Constructor
@@ -147,6 +152,27 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 
 		case LOAD:
 			newAct = new ActionLoad(this);
+			break;
+
+
+		case TO_PICK_IMAGE:
+			newAct = new ActionPickImage(this);
+			break;
+
+		case TO_PICK_COLOR:
+			newAct = new ActionPickColor(this);
+			break;
+
+		case TO_PICK_IMAGE_COLOR:
+			newAct = new ActionPickImage_Color(this);
+			break;
+
+		case TO_PLAY:
+			newAct = new ActionSwitchPlay(this);
+			break;
+
+		case TO_DRAW:
+			newAct = new ActionSwitchDraw(this);
 			break;
 
 		case EXIT:
