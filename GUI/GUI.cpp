@@ -46,6 +46,7 @@ bool GUI::getColorisFilled() const {
 
 	return UI.isFilled;
 }
+
 string GUI::GetSrting() const 
 {
 	string Label;
@@ -84,9 +85,7 @@ ActionType GUI::MapInputToActionType(int &x,int &y) const
 
 			switch (ClickedItemOrder)
 			{
-			case ITM_SQUR: return DRAW_SQUARE;
-			case ITM_ELPS: return DRAW_ELPS;
-			case ITM_HEX: return DRAW_HEX;
+			case ITM_SHAPES: return DRAW_SHAPES;
 			case ITM_MULSELECT: return MUL_SELECT;
 			case ITM_BACK: return SEND_BACK;
 			case ITM_FRONT: return BRNG_FRNT;
@@ -119,7 +118,15 @@ ActionType GUI::MapInputToActionType(int &x,int &y) const
 		case ITM_RED: return COLOR_RED;
 		case ITM_BLUE: return COLOR_BLUE;
 		case ITM_GREEN: return COLOR_GREEN;
-		case ITM_BACKDROWING: return GO_BACK;
+		}
+	}
+	else if (UI.InterfaceMode == MODE_SHAPES) {
+		int ClickedItemOrder = (x / UI.MenuItemWidth);
+		switch (ClickedItemOrder)
+		{
+		case ITM_SQUR: return DRAW_SQUARE;
+		case ITM_ELPS: return DRAW_ELPS;
+		case ITM_HEX: return DRAW_HEX;
 		}
 	}
 	else	//GUI is in PLAY mode
@@ -216,9 +223,7 @@ void GUI::CreateDrawToolBar() const
 	//To control the order of these images in the menu, 
 	//reoder them in UI_Info.h ==> enum DrawMenuItem
 	string MenuItemImages[DRAW_ITM_COUNT];
-	MenuItemImages[ITM_SQUR] = "images\\MenuItems\\Menu_Sqr.jpg";
-	MenuItemImages[ITM_ELPS] = "images\\MenuItems\\Menu_Elps.jpg";
-	MenuItemImages[ITM_HEX] = "images\\MenuItems\\Menu_Hex.jpg";
+	MenuItemImages[ITM_SHAPES] = "images\\MenuItems\\Menu_Sqr.jpg";
 	MenuItemImages[ITM_MULSELECT] = "images\\MenuItems\\Menu_MultiSelect.jpg";
 	MenuItemImages[ITM_BACK] = "images\\MenuItems\\Menu_Back.jpg";
 	MenuItemImages[ITM_FRONT] = "images\\MenuItems\\Menu_Front.jpg";
@@ -237,29 +242,49 @@ void GUI::CreateDrawToolBar() const
 		pWind->DrawImage(MenuItemImages[i], i*UI.MenuItemWidth,0,UI.MenuItemWidth, UI.ToolBarHeight);
 
 	//Draw a line under the toolbar
-	pWind->SetPen(RED, 3);
+	pWind->SetPen(BLACK, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);	
-
 }
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+void GUI::CreateShapesBar() const {
+
+	UI.InterfaceMode = MODE_SHAPES;
+
+	string DrawShapesItem[Shapes_COUNT];
+
+	DrawShapesItem[ITM_SQUR] = "images\\MenuItems\\Menu_Sqr.jpg";
+	DrawShapesItem[ITM_ELPS] = "images\\MenuItems\\Menu_Elps.jpg";
+	DrawShapesItem[ITM_HEX] = "images\\MenuItems\\Menu_Hex.jpg";
+
+	//Draw menu item one image at a time
+	for (int i = 0; i < Shapes_COUNT; i++)
+		pWind->DrawImage(DrawShapesItem[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+
+	pWind->SetPen(RED, 3);
+	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
 
 void GUI::CreateDrawColorBar() const {
 
 	UI.InterfaceMode = MODE_COLOR;
 
 	string DrawColorItem[Color_COUNT];
-
 	DrawColorItem[ITM_RED] = "images\\MenuItems\\Menu_Red.jpg";
 	DrawColorItem[ITM_BLUE] = "images\\MenuItems\\Menu_Blue.jpg";
 	DrawColorItem[ITM_GREEN] = "images\\MenuItems\\Menu_Green.jpg";
-	DrawColorItem[ITM_BACKDROWING] = "images\\MenuItems\\Menu_Back.jpg";
 
 	//Draw menu item one image at a time
 	for (int i = 0; i < Color_COUNT; i++)
 		pWind->DrawImage(DrawColorItem[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 
-	pWind->SetPen(RED, 3);
+	pWind->SetPen(BLACK, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 }
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
 void GUI::CreatePlayToolBar() const
@@ -279,8 +304,6 @@ void GUI::CreatePlayToolBar() const
 	//Draw menu item one image at a time
 	for (int i = 0; i < PLAY_ITM_COUNT; i++)
 		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
-
-
 
 	//Draw a line under the toolbar
 	pWind->SetPen(RED, 3);

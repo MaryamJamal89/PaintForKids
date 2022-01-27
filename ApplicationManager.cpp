@@ -73,14 +73,25 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 	{
 		case DRAW_SQUARE:
 			newAct = new ActionAddSquare(this);
+			pGUI->ClearToolBar();
+			pGUI->CreateDrawToolBar();
 			break;
 
 		case DRAW_ELPS:
 			newAct = new ActionAddEllipse(this);
+			pGUI->ClearToolBar();
+			pGUI->CreateDrawToolBar();
 			break;
 
 		case DRAW_HEX:
 			newAct = new ActionAddHexagon(this);
+			pGUI->ClearToolBar();
+			pGUI->CreateDrawToolBar();
+			break;
+
+		case DRAW_SHAPES:
+			pGUI->ClearToolBar();
+			pGUI->CreateShapesBar();
 			break;
 
 		case MUL_SELECT:
@@ -99,22 +110,23 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 
 		case COLOR_RED:
 			newAct = new ActionChangeColor(this, RED, DORF);
+			pGUI->ClearToolBar();
+			pGUI->CreateDrawToolBar();
 			break;
 
 		case COLOR_BLUE:
-			//create AddLineAction here
 			newAct = new ActionChangeColor(this, BLUE, DORF);
+			pGUI->ClearToolBar();
+			pGUI->CreateDrawToolBar();
 			break;
 
 		case COLOR_GREEN:
 			//create AddLineAction here
 			newAct = new ActionChangeColor(this, GREEN, DORF);
-			break;
-
-		case GO_BACK:
 			pGUI->ClearToolBar();
 			pGUI->CreateDrawToolBar();
 			break;
+
 
 		case CHNG_DRAW_CLR:
 			DORF = 1;
@@ -141,6 +153,7 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 		case LOAD:
 			newAct = new ActionLoad(this);
 			break;
+
 
 		case TO_PICK_IMAGE:
 			newAct = new ActionPickImage(this);
