@@ -14,35 +14,39 @@ class ApplicationManager
 private:
 	int x, y;			//click points on Screen
 	int FigCount;		//Actual number of figures
-	int DORF =0;		//Draw or fill or backgoround 
-	 
+	int DORF = 0;		//Draw or fill or backgoround 
+
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
 
 	//Pointers to Input and Output classes
 	GUI* pGUI;
 
-public:	
+public:
 	int multiSelect;//enabling multiSelect
-	ApplicationManager(); 
+	ApplicationManager();
 	~ApplicationManager();
 
 	void ResetFigList(); //deletes all old figures
-	
+
 	void Run();		//to run the application
-	
+
 	// -- Action-Related Functions
 	Action* CreateAction(ActionType);
-	void ExecuteAction(Action*&) ; //Execute an action
-	
+	void ExecuteAction(Action*&); //Execute an action
+
 	// -- Figures Management Functions
 	void AddFigure(CFigure* pFig); //Adds a new figure to the FigList
-	CFigure *GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
+	CFigure* GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
 
-	CFigure* GetSelectedFigureByFlag(int& selectedIndex, int& selectedNum);
+	CFigure* GetSelectedFigureByFlag(int& selectedIndex, int& selectedNum);  //get one selected figure by checking isSelected flag
 	void InsertFigure(bool isFront);  //change location of selected figure to back or front
-		
+
+	void DeleteSelectedFigures();    //delete selected figures
+
+	void RearrangingFigList();       //remove null refrences from the FigList
+
 	// -- Interface Management Functions	
-	GUI *GetGUI() const; //Return pointer to the interface
+	GUI* GetGUI() const; //Return pointer to the interface
 	void UpdateInterface() const;	//Redraws all the drawing window	
 
 	// Saving function

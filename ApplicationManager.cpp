@@ -15,6 +15,7 @@
 #include "Actions/ActionPickImage_Color.h"
 #include "Actions/ActionSwitchPlay.h"
 #include "Actions/ActionSwitchDraw.h"
+#include "Actions/ActionDelete.h"
 
 
 //Constructor
@@ -96,6 +97,10 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 
 		case MUL_SELECT:
 			newAct = new ActionMultiSelect(this,multiSelect);
+			break;
+
+		case DEL:
+			newAct = new ActionDelete(this);
 			break;
 
 		case SEND_BACK:
@@ -295,6 +300,37 @@ void ApplicationManager::InsertFigure(bool isFront)          //insert figure in 
 			pGUI->PrintMessage("Send to back!");
 		}
 	}
+}
+
+void ApplicationManager::RearrangingFigList()         //removing null refrences from FigList
+{
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i] == NULL)
+		{
+			//shifting all upcoming figures to remove the null refrenece
+			for (int j = i; j < FigCount; j++)
+			{
+				FigList[j] = FigList[j + 1];
+			}
+		}
+	}
+}
+
+void ApplicationManager::DeleteSelectedFigures()           //delete all selected figures
+{
+	int deletedNum = 0;
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i]->IsSelected())
+		{
+			//deleting the figure
+			FigList[i] = NULL;
+			deletedNum++;
+		}
+	}
+	RearrangingFigList();
+	FigCount -= deletedNum;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////asmaa

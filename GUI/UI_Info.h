@@ -21,8 +21,9 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	//If you want to change the menu items order, change the order here
 	ITM_SHAPES,		//Square item in menu
 
-	
+
 	ITM_MULSELECT,   //button for multiselection
+	ITM_DEL,
 	ITM_BACK,
 	ITM_FRONT,
 

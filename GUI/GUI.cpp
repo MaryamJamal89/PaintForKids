@@ -87,6 +87,7 @@ ActionType GUI::MapInputToActionType(int &x,int &y) const
 			{
 			case ITM_SHAPES: return DRAW_SHAPES;
 			case ITM_MULSELECT: return MUL_SELECT;
+			case ITM_DEL: return DEL;
 			case ITM_BACK: return SEND_BACK;
 			case ITM_FRONT: return BRNG_FRNT;
 			case ITM_DROWCLR: return CHNG_DRAW_CLR;
@@ -225,6 +226,7 @@ void GUI::CreateDrawToolBar() const
 	string MenuItemImages[DRAW_ITM_COUNT];
 	MenuItemImages[ITM_SHAPES] = "images\\MenuItems\\Menu_Sqr.jpg";
 	MenuItemImages[ITM_MULSELECT] = "images\\MenuItems\\Menu_MultiSelect.jpg";
+	MenuItemImages[ITM_DEL] = "images\\MenuItems\\Menu_Delete.jpg";
 	MenuItemImages[ITM_BACK] = "images\\MenuItems\\Menu_Back.jpg";
 	MenuItemImages[ITM_FRONT] = "images\\MenuItems\\Menu_Front.jpg";
 	MenuItemImages[ITM_DROWCLR] = "images\\MenuItems\\Menu_ChangeColor.jpg";
