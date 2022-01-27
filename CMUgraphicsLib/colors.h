@@ -165,6 +165,10 @@ const color GAINSBORO = color(220, 220, 220);
 const color FLORALWHITE = color(255, 250, 240);
 const color LIGHTPINK = color(255, 182, 193);
 const color THISTLE = color(216, 191, 216);
+const color MYTHISTLE = color(230, 216, 224);
+const color MYDARKGRAY = color(140, 140, 140);
+const color MYDARKBLACK = color(40, 40, 40);
+
 
 const color TOMATO = color(255, 99, 71);//=====
 const color PLUM = color(221, 160, 221);
