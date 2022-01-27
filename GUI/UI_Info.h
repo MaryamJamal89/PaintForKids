@@ -21,7 +21,6 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	//If you want to change the menu items order, change the order here
 	ITM_SHAPES,		//Square item in menu
 
-
 	ITM_MULSELECT,   //button for multiselection
 	ITM_DEL,
 	ITM_BACK,
@@ -32,8 +31,6 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	ITM_FILLCLR,
 	ITM_BGCLR,
 
-
-
 	//TODO: Add more items names here
 	ITM_SAVE,       //save item
 	ITM_LOAD,       //Load item
@@ -41,8 +38,8 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	ITM_EXIT,		//Exit item
 	
 	DRAW_ITM_COUNT		//no. of menu items ==> This should be the last line in this enum
-	
 };
+
 enum ShapesItem //The items of the Draw menu (you should add more items)
 {
 	ITM_SQUR,		//Square item in menu
@@ -51,12 +48,13 @@ enum ShapesItem //The items of the Draw menu (you should add more items)
 
 	Shapes_COUNT
 };
+
 enum DrawColorItem //The items of the Draw menu (you should add more items)
 {
-	ITM_RED,
-	ITM_BLUE,
-	ITM_GREEN,
-
+	ITM_TOMATO,
+	ITM_DEEPSKYBLUE,
+	ITM_LIGHTGREEN,
+	ITM_ORANGE,
 
 	Color_COUNT
 };
