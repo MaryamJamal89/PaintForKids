@@ -17,7 +17,7 @@ int main()
 	//Khaled
 	//Mahmoud
 	//Sarrah
-	int
+	
 	ApplicationManager AppManager;
 	AppManager.Run();	
 	

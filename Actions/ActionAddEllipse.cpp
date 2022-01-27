@@ -21,18 +21,22 @@ void ActionAddEllipse::Execute()
 	ElliGfxInfo.FillClr = pGUI->getCrntFillColor();
 	ElliGfxInfo.BorderWdth = pGUI->getCrntPenWidth();
 
-	//Step 1 - Read Ellipse data from the user
-	pGUI->PrintMessage("New Ellipse: Click at center point");
-	//Read 1st point and store in point P1
-	pGUI->GetPointClicked(C.x, C.y);
+	do
+	{
+		//Read 1st point and store in point P1
+		pGUI->GetPointClicked(C.x, C.y);
+		//Read 1st point and store in point P1
+		pGUI->GetPointClicked(P1.x, P1.y);
 
-	pGUI->PrintMessage("New Ellipse: Click at second point");
-	//Read 1st point and store in point P1
-	pGUI->GetPointClicked(P1.x, P1.y);
+		//Read 2nd point and store in point P2
+		pGUI->GetPointClicked(P2.x, P2.y);
 
-	pGUI->PrintMessage("New Ellipse: Click at theird point");
-	//Read 2nd point and store in point P2
-	pGUI->GetPointClicked(P2.x, P2.y);
+		pGUI->PrintMessage("You Clicked In Tool Bar!!");
+
+	} while (P2.y >= 0 && P2.y < UI.ToolBarHeight || P1.y >= 0 && P1.y < UI.ToolBarHeight || C.y >= 0 && C.y < UI.ToolBarHeight);
+
+	pGUI->PrintMessage("New Ellipse");
+
 
 	pGUI->ClearStatusBar();
 
