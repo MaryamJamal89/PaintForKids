@@ -17,7 +17,6 @@
 #include "Actions/ActionSwitchDraw.h"
 #include "Actions/ActionDelete.h"
 
-
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -104,34 +103,36 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			break;
 
 		case SEND_BACK:
-			//send to back
 			newAct = new ActionChangeLocation(this,false);
 			break;
 
 		case BRNG_FRNT:
-			//bring to front
 			newAct = new ActionChangeLocation(this, true);
 			break;
 
-		case COLOR_RED:
-			newAct = new ActionChangeColor(this, RED, DORF);
+		case COLOR_TOMATO:
+			newAct = new ActionChangeColor(this, TOMATO, DORF);
 			pGUI->ClearToolBar();
 			pGUI->CreateDrawToolBar();
 			break;
 
-		case COLOR_BLUE:
-			newAct = new ActionChangeColor(this, BLUE, DORF);
+		case COLOR_DEEPSKYBLUE:
+			newAct = new ActionChangeColor(this, DEEPSKYBLUE, DORF);
 			pGUI->ClearToolBar();
 			pGUI->CreateDrawToolBar();
 			break;
 
-		case COLOR_GREEN:
-			//create AddLineAction here
-			newAct = new ActionChangeColor(this, GREEN, DORF);
+		case COLOR_LIGHTGREEN:
+			newAct = new ActionChangeColor(this, LIGHTGREEN, DORF);
 			pGUI->ClearToolBar();
 			pGUI->CreateDrawToolBar();
 			break;
 
+		case COLOR_ORANGE:
+			newAct = new ActionChangeColor(this, ORANGE, DORF);
+			pGUI->ClearToolBar();
+			pGUI->CreateDrawToolBar();
+			break;
 
 		case CHNG_DRAW_CLR:
 			DORF = 1;
@@ -158,7 +159,6 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 		case LOAD:
 			newAct = new ActionLoad(this);
 			break;
-
 
 		case TO_PICK_IMAGE:
 			newAct = new ActionPickImage(this);
