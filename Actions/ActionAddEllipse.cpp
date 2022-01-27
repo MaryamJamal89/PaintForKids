@@ -23,12 +23,16 @@ void ActionAddEllipse::Execute()
 
 	do
 	{
-		//Read 1st point and store in point P1
+		//Read 1st point and store in point center
+		pGUI->PrintMessage("New Ellipse: Click at center point");
 		pGUI->GetPointClicked(C.x, C.y);
+
 		//Read 1st point and store in point P1
+		pGUI->PrintMessage("New Ellipse: Click at height point");
 		pGUI->GetPointClicked(P1.x, P1.y);
 
 		//Read 2nd point and store in point P2
+		pGUI->PrintMessage("New Ellipse: Click at length point");
 		pGUI->GetPointClicked(P2.x, P2.y);
 
 		pGUI->PrintMessage("You Clicked In Tool Bar!!");

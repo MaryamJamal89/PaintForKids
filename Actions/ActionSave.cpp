@@ -44,11 +44,10 @@ void ActionSave::Execute()
 			}
 		}
 	}
-	file.open(file_name+".txt", ios::out);
+	file.open("Saves\\" + file_name + ".txt", ios::out);
 
 	file << pGUI->ColorToString( UI.DrawColor) << " " << pGUI->ColorToString(UI.FillColor) << "  " << pGUI->ColorToString(UI.BkGrndColor )<< endl;
     pManager->SaveAll(file);
-
 
     file.close();
 
