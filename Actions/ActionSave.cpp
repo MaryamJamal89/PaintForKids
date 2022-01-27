@@ -13,13 +13,14 @@
 #include <vector>
 
 vector <string> fileNames;          // Declaring Vector of String type to carry all file Names 
-int i =1;
 ActionSave::ActionSave(ApplicationManager* pApp) :Action(pApp) {
 
 }
 
 void ActionSave::Execute()
 {
+	int copyNumber = pManager->ReturnNumberofDulicatedFile();
+
 	GUI* pGUI = pManager->GetGUI();
     
 	file_name= pGUI->ReadFileName("Save: Enter file name to save...");
@@ -35,8 +36,8 @@ void ActionSave::Execute()
 				string response = pGUI->Confirm("Sorry,This file is already exit .Do you want to make new copy (Y/N)?");
 				if (response == "Y" || response == "y")
 				{
-					file_name = file_name + " [" +to_string(i) + "]"; // here i need to make counter -- still i have change here --Asmaa--
-					i++;
+					file_name = file_name + " [" +to_string(copyNumber) + "]"; 
+					pManager->increamentNumberofDulicatedFile();
 				}
 			}
 			else {

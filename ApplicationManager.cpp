@@ -28,8 +28,20 @@ ApplicationManager::ApplicationManager()
 
 
 	multiSelect = 0;
+	numberOfDuplicatedFilesName = 1;
+}
+// return numberOfDuplicatedFilesName
+int ApplicationManager::ReturnNumberofDulicatedFile()
+
+{
+	return numberOfDuplicatedFilesName;
 }
 
+void ApplicationManager::increamentNumberofDulicatedFile()
+
+{
+	numberOfDuplicatedFilesName++;
+}
 //delete all old figures
 void ApplicationManager::ResetFigList()
 {
@@ -333,7 +345,6 @@ void ApplicationManager::DeleteSelectedFigures()           //delete all selected
 	FigCount -= deletedNum;
 }
 
-////////////////////////////////////////////////////////////////////////////////////asmaa
 void ApplicationManager::SaveAll(ofstream& File) const
 {
 	File << FigCount << endl;

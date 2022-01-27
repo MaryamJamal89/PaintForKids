@@ -21,7 +21,7 @@ void CHexagon::DrawMe(GUI* pOut) const
 // save figure in the file
 void CHexagon::Save(ofstream& file, GUI* pGUI)
 {
-	file << "HEX " << ID << " " << Center.x << " " << Center.y << " " << P.x << " " << P.y << " " << pGUI->ColorToString(FigGfxInfo.DrawClr) << " ";
+	file << "HEX " << ID << " " << Center.x << " " << Center.y << " " << length << " " << pGUI->ColorToString(FigGfxInfo.DrawClr) << " ";
 
 	if (FigGfxInfo.isFilled == true)
 	{

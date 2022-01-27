@@ -22,7 +22,7 @@ void CEllipse::DrawMe(GUI* pOut) const
 //save figure in the file
 void CEllipse::Save(ofstream& file, GUI* pGUI)
 {
-	file << "ELPS " << ID << " " << Center.x << " " << Center.y << " " << P.x << " " << P.y << " " << pGUI->ColorToString(FigGfxInfo.DrawClr) << " ";
+	file << "ELPS " << ID << " " << Center.x << " " << Center.y << " " << length << " "<< height<<" "<< pGUI->ColorToString(FigGfxInfo.DrawClr) << " ";
 
 	if (FigGfxInfo.isFilled == true)
 	{
