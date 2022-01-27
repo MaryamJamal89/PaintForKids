@@ -21,19 +21,19 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	//If you want to change the menu items order, change the order here
 	ITM_SHAPES,		//Square item in menu
 
-	ITM_MULSELECT,   //button for multiselection
-	ITM_DEL,
-	ITM_BACK,
-	ITM_FRONT,
-
-	//Colors "randa"
 	ITM_DROWCLR,
 	ITM_FILLCLR,
 	ITM_BGCLR,
 
-	//TODO: Add more items names here
+	ITM_BACK,
+	ITM_FRONT,
+
+	ITM_MULSELECT,   //button for multiselection
+	ITM_DEL,
+	
 	ITM_SAVE,       //save item
 	ITM_LOAD,       //Load item
+
 	ITM_PLAY,       //Switch Play Item Edit By 'Mahmoud'
 	ITM_EXIT,		//Exit item
 	
@@ -64,7 +64,6 @@ enum PlayMenuItem //The items of the Play menu (you should add more items)
 	//Note: Items are ordered here as they appear in menu
 	//If you want to change the menu items order, change the order here
 	
-	//TODO: Add more items names here
 	ITM_PICK_IMAGE,			//Pick Item Edit By 'Mahmoud'
 	ITM_PICK_FILL_COLOR,	//Pick Fill Color Edit By 'Mahmoud'
 	ITM_PICK_IMAGE_COLOR,   //Pick Item And Color Edit By 'Mahmoud'
@@ -88,20 +87,20 @@ struct UI_Info	//User Interface Info.
 	
 	bool isFilled = false; 
 
-	color DrawColor = BLUE;		//Drawing color
-	color FillColor = GREEN;		//Filling color
+	color DrawColor = DEEPSKYBLUE;			//Drawing color
+	color FillColor = LIGHTGREEN;		//Filling color
 	color HighlightColor = MAGENTA;	//Highlighting color
-	color MsgColor = RED;			//Messages color
-	color BkGrndColor = LIGHTGOLDENRODYELLOW;		//Background color
-	color ToolBarColor = WHITE;		//ToolBarColor
-	color StatusBarColor = TURQUOISE;	//Status bar color
-	int PenWidth = 3;			//width of the pen that draws shapes
+	color MsgColor = DARKRED;			//Messages color
+	color BkGrndColor = MYTHISTLE;		//Background color
+	color ToolBarColor = WHITE;			//ToolBarColor
+	color StatusBarColor = MYDARKGRAY;	//Status bar color
+	int PenWidth = 3;				//width of the pen that draws shapes
 
-	///// Add more members if needed
-	//GUI_MODE InterfaceMode;
+	// Add more members if needed
+	// GUI_MODE InterfaceMode;
 
-	//int	width, height,	//Window width and height
-	//	wx, wy,			//Window starting coordinates
+	//  int	width, height,	//Window width and height
+	//	wx, wy,				//Window starting coordinates
 	//	StatusBarHeight,	//Status Bar Height
 	//	ToolBarHeight,		//Tool Bar Height (distance from top of window to bottom line of toolbar)
 	//	MenuItemWidth;		//Width of each item in toolbar menu
@@ -109,8 +108,8 @@ struct UI_Info	//User Interface Info.
 	//color DrawColor;		//Drawing color
 	//color FillColor;		//Filling color
 	//color HighlightColor;	//Highlighting color
-	//color MsgColor;			//Messages color
-	//color BkGrndColor;		//Background color
+	//color MsgColor;		//Messages color
+	//color BkGrndColor;	//Background color
 	//color StatusBarColor;	//Status bar color
 	//int PenWidth;			//width of the pen that draws shapes
 

@@ -226,16 +226,16 @@ void GUI::CreateDrawToolBar() const
 	//reoder them in UI_Info.h ==> enum DrawMenuItem
 	string MenuItemImages[DRAW_ITM_COUNT];
 	MenuItemImages[ITM_SHAPES] = "images\\MenuItems\\\shapesMenu\\shapes-color.jpg";
-	MenuItemImages[ITM_MULSELECT] = "images\\MenuItems\\multiselect-color.jpg";
-	MenuItemImages[ITM_DEL] = "images\\MenuItems\\delete-color.jpg";
-	MenuItemImages[ITM_BACK] = "images\\MenuItems\\sendback-color.jpg";
-	MenuItemImages[ITM_FRONT] = "images\\MenuItems\\bringfront-color.jpg";
 	MenuItemImages[ITM_DROWCLR] = "images\\MenuItems\\draw-color.jpg";
 	MenuItemImages[ITM_FILLCLR] = "images\\MenuItems\\fillingColor-color.jpg";
 	MenuItemImages[ITM_BGCLR] = "images\\MenuItems\\BGcolor-color.jpg";
+	MenuItemImages[ITM_BACK] = "images\\MenuItems\\sendback-color.jpg";
+	MenuItemImages[ITM_FRONT] = "images\\MenuItems\\bringfront-color.jpg";
+	MenuItemImages[ITM_MULSELECT] = "images\\MenuItems\\multiselect-color.jpg";
+	MenuItemImages[ITM_DEL] = "images\\MenuItems\\delete-color.jpg";
 	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\save-color.jpg";
 	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\load-color.jpg";
-	MenuItemImages[ITM_PLAY] = "images\\MenuItems\\playmood-color.jpg";
+	MenuItemImages[ITM_PLAY] = "images\\MenuItems\\playmood4-color.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\exit-color.jpg";
 
 	//Draw menu item one image at a time
@@ -243,7 +243,7 @@ void GUI::CreateDrawToolBar() const
 		pWind->DrawImage(MenuItemImages[i], i*UI.MenuItemWidth,0,UI.MenuItemWidth, UI.ToolBarHeight);
 
 	//Draw a line under the toolbar
-	pWind->SetPen(BLACK, 3);
+	pWind->SetPen(MYDARKBLACK, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);	
 }
 
@@ -263,7 +263,7 @@ void GUI::CreateShapesBar() const {
 	for (int i = 0; i < Shapes_COUNT; i++)
 		pWind->DrawImage(DrawShapesItem[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 
-	pWind->SetPen(BLACK, 3);
+	pWind->SetPen(MYDARKBLACK, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 }
 
@@ -283,7 +283,7 @@ void GUI::CreateDrawColorBar() const {
 	for (int i = 0; i < Color_COUNT; i++)
 		pWind->DrawImage(DrawColorItem[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 
-	pWind->SetPen(BLACK, 3);
+	pWind->SetPen(MYDARKBLACK, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 }
 
@@ -305,7 +305,7 @@ void GUI::CreatePlayToolBar() const
 		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 
 	//Draw a line under the toolbar
-	pWind->SetPen(BLACK, 3);
+	pWind->SetPen(MYDARKBLACK, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 }
 
@@ -354,30 +354,32 @@ int GUI::getCrntPenWidth() const		//get current pen width
 color GUI::StringToColor(string colorStr)    //convert string to color type
 {
 	if (colorStr == "DEEPSKYBLUE") return DEEPSKYBLUE;
+	else if (colorStr == "TOMATO") return TOMATO;
+	else if (colorStr == "LIGHTGREEN") return LIGHTGREEN;
+	else if (colorStr == "ORANGE") return ORANGE;
 	else if (colorStr == "BLACK") return BLACK;
+	else if (colorStr == "MYDARKBLACK") return MYDARKBLACK;
+	else if (colorStr == "MYDARKGRAY") return MYDARKGRAY;
+	else if (colorStr == "WHITE") return WHITE;
 	else if (colorStr == "RED") return RED;
 	else if (colorStr == "BLUE") return BLUE;
 	else if (colorStr == "GREEN") return GREEN;
-	else if (colorStr == "TOMATO") return TOMATO;
-	else if (colorStr == "YELLOW") return YELLOW;
-	else if (colorStr == "WHITE") return WHITE;
-	else if (colorStr == "LIGHTGREEN") return LIGHTGREEN;
-	else if (colorStr == "ORANGE") return ORANGE;
 }
 ////////////////////////////////////////////////////////////////////  covert color to  string
 string GUI::ColorToString(color clr)    //convert string to color type
 {
 	if (isMatchedColors(clr,DEEPSKYBLUE)) return "DEEPSKYBLUE";
+	else if (isMatchedColors(clr, TOMATO)) return "TOMATO";
+	else if (isMatchedColors(clr, LIGHTGREEN)) return "LIGHTGREEN";
+	else if (isMatchedColors(clr, ORANGE)) return "ORANGE";
 	else if (isMatchedColors(clr,BLACK)) return "BLACK";
+	else if (isMatchedColors(clr, MYDARKBLACK)) return "MYDARKBLACK";
+	else if (isMatchedColors(clr, MYDARKGRAY)) return "MYDARKGRAY";
+	else if (isMatchedColors(clr, WHITE)) return "WHITE";
 	else if (isMatchedColors(clr, RED)) return "RED"; 
 	else if (isMatchedColors(clr, BLUE)) return "BLUE";
 	else if (isMatchedColors(clr, GREEN)) return "GREEN";
-	else if (isMatchedColors(clr, TOMATO)) return "TOMATO";
-	else if (isMatchedColors(clr,YELLOW)) return "YELLOW";
-	else if (isMatchedColors(clr, WHITE)) return "WHITE";
-	else if (isMatchedColors(clr, LIGHTGREEN)) return "LIGHTGREEN";
-	else if (isMatchedColors(clr, ORANGE)) return "ORANGE";
-	else if (isMatchedColors(clr, LIGHTGOLDENRODYELLOW)) return "LIGHTGOLDENRODYELLOW";	
+	else if (isMatchedColors(clr, MYTHISTLE)) return "MYTHISTLE";
 }
 
 bool GUI::isMatchedColors(color c1, color c2)      //check if two color objects are matched
