@@ -463,7 +463,7 @@ void GUI::DrawHex(Point center, int length, GfxInfo HexGfxInfo, bool selected) c
 	int d = length;
 
 	Point point1;
-	point1.x = center.x - d;
+	point1.x = center.x - d;             
 	point1.y = center.y;
 	Point point2;
 	point2.x = center.x - d / 2;
