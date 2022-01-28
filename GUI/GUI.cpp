@@ -120,6 +120,7 @@ ActionType GUI::MapInputToActionType(int &x,int &y) const
 		case ITM_DEEPSKYBLUE: return COLOR_DEEPSKYBLUE;
 		case ITM_LIGHTGREEN: return COLOR_LIGHTGREEN;
 		case ITM_ORANGE: return COLOR_ORANGE;
+		case ITM_COLORBACK: return TO_DRAW;
 		}
 	}
 	else if (UI.InterfaceMode == MODE_SHAPES) {
@@ -129,6 +130,8 @@ ActionType GUI::MapInputToActionType(int &x,int &y) const
 		case ITM_SQUR: return DRAW_SQUARE;
 		case ITM_ELPS: return DRAW_ELPS;
 		case ITM_HEX: return DRAW_HEX;
+		case ITM_SHAPESBACK: return TO_DRAW;
+
 		}
 	}
 	else	//GUI is in PLAY mode
@@ -258,6 +261,7 @@ void GUI::CreateShapesBar() const {
 	DrawShapesItem[ITM_SQUR] = "images\\MenuItems\\shapesMenu\\square-color.jpg";
 	DrawShapesItem[ITM_ELPS] = "images\\MenuItems\\shapesMenu\\ellipse-color.jpg";
 	DrawShapesItem[ITM_HEX] = "images\\MenuItems\\shapesMenu\\hexagon-color.jpg";
+	DrawShapesItem[ITM_SHAPESBACK] = "images\\MenuItems\\return-color.jpg";
 
 	//Draw menu item one image at a time
 	for (int i = 0; i < Shapes_COUNT; i++)
@@ -278,6 +282,8 @@ void GUI::CreateDrawColorBar() const {
 	DrawColorItem[ITM_DEEPSKYBLUE] = "images\\MenuItems\\colorMenu\\DEEPSKYBLUE.jpg";
 	DrawColorItem[ITM_LIGHTGREEN] = "images\\MenuItems\\colorMenu\\LIGHTGREEN.jpg";
 	DrawColorItem[ITM_ORANGE] = "images\\MenuItems\\colorMenu\\ORANGE.jpg";
+	DrawColorItem[ITM_COLORBACK] = "images\\MenuItems\\return-color.jpg";
+
 
 	//Draw menu item one image at a time
 	for (int i = 0; i < Color_COUNT; i++)
