@@ -3,26 +3,6 @@
 //constructor make necessary initializations
 GUI::GUI()
 {
-	//Initialize user interface parameters
-	//UI.InterfaceMode = MODE_DRAW;
-	
-	//UI.width = 1300;
-	//UI.height = 700;
-	//UI.wx = 5;
-	//UI.wy = 5;
-	
-	//UI.StatusBarHeight = 50;
-	//UI.ToolBarHeight = 50;
-	//UI.MenuItemWidth = 80;
-	
-	//UI.DrawColor = BLUE;		//Drawing color
-	//UI.FillColor = GREEN;		//Filling color
-	//UI.MsgColor = RED;		//Messages color
-	//UI.BkGrndColor = LIGHTGOLDENRODYELLOW;	//Background color
-	//UI.HighlightColor = MAGENTA;	//This color should NOT be used to draw figures. use if for highlight only
-	//UI.StatusBarColor = TURQUOISE;
-	//UI.PenWidth = 3;	//width of the figures frames
-
 	//Create the output window
 	pWind = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
 
@@ -31,6 +11,8 @@ GUI::GUI()
 	
 	CreateDrawToolBar();
 	CreateStatusBar();
+
+	PrintTempMessge("Welcome to Draw mode!", 1000);
 }
 
 //======================================================================================//

@@ -104,6 +104,7 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 		case DRAW_SHAPES:
 			pGUI->ClearToolBar();
 			pGUI->CreateShapesBar();
+			pGUI->PrintTempMessge("Select a figure to draw!", 1000);
 			break;
 
 		case MUL_SELECT:
@@ -156,18 +157,21 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			DORF = 1;
 			pGUI->ClearToolBar();
 			pGUI->CreateDrawColorBar();
+			pGUI->PrintTempMessge("Select drawing color!", 1000);
 			break;
 
 		case CHNG_FILL_CLR:
 			DORF = 2;
 			pGUI->ClearToolBar();
 			pGUI->CreateDrawColorBar();
+			pGUI->PrintTempMessge("Select filling color!", 1000);
 			break;
 
 		case CHNG_BK_CLR:
 			DORF = 3;
 			pGUI->ClearToolBar();
 			pGUI->CreateDrawColorBar();
+			pGUI->PrintTempMessge("Select background color!", 1000);
 			break;
 
 		case SAVE:
