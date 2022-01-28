@@ -42,6 +42,9 @@ public:
 	virtual bool InFig(int, int) = 0;		//Determine the position of the Point
 	virtual void PrintInfo(GUI* pGUI) = 0; //print all figure info on the status bar
 	//virtual void PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar
+	
+	// take a copy of pointer obj without Refernce
+	virtual CFigure * CloneFig(); // to copy figure
 };
 
 #endif

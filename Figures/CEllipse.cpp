@@ -84,3 +84,8 @@ void CEllipse::PrintInfo(GUI* pGUI)
 	}
 	pGUI->PrintMessage("Ellipse / ID: " + id + " / Center: (" + x + ", " + y + ") / Length: " + len + " / Height: " + _height + " / Drawing Color: " + pGUI->ColorToString(FigGfxInfo.DrawClr) + " / Filling Color: " + fillingColor);
 }
+
+// take a copy of pointer obj without Refernce
+CEllipse* CEllipse::CloneFig() {
+	return new CEllipse(*this);
+}

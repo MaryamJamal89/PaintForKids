@@ -11,7 +11,7 @@ CSquare::CSquare(Point P1, int len, GfxInfo FigureGfxInfo):CFigure(FigureGfxInfo
 	length = len;
 	SqrCnt++;
 }
-	
+
 void CSquare::DrawMe(GUI* pGUI) const
 {
 	//Call Output::DrawRect to draw a Square on the screen	
@@ -81,4 +81,9 @@ void CSquare::PrintInfo(GUI* pGUI)
 		fillingColor = "NO_FILL";
 	}
 	pGUI->PrintMessage("Square / ID:" + id + " / Top Left Corner: (" + x1 + ", " + y1 + ") /" + " Length: " + len +  " / " + " Drawing Color: " + pGUI->ColorToString(FigGfxInfo.DrawClr) + " / Filling Color: " + fillingColor);
+}
+
+// take a copy of pointer obj without Refernce
+CSquare* CSquare::CloneFig() {
+	return new CSquare(*this);
 }

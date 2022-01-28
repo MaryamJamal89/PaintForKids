@@ -12,5 +12,6 @@ void ActionSwitchDraw::Execute()
 	GUI* pGUI = pManager->GetGUI();
 	// to create New ToolBar
 	pGUI->CreateDrawToolBar();
+	pManager->UnSelectFigures(2);
 	pGUI->PrintTempMessge("Welcome to Draw mode!", 1000);
 }

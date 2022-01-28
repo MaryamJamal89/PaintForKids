@@ -26,6 +26,10 @@ public:
 	virtual int orientation(Point p, Point q, Point r);
 	virtual bool doIntersect(Point p1, Point q1, Point p2, Point q2);
 	virtual bool isInside(Point polygon[], int n, Point p);
+
+	// take a copy of pointer obj without Refernce
+	virtual CHexagon* CloneFig();
+
 };
 
 #endif
