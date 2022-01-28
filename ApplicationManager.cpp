@@ -80,6 +80,8 @@ void ApplicationManager::Run()
 Action* ApplicationManager::CreateAction(ActionType ActType) 
 {
 	Action* newAct = NULL;
+	int selectedIndex, selectedNum;
+	CFigure* figure = NULL;
 	
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
@@ -125,25 +127,30 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			break;
 
 		case COLOR_TOMATO:
-			newAct = new ActionChangeColor(this, TOMATO, DORF);
+			figure = GetSelectedFigureByFlag(selectedIndex, selectedNum);
+			newAct = new ActionChangeColor(this, TOMATO, DORF, figure);
 			pGUI->ClearToolBar();
 			pGUI->CreateDrawToolBar();
 			break;
 
 		case COLOR_DEEPSKYBLUE:
-			newAct = new ActionChangeColor(this, DEEPSKYBLUE, DORF);
+			figure = GetSelectedFigureByFlag(selectedIndex, selectedNum);
+			newAct = new ActionChangeColor(this, DEEPSKYBLUE, DORF, figure);
 			pGUI->ClearToolBar();
 			pGUI->CreateDrawToolBar();
 			break;
 
 		case COLOR_LIGHTGREEN:
-			newAct = new ActionChangeColor(this, LIGHTGREEN, DORF);
+			figure = GetSelectedFigureByFlag(selectedIndex, selectedNum);
+			newAct = new ActionChangeColor(this, LIGHTGREEN, DORF, figure);
 			pGUI->ClearToolBar();
 			pGUI->CreateDrawToolBar();
 			break;
 
 		case COLOR_ORANGE:
-			newAct = new ActionChangeColor(this, ORANGE, DORF);
+
+			figure = GetSelectedFigureByFlag(selectedIndex, selectedNum);
+			newAct = new ActionChangeColor(this, ORANGE, DORF, figure);
 			pGUI->ClearToolBar();
 			pGUI->CreateDrawToolBar();
 			break;
