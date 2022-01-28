@@ -24,11 +24,11 @@ void ActionAddHexagon::Execute()
 	//Step 1 - Read Hexagon data from the user
 	//Read 1st point and store in point center
 	pGUI->PrintMessage("New Hexagon: Click at center point");
-	C = CheckPoint(pGUI);
+	C = CheckPoint(pGUI, "New Hexagon: Click at center point");
 
 	//Read 2nd point and store in point P1
 	pGUI->PrintMessage("New Hexagon: Click at length point");
-	P1 = CheckPoint(pGUI);
+	P1 = CheckPoint(pGUI, "New Hexagon: Click at length point");
 
 	pGUI->ClearStatusBar();
 
@@ -49,12 +49,13 @@ void ActionAddHexagon::Execute()
 	H->PrintInfo(pGUI);
 }
 
-Point ActionAddHexagon::CheckPoint(GUI* pGUI)
+Point ActionAddHexagon::CheckPoint(GUI* pGUI, string mssg)
 {
 	Point point;
 	do
 	{
 		pGUI->PrintTempMessge("You are out of the Drawing Area!!", 2000);
+		pGUI->PrintMessage(mssg);
 		pGUI->GetPointClicked(point.x, point.y);
 	} while (!(point.y >= UI.ToolBarHeight && point.y < UI.height - UI.StatusBarHeight));
 	return point;

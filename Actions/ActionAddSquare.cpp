@@ -27,12 +27,12 @@ void ActionAddSquare::Execute()
 	//Read 1st point and store in point P1
 	pGUI->PrintMessage("New Square: Click at first point");
 	pGUI->GetPointClicked(P1.x, P1.y);
-	CheckPoint(pGUI, P1);
+	CheckPoint(pGUI, P1, "New Square: Click at first point");
 
 	//Read 2nd point and store in point P2
 	pGUI->PrintMessage("New Square: Click at second point");
 	pGUI->GetPointClicked(P2.x, P2.y);
-	CheckPoint(pGUI, P2);
+	CheckPoint(pGUI, P2, "New Square: Click at second point");
 
 	pGUI->ClearStatusBar();
 
@@ -61,11 +61,12 @@ void ActionAddSquare::Execute()
 	R->PrintInfo(pGUI);
 }
 
-void ActionAddSquare::CheckPoint(GUI* pGUI, Point& point)
+void ActionAddSquare::CheckPoint(GUI* pGUI, Point& point, string mssg)
 {
 	while (!(point.y >= UI.ToolBarHeight && point.y < UI.height - UI.StatusBarHeight))
 	{
 		pGUI->PrintTempMessge("You are out of the Drawing Area!!", 2000);
+		pGUI->PrintMessage(mssg);
 		pGUI->GetPointClicked(point.x, point.y);
 	}
 }

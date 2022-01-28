@@ -12,7 +12,7 @@ public:
 
 	//Add Hexagon to the ApplicationManager
 	virtual void Execute();
-	Point CheckPoint(GUI* pGUI);
+	Point CheckPoint(GUI* pGUI, string mssg);
 };
 
 #endif
