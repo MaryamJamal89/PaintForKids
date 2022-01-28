@@ -227,6 +227,11 @@ void ApplicationManager::ExecuteAction(Action* &pAct)
 	}
 }
 
+int ApplicationManager::GetFigCount()
+{
+	return FigCount;
+}
+
 //==================================================================================//
 //						Figures Management Functions								//
 //==================================================================================//
@@ -292,11 +297,11 @@ void ApplicationManager::InsertFigure(bool isFront)          //insert figure in 
 	CFigure* temp = GetSelectedFigureByFlag(selectedIndex,selectedNum);
 	if (temp == NULL)
 	{
-		pGUI->PrintMessage("No selected figure to move!");
+		pGUI->PrintTempMessge("No selected figure to move!", 1000);
 	}
 	else if (selectedNum > 1)
 	{
-		pGUI->PrintMessage("Select only one figure to move!");
+		pGUI->PrintTempMessge("Select only one figure to move!", 1000);
 	}
 	else
 	{
@@ -306,7 +311,7 @@ void ApplicationManager::InsertFigure(bool isFront)          //insert figure in 
 				FigList[i] = FigList[i + 1];
 			}
 			FigList[FigCount - 1] = temp;
-			pGUI->PrintMessage("Bring to front!");
+			pGUI->PrintTempMessge("Figure brought to front!", 1000);
 		}
 		else
 		{
@@ -314,7 +319,7 @@ void ApplicationManager::InsertFigure(bool isFront)          //insert figure in 
 				FigList[i] = FigList[i - 1];
 			}
 			FigList[0] = temp;
-			pGUI->PrintMessage("Send to back!");
+			pGUI->PrintTempMessge("Figure sent to back!", 1000);
 		}
 	}
 }

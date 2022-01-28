@@ -200,6 +200,14 @@ void GUI::ClearStatusBar() const
 	pWind->DrawRectangle(0, UI.height - UI.StatusBarHeight, UI.width, UI.height);
 }
 
+void GUI::PrintTempMessge(string msg, int ms)
+{
+	PrintMessage(msg);
+	Sleep(ms);
+	ClearStatusBar();
+}
+
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
 void GUI::ClearToolBar() const
@@ -364,6 +372,7 @@ color GUI::StringToColor(string colorStr)    //convert string to color type
 	else if (colorStr == "RED") return RED;
 	else if (colorStr == "BLUE") return BLUE;
 	else if (colorStr == "GREEN") return GREEN;
+	else if (colorStr == "MYTHISTLE") return MYTHISTLE;
 }
 ////////////////////////////////////////////////////////////////////  covert color to  string
 string GUI::ColorToString(color clr)    //convert string to color type

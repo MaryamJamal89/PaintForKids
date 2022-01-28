@@ -15,7 +15,5 @@ void ActionDelete::Execute()
 	pGUI->ClearDrawArea();
 	pManager->UpdateInterface();
 	//confirmation message
-	pGUI->PrintMessage("figures deleted!");
-	Sleep(800);
-	pGUI->ClearStatusBar();
+	pGUI->PrintTempMessge("figures deleted!", 1000);
 }

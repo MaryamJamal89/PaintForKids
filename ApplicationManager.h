@@ -33,6 +33,8 @@ public:
 	ApplicationManager();
 	~ApplicationManager();
 
+	int GetFigCount();    //get number of drawn figures
+
 	void ResetFigList(); //deletes all old figures
 
 	void Run();		//to run the application

@@ -34,10 +34,11 @@ void CEllipse::Save(ofstream& file, GUI* pGUI)
 	}
 }
 
+//loading ellipse from old graph
 void CEllipse::Load(ifstream& loadedFile, GUI* pGUI)
 {
 	string drawColor, fillColor;
-	loadedFile >> ID >> Center.x >> Center.y >> P.x >> P.y >> drawColor >> fillColor;
+	loadedFile >> ID >> Center.x >> Center.y >> length >> height >> drawColor >> fillColor;
 	FigGfxInfo.DrawClr = pGUI->StringToColor(drawColor);
 	if (fillColor == "NO_FILL")
 	{
