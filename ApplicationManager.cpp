@@ -85,20 +85,14 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 	{
 		case DRAW_SQUARE:
 			newAct = new ActionAddSquare(this);
-			pGUI->ClearToolBar();
-			pGUI->CreateDrawToolBar();
 			break;
 
 		case DRAW_ELPS:
 			newAct = new ActionAddEllipse(this);
-			pGUI->ClearToolBar();
-			pGUI->CreateDrawToolBar();
 			break;
 
 		case DRAW_HEX:
 			newAct = new ActionAddHexagon(this);
-			pGUI->ClearToolBar();
-			pGUI->CreateDrawToolBar();
 			break;
 
 		case DRAW_SHAPES:

@@ -45,6 +45,7 @@ enum ShapesItem //The items of the Draw menu (you should add more items)
 	ITM_SQUR,		//Square item in menu
 	ITM_ELPS,		//Ellipse item in menu
 	ITM_HEX,		//Hex item in menu
+	ITM_SHAPESBACK,
 
 	Shapes_COUNT
 };
@@ -55,6 +56,7 @@ enum DrawColorItem //The items of the Draw menu (you should add more items)
 	ITM_DEEPSKYBLUE,
 	ITM_LIGHTGREEN,
 	ITM_ORANGE,
+	ITM_COLORBACK,
 
 	Color_COUNT
 };
