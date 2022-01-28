@@ -11,13 +11,17 @@ void ActionExit::Execute()
 {
 	GUI* pGUI = pManager->GetGUI();
 
-	//ask user to save first
-	string response = pGUI->Confirm("Do you want save current file (Y/N)?");
-	if (response == "Y" || response == "y")
+	//check if there were any drawn figures
+	if (pManager->GetFigCount() > 0)
 	{
-		//save
-		Action* save = new ActionSave(pManager);
-		save->Execute();
+		//ask user to save first
+		string response = pGUI->Confirm("Do you want save current file (Y/N)?");
+		if (response == "Y" || response == "y")
+		{
+			//save
+			Action* save = new ActionSave(pManager);
+			save->Execute();
+		}
 	}
 }
 

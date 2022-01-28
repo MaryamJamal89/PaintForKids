@@ -82,5 +82,5 @@ void CEllipse::PrintInfo(GUI* pGUI)
 	{
 		fillingColor = "NO_FILL";
 	}
-	pGUI->PrintMessage("Ellipse / ID: " + id + " / Center: (" + x + ", " + y + ") / Length: "+len+" / Height: "+_height+" / Drawing Color: " + pGUI->ColorToString(FigGfxInfo.DrawClr) + " / Filling Color: " + fillingColor);
+	pGUI->PrintMessage("Ellipse / ID: " + id + " / Center: (" + x + ", " + y + ") / Length: " + len + " / Height: " + _height + " / Drawing Color: " + pGUI->ColorToString(FigGfxInfo.DrawClr) + " / Filling Color: " + fillingColor);
 }
