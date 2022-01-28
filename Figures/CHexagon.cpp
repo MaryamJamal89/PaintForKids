@@ -1,6 +1,9 @@
 #include "CHexagon.h"
 #include<fstream>
 
+// Define Infinite (Using INT_MAX caused overflow problems)
+#define INF 10000
+
 int CHexagon::HexCnt = 0;  //static variable to determine the number of objects
 
 CHexagon::CHexagon(){}
@@ -36,7 +39,7 @@ void CHexagon::Save(ofstream& file, GUI* pGUI)
 void CHexagon::Load(ifstream& loadedFile, GUI* pGUI)
 {
 	string drawColor, fillColor;
-	loadedFile >> ID >> Center.x >> Center.y >> P.x >> P.y >> drawColor >> fillColor;
+	loadedFile >> ID >> Center.x >> Center.y >> length >> drawColor >> fillColor;
 	FigGfxInfo.DrawClr = pGUI->StringToColor(drawColor);
 	if (fillColor == "NO_FILL")
 	{
@@ -50,25 +53,124 @@ void CHexagon::Load(ifstream& loadedFile, GUI* pGUI)
 	CHexagon::SetSelected(false);
 }
 
-double area1(int x1, int y1, int x2, int y2, int x3, int y3)
+
+// https://www.geeksforgeeks.org/how-to-check-if-a-given-point-lies-inside-a-polygon/?ref=gcse
+// Given three collinear points p, q, r, the function checks if
+// point q lies on line segment 'pr'
+bool CHexagon::onSegment(Point p, Point q, Point r)
 {
-	return abs((x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2.0);
+	if (q.x <= max(p.x, r.x) && q.x >= min(p.x, r.x) &&
+		q.y <= max(p.y, r.y) && q.y >= min(p.y, r.y))
+		return true;
+	return false;
 }
 
-// InFig return boolian to check point inside Figure 
+// To find orientation of ordered triplet (p, q, r).
+// The function returns following values
+// 0 --> p, q and r are collinear
+// 1 --> Clockwise
+// 2 --> Counterclockwise
+int CHexagon::orientation(Point p, Point q, Point r)
+{
+	int val = (q.y - p.y) * (r.x - q.x) -
+		(q.x - p.x) * (r.y - q.y);
+
+	if (val == 0) return 0; // collinear
+	return (val > 0) ? 1 : 2; // clock or counterclock wise
+}
+
+// The function that returns true if line segment 'p1q1'
+// and 'p2q2' intersect.
+bool CHexagon::doIntersect(Point p1, Point q1, Point p2, Point q2)
+{
+	// Find the four orientations needed for general and
+	// special cases
+	int o1 = orientation(p1, q1, p2);
+	int o2 = orientation(p1, q1, q2);
+	int o3 = orientation(p2, q2, p1);
+	int o4 = orientation(p2, q2, q1);
+
+	// General case
+	if (o1 != o2 && o3 != o4)
+		return true;
+
+	// Special Cases
+	// p1, q1 and p2 are collinear and p2 lies on segment p1q1
+	if (o1 == 0 && onSegment(p1, p2, q1)) return true;
+
+	// p1, q1 and p2 are collinear and q2 lies on segment p1q1
+	if (o2 == 0 && onSegment(p1, q2, q1)) return true;
+
+	// p2, q2 and p1 are collinear and p1 lies on segment p2q2
+	if (o3 == 0 && onSegment(p2, p1, q2)) return true;
+
+	// p2, q2 and q1 are collinear and q1 lies on segment p2q2
+	if (o4 == 0 && onSegment(p2, q1, q2)) return true;
+
+	return false; // Doesn't fall in any of the above cases
+}
+
+
+// Returns true if the point p lies inside the polygon[] with n vertices
+bool CHexagon::isInside(Point polygon[], int n, Point p)
+{
+	// There must be at least 3 vertices in polygon[]
+	if (n < 3) return false;
+
+	// Create a point for line segment from p to infinite
+	Point extreme = { INF, p.y };
+
+	// Count intersections of the above line with sides of polygon
+	int count = 0, i = 0;
+	do
+	{
+		int next = (i + 1) % n;
+
+		// Check if the line segment from 'p' to 'extreme' intersects
+		// with the line segment from 'polygon[i]' to 'polygon[next]'
+		if (doIntersect(polygon[i], polygon[next], p, extreme))
+		{
+			// If the point 'p' is collinear with line segment 'i-next',
+			// then check if it lies on segment. If it lies, return true,
+			// otherwise false
+			if (orientation(polygon[i], p, polygon[next]) == 0)
+				return onSegment(polygon[i], p, polygon[next]);
+
+			count++;
+		}
+		i = next;
+	} while (i != 0);
+
+	// Return true if count is odd, false otherwise
+	return count & 1; // Same as (count%2 == 1)
+}
+
+ //InFig return boolian to check point inside Figure 
 bool CHexagon::InFig(int x, int y)
 {
-	int y1 = Center.y - P.x, y2 = Center.y + P.y, x1 = Center.x - P.x, x2 = Center.x + P.y;
-	double A = .5 * abs(P.x) * 2 * abs(P.y) * 2;
-	double A1 = area1(x, y, x2, Center.y, Center.x, y1);
-	double A2 = area1(x, y, x2, Center.y, Center.x, y2);
-	double A3 = area1(x, y, Center.x, y2, x1, Center.y);
-	double A4 = area1(x, y, x1, Center.y, Center.x, y1);
-	if (A == A1 + A2 + A3 + A4)
-	{
-		return true;
-	}
-	return false;
+	int d = length;
+
+	Point point1;
+	point1.x = Center.x - d;
+	point1.y = Center.y;
+	Point point2;
+	point2.x = Center.x - d / 2;
+	point2.y = Center.y - (d - d / 20 * 3);
+	Point point3;
+	point3.x = Center.x + d / 2;
+	point3.y = Center.y - (d - d / 20 * 3);
+	Point point4;
+	point4.x = Center.x + d;
+	point4.y = Center.y;
+	Point point5;
+	point5.x = Center.x + d / 2;
+	point5.y = Center.y + (d - d / 20 * 3);
+	Point point6;
+	point6.x = Center.x - d / 2;
+	point6.y = Center.y + (d - d / 20 * 3);
+
+	Point points[] = { point1, point2, point3, point4,point5,point6 };
+	return isInside(points, 6, {x,y});
 }
 
 // Print to return all info about figure
@@ -77,6 +179,7 @@ void CHexagon::PrintInfo(GUI* pGUI)
 	string id = to_string(ID);
 	string x = to_string(Center.x);
 	string y = to_string(Center.y);
+	string len = to_string(length);
 
 	string fillingColor;
 	if (FigGfxInfo.isFilled)
@@ -87,5 +190,5 @@ void CHexagon::PrintInfo(GUI* pGUI)
 	{
 		fillingColor = "NO_FILL";
 	}
-	pGUI->PrintMessage("Hexagon / ID: " + id + " Center: (" + x + ", " + y + ") / Drawing Color:" + pGUI->ColorToString(FigGfxInfo.DrawClr) + " / Filling Color: " + fillingColor);
+	pGUI->PrintMessage("Hexagon / ID: " + id + " / Center: (" + x + ", " + y + ") / Length: " + len +" / Drawing Color:" + pGUI->ColorToString(FigGfxInfo.DrawClr) + " / Filling Color: " + fillingColor);
 }

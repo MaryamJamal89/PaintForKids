@@ -52,7 +52,6 @@ void ActionSave::Execute()
 
     file.close();
 
-	pGUI->PrintMessage("File Saved Successfully");
-	Sleep(500);
+	pGUI->PrintTempMessge("File Saved Successfully", 1000);
 }
 

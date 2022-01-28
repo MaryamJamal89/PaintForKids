@@ -3,26 +3,6 @@
 //constructor make necessary initializations
 GUI::GUI()
 {
-	//Initialize user interface parameters
-	//UI.InterfaceMode = MODE_DRAW;
-	
-	//UI.width = 1300;
-	//UI.height = 700;
-	//UI.wx = 5;
-	//UI.wy = 5;
-	
-	//UI.StatusBarHeight = 50;
-	//UI.ToolBarHeight = 50;
-	//UI.MenuItemWidth = 80;
-	
-	//UI.DrawColor = BLUE;		//Drawing color
-	//UI.FillColor = GREEN;		//Filling color
-	//UI.MsgColor = RED;		//Messages color
-	//UI.BkGrndColor = LIGHTGOLDENRODYELLOW;	//Background color
-	//UI.HighlightColor = MAGENTA;	//This color should NOT be used to draw figures. use if for highlight only
-	//UI.StatusBarColor = TURQUOISE;
-	//UI.PenWidth = 3;	//width of the figures frames
-
 	//Create the output window
 	pWind = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
 
@@ -31,6 +11,8 @@ GUI::GUI()
 	
 	CreateDrawToolBar();
 	CreateStatusBar();
+
+	PrintTempMessge("Welcome to Draw mode!", 1000);
 }
 
 //======================================================================================//
@@ -203,6 +185,14 @@ void GUI::ClearStatusBar() const
 	pWind->DrawRectangle(0, UI.height - UI.StatusBarHeight, UI.width, UI.height);
 }
 
+void GUI::PrintTempMessge(string msg, int ms)
+{
+	PrintMessage(msg);
+	Sleep(ms);
+	ClearStatusBar();
+}
+
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
 void GUI::ClearToolBar() const
@@ -370,6 +360,7 @@ color GUI::StringToColor(string colorStr)    //convert string to color type
 	else if (colorStr == "RED") return RED;
 	else if (colorStr == "BLUE") return BLUE;
 	else if (colorStr == "GREEN") return GREEN;
+	else if (colorStr == "MYTHISTLE") return MYTHISTLE;
 }
 ////////////////////////////////////////////////////////////////////  covert color to  string
 string GUI::ColorToString(color clr)    //convert string to color type
@@ -469,7 +460,7 @@ void GUI::DrawHex(Point center, int length, GfxInfo HexGfxInfo, bool selected) c
 	int d = length;
 
 	Point point1;
-	point1.x = center.x - d;
+	point1.x = center.x - d;             
 	point1.y = center.y;
 	Point point2;
 	point2.x = center.x - d / 2;
