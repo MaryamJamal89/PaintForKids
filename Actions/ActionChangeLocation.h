@@ -10,7 +10,6 @@ public:
 	ActionChangeLocation(ApplicationManager* pApp, bool isFront);
 
 	virtual void Execute();
-
 };
 
 #endif

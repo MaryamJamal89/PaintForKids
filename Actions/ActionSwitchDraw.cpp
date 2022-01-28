@@ -2,9 +2,8 @@
 #include "../ApplicationManager.h"
 #include "../GUI/GUI.h"
 
-ActionSwitchDraw::ActionSwitchDraw(ApplicationManager* pApp) :Action(pApp)
-{
-}
+ActionSwitchDraw::ActionSwitchDraw(ApplicationManager* pApp) : Action(pApp)
+{}
 
 void ActionSwitchDraw::Execute()
 {

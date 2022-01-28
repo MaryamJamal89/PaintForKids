@@ -7,8 +7,8 @@ ActionSelect::ActionSelect(ApplicationManager* pApp, Point _P, bool _multiSelect
 {
 	multiSelect = _multiSelect;
 	P = _P;
-	
 }
+
 void ActionSelect::Execute()
 {
 	//Get a Pointer to the Interface

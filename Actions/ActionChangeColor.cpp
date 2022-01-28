@@ -3,13 +3,11 @@
 #include "../GUI/GUI.h"
 #include"../Figures/CFigure.h"
 
-ActionChangeColor::ActionChangeColor(ApplicationManager* pApp, color c, int drawORfill, CFigure* figure) : Action(pApp), colour(c), DrawOrFill(drawORfill),Figure(figure)
+ActionChangeColor::ActionChangeColor(ApplicationManager* pApp, color c, int drawORfill, CFigure* figure) : Action(pApp), colour(c), DrawOrFill(drawORfill), Figure(figure)
+{}
+
+void ActionChangeColor::Execute() 
 {
-}
-
-void ActionChangeColor::Execute() {
-
-	
 	// Check If The Mode if Change Drawing Color
 	if (DrawOrFill == 1) {
 		if (Figure != NULL)
@@ -36,6 +34,4 @@ void ActionChangeColor::Execute() {
 		pGUI->ClearDrawArea();
 		pManager->UpdateInterface();
 	}
-
-
 }

@@ -3,7 +3,7 @@
 #include "..\ApplicationManager.h"
 #include "..\GUI\GUI.h"
 
-ActionChangeLocation::ActionChangeLocation(ApplicationManager* pApp, bool isFront) :Action(pApp)
+ActionChangeLocation::ActionChangeLocation(ApplicationManager* pApp, bool isFront) : Action(pApp)
 {
 	this->isFront = isFront;
 }
