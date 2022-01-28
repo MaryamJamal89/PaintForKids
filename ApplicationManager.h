@@ -3,6 +3,9 @@
 
 #include "DEFS.h"
 #include "Figures\CFigure.h"
+#include <vector>
+
+using namespace std;
 
 class Action;	//Forward Declaration
 
@@ -23,6 +26,7 @@ private:
 
 public:
 	int multiSelect;//enabling multiSelect
+	//vector <CFigure*> selectedFigures;
 	int numberOfDuplicatedFilesName;  // this variable to know what number of files that has the same name
 	int ReturnNumberofDulicatedFile(); // this function use to return numberOfDuplicatedFilesName
 	void increamentNumberofDulicatedFile(); //this function use to increament numberOfDuplicatedFilesName
@@ -55,7 +59,7 @@ public:
 	// Saving function
 	void SaveAll(ofstream& File)const;       //Save All Figures To The File :Asmaa
 
-	void UnSelectFigures() const;
+	void UnSelectFigures(int mul) const;
 };
 
 #endif

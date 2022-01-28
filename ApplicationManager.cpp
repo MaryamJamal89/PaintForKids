@@ -240,11 +240,15 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 }
 
 //unSelect Figures
-void ApplicationManager::UnSelectFigures()const {
-	for (int i = 0; i < FigCount ; i++) {
+void ApplicationManager::UnSelectFigures(int mul)const {
+	if (mul == 1 && multiSelect)
+	{
+		return;
+	}
+	for (int i = 0; i < FigCount; i++) {
 		FigList[i]->SetSelected(false);
 	}
-}
+};
 ///////////////////////////////////////////////////////
 // func to return Selected Figure
 CFigure *ApplicationManager::GetFigure(int x, int y) const         //get one selected figure by clicked point indexes

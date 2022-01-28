@@ -48,9 +48,7 @@ void ActionAddHexagon::Execute()
 	CHexagon* H = new CHexagon(C, SideLength, HexGfxInfo);
 	
 	//and unselect All Previous Figures
-	if (!pManager->multiSelect) {
-		pManager->UnSelectFigures();
-	}
+	pManager->UnSelectFigures(1);
 	//Step 4 - Add the Hexagon to the list of figures
 	pManager->AddFigure(H);
 
