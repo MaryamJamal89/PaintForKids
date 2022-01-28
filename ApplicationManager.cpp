@@ -386,14 +386,16 @@ void ApplicationManager::TakeCopyOfFigures() {
 	if (UI.InterfaceMode == MODE_PLAY) {
 		for (int i = 0; i < FigCount; i++)
 		{
-			PlayFigureList[i] = FigList[i]->CloneFig();
+			CopyFigList[i] = FigList[i]->CloneFig();
 		}
 	}
 	else {
 		for (int i = 0; i < FigCount; i++)
 		{
-			FigList[i] = PlayFigureList[i]->CloneFig();
+			FigList[i] = CopyFigList[i]->CloneFig();
 		}
+		for (int i = 0; i < FigCount; i++)
+			delete CopyFigList[i];
 	}
 	
 }
@@ -405,14 +407,8 @@ void ApplicationManager::TakeCopyOfFigures() {
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() 
 {	
-	/*if (UI.InterfaceMode == MODE_PLAY) {
-		for (int i = 0; i < FigCount; i++)
-			PlayFigureList[i]->DrawMe(pGUI);
-	}else
-	{*/
-		for(int i=0; i<FigCount; i++)
-			FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
-	//}
+	for(int i=0; i<FigCount; i++)
+		FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
