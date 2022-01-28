@@ -29,37 +29,17 @@ void ActionSelect::Execute()
 		if (fig->IsSelected()) 
 		{
 			fig->SetSelected(false);
-			//cout << selectedFigures.size() <<"   1" << endl;
-			//selectedFigures.erase(find(selectedFigures.begin(), selectedFigures.end(),fig));
-			//cout << selectedFigures.size() <<"   2" << endl;
-			/*if (!selectedFigures.empty()) {
-				(selectedFigures.back())->PrintInfo(pGUI);
-			}*/
 			pGUI->ClearStatusBar();
 		}
 		else
 		{
-			// Enabling Multiple select
+			// IF Multiple select Enabled
 			if (!multiSelect) 
 			{
 				pManager->UnSelectFigures(2);
-				//selectedFigures.clear();
 			}
 			fig->SetSelected(true);
-			//selectedFigures.push_back(fig);
-			//pGUI->PrintMessage(selectedFigures.pop_back());
-			//cout << selectedFigures.size() <<"   3"<< endl;
-			//(selectedFigures.back())->PrintInfo(pGUI);
-			//cout << selectedFigures.size() <<"   4"<< endl;
 			fig->PrintInfo(pGUI);
 		}
-		
-		//cout << selectedFigures.size()<<endl;
-		/*cout << fig << endl;
-		vector <CFigure*> s =  pManager->GetSelectedFigure();
-		if (s.size() != 0) {
-			cout << s.back()<<endl;
-		}*/
-
 	}
 }

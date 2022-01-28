@@ -297,27 +297,13 @@ CFigure *ApplicationManager::GetSelectedFigureByFlag(int& selectedIndex, int& se
 }
 //get selected figures
 vector <CFigure*> ApplicationManager::GetSelectedFigure() {
-	//int len = sizeof(FigList) / sizeof(CFigure);
-	/*CFigure* selectedFigures[MaxFigCount];*/
-
-	/*vector<int> mult;
-	mult.reserve(arr.size());
-
-	for (const auto& i : arr) {
-		mult.push_back(i * 4);
-	}
-	return mult;*/
-
-
 	vector <CFigure*> selectedFigures;
 	for (int i = 0; i < FigCount; i++) {
 		if (FigList[i]->IsSelected()) {
 			selectedFigures.push_back(FigList[i]);
 		}
 	}
-
 	return selectedFigures;
-	
 }
 
 void ApplicationManager::InsertFigure(bool isFront)          //insert figure in front or back of all figuers
@@ -397,15 +383,19 @@ void ApplicationManager::SaveAll(ofstream& File) const
 // take copy of Figures
 void ApplicationManager::TakeCopyOfFigures() {
 	
-	for (int i = 0; i < FigCount; i++)
-	{
-		// take a copy of pointer obj without Refernce
-		temp[i] = FigList[i]->CloneFig();
-
-		//cout << " " << FigList[i]<< endl;
-
-		PlayFigList.push_back(temp[i]);
+	if (UI.InterfaceMode == MODE_PLAY) {
+		for (int i = 0; i < FigCount; i++)
+		{
+			PlayFigureList[i] = FigList[i]->CloneFig();
+		}
 	}
+	else {
+		for (int i = 0; i < FigCount; i++)
+		{
+			FigList[i] = PlayFigureList[i]->CloneFig();
+		}
+	}
+	
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -415,19 +405,14 @@ void ApplicationManager::TakeCopyOfFigures() {
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() 
 {	
-	
-	if (UI.InterfaceMode == MODE_PLAY) {
-		for (auto fig = PlayFigList.begin(); fig != PlayFigList.end(); fig++)
-		{
-			//cout << *fig << " ";
-			(*fig)->DrawMe(pGUI);
-			cout << "***** " << *fig<<endl;
-		}
+	/*if (UI.InterfaceMode == MODE_PLAY) {
+		for (int i = 0; i < FigCount; i++)
+			PlayFigureList[i]->DrawMe(pGUI);
 	}else
-	{
+	{*/
 		for(int i=0; i<FigCount; i++)
 			FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
-	}
+	//}
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -444,5 +429,4 @@ ApplicationManager::~ApplicationManager()
 	for(int i=0; i<FigCount; i++)
 		delete FigList[i];
 	delete pGUI;
-	
 }
