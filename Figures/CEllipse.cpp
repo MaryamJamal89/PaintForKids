@@ -70,6 +70,8 @@ void CEllipse::PrintInfo(GUI* pGUI)
 	string id = to_string(ID);
 	string x = to_string(Center.x);
 	string y = to_string(Center.y);
+	string len = to_string(length);
+	string _height = to_string(height);
 
 	string fillingColor;
 	if (FigGfxInfo.isFilled)
@@ -80,5 +82,5 @@ void CEllipse::PrintInfo(GUI* pGUI)
 	{
 		fillingColor = "NO_FILL";
 	}
-	pGUI->PrintMessage("Ellipse / ID: " + id + " Center: (" + x + ", " + y + ") / Drawing Color: " + pGUI->ColorToString(FigGfxInfo.DrawClr) + " / Filling Color: " + fillingColor);
+	pGUI->PrintMessage("Ellipse / ID: " + id + " / Center: (" + x + ", " + y + ") / Length: " + len + " / Height: " + _height + " / Drawing Color: " + pGUI->ColorToString(FigGfxInfo.DrawClr) + " / Filling Color: " + fillingColor);
 }
