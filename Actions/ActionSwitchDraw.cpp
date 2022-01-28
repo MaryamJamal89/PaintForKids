@@ -14,4 +14,5 @@ void ActionSwitchDraw::Execute()
 	pGUI->CreateDrawToolBar();
 	pManager->UnSelectFigures(2);
 	pGUI->PrintTempMessge("Welcome to Draw mode!", 1000);
+	pManager->TakeCopyOfFigures();
 }
