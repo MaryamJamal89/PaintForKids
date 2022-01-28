@@ -107,6 +107,12 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			break;
 
 		case MUL_SELECT:
+			/*if (multiSelect) {
+				multiSelect = 0;
+			}
+			else {
+				multiSelect = 1;
+			}*/
 			newAct = new ActionMultiSelect(this,multiSelect);
 			break;
 
@@ -200,12 +206,8 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			return NULL;
 			break;
 
-			// Khaled
 		case  DRAWING_AREA:
-			Point P;
-			P.x = x; P.y = y;
-			//pGUI->GetPointClicked(P.x, P.y); // this is the reason of double click // first click for entering this case and seconed one to send it to Action object  
-			newAct = new ActionSelect(this, P, multiSelect);
+			newAct = new ActionSelect(this, {x,y}, multiSelect);
 			break;
 	}	
 	return newAct;
