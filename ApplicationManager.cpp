@@ -98,9 +98,16 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 		case DRAW_SHAPES:
 			pGUI->ClearToolBar();
 			pGUI->CreateShapesBar();
+			pGUI->PrintTempMessge("Select a figure to draw!", 1000);
 			break;
 
 		case MUL_SELECT:
+			/*if (multiSelect) {
+				multiSelect = 0;
+			}
+			else {
+				multiSelect = 1;
+			}*/
 			newAct = new ActionMultiSelect(this,multiSelect);
 			break;
 
@@ -144,18 +151,21 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			DORF = 1;
 			pGUI->ClearToolBar();
 			pGUI->CreateDrawColorBar();
+			pGUI->PrintTempMessge("Select drawing color!", 1000);
 			break;
 
 		case CHNG_FILL_CLR:
 			DORF = 2;
 			pGUI->ClearToolBar();
 			pGUI->CreateDrawColorBar();
+			pGUI->PrintTempMessge("Select filling color!", 1000);
 			break;
 
 		case CHNG_BK_CLR:
 			DORF = 3;
 			pGUI->ClearToolBar();
 			pGUI->CreateDrawColorBar();
+			pGUI->PrintTempMessge("Select background color!", 1000);
 			break;
 
 		case SAVE:
@@ -194,12 +204,8 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			return NULL;
 			break;
 
-			// Khaled
 		case  DRAWING_AREA:
-			Point P;
-			P.x = x; P.y = y;
-			//pGUI->GetPointClicked(P.x, P.y); // this is the reason of double click // first click for entering this case and seconed one to send it to Action object  
-			newAct = new ActionSelect(this, P, multiSelect);
+			newAct = new ActionSelect(this, {x,y}, multiSelect);
 			break;
 	}	
 	return newAct;
@@ -219,10 +225,15 @@ void ApplicationManager::ExecuteAction(Action* &pAct)
 	}
 }
 
+int ApplicationManager::GetFigCount()
+{
+	return FigCount;
+}
+
 //==================================================================================//
 //						Figures Management Functions								//
 //==================================================================================//
-// multiSelect filed
+//multiSelect filed
 //bool ApplicationManager::multiSelect = false;
 //Add a figure to the list of figures
 void ApplicationManager::AddFigure(CFigure* pFig)
@@ -232,13 +243,16 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 }
 
 //unSelect Figures
-void ApplicationManager::UnSelectFigures()const {
-	for (int i = 0; i < FigCount ; i++) {
+void ApplicationManager::UnSelectFigures(int mul)const {
+	if (mul == 1 && multiSelect)
+	{
+		return;
+	}
+	for (int i = 0; i < FigCount; i++) {
 		FigList[i]->SetSelected(false);
 	}
-}
+};
 ///////////////////////////////////////////////////////
-// khaled
 // func to return Selected Figure
 CFigure *ApplicationManager::GetFigure(int x, int y) const         //get one selected figure by clicked point indexes
 {
@@ -281,11 +295,11 @@ void ApplicationManager::InsertFigure(bool isFront)          //insert figure in 
 	CFigure* temp = GetSelectedFigureByFlag(selectedIndex,selectedNum);
 	if (temp == NULL)
 	{
-		pGUI->PrintMessage("No selected figure to move!");
+		pGUI->PrintTempMessge("No selected figure to move!", 1000);
 	}
 	else if (selectedNum > 1)
 	{
-		pGUI->PrintMessage("Select only one figure to move!");
+		pGUI->PrintTempMessge("Select only one figure to move!", 1000);
 	}
 	else
 	{
@@ -295,7 +309,7 @@ void ApplicationManager::InsertFigure(bool isFront)          //insert figure in 
 				FigList[i] = FigList[i + 1];
 			}
 			FigList[FigCount - 1] = temp;
-			pGUI->PrintMessage("Bring to front!");
+			pGUI->PrintTempMessge("Figure brought to front!", 1000);
 		}
 		else
 		{
@@ -303,7 +317,7 @@ void ApplicationManager::InsertFigure(bool isFront)          //insert figure in 
 				FigList[i] = FigList[i - 1];
 			}
 			FigList[0] = temp;
-			pGUI->PrintMessage("Send to back!");
+			pGUI->PrintTempMessge("Figure sent to back!", 1000);
 		}
 	}
 }
