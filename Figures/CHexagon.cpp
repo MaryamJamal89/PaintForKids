@@ -179,6 +179,7 @@ void CHexagon::PrintInfo(GUI* pGUI)
 	string id = to_string(ID);
 	string x = to_string(Center.x);
 	string y = to_string(Center.y);
+	string len = to_string(length);
 
 	string fillingColor;
 	if (FigGfxInfo.isFilled)
@@ -189,5 +190,5 @@ void CHexagon::PrintInfo(GUI* pGUI)
 	{
 		fillingColor = "NO_FILL";
 	}
-	pGUI->PrintMessage("Hexagon / ID: " + id + " Center: (" + x + ", " + y + ") / Drawing Color:" + pGUI->ColorToString(FigGfxInfo.DrawClr) + " / Filling Color: " + fillingColor);
+	pGUI->PrintMessage("Hexagon / ID: " + id + " / Center: (" + x + ", " + y + ") / Length: " + len +" / Drawing Color:" + pGUI->ColorToString(FigGfxInfo.DrawClr) + " / Filling Color: " + fillingColor);
 }
