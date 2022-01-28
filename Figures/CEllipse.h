@@ -22,6 +22,9 @@ public:
 	virtual bool InFig(int, int);
 	// Print to return all info about figure
 	virtual void PrintInfo(GUI* pGUI);
+	// take a copy of pointer obj without Refernce
+	virtual CEllipse* CloneFig();
+
 };
 
 #endif

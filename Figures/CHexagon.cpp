@@ -192,3 +192,7 @@ void CHexagon::PrintInfo(GUI* pGUI)
 	}
 	pGUI->PrintMessage("Hexagon / ID: " + id + " / Center: (" + x + ", " + y + ") / Length: " + len +" / Drawing Color:" + pGUI->ColorToString(FigGfxInfo.DrawClr) + " / Filling Color: " + fillingColor);
 }
+// take a copy of pointer obj without Refernce
+CHexagon* CHexagon::CloneFig() {
+	return new CHexagon(*this);
+}

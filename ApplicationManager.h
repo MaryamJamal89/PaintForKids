@@ -20,7 +20,9 @@ private:
 	int DORF = 0;		//Draw or fill or backgoround 
 
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
-
+	CFigure* temp[MaxFigCount];
+	vector <CFigure*> PlayFigList;   //List of all figures to use in play mode (Array of pointers)
+	/*CFigure* PlayFigList[MaxFigCount];*/ //List of all figures to use in play mode (Array of pointers)
 	//Pointers to Input and Output classes
 	GUI* pGUI;
 
@@ -56,12 +58,17 @@ public:
 
 	// -- Interface Management Functions	
 	GUI* GetGUI() const; //Return pointer to the interface
-	void UpdateInterface() const;	//Redraws all the drawing window	
+	void UpdateInterface() ;	//Redraws all the drawing window	
 
 	// Saving function
 	void SaveAll(ofstream& File)const;       //Save All Figures To The File :Asmaa
 
 	void UnSelectFigures(int mul) const;
+
+	void TakeCopyOfFigures() ;  // copy array of figures
+
+	vector <CFigure*> GetSelectedFigure();
+
 };
 
 #endif

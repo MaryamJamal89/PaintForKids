@@ -53,6 +53,13 @@ void ActionSelect::Execute()
 			//cout << selectedFigures.size() <<"   4"<< endl;
 			fig->PrintInfo(pGUI);
 		}
+		
 		//cout << selectedFigures.size()<<endl;
+		/*cout << fig << endl;
+		vector <CFigure*> s =  pManager->GetSelectedFigure();
+		if (s.size() != 0) {
+			cout << s.back()<<endl;
+		}*/
+
 	}
 }

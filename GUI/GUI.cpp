@@ -141,6 +141,10 @@ ActionType GUI::MapInputToActionType(int &x,int &y) const
 			default: return EMPTY;	//A click on empty place in desgin toolbar
 			}
 		}
+		if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)
+		{
+			return DRAWING_AREA;
+		}
 
 	}
 

@@ -13,5 +13,8 @@ void ActionSwitchPlay::Execute()
 	// to create New ToolBar
 	pGUI->CreatePlayToolBar();
 	pGUI->PrintTempMessge("Welcome to Play mode!", 1000);
+	pManager->TakeCopyOfFigures();
+	pManager->multiSelect = 0;
+	//pManager->UnSelectFigures(2);
 }
 

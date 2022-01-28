@@ -16,6 +16,7 @@
 #include "Actions/ActionSwitchPlay.h"
 #include "Actions/ActionSwitchDraw.h"
 #include "Actions/ActionDelete.h"
+#include "Figures/CSquare.h"
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -204,7 +205,7 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			return NULL;
 			break;
 
-		case  DRAWING_AREA:
+		case DRAWING_AREA: //select
 			newAct = new ActionSelect(this, {x,y}, multiSelect);
 			break;
 	}	
@@ -288,6 +289,30 @@ CFigure *ApplicationManager::GetSelectedFigureByFlag(int& selectedIndex, int& se
 		return FigList[selectedIndex];
 	}
 }
+//get selected figures
+vector <CFigure*> ApplicationManager::GetSelectedFigure() {
+	//int len = sizeof(FigList) / sizeof(CFigure);
+	/*CFigure* selectedFigures[MaxFigCount];*/
+
+	/*vector<int> mult;
+	mult.reserve(arr.size());
+
+	for (const auto& i : arr) {
+		mult.push_back(i * 4);
+	}
+	return mult;*/
+
+
+	vector <CFigure*> selectedFigures;
+	for (int i = 0; i < FigCount; i++) {
+		if (FigList[i]->IsSelected()) {
+			selectedFigures.push_back(FigList[i]);
+		}
+	}
+
+	return selectedFigures;
+	
+}
 
 void ApplicationManager::InsertFigure(bool isFront)          //insert figure in front or back of all figuers
 {
@@ -363,16 +388,40 @@ void ApplicationManager::SaveAll(ofstream& File) const
 }
 
 
+// take copy of Figures
+void ApplicationManager::TakeCopyOfFigures() {
+	
+	for (int i = 0; i < FigCount; i++)
+	{
+		// take a copy of pointer obj without Refernce
+		temp[i] = FigList[i]->CloneFig();
+
+		//cout << " " << FigList[i]<< endl;
+
+		PlayFigList.push_back(temp[i]);
+	}
+}
+
 ////////////////////////////////////////////////////////////////////////////////////
 //==================================================================================//
 //							Interface Management Functions							//
 //==================================================================================//
-
 //Draw all figures on the user interface
-void ApplicationManager::UpdateInterface() const
+void ApplicationManager::UpdateInterface() 
 {	
-	for(int i=0; i<FigCount; i++)
-		FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
+	
+	if (UI.InterfaceMode == MODE_PLAY) {
+		for (auto fig = PlayFigList.begin(); fig != PlayFigList.end(); fig++)
+		{
+			//cout << *fig << " ";
+			(*fig)->DrawMe(pGUI);
+			cout << "***** " << *fig<<endl;
+		}
+	}else
+	{
+		for(int i=0; i<FigCount; i++)
+			FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
+	}
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
