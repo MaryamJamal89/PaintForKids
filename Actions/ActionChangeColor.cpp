@@ -1,9 +1,9 @@
 #include "ActionChangeColor.h"
 #include "../ApplicationManager.h"
 #include "../GUI/GUI.h"
+#include"../Figures/CFigure.h"
 
-
-ActionChangeColor::ActionChangeColor(ApplicationManager* pApp, color c, int drawORfill) : Action(pApp), colour(c), DrawOrFill(drawORfill)
+ActionChangeColor::ActionChangeColor(ApplicationManager* pApp, color c, int drawORfill, CFigure* figure) : Action(pApp), colour(c), DrawOrFill(drawORfill),Figure(figure)
 {
 }
 
@@ -12,13 +12,21 @@ void ActionChangeColor::Execute() {
 	
 	// Check If The Mode if Change Drawing Color
 	if (DrawOrFill == 1) {
-		UI.DrawColor = colour;
+		if (Figure != NULL)
+			Figure->ChngDrawClr(colour);
+		else
+			UI.DrawColor = colour;
+
 		pManager->UpdateInterface();
 	}
 	// Check If The Mode if Change Filling Color
 	else if (DrawOrFill == 2) {
-		UI.isFilled = true;
-		UI.FillColor = colour;
+		if (Figure != NULL)
+			Figure->ChngFillClr(colour);
+		else {
+			UI.isFilled = true;
+			UI.FillColor = colour;
+		}
 		pManager->UpdateInterface();
 	}
 	// Check If The Mode if Change background Color
