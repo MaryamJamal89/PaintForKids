@@ -9,7 +9,7 @@ ActionAddEllipse::ActionAddEllipse(ApplicationManager* pApp) :Action(pApp)
 //Execute the action
 void ActionAddEllipse::Execute()
 {
-	Point C;
+	Point C, P1, P2;
 
 	//Get a Pointer to the Interface
 	GUI* pGUI = pManager->GetGUI();
@@ -21,21 +21,44 @@ void ActionAddEllipse::Execute()
 	ElliGfxInfo.FillClr = pGUI->getCrntFillColor();
 	ElliGfxInfo.BorderWdth = pGUI->getCrntPenWidth();
 
-	//Step 1 - Read Ellipse data from the user
+	do
+	{
+		//Read 1st point and store in point center
+		pGUI->PrintMessage("New Ellipse: Click at center point");
+		pGUI->GetPointClicked(C.x, C.y);
 
-	pGUI->PrintMessage("New Ellipse: Click at center point");
-	//Read 1st point and store in point P1
-	pGUI->GetPointClicked(C.x, C.y);
+		//Read 1st point and store in point P1
+		pGUI->PrintMessage("New Ellipse: Click at height point");
+		pGUI->GetPointClicked(P1.x, P1.y);
+
+		//Read 2nd point and store in point P2
+		pGUI->PrintMessage("New Ellipse: Click at length point");
+		pGUI->GetPointClicked(P2.x, P2.y);
+
+		pGUI->PrintMessage("You Clicked In Tool Bar!!");
+
+	} while (P2.y >= 0 && P2.y < UI.ToolBarHeight || P1.y >= 0 && P1.y < UI.ToolBarHeight || C.y >= 0 && C.y < UI.ToolBarHeight);
+
+	pGUI->PrintMessage("New Ellipse");
+
 
 	pGUI->ClearStatusBar();
 
-	//Step 2 - Create a Ellipse with the parameters read from the user
-	CEllipse* E = new CEllipse(C, ElliGfxInfo);
+	//Step 2 - prepare Ellipse data
+	//Calcuate ellipse legnth and height
+	int SideLength = max(abs(C.x - P1.x), abs(C.y - P1.y));
+	int SideHeight = max(abs(C.x - P2.x), abs(C.y - P2.y));
+
+	//Step 3 - Create a Ellipse with the parameters read from the user
+	CEllipse* E = new CEllipse(C, SideLength, SideHeight, ElliGfxInfo);
 	
 	//and unselect All Previous Figures
 	if(!pManager->multiSelect){
 		pManager->UnSelectFigures();
 	}
-	//Step 3 - Add the Ellipse to the list of figures
+	//Step 4 - Add the Ellipse to the list of figures
 	pManager->AddFigure(E);
+
+	//Step 5 - print new figure info in status bar
+	E->PrintInfo(pGUI);
 }

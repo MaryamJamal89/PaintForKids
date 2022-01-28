@@ -35,12 +35,13 @@ void ActionLoad::Execute()
 	ifstream loadedFile;
 	do {
 		string fileName = pGUI->ReadFileName("Load: Enter file name to load from...");
-		loadedFile.open(fileName + ".txt");
+		loadedFile.open("Saves\\" + fileName + ".txt");
 		if (loadedFile.fail())
 		{
-			pGUI->PrintMessage("File does not exist!");
+			pGUI->PrintMessage(fileName + " File does not exist!");
 			Sleep(800);
 		}
+		//TODO: loop breaker!
 	} while (loadedFile.fail());
 
 	//reading window colors

@@ -5,23 +5,24 @@ int CEllipse::ElliCnt = 0;  //static variable to determine the number of objects
 
 CEllipse::CEllipse(){}
 
-CEllipse::CEllipse(Point C, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo)
+CEllipse::CEllipse(Point C, int len, int hght, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo)
 {
 	Center = C;
+	length = len;
+	height = hght;
 	ElliCnt++;
-	P.x = 80; P.y = 30;
 }
 
 void CEllipse::DrawMe(GUI* pOut) const
 {
 	//Call Output::DrawEllipse to draw a ellipse on the screen	
-	pOut->DrawEllip(Center, P, FigGfxInfo, Selected);
+	pOut->DrawEllip(Center, length, height, FigGfxInfo, Selected);
 }
 
-// save figure in the file
+//save figure in the file
 void CEllipse::Save(ofstream& file, GUI* pGUI)
 {
-	file << "ELPS " << ID << " " << Center.x << " " << Center.y << " " << P.x << " " << P.y << " " << pGUI->ColorToString(FigGfxInfo.DrawClr) << " ";
+	file << "ELPS " << ID << " " << Center.x << " " << Center.y << " " << length << " "<< height<<" "<< pGUI->ColorToString(FigGfxInfo.DrawClr) << " ";
 
 	if (FigGfxInfo.isFilled == true)
 	{
@@ -62,20 +63,20 @@ bool CEllipse::InFig(int x, int y)  //Determine the position of the point
 }
 
 // Print to return all info about figure
-string CEllipse::PrintInfo()
+void CEllipse::PrintInfo(GUI* pGUI)
 {
-
 	string id = to_string(ID);
 	string x = to_string(Center.x);
 	string y = to_string(Center.y);
-	//string clr = getColor(this->FigGfxInfo.DrawClr);
 
-	//if (FigGfxInfo.isFilled)
-	//{
-	//	//pOut->PrintMessage(" - FillColor: ");
-	//	//string clrF = getColor(this->FigGfxInfo.FillClr);
-	//	return ("Ellipse -ID: " + id + " Center: (" + x + ", " + y + ") DrawColor:");
-	//}
-	//else
-	return ("Ellipse -ID: " + id + " Center: (" + x + ", " + y + ") DrawColor:");
+	string fillingColor;
+	if (FigGfxInfo.isFilled)
+	{
+		fillingColor = pGUI->ColorToString(FigGfxInfo.FillClr);
+	}
+	else
+	{
+		fillingColor = "NO_FILL";
+	}
+	pGUI->PrintMessage("Ellipse / ID: " + id + " Center: (" + x + ", " + y + ") / Drawing Color: " + pGUI->ColorToString(FigGfxInfo.DrawClr) + " / Filling Color: " + fillingColor);
 }

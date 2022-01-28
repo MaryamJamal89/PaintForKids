@@ -5,18 +5,18 @@ GUI::GUI()
 {
 	//Initialize user interface parameters
 	//UI.InterfaceMode = MODE_DRAW;
-	//
+	
 	//UI.width = 1300;
 	//UI.height = 700;
 	//UI.wx = 5;
-	//UI.wy =5;
-	//
+	//UI.wy = 5;
+	
 	//UI.StatusBarHeight = 50;
 	//UI.ToolBarHeight = 50;
 	//UI.MenuItemWidth = 80;
-	//
-	//UI.DrawColor = BLUE;	//Drawing color
-	//UI.FillColor = GREEN;	//Filling color
+	
+	//UI.DrawColor = BLUE;		//Drawing color
+	//UI.FillColor = GREEN;		//Filling color
 	//UI.MsgColor = RED;		//Messages color
 	//UI.BkGrndColor = LIGHTGOLDENRODYELLOW;	//Background color
 	//UI.HighlightColor = MAGENTA;	//This color should NOT be used to draw figures. use if for highlight only
@@ -46,6 +46,7 @@ bool GUI::getColorisFilled() const {
 
 	return UI.isFilled;
 }
+
 string GUI::GetSrting() const 
 {
 	string Label;
@@ -84,20 +85,17 @@ ActionType GUI::MapInputToActionType(int &x,int &y) const
 
 			switch (ClickedItemOrder)
 			{
-			case ITM_SQUR: return DRAW_SQUARE;
-			case ITM_ELPS: return DRAW_ELPS;
-			case ITM_HEX: return DRAW_HEX;
+			case ITM_SHAPES: return DRAW_SHAPES;
 			case ITM_MULSELECT: return MUL_SELECT;
+			case ITM_DEL: return DEL;
 			case ITM_BACK: return SEND_BACK;
 			case ITM_FRONT: return BRNG_FRNT;
 			case ITM_DROWCLR: return CHNG_DRAW_CLR;
 			case ITM_FILLCLR: return CHNG_FILL_CLR;
 			case ITM_BGCLR: return CHNG_BK_CLR;
-			case ITM_RED: return COLOR_RED;
-			case ITM_BLUE: return COLOR_BLUE;
-			case ITM_GREEN: return COLOR_GREEN;
 			case ITM_SAVE: return SAVE;
 			case ITM_LOAD: return LOAD;
+			case ITM_PLAY: return TO_PLAY;
 			case ITM_EXIT: return EXIT;
 			
 			default: return EMPTY;	//A click on empty place in desgin toolbar
@@ -113,13 +111,54 @@ ActionType GUI::MapInputToActionType(int &x,int &y) const
 		//[3] User clicks on the status bar
 		return STATUS;
 	}
+	else if (UI.InterfaceMode == MODE_COLOR) {
+		int ClickedItemOrder = (x / UI.MenuItemWidth);
+
+		switch (ClickedItemOrder)
+		{
+		case ITM_TOMATO: return COLOR_TOMATO;
+		case ITM_DEEPSKYBLUE: return COLOR_DEEPSKYBLUE;
+		case ITM_LIGHTGREEN: return COLOR_LIGHTGREEN;
+		case ITM_ORANGE: return COLOR_ORANGE;
+		}
+	}
+	else if (UI.InterfaceMode == MODE_SHAPES) {
+		int ClickedItemOrder = (x / UI.MenuItemWidth);
+		switch (ClickedItemOrder)
+		{
+		case ITM_SQUR: return DRAW_SQUARE;
+		case ITM_ELPS: return DRAW_ELPS;
+		case ITM_HEX: return DRAW_HEX;
+		}
+	}
 	else	//GUI is in PLAY mode
 	{
 		///TODO:
 		//perform checks similar to Draw mode checks above
 		//and return the correspoding action
-		return TO_PLAY;	//just for now. This should be updated
-	}	
+		//return TO_PLAY;	//just for now. This should be updated
+		if (y >= 0 && y < UI.ToolBarHeight)
+		{
+			//Check whick Menu item was clicked
+			//==> This assumes that menu items are lined up horizontally <==
+			int ClickedItemOrder = (x / UI.MenuItemWidth);
+			//Divide x coord of the point clicked by the menu item width (int division)
+			//if division result is 0 ==> first item is clicked, if 1 ==> 2nd item and so on
+
+			switch (ClickedItemOrder)
+			{
+			case ITM_PICK_IMAGE: return TO_PICK_IMAGE;
+			case ITM_PICK_FILL_COLOR: return TO_PICK_COLOR;
+			case ITM_PICK_IMAGE_COLOR: return TO_PICK_IMAGE_COLOR;
+			case ITM_DRAW: return TO_DRAW;
+
+
+			default: return EMPTY;	//A click on empty place in desgin toolbar
+			}
+		}
+
+	}
+
 }
 
 //======================================================================================//
@@ -137,6 +176,13 @@ window* GUI::CreateWind(int w, int h, int x, int y) const
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
+void GUI::CreateToolBar() const
+{
+	pWind->SetPen(WHITE, 1);
+	pWind->SetBrush(WHITE);
+	pWind->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight);
+}
+//////////////////////////////////////////////////////////////////////////////////////////
 void GUI::CreateStatusBar() const
 {
 	pWind->SetPen(UI.StatusBarColor, 1);
@@ -156,8 +202,20 @@ void GUI::ClearStatusBar() const
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
+void GUI::ClearToolBar() const
+{
+	//Clear Status bar by drawing a filled white Square
+	pWind->SetPen(UI.ToolBarColor, 1);
+	pWind->SetBrush(UI.ToolBarColor);
+	pWind->DrawRectangle( 0, 0 , UI.width, UI.ToolBarHeight);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
 void GUI::CreateDrawToolBar() const
 {
+	//ClearDrawArea();
+	CreateToolBar();
 	UI.InterfaceMode = MODE_DRAW;
 
 	//You can draw the tool bar icons in any way you want.
@@ -167,40 +225,88 @@ void GUI::CreateDrawToolBar() const
 	//To control the order of these images in the menu, 
 	//reoder them in UI_Info.h ==> enum DrawMenuItem
 	string MenuItemImages[DRAW_ITM_COUNT];
-	MenuItemImages[ITM_SQUR] = "images\\MenuItems\\Menu_Sqr.jpg";
-	MenuItemImages[ITM_ELPS] = "images\\MenuItems\\Menu_Elps.jpg";
-	MenuItemImages[ITM_HEX] = "images\\MenuItems\\Menu_Hex.jpg";
-	MenuItemImages[ITM_MULSELECT] = "images\\MenuItems\\Menu_MultiSelect.jpg";
-	MenuItemImages[ITM_BACK] = "images\\MenuItems\\Menu_Back.jpg";
-	MenuItemImages[ITM_FRONT] = "images\\MenuItems\\Menu_Front.jpg";
-	MenuItemImages[ITM_DROWCLR] = "images\\MenuItems\\Menu_ChangeColor.jpg";
-	MenuItemImages[ITM_FILLCLR] = "images\\MenuItems\\Menu_FillColor.jpg";
-	MenuItemImages[ITM_BGCLR] = "images\\MenuItems\\Menu_BGColor.jpg";
-	MenuItemImages[ITM_RED] = "images\\MenuItems\\Menu_Red.jpg";
-	MenuItemImages[ITM_BLUE] = "images\\MenuItems\\Menu_Blue.jpg";
-	MenuItemImages[ITM_GREEN] = "images\\MenuItems\\Menu_Green.jpg";
-	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\MenuSave.jpg";
-	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\Menu_Load.jpg";
-	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
-
-	//TODO: Prepare images for each menu item and add it to the list
+	MenuItemImages[ITM_SHAPES] = "images\\MenuItems\\\shapesMenu\\shapes-color.jpg";
+	MenuItemImages[ITM_DROWCLR] = "images\\MenuItems\\draw-color.jpg";
+	MenuItemImages[ITM_FILLCLR] = "images\\MenuItems\\fillingColor-color.jpg";
+	MenuItemImages[ITM_BGCLR] = "images\\MenuItems\\BGcolor-color.jpg";
+	MenuItemImages[ITM_BACK] = "images\\MenuItems\\sendback-color.jpg";
+	MenuItemImages[ITM_FRONT] = "images\\MenuItems\\bringfront-color.jpg";
+	MenuItemImages[ITM_MULSELECT] = "images\\MenuItems\\multiselect-color.jpg";
+	MenuItemImages[ITM_DEL] = "images\\MenuItems\\delete-color.jpg";
+	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\save-color.jpg";
+	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\load-color.jpg";
+	MenuItemImages[ITM_PLAY] = "images\\MenuItems\\playmood4-color.jpg";
+	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\exit-color.jpg";
 
 	//Draw menu item one image at a time
 	for(int i=0; i<DRAW_ITM_COUNT; i++)
 		pWind->DrawImage(MenuItemImages[i], i*UI.MenuItemWidth,0,UI.MenuItemWidth, UI.ToolBarHeight);
 
 	//Draw a line under the toolbar
-	pWind->SetPen(RED, 3);
+	pWind->SetPen(MYDARKBLACK, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);	
+}
 
+//////////////////////////////////////////////////////////////////////////////////////////
+
+void GUI::CreateShapesBar() const {
+
+	UI.InterfaceMode = MODE_SHAPES;
+
+	string DrawShapesItem[Shapes_COUNT];
+
+	DrawShapesItem[ITM_SQUR] = "images\\MenuItems\\shapesMenu\\square-color.jpg";
+	DrawShapesItem[ITM_ELPS] = "images\\MenuItems\\shapesMenu\\ellipse-color.jpg";
+	DrawShapesItem[ITM_HEX] = "images\\MenuItems\\shapesMenu\\hexagon-color.jpg";
+
+	//Draw menu item one image at a time
+	for (int i = 0; i < Shapes_COUNT; i++)
+		pWind->DrawImage(DrawShapesItem[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+
+	pWind->SetPen(MYDARKBLACK, 3);
+	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+void GUI::CreateDrawColorBar() const {
+
+	UI.InterfaceMode = MODE_COLOR;
+
+	string DrawColorItem[Color_COUNT];
+	DrawColorItem[ITM_TOMATO] = "images\\MenuItems\\colorMenu\\TOMATO.jpg";
+	DrawColorItem[ITM_DEEPSKYBLUE] = "images\\MenuItems\\colorMenu\\DEEPSKYBLUE.jpg";
+	DrawColorItem[ITM_LIGHTGREEN] = "images\\MenuItems\\colorMenu\\LIGHTGREEN.jpg";
+	DrawColorItem[ITM_ORANGE] = "images\\MenuItems\\colorMenu\\ORANGE.jpg";
+
+	//Draw menu item one image at a time
+	for (int i = 0; i < Color_COUNT; i++)
+		pWind->DrawImage(DrawColorItem[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+
+	pWind->SetPen(MYDARKBLACK, 3);
+	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
 void GUI::CreatePlayToolBar() const
 {
+	ClearDrawArea();
+	CreateToolBar();
 	UI.InterfaceMode = MODE_PLAY;
-	///TODO: write code to create Play mode menu
+	string MenuItemImages[PLAY_ITM_COUNT];
+	MenuItemImages[ITM_PICK_IMAGE] = "images\\MenuItems\\selectShape-color.jpg";
+	MenuItemImages[ITM_PICK_FILL_COLOR] = "images\\MenuItems\\selectColor-color.jpg";
+	MenuItemImages[ITM_PICK_IMAGE_COLOR] = "images\\MenuItems\\selectAll-color.jpg";
+	MenuItemImages[ITM_DRAW] = "images\\MenuItems\\return-color.jpg";
+
+	//Draw menu item one image at a time
+	for (int i = 0; i < PLAY_ITM_COUNT; i++)
+		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+
+	//Draw a line under the toolbar
+	pWind->SetPen(MYDARKBLACK, 3);
+	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -247,32 +353,38 @@ int GUI::getCrntPenWidth() const		//get current pen width
 
 color GUI::StringToColor(string colorStr)    //convert string to color type
 {
-	if (colorStr == "BLUE") return BLUE;
-	else if (colorStr == "BLACK") return BLACK;
-	else if (colorStr == "RED") return RED;
-	else if (colorStr == "YELLOW") return YELLOW;
-	else if (colorStr == "WHITE") return WHITE;
-	else if (colorStr == "GREEN") return GREEN;
+	if (colorStr == "DEEPSKYBLUE") return DEEPSKYBLUE;
+	else if (colorStr == "TOMATO") return TOMATO;
+	else if (colorStr == "LIGHTGREEN") return LIGHTGREEN;
 	else if (colorStr == "ORANGE") return ORANGE;
+	else if (colorStr == "BLACK") return BLACK;
+	else if (colorStr == "MYDARKBLACK") return MYDARKBLACK;
+	else if (colorStr == "MYDARKGRAY") return MYDARKGRAY;
+	else if (colorStr == "WHITE") return WHITE;
+	else if (colorStr == "RED") return RED;
+	else if (colorStr == "BLUE") return BLUE;
+	else if (colorStr == "GREEN") return GREEN;
 }
 ////////////////////////////////////////////////////////////////////  covert color to  string
 string GUI::ColorToString(color clr)    //convert string to color type
 {
-	
-	if (isMatchedColors(clr,BLUE)) return "BLUE";
-	else if (isMatchedColors(clr,BLACK)) return "BLACK";
-	else if (isMatchedColors(clr, RED)) return "RED";
-	else if (isMatchedColors(clr,YELLOW)) return "YELLOW";
-	else if (isMatchedColors(clr, WHITE)) return "WHITE";
-	else if (isMatchedColors(clr, GREEN)) return "GREEN";
+	if (isMatchedColors(clr,DEEPSKYBLUE)) return "DEEPSKYBLUE";
+	else if (isMatchedColors(clr, TOMATO)) return "TOMATO";
+	else if (isMatchedColors(clr, LIGHTGREEN)) return "LIGHTGREEN";
 	else if (isMatchedColors(clr, ORANGE)) return "ORANGE";
-	else if (isMatchedColors(clr, LIGHTGOLDENRODYELLOW)) return "LIGHTGOLDENRODYELLOW";
-	
+	else if (isMatchedColors(clr,BLACK)) return "BLACK";
+	else if (isMatchedColors(clr, MYDARKBLACK)) return "MYDARKBLACK";
+	else if (isMatchedColors(clr, MYDARKGRAY)) return "MYDARKGRAY";
+	else if (isMatchedColors(clr, WHITE)) return "WHITE";
+	else if (isMatchedColors(clr, RED)) return "RED"; 
+	else if (isMatchedColors(clr, BLUE)) return "BLUE";
+	else if (isMatchedColors(clr, GREEN)) return "GREEN";
+	else if (isMatchedColors(clr, MYTHISTLE)) return "MYTHISTLE";
 }
 
 bool GUI::isMatchedColors(color c1, color c2)      //check if two color objects are matched
 {
-	if (c1.ucBlue == c2.ucBlue && c1.ucRed == c2.ucRed && c1.ucGreen == c2.ucGreen)
+	if (c1.ucBlue == c2.ucBlue && c1.ucRed == c2.ucRed && c1.ucGreen == c2.ucGreen )
 	{
 		return true;
 	}
@@ -307,10 +419,9 @@ void GUI::DrawSquare(Point P1, int length, GfxInfo RectGfxInfo, bool selected) c
 
 	pWind->DrawRectangle(P1.x, P1.y, P1.x + length, P1.y + length, style);
 	//pWind->DrawLine(P1.x, P1.y, P1.x + length, P1.y + length, style);
-
 }
 
-void GUI::DrawEllip(Point P1, Point P2, GfxInfo ElliGfxInfo, bool selected) const
+void GUI::DrawEllip(Point center, int length, int height, GfxInfo ElliGfxInfo, bool selected) const
 {
 	color DrawingClr;
 	if (selected)
@@ -328,10 +439,10 @@ void GUI::DrawEllip(Point P1, Point P2, GfxInfo ElliGfxInfo, bool selected) cons
 	else
 		style = FRAME;
 
-	pWind->DrawEllipse(P1.x - P2.x, P1.y - P2.y, P1.x + P2.x, P1.y + P2.y, style);
+	pWind->DrawEllipse(center.x - height, center.y - length, center.x + height, center.y + length, style);
 }
 
-void GUI::DrawHex(Point center, GfxInfo HexGfxInfo, bool selected) const
+void GUI::DrawHex(Point center, int length, GfxInfo HexGfxInfo, bool selected) const
 {
 	color DrawingClr;
 	if (selected)
@@ -349,7 +460,7 @@ void GUI::DrawHex(Point center, GfxInfo HexGfxInfo, bool selected) const
 	else
 		style = FRAME;
 
-	int d = 50;
+	int d = length;
 
 	Point point1;
 	point1.x = center.x - d;

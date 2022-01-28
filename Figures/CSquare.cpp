@@ -1,12 +1,15 @@
 #include "CSquare.h"
 #include<fstream>
 
+int CSquare::SqrCnt = 0;  //static variable to determine the number of objects
+
 CSquare::CSquare(){}
 
 CSquare::CSquare(Point P1, int len, GfxInfo FigureGfxInfo):CFigure(FigureGfxInfo)
 {
 	TopLeftCorner = P1;
 	length = len;
+	SqrCnt++;
 }
 	
 void CSquare::DrawMe(GUI* pGUI) const
@@ -48,7 +51,6 @@ void CSquare::Load(ifstream& loadedFile, GUI* pGUI)
 	CSquare::SetSelected(false);
 }
 
-// khaled
 // check point inside the figure our Not
 bool CSquare::InFig(int x, int y)
 {
@@ -60,8 +62,7 @@ bool CSquare::InFig(int x, int y)
 }
 
 // to print info about figure in the status bar 
-// we have to write info about color 
-string CSquare::PrintInfo()
+void CSquare::PrintInfo(GUI* pGUI)
 {
 	string id = to_string(ID);
 	string x1 = to_string(TopLeftCorner.x);
@@ -69,5 +70,14 @@ string CSquare::PrintInfo()
 	string x2 = to_string(TopLeftCorner.x + length);
 	string y2 = to_string(TopLeftCorner.y + length);
 
-	return ("Rectangle - ID:" + id + " Corner1: (" + x1 + ", " + y1 + ")" + " Corner2: (" + x2 + ", " + y2 + ")" + " DrawColor: ");
+	string fillingColor;
+	if (FigGfxInfo.isFilled)
+	{
+		fillingColor = pGUI->ColorToString(FigGfxInfo.FillClr);
+	}
+	else
+	{
+		fillingColor = "NO_FILL";
+	}
+	pGUI->PrintMessage("Square / ID:" + id + " Corner1: (" + x1 + ", " + y1 + ") /" + " Corner2: (" + x2 + ", " + y2 + ") /" + " Drawing Color: " + pGUI->ColorToString(FigGfxInfo.DrawClr) + " / Filling Color: " + fillingColor);
 }

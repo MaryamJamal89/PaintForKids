@@ -1,10 +1,10 @@
 #include "ActionExit.h"
 #include "..\ApplicationManager.h"
 #include "..\GUI\GUI.h"
+#include "ActionSave.h"
 
 ActionExit::ActionExit(ApplicationManager* pApp) :Action(pApp)
 {}
-
 
 //Execute the action
 void ActionExit::Execute()
@@ -16,5 +16,8 @@ void ActionExit::Execute()
 	if (response == "Y" || response == "y")
 	{
 		//save
+		Action* save = new ActionSave(pManager);
+		save->Execute();
 	}
 }
+

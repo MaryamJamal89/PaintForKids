@@ -5,23 +5,23 @@ int CHexagon::HexCnt = 0;  //static variable to determine the number of objects
 
 CHexagon::CHexagon(){}
 
-CHexagon::CHexagon(Point C, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo)
+CHexagon::CHexagon(Point C, int len, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo)
 {
 	Center = C;
+	length = len;
 	HexCnt++;
-	P.x = 80; P.y = 30;
 }
 
 void CHexagon::DrawMe(GUI* pOut) const
 {
-	//Call Output::DrawEllipse to draw a ellipse on the screen	
-	pOut->DrawHex(Center, FigGfxInfo, Selected);
+	//Call Output::DrawHex to draw a Hexagon on the screen	
+	pOut->DrawHex(Center, length, FigGfxInfo, Selected);
 }
 
 // save figure in the file
 void CHexagon::Save(ofstream& file, GUI* pGUI)
 {
-	file << "HEX " << ID << " " << Center.x << " " << Center.y << " " << P.x << " " << P.y << " " << pGUI->ColorToString(FigGfxInfo.DrawClr) << " ";
+	file << "HEX " << ID << " " << Center.x << " " << Center.y << " " << length << " " << pGUI->ColorToString(FigGfxInfo.DrawClr) << " ";
 
 	if (FigGfxInfo.isFilled == true)
 	{
@@ -50,14 +50,11 @@ void CHexagon::Load(ifstream& loadedFile, GUI* pGUI)
 	CHexagon::SetSelected(false);
 }
 
-
-// khaled
 double area1(int x1, int y1, int x2, int y2, int x3, int y3)
 {
 	return abs((x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2.0);
 }
 
-// khaled 
 // InFig return boolian to check point inside Figure 
 bool CHexagon::InFig(int x, int y)
 {
@@ -74,23 +71,21 @@ bool CHexagon::InFig(int x, int y)
 	return false;
 }
 
-// khaled
 // Print to return all info about figure
-string CHexagon::PrintInfo()
+void CHexagon::PrintInfo(GUI* pGUI)
 {
 	string id = to_string(ID);
 	string x = to_string(Center.x);
 	string y = to_string(Center.y);
-	/*string clr = getColor(this->FigGfxInfo.DrawClr);
 
+	string fillingColor;
 	if (FigGfxInfo.isFilled)
 	{
-		pOut->PrintMessage(" - FillColor: ");
-		string clrF = getColor(this->FigGfxInfo.FillClr);
-		return ("Ellipse -ID: " + id + " Center: (" + x + ", " + y + ") DrawColor:" + clr + " FillColor: " + clrF);
+		fillingColor = pGUI->ColorToString(FigGfxInfo.FillClr);
 	}
-	else*/
-		return ("Ellipse -ID: " + id + " Center: (" + x + ", " + y + ") DrawColor:");
+	else
+	{
+		fillingColor = "NO_FILL";
+	}
+	pGUI->PrintMessage("Hexagon / ID: " + id + " Center: (" + x + ", " + y + ") / Drawing Color:" + pGUI->ColorToString(FigGfxInfo.DrawClr) + " / Filling Color: " + fillingColor);
 }
-
-

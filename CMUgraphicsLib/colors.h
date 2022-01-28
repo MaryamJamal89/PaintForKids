@@ -11,43 +11,34 @@ This file was last modified on 05.16.1999
 class color {
 
   public:
-
     // Default constructor creates black
     color(unsigned char Red = 0, unsigned char Green = 0, unsigned char Blue = 0) { 
         ucRed = Red;  ucGreen = Green;  ucBlue = Blue; 
     }
 
-
     // Color components.  0 = no intensity, 255 = full intensity
     unsigned char ucRed;
     unsigned char ucGreen;
     unsigned char ucBlue;
-
 };
 
 bool operator==(color a, color b);
 bool operator!=(color a, color b);
 
 /*
-
   Predefine some color objects...  Data was liberally borrowed from the
   Open Group's X11 rbg.txt file
 
   $XConsortium: rgb.txt,v 10.41 94/02/20 18:39:36 rws Exp 
-
 */
 
 const color SNOW = color(255, 250, 250);
 const color GHOSTWHITE = color(248, 248, 255);
 const color WHITESMOKE = color(245, 245, 245);
-const color GAINSBORO = color(220, 220, 220);
-const color FLORALWHITE = color(255, 250, 240);
 const color OLDLACE = color(253, 245, 230);
 const color LINEN = color(250, 240, 230);
-const color ANTIQUEWHITE = color(250, 235, 215);
 const color PAPAYAWHIP = color(255, 239, 213);
 const color BLANCHEDALMOND = color(255, 235, 205);
-const color BISQUE = color(255, 228, 196);
 const color PEACHPUFF = color(255, 218, 185);
 const color NAVAJOWHITE = color(255, 222, 173);
 const color MOCCASIN = color(255, 228, 181);
@@ -85,15 +76,10 @@ const color SLATEBLUE = color(106, 90, 205);
 const color MEDIUMSLATEBLUE = color(123, 104, 238);
 const color LIGHTSLATEBLUE = color(132, 112, 255);
 const color MEDIUMBLUE = color(0, 0, 205);
-const color ROYALBLUE = color(65, 105, 225);
 const color BLUE = color(0, 0, 255);
-const color DODGERBLUE = color(30, 144, 255);
-const color DEEPSKYBLUE = color(0, 191, 255);
-const color SKYBLUE = color(135, 206, 235);
-const color LIGHTSKYBLUE = color(135, 206, 250);
+
 const color STEELBLUE = color(70, 130, 180);
 const color LIGHTSTEELBLUE = color(176, 196, 222);
-const color LIGHTBLUE = color(173, 216, 230);
 const color POWDERBLUE = color(176, 224, 230);
 const color PALETURQUOISE = color(175, 238, 238);
 const color DARKTURQUOISE = color(0, 206, 209);
@@ -123,17 +109,14 @@ const color FORESTGREEN = color(34, 139, 34);
 const color OLIVEDRAB = color(107, 142, 35);
 const color DARKKHAKI = color(189, 183, 107);
 const color KHAKI = color(240, 230, 140);
-const color PALEGOLDENROD = color(238, 232, 170);
 const color LIGHTGOLDENRODYELLOW = color(250, 250, 210);
-const color LIGHTYELLOW = color(255, 255, 224);
 const color YELLOW = color(255, 255, 0);
+const color LIGHTYELLOW = color(255, 255, 224);
 const color GOLD = color(255, 215, 0);
-const color LIGHTGOLDENROD = color(238, 221, 130);
-const color GOLDENROD = color(218, 165, 32);
+
 const color DARKGOLDENROD = color(184, 134, 11);
 const color ROSYBROWN = color(188, 143, 143);
 const color INDIAN = color(205, 92, 92);
-const color INDIANRED = color(205, 92, 92);
 const color SADDLEBROWN = color(139, 69, 19);
 const color SIENNA = color(160, 82, 45);
 const color PERU = color(205, 133, 63);
@@ -148,24 +131,20 @@ const color BROWN = color(165, 42, 42);
 const color DARKSALMON = color(233, 150, 122);
 const color SALMON = color(250, 128, 114);
 const color LIGHTSALMON = color(255, 160, 122);
-const color ORANGE = color(255, 165, 0);
+const color GOLDENROD = color(218, 165, 32);
 const color DARKORANGE = color(255, 140, 0);
 const color CORAL = color(255, 127, 80);
 const color LIGHTCORAL = color(240, 128, 128);
-const color TOMATO = color(255, 99, 71);
 const color ORANGERED = color(255, 69, 0);
 const color RED = color(255, 0, 0);
 const color HOTPINK = color(255, 105, 180);
 const color DEEPPINK = color(255, 20, 147);
 const color PINK = color(255, 192, 203);
-const color LIGHTPINK = color(255, 182, 193);
 const color PALEVIOLETRED = color(219, 112, 147);
-const color MAROON = color(176, 48, 96);
 const color MEDIUMVIOLETRED = color(199, 21, 133);
 const color VIOLETRED = color(208, 32, 144);
 const color MAGENTA = color(255, 0, 255);
 const color VIOLET = color(238, 130, 238);
-const color PLUM = color(221, 160, 221);
 const color ORCHID = color(218, 112, 214);
 const color MEDIUMORCHID = color(186, 85, 211);
 const color DARKORCHID = color(153, 50, 204);
@@ -173,14 +152,37 @@ const color DARKVIOLET = color(148, 0, 211);
 const color BLUEVIOLET = color(138, 43, 226);
 const color PURPLE = color(160, 32, 240);
 const color MEDIUMPURPLE = color(147, 112, 219);
-const color THISTLE = color(216, 191, 216);
 const color DARKGREY = color(169, 169, 169);
 const color DARKGRAY = color(169, 169, 169);
 const color DARKBLUE = color(0, 0, 139);
 const color DARKCYAN = color(0, 139, 139);
 const color DARKMAGENTA = color(139, 0, 139);
 const color DARKRED = color(139, 0, 0);
-const color LIGHTGREEN = color(144, 238, 144);
 
+const color ANTIQUEWHITE = color(250, 235, 215);
+const color BISQUE = color(255, 228, 196); 
+const color GAINSBORO = color(220, 220, 220);
+const color FLORALWHITE = color(255, 250, 240);
+const color LIGHTPINK = color(255, 182, 193);
+const color THISTLE = color(216, 191, 216);
+const color MYTHISTLE = color(230, 216, 224);
+const color MYDARKGRAY = color(140, 140, 140);
+const color MYDARKBLACK = color(40, 40, 40);
+
+
+const color TOMATO = color(255, 99, 71);//=====
+const color PLUM = color(221, 160, 221);
+const color INDIANRED = color(205, 92, 92);
+const color LIGHTGREEN = color(144, 238, 144);//=====
+const color ROYALBLUE = color(65, 105, 225);
+const color DODGERBLUE = color(30, 144, 255);
+const color DEEPSKYBLUE = color(0, 191, 255);//=====
+const color SKYBLUE = color(135, 206, 235);
+const color LIGHTSKYBLUE = color(135, 206, 250);
+const color LIGHTBLUE = color(173, 216, 230);
+const color PALEGOLDENROD = color(238, 232, 170);
+const color LIGHTGOLDENROD = color(238, 221, 130);
+const color ORANGE = color(255, 165, 0);//=====
+const color MAROON = color(176, 48, 96);
 
 #endif //COLOR_H
