@@ -2,6 +2,7 @@
 #define ACTION_ADD_SQUARE_H
 
 #include "Action.h"
+#include "../GUI/GUI.h"
 
 //Add Square Action class
 class ActionAddSquare: public Action
@@ -11,6 +12,7 @@ public:
 	
 	//Add Square to the ApplicationManager
 	virtual void Execute() ;
+	void CheckPoint(GUI* pGUI, Point& point);
 };
 
 #endif
