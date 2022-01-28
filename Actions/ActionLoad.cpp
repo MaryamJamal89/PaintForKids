@@ -16,6 +16,7 @@ ActionLoad::ActionLoad(ApplicationManager* pApp) :Action(pApp)
 void ActionLoad::Execute()
 {
 	GUI* pGUI = pManager->GetGUI();
+	CFigure* figure = NULL;
 
 	//check if there are any drawn figures
 	if (pManager->GetFigCount() > 0)
@@ -50,17 +51,17 @@ void ActionLoad::Execute()
 
 		//using coloring actions to apply new colors
 		//changing window drawing color
-		Action* changeDrawColor = new ActionChangeColor(pManager, pGUI->StringToColor(drawColor), 1);
+		Action* changeDrawColor = new ActionChangeColor(pManager, pGUI->StringToColor(drawColor), 1, figure);
 		changeDrawColor->Execute();
 
 		if (fillColor != "NO_FILL")
 		{
 			//changing window filling color if it was set
-			Action* changeFillColor = new ActionChangeColor(pManager, pGUI->StringToColor(fillColor), 2);
+			Action* changeFillColor = new ActionChangeColor(pManager, pGUI->StringToColor(fillColor), 2, figure);
 			changeFillColor->Execute();
 		}
 		//changing window background color
-		Action* changeBgColor = new ActionChangeColor(pManager, pGUI->StringToColor(bgColor), 3);
+		Action* changeBgColor = new ActionChangeColor(pManager, pGUI->StringToColor(bgColor), 3, figure);
 		changeBgColor->Execute();
 
 		loadedFile >> figsNum;
