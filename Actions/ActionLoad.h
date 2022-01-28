@@ -9,7 +9,6 @@ public:
 	ActionLoad(ApplicationManager* pApp);
 
 	virtual void Execute();
-
 };
 
 #endif

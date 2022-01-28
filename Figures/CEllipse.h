@@ -24,7 +24,6 @@ public:
 	virtual void PrintInfo(GUI* pGUI);
 	// take a copy of pointer obj without Refernce
 	virtual CEllipse* CloneFig();
-
 };
 
 #endif

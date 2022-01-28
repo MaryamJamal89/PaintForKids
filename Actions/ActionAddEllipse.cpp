@@ -1,7 +1,4 @@
 #include "./ActionAddEllipse.h"
-#include "../Figures/CEllipse.h"
-#include "../ApplicationManager.h"
-#include "../GUI/GUI.h"
 
 ActionAddEllipse::ActionAddEllipse(ApplicationManager* pApp) :Action(pApp)
 {}

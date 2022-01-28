@@ -1,5 +1,6 @@
 #include<fstream>
 #include<windows.h>
+
 #include "ActionLoad.h"
 #include "..\Figures\CSquare.h"
 #include "..\Figures\CHexagon.h"

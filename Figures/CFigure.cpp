@@ -8,6 +8,7 @@ CFigure::CFigure(GfxInfo FigureGfxInfo)
 	Selected = true; // Figure is selected after created
 	ID = id++; // Figure ID starts from 1
 }
+
 //CFigure::Selected = true;
 void CFigure::SetSelected(bool s)
 {	Selected = s; }
@@ -28,6 +29,7 @@ void CFigure::ChngFillClr(color Fclr)
 int CFigure::id = 1;
 
 // take a copy of pointer obj without Refernce
-CFigure* CFigure::CloneFig() {
+CFigure* CFigure::CloneFig() 
+{
 	return NULL;
 }

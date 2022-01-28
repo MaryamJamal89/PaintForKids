@@ -3,10 +3,11 @@
 
 #include "Action.h"
 
-class ActionPickImage :public Action
+class ActionPickImage : public Action
 {
 public:
 	ActionPickImage(ApplicationManager* pApp);
 	virtual void Execute();
 };
+
 #endif

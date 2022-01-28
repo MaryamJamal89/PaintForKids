@@ -110,7 +110,6 @@ bool CHexagon::doIntersect(Point p1, Point q1, Point p2, Point q2)
 	return false; // Doesn't fall in any of the above cases
 }
 
-
 // Returns true if the point p lies inside the polygon[] with n vertices
 bool CHexagon::isInside(Point polygon[], int n, Point p)
 {
@@ -192,7 +191,9 @@ void CHexagon::PrintInfo(GUI* pGUI)
 	}
 	pGUI->PrintMessage("Hexagon / ID: " + id + " / Center: (" + x + ", " + y + ") / Length: " + len +" / Drawing Color:" + pGUI->ColorToString(FigGfxInfo.DrawClr) + " / Filling Color: " + fillingColor);
 }
+
 // take a copy of pointer obj without Refernce
-CHexagon* CHexagon::CloneFig() {
+CHexagon* CHexagon::CloneFig() 
+{
 	return new CHexagon(*this);
 }

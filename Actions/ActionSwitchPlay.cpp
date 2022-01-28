@@ -2,9 +2,8 @@
 #include "../ApplicationManager.h"
 #include "../GUI/GUI.h"
 
-ActionSwitchPlay::ActionSwitchPlay(ApplicationManager* pApp) :Action(pApp)
-{
-}
+ActionSwitchPlay::ActionSwitchPlay(ApplicationManager* pApp) : Action(pApp)
+{}
 
 void ActionSwitchPlay::Execute()
 {

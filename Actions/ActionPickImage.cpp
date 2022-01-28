@@ -2,9 +2,8 @@
 #include "../ApplicationManager.h"
 #include "../GUI/GUI.h"
 
-ActionPickImage::ActionPickImage(ApplicationManager* pApp) :Action(pApp)
-{
-}
+ActionPickImage::ActionPickImage(ApplicationManager* pApp) : Action(pApp)
+{}
 
 void ActionPickImage::Execute()
 {
