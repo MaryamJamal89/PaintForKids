@@ -12,7 +12,7 @@ public:
 	
 	//Add Square to the ApplicationManager
 	virtual void Execute() ;
-	void CheckPoint(GUI* pGUI, Point& point);
+	void CheckPoint(GUI* pGUI, Point& point, string mssg);
 };
 
 #endif
