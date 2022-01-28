@@ -16,7 +16,6 @@
 #include "Actions/ActionSwitchPlay.h"
 #include "Actions/ActionSwitchDraw.h"
 #include "Actions/ActionDelete.h"
-#include "Figures/CSquare.h"
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -212,7 +211,7 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			return NULL;
 			break;
 
-		case DRAWING_AREA: //select
+		case  DRAWING_AREA:
 			newAct = new ActionSelect(this, {x,y}, multiSelect);
 			break;
 	}	
@@ -296,16 +295,6 @@ CFigure *ApplicationManager::GetSelectedFigureByFlag(int& selectedIndex, int& se
 		return FigList[selectedIndex];
 	}
 }
-//get selected figures
-vector <CFigure*> ApplicationManager::GetSelectedFigure() {
-	vector <CFigure*> selectedFigures;
-	for (int i = 0; i < FigCount; i++) {
-		if (FigList[i]->IsSelected()) {
-			selectedFigures.push_back(FigList[i]);
-		}
-	}
-	return selectedFigures;
-}
 
 void ApplicationManager::InsertFigure(bool isFront)          //insert figure in front or back of all figuers
 {
@@ -380,33 +369,27 @@ void ApplicationManager::SaveAll(ofstream& File) const
 	}
 }
 
-
-// take copy of Figures
 void ApplicationManager::TakeCopyOfFigures() {
-	
 	if (UI.InterfaceMode == MODE_PLAY) {
 		for (int i = 0; i < FigCount; i++)
-		{
-			CopyFigList[i] = FigList[i]->CloneFig();
-		}
+			CopyFigList[i]= FigList[i]->CloneFig();
 	}
 	else {
 		for (int i = 0; i < FigCount; i++)
-		{
 			FigList[i] = CopyFigList[i]->CloneFig();
-		}
+
 		for (int i = 0; i < FigCount; i++)
 			delete CopyFigList[i];
 	}
-	
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
 //==================================================================================//
 //							Interface Management Functions							//
 //==================================================================================//
+
 //Draw all figures on the user interface
-void ApplicationManager::UpdateInterface() 
+void ApplicationManager::UpdateInterface() const
 {	
 	for(int i=0; i<FigCount; i++)
 		FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
@@ -426,4 +409,5 @@ ApplicationManager::~ApplicationManager()
 	for(int i=0; i<FigCount; i++)
 		delete FigList[i];
 	delete pGUI;
+	
 }
