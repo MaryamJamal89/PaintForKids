@@ -16,7 +16,6 @@
 #include "Actions/ActionSwitchPlay.h"
 #include "Actions/ActionSwitchDraw.h"
 #include "Actions/ActionDelete.h"
-#include "Figures/CSquare.h"
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -210,7 +209,7 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 		break;
 
 	case DRAWING_AREA: //select
-		newAct = new ActionSelect(this, { x,y }, multiSelect);
+		newAct = new ActionSelect(this, { x, y }, multiSelect);
 		break;
 	}
 	return newAct;
@@ -381,38 +380,32 @@ void ApplicationManager::SaveAll(ofstream& File) const
 }
 
 // take copy of Figures
-void ApplicationManager::TakeCopyOfFigures() {
-
+void ApplicationManager::TakeCopyOfFigures() 
+{
 	if (UI.InterfaceMode == MODE_PLAY) {
 		for (int i = 0; i < FigCount; i++)
-		{
-			PlayFigureList[i] = FigList[i]->CloneFig();
-		}
+			CopyFigList[i]= FigList[i]->CloneFig();
 	}
-	else {
+	else 
+  {
 		for (int i = 0; i < FigCount; i++)
-		{
-			FigList[i] = PlayFigureList[i]->CloneFig();
-		}
-	}
+			FigList[i] = CopyFigList[i]->CloneFig();
 
+		for (int i = 0; i < FigCount; i++)
+			delete CopyFigList[i];
+	}
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
 //==================================================================================//
 //							Interface Management Functions							//
 //==================================================================================//
+
 //Draw all figures on the user interface
-void ApplicationManager::UpdateInterface()
-{
-	/*if (UI.InterfaceMode == MODE_PLAY) {
-		for (int i = 0; i < FigCount; i++)
-			PlayFigureList[i]->DrawMe(pGUI);
-	}else
-	{*/
-	for (int i = 0; i < FigCount; i++)
+void ApplicationManager::UpdateInterface() const
+{	
+	for(int i = 0; i<FigCount; i++)
 		FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
-//}
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -431,4 +424,5 @@ ApplicationManager::~ApplicationManager()
 	for (int i = 0; i < FigCount; i++)
 		delete FigList[i];
 	delete pGUI;
+	
 }
