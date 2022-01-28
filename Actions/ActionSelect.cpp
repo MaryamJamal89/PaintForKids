@@ -16,11 +16,10 @@ void ActionSelect::Execute()
 	//check where this point :
 	//and return selected figure or null 
 	CFigure* fig = pManager->GetFigure(P.x, P.y);
-
-	pGUI->PrintMessage("No Figure Selected");
 	
 	// no figure selected
 	if (fig == NULL) {
+		pGUI->PrintMessage("No Figure Selected");
 		pManager->UnSelectFigures();
 	}
 	else
