@@ -230,7 +230,7 @@ void ApplicationManager::ExecuteAction(Action* &pAct)
 //==================================================================================//
 //						Figures Management Functions								//
 //==================================================================================//
-// multiSelect filed
+//multiSelect filed
 //bool ApplicationManager::multiSelect = false;
 //Add a figure to the list of figures
 void ApplicationManager::AddFigure(CFigure* pFig)
@@ -246,7 +246,6 @@ void ApplicationManager::UnSelectFigures()const {
 	}
 }
 ///////////////////////////////////////////////////////
-// khaled
 // func to return Selected Figure
 CFigure *ApplicationManager::GetFigure(int x, int y) const         //get one selected figure by clicked point indexes
 {

@@ -27,6 +27,7 @@ void ActionSelect::Execute()
 		if (fig->IsSelected()) 
 		{
 			fig->SetSelected(false);
+			pGUI->ClearStatusBar();
 		}
 		else
 		{
