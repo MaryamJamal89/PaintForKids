@@ -12,6 +12,6 @@ void ActionSwitchDraw::Execute()
 	// to create New ToolBar
 	pGUI->CreateDrawToolBar();
 	// to return the figures
-	pManager->TakeCopyOfFigures();
+	//pManager->TakeCopyOfFigures();
 	pGUI->PrintTempMessge("Welcome to Draw mode!", 1000);
 }
