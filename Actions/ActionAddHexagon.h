@@ -3,6 +3,8 @@
 
 #include "Action.h"
 #include "../GUI/GUI.h"
+#include "../Figures/CHexagon.h"
+#include "../ApplicationManager.h"
 
 //Add Hexagon Action class
 class ActionAddHexagon : public Action
@@ -12,7 +14,7 @@ public:
 
 	//Add Hexagon to the ApplicationManager
 	virtual void Execute();
-	Point CheckPoint(GUI* pGUI, string mssg);
+	void CheckPoint(GUI* pGUI, Point &point, string mssg);
 };
 
 #endif

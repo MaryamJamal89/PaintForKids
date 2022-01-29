@@ -3,6 +3,8 @@
 
 #include "Action.h"
 #include "../GUI/GUI.h"
+#include "..\Figures\CSquare.h"
+#include "..\ApplicationManager.h"
 
 //Add Square Action class
 class ActionAddSquare: public Action

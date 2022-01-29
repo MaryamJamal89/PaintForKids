@@ -3,11 +3,11 @@
 
 #include "Action.h"
 
-
-class ActionPickImage_Color :public Action
+class ActionPickImage_Color : public Action
 {
 public:
 	ActionPickImage_Color(ApplicationManager* pApp);
 	virtual void Execute();
 };
+
 #endif

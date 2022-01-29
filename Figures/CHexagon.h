@@ -29,7 +29,6 @@ public:
 
 	// take a copy of pointer obj without Refernce
 	virtual CHexagon* CloneFig();
-
 };
 
 #endif

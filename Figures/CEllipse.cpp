@@ -86,6 +86,7 @@ void CEllipse::PrintInfo(GUI* pGUI)
 }
 
 // take a copy of pointer obj without Refernce
-CEllipse* CEllipse::CloneFig() {
+CEllipse* CEllipse::CloneFig() 
+{
 	return new CEllipse(*this);
 }

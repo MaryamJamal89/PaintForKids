@@ -3,6 +3,8 @@
 
 #include "Action.h"
 #include "../GUI/GUI.h"
+#include "../Figures/CEllipse.h"
+#include "../ApplicationManager.h"
 
 //Add Ellipse Action class
 class ActionAddEllipse : public Action
@@ -13,7 +15,6 @@ public:
 	//Add Ellipse to the ApplicationManager
 	virtual void Execute();
 	void CheckPoint(GUI* pGUI, Point& point, string mssg);
-
 };
 
 #endif

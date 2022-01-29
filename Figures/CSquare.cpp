@@ -84,6 +84,7 @@ void CSquare::PrintInfo(GUI* pGUI)
 }
 
 // take a copy of pointer obj without Refernce
-CSquare* CSquare::CloneFig() {
+CSquare* CSquare::CloneFig() 
+{
 	return new CSquare(*this);
 }

@@ -1,10 +1,6 @@
 #include "ActionAddSquare.h"
-#include "..\Figures\CSquare.h"
 
-#include "..\ApplicationManager.h"
-#include "..\GUI\GUI.h"
-
-ActionAddSquare::ActionAddSquare(ApplicationManager* pApp) :Action(pApp)
+ActionAddSquare::ActionAddSquare(ApplicationManager* pApp) : Action(pApp)
 {}
 
 //Execute the action
@@ -21,7 +17,6 @@ void ActionAddSquare::Execute()
 	SqrGfxInfo.DrawClr = pGUI->getCrntDrawColor();
 	SqrGfxInfo.FillClr = pGUI->getCrntFillColor();
 	SqrGfxInfo.BorderWdth = pGUI->getCrntPenWidth();
-
 
 	//Step 1 - Read Square data from the user
 	//Read 1st point and store in point P1
