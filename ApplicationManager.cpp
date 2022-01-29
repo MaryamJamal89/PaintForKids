@@ -368,6 +368,7 @@ void ApplicationManager::SaveAll(ofstream& File) const
 	}
 }
 
+
 //// take copy of Figures
 //void ApplicationManager::TakeCopyOfFigures() 
 //{
@@ -384,6 +385,7 @@ void ApplicationManager::SaveAll(ofstream& File) const
 //			delete CopyFigList[i];
 //	}
 //}
+
 
 ////////////////////////////////////////////////////////////////////////////////////
 //==================================================================================//

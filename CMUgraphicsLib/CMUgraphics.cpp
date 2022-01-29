@@ -19,6 +19,9 @@ windowinput* wipInput = NULL;
 static LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 	
 	switch(msg) {
+	case WM_PAINT:
+		std::cout <<"NEED TO PAINT"<< std::endl;
+		break;
 	  case WM_LBUTTONDOWN:
         if(wipInput != NULL) {
             wipInput->SetMouseState(hwnd, LEFT_BUTTON, BUTTON_DOWN, LOWORD(lParam), HIWORD(lParam));
