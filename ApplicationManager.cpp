@@ -295,17 +295,6 @@ CFigure* ApplicationManager::GetSelectedFigureByFlag(int& selectedIndex, int& se
 	}
 }
 
-//get selected figures
-vector <CFigure*> ApplicationManager::GetSelectedFigure() {
-	vector <CFigure*> selectedFigures;
-	for (int i = 0; i < FigCount; i++) {
-		if (FigList[i]->IsSelected()) {
-			selectedFigures.push_back(FigList[i]);
-		}
-	}
-	return selectedFigures;
-}
-
 void ApplicationManager::InsertFigure(bool isFront)          //insert figure in front or back of all figuers
 {
 	int selectedIndex, selectedNum;
@@ -379,22 +368,22 @@ void ApplicationManager::SaveAll(ofstream& File) const
 	}
 }
 
-// take copy of Figures
-void ApplicationManager::TakeCopyOfFigures() 
-{
-	if (UI.InterfaceMode == MODE_PLAY) {
-		for (int i = 0; i < FigCount; i++)
-			CopyFigList[i]= FigList[i]->CloneFig();
-	}
-	else 
-  {
-		for (int i = 0; i < FigCount; i++)
-			FigList[i] = CopyFigList[i]->CloneFig();
-
-		for (int i = 0; i < FigCount; i++)
-			delete CopyFigList[i];
-	}
-}
+//// take copy of Figures
+//void ApplicationManager::TakeCopyOfFigures() 
+//{
+//	if (UI.InterfaceMode == MODE_PLAY) {
+//		for (int i = 0; i < FigCount; i++)
+//			CopyFigList[i]= FigList[i]->CloneFig();
+//	}
+//	else 
+//  {
+//		for (int i = 0; i < FigCount; i++)
+//			FigList[i] = CopyFigList[i]->CloneFig();
+//
+//		for (int i = 0; i < FigCount; i++)
+//			delete CopyFigList[i];
+//	}
+//}
 
 ////////////////////////////////////////////////////////////////////////////////////
 //==================================================================================//
