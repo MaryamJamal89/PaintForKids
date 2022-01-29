@@ -64,7 +64,7 @@ public:
 
 	void UnSelectFigures(int mul) const;
 
-	void TakeCopyOfFigures();
+	//void TakeCopyOfFigures();
 };
 
 #endif

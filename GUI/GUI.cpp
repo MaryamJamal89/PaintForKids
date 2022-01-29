@@ -94,26 +94,39 @@ ActionType GUI::MapInputToActionType(int &x,int &y) const
 		return STATUS;
 	}
 	else if (UI.InterfaceMode == MODE_COLOR) {
-		int ClickedItemOrder = (x / UI.MenuItemWidth);
-
-		switch (ClickedItemOrder)
+		if (y >= 0 && y < UI.ToolBarHeight)
 		{
-		case ITM_TOMATO: return COLOR_TOMATO;
-		case ITM_DEEPSKYBLUE: return COLOR_DEEPSKYBLUE;
-		case ITM_LIGHTGREEN: return COLOR_LIGHTGREEN;
-		case ITM_ORANGE: return COLOR_ORANGE;
-		case ITM_COLORBACK: return TO_DRAW;
+			int ClickedItemOrder = (x / UI.MenuItemWidth);
+			switch (ClickedItemOrder)
+			{
+			case ITM_TOMATO: return COLOR_TOMATO;
+			case ITM_DEEPSKYBLUE: return COLOR_DEEPSKYBLUE;
+			case ITM_LIGHTGREEN: return COLOR_LIGHTGREEN;
+			case ITM_ORANGE: return COLOR_ORANGE;
+			case ITM_COLORBACK: return TO_DRAW;
+			}
+		}
+		if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)
+		{
+			return DRAWING_AREA;
 		}
 	}
 	else if (UI.InterfaceMode == MODE_SHAPES) {
-		int ClickedItemOrder = (x / UI.MenuItemWidth);
-		switch (ClickedItemOrder)
+		if (y >= 0 && y < UI.ToolBarHeight)
 		{
-		case ITM_SQUR: return DRAW_SQUARE;
-		case ITM_ELPS: return DRAW_ELPS;
-		case ITM_HEX: return DRAW_HEX;
-		case ITM_SHAPESBACK: return TO_DRAW;
+			int ClickedItemOrder = (x / UI.MenuItemWidth);
+			switch (ClickedItemOrder)
+			{
+			case ITM_SQUR: return DRAW_SQUARE;
+			case ITM_ELPS: return DRAW_ELPS;
+			case ITM_HEX: return DRAW_HEX;
+			case ITM_SHAPESBACK: return TO_DRAW;
 
+			}
+		}
+		if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)
+		{
+			return DRAWING_AREA;
 		}
 	}
 	else	//GUI is in PLAY mode

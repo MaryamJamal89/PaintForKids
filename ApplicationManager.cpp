@@ -369,7 +369,7 @@ void ApplicationManager::SaveAll(ofstream& File) const
 	}
 }
 
-void ApplicationManager::TakeCopyOfFigures() {
+/*void ApplicationManager::TakeCopyOfFigures() {
 	if (UI.InterfaceMode == MODE_PLAY) {
 		for (int i = 0; i < FigCount; i++)
 			CopyFigList[i]= FigList[i]->CloneFig();
@@ -381,7 +381,7 @@ void ApplicationManager::TakeCopyOfFigures() {
 		for (int i = 0; i < FigCount; i++)
 			delete CopyFigList[i];
 	}
-}
+}*/
 
 ////////////////////////////////////////////////////////////////////////////////////
 //==================================================================================//
