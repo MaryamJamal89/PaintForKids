@@ -28,6 +28,7 @@ ApplicationManager::ApplicationManager()
 
 	multiSelect = 0;
 	numberOfDuplicatedFilesName = 1;
+	inPlayMode = false;
 }
 
 // return numberOfDuplicatedFilesName
@@ -368,25 +369,36 @@ void ApplicationManager::SaveAll(ofstream& File) const
 	}
 }
 
-
+//bool ApplicationManager::inPlayMode = false;
 // take copy of Figures
 void ApplicationManager::TakeCopyOfFigures() 
 {
-	bool wasInPlayMode = false;
+	//bool inPlayMode = false;
 	if (UI.InterfaceMode == MODE_PLAY) {
 		for (int i = 0; i < FigCount; i++)
-			CopyFigList[i]= FigList[i]->CloneFig();
-		wasInPlayMode = true;
+		{
+			CopyFigList[i] = FigList[i]->CloneFig();
+			cout << CopyFigList[i] << " : " << FigList[i] << endl;
+		}
+		inPlayMode = true;
 	}
 	else 
 	{
-		if(wasInPlayMode){
+		if(inPlayMode == true){
 			for (int i = 0; i < FigCount; i++)
+			{
+				delete FigList[i];
+			}
+			for (int i = 0; i < FigCount; i++)
+			{
 				FigList[i] = CopyFigList[i]->CloneFig();
-
+				cout << CopyFigList[i] << " : " << FigList[i] << endl;
+			}
 			for (int i = 0; i < FigCount; i++)
+			{
 				delete CopyFigList[i];
-			wasInPlayMode = false;
+				inPlayMode = false;
+			}
 		}
 	}
 }
