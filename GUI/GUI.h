@@ -4,8 +4,6 @@
 #include "..\DEFS.h"
 #include "UI_Info.h" 
 #include "..\CMUgraphicsLib\CMUgraphics.h"
-#include "..\Figures\CFigure.h"
-#include "..\ApplicationManager.h"
 
 //This class is responsible for Grphical User Interface handling
 //All user input and program outputs MUST be done through this class
