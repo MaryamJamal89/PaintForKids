@@ -345,16 +345,6 @@ void ApplicationManager::RearrangingFigList()         //removing null refrences 
 	}
 }
 
-CFigure* ApplicationManager::getFigList()
-{
-	return *FigList;
-}
-
-int ApplicationManager::getFigCount()
-{
-	return FigCount;
-}
-
 void ApplicationManager::DeleteSelectedFigures()           //delete all selected figures
 {
 	int deletedNum = 0;

@@ -43,8 +43,6 @@ public:
 	void DrawSquare(Point P1, int length, GfxInfo RectGfxInfo, bool selected = false) const;	//Draw a Square
 	void DrawEllip(Point P1, int length, int height, GfxInfo ElliGfxInfo, bool selected = false) const;		//Draw a Ellipse
 	void DrawHex(Point center, int length, GfxInfo HexGfxInfo, bool selected = false) const;	//Draw a Hex
-
-	//void terminateFig();
 	
 	void PrintMessage(string msg) const;	//Print a message on Status bar
 

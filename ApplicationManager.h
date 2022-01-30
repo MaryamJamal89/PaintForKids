@@ -54,9 +54,6 @@ public:
 	void DeleteSelectedFigures();    //delete selected figures
 	void RearrangingFigList();       //remove null refrences from the FigList
 
-	CFigure* getFigList();
-	int getFigCount();
-
 	// -- Interface Management Functions	
 	GUI* GetGUI() const; //Return pointer to the interface
 	void UpdateInterface() const;	//Redraws all the drawing window	

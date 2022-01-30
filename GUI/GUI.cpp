@@ -516,16 +516,6 @@ void GUI::DrawHex(Point center, int length, GfxInfo HexGfxInfo, bool selected) c
 	// Draw the polygon.
 	pWind->DrawPolygon(Xpoints, Ypoints, 6, style);
 }
-//ApplicationManager* pManager;
-//CFigure* copyarr = pManager->getFigList();
-//int c = pManager->getFigCount();
-//
-//void GUI::terminateFig()
-//{
-//	copyarr[c - 1] = NULL;
-//	c--;
-//	pManager->RearrangingFigList();
-//}
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
