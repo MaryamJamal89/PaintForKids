@@ -52,7 +52,6 @@ public:
 	void InsertFigure(bool isFront);  //change location of selected figure to back or front
 
 	void DeleteSelectedFigures();    //delete selected figures
-
 	void RearrangingFigList();       //remove null refrences from the FigList
 
 	// -- Interface Management Functions	
