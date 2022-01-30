@@ -31,7 +31,7 @@ public:
 	void CreatePlayToolBar() const;	//creates Play mode toolbar & menu
 	void CreateStatusBar() const;	//create the status bar
 
-	void PrintTempMessge(string msg, int ms);   //print message on status bar and clear after sleep time
+	void PrintTempMessge(string msg, int ms) const;   //print message on status bar and clear after sleep time
 
 	void ClearStatusBar() const;	//Clears the status bar
 	void ClearToolBar() const;		//Clears the tool bar

@@ -202,7 +202,7 @@ void GUI::ClearStatusBar() const
 	pWind->DrawRectangle(0, UI.height - UI.StatusBarHeight, UI.width, UI.height);
 }
 
-void GUI::PrintTempMessge(string msg, int ms)
+void GUI::PrintTempMessge(string msg, int ms) const
 {
 	PrintMessage(msg);
 	Sleep(ms);
@@ -497,6 +497,15 @@ void GUI::DrawHex(Point center, int length, GfxInfo HexGfxInfo, bool selected) c
 
 	int Xpoints[6] = { point1.x, point2.x, point3.x, point4.x, point5.x, point6.x };
 	int Ypoints[6] = { point1.y, point2.y, point3.y, point4.y, point5.y, point6.y };
+
+	for (int i = 0; i < 6; i++)
+	{
+		if (Ypoints[i] < UI.ToolBarHeight || Ypoints[i] >= (UI.height - UI.StatusBarHeight))
+		{
+			PrintTempMessge("Points out of the Drawing Area!", 800);
+			return;
+		}
+	}
 
 	// Draw the polygon.
 	pWind->DrawPolygon(Xpoints, Ypoints, 6, style);
