@@ -25,8 +25,10 @@ private:
 	GUI* pGUI;
 
 public:
+	int copyArrayLength;
 	bool inPlayMode;
 	int multiSelect;//enabling multiSelect
+	int playType;
 	int numberOfDuplicatedFilesName;  // this variable to know what number of files that has the same name
 	int ReturnNumberofDulicatedFile(); // this function use to return numberOfDuplicatedFilesName
 	void increamentNumberofDulicatedFile(); //this function use to increament numberOfDuplicatedFilesName

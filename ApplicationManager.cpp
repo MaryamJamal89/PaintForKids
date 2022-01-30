@@ -29,6 +29,7 @@ ApplicationManager::ApplicationManager()
 	multiSelect = 0;
 	numberOfDuplicatedFilesName = 1;
 	inPlayMode = false;
+	playType = 0;
 }
 
 // return numberOfDuplicatedFilesName
@@ -182,7 +183,7 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 		break;
 
 	case TO_PICK_IMAGE:
-		newAct = new ActionPickImage(this);
+		newAct = new ActionPickImage(this, playType);
 		break;
 
 	case TO_PICK_COLOR:
@@ -198,6 +199,7 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 		break;
 
 	case TO_DRAW:
+		playType = 0;
 		newAct = new ActionSwitchDraw(this);
 		break;
 
@@ -210,7 +212,7 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 		break;
 
 	case DRAWING_AREA: //select
-		newAct = new ActionSelect(this, { x, y }, multiSelect);
+		newAct = new ActionSelect(this, { x, y }, multiSelect, playType);
 		break;
 	}
 	return newAct;
@@ -353,6 +355,7 @@ void ApplicationManager::DeleteSelectedFigures()           //delete all selected
 		if (FigList[i]->IsSelected())
 		{
 			//deleting the figure
+			cout<<"hit" << endl;
 			FigList[i] = NULL;
 			deletedNum++;
 		}
@@ -370,23 +373,27 @@ void ApplicationManager::SaveAll(ofstream& File) const
 	}
 }
 
-//bool ApplicationManager::inPlayMode = false;
+// bool ApplicationManager::inPlayMode = false;
 // take copy of Figures
 void ApplicationManager::TakeCopyOfFigures()
 {
 	//bool inPlayMode = false;
 	if (UI.InterfaceMode == MODE_PLAY) {
+		cout << "122" << endl;
 		for (int i = 0; i < FigCount; i++)
 		{
 			CopyFigList[i] = FigList[i]->CloneFig();
 			cout << CopyFigList[i] << " : " << FigList[i] << endl;
 		}
+		copyArrayLength = FigCount;
 		inPlayMode = true;
 	}
 	else
 	{
 		if (inPlayMode == true) 
 		{
+			FigCount = copyArrayLength;
+			cout << "133" << endl;
 			for (int i = 0; i < FigCount; i++)
 			{
 				delete FigList[i];

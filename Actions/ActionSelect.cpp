@@ -3,10 +3,11 @@
 
 using namespace std;
 
-ActionSelect::ActionSelect(ApplicationManager* pApp, Point _P, bool _multiSelect) :Action(pApp)
+ActionSelect::ActionSelect(ApplicationManager* pApp, Point _P, bool _multiSelect,int _playType) :Action(pApp)
 {
 	multiSelect = _multiSelect;
 	P = _P;
+	playType = _playType;
 }
 
 void ActionSelect::Execute()
@@ -39,6 +40,11 @@ void ActionSelect::Execute()
 			}
 			fig->SetSelected(true);
 			fig->PrintInfo(pGUI);
+		}
+		if (playType) {
+			pManager->DeleteSelectedFigures();
+			pGUI->ClearDrawArea();
+			pManager->UpdateInterface();
 		}
 	}
 }

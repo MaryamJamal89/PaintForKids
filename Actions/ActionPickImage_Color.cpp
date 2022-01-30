@@ -9,5 +9,6 @@ void ActionPickImage_Color::Execute()
 {
 	//Get a Pointer to the Interface
 	GUI* pGUI = pManager->GetGUI();
+	pManager->playType = 3;
 	pGUI->PrintMessage("Select Figur To Pick Image AND Color-_-!");
 }
