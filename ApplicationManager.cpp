@@ -248,7 +248,7 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 }
 
 //unSelect Figures
-void ApplicationManager::UnSelectFigures(int mul) const 
+void ApplicationManager::UnSelectFigures(int mul) const
 {
 	if (mul == 1 && multiSelect)
 	{
@@ -329,6 +329,7 @@ void ApplicationManager::InsertFigure(bool isFront)          //insert figure in 
 	}
 }
 
+
 void ApplicationManager::RearrangingFigList()         //removing null refrences from FigList
 {
 	for (int i = 0; i < FigCount; i++)
@@ -342,6 +343,16 @@ void ApplicationManager::RearrangingFigList()         //removing null refrences 
 			}
 		}
 	}
+}
+
+CFigure* ApplicationManager::getFigList()
+{
+	return *FigList;
+}
+
+int ApplicationManager::getFigCount()
+{
+	return FigCount;
 }
 
 void ApplicationManager::DeleteSelectedFigures()           //delete all selected figures
@@ -371,7 +382,7 @@ void ApplicationManager::SaveAll(ofstream& File) const
 
 //bool ApplicationManager::inPlayMode = false;
 // take copy of Figures
-void ApplicationManager::TakeCopyOfFigures() 
+void ApplicationManager::TakeCopyOfFigures()
 {
 	//bool inPlayMode = false;
 	if (UI.InterfaceMode == MODE_PLAY) {
@@ -382,9 +393,10 @@ void ApplicationManager::TakeCopyOfFigures()
 		}
 		inPlayMode = true;
 	}
-	else 
+	else
 	{
-		if(inPlayMode == true){
+		if (inPlayMode == true) 
+		{
 			for (int i = 0; i < FigCount; i++)
 			{
 				delete FigList[i];
@@ -411,8 +423,8 @@ void ApplicationManager::TakeCopyOfFigures()
 
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
-{	
-	for(int i = 0; i<FigCount; i++)
+{
+	for (int i = 0; i < FigCount; i++)
 		FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
 }
 
@@ -432,5 +444,5 @@ ApplicationManager::~ApplicationManager()
 	for (int i = 0; i < FigCount; i++)
 		delete FigList[i];
 	delete pGUI;
-	
+
 }

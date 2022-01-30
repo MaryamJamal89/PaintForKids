@@ -4,6 +4,8 @@
 #include "..\DEFS.h"
 #include "UI_Info.h" 
 #include "..\CMUgraphicsLib\CMUgraphics.h"
+#include "..\Figures\CFigure.h"
+#include "..\ApplicationManager.h"
 
 //This class is responsible for Grphical User Interface handling
 //All user input and program outputs MUST be done through this class
@@ -31,7 +33,7 @@ public:
 	void CreatePlayToolBar() const;	//creates Play mode toolbar & menu
 	void CreateStatusBar() const;	//create the status bar
 
-	void PrintTempMessge(string msg, int ms);   //print message on status bar and clear after sleep time
+	void PrintTempMessge(string msg, int ms) const;   //print message on status bar and clear after sleep time
 
 	void ClearStatusBar() const;	//Clears the status bar
 	void ClearToolBar() const;		//Clears the tool bar
@@ -41,6 +43,8 @@ public:
 	void DrawSquare(Point P1, int length, GfxInfo RectGfxInfo, bool selected = false) const;	//Draw a Square
 	void DrawEllip(Point P1, int length, int height, GfxInfo ElliGfxInfo, bool selected = false) const;		//Draw a Ellipse
 	void DrawHex(Point center, int length, GfxInfo HexGfxInfo, bool selected = false) const;	//Draw a Hex
+
+	//void terminateFig();
 	
 	void PrintMessage(string msg) const;	//Print a message on Status bar
 
