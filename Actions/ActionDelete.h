@@ -9,7 +9,6 @@ public:
 	ActionDelete(ApplicationManager* pApp);
 
 	virtual void Execute();
-
 };
 
 #endif

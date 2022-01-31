@@ -1,7 +1,4 @@
 #include "./ActionAddEllipse.h"
-#include "../Figures/CEllipse.h"
-#include "../ApplicationManager.h"
-#include "../GUI/GUI.h"
 
 ActionAddEllipse::ActionAddEllipse(ApplicationManager* pApp) :Action(pApp)
 {}
@@ -21,26 +18,20 @@ void ActionAddEllipse::Execute()
 	ElliGfxInfo.FillClr = pGUI->getCrntFillColor();
 	ElliGfxInfo.BorderWdth = pGUI->getCrntPenWidth();
 
-	do
-	{
-		//Read 1st point and store in point center
-		pGUI->PrintMessage("New Ellipse: Click at center point");
-		pGUI->GetPointClicked(C.x, C.y);
+	//Read 1st point and store in point center
+	pGUI->PrintMessage("New Ellipse: Click at center point");
+	pGUI->GetPointClicked(C.x, C.y);
+	CheckPoint(pGUI, C, "New Ellipse: Click at center point");
 
-		//Read 1st point and store in point P1
-		pGUI->PrintMessage("New Ellipse: Click at height point");
-		pGUI->GetPointClicked(P1.x, P1.y);
+	//Read 1st point and store in point P1
+	pGUI->PrintMessage("New Ellipse: Click at height point");
+	pGUI->GetPointClicked(P1.x, P1.y);
+	CheckPoint(pGUI, P1, "New Ellipse: Click at height point");
 
-		//Read 2nd point and store in point P2
-		pGUI->PrintMessage("New Ellipse: Click at length point");
-		pGUI->GetPointClicked(P2.x, P2.y);
-
-		pGUI->PrintMessage("You Clicked In Tool Bar!!");
-
-	} while (P2.y >= 0 && P2.y < UI.ToolBarHeight || P1.y >= 0 && P1.y < UI.ToolBarHeight || C.y >= 0 && C.y < UI.ToolBarHeight);
-
-	pGUI->PrintMessage("New Ellipse");
-
+	//Read 2nd point and store in point P2
+	pGUI->PrintMessage("New Ellipse: Click at length point");
+	pGUI->GetPointClicked(P2.x, P2.y);
+	CheckPoint(pGUI, P2, "New Ellipse: Click at length point");
 
 	pGUI->ClearStatusBar();
 
@@ -51,14 +42,23 @@ void ActionAddEllipse::Execute()
 
 	//Step 3 - Create a Ellipse with the parameters read from the user
 	CEllipse* E = new CEllipse(C, SideLength, SideHeight, ElliGfxInfo);
-	
+
 	//and unselect All Previous Figures
-	if(!pManager->multiSelect){
-		pManager->UnSelectFigures();
-	}
+	pManager->UnSelectFigures(1);
+
 	//Step 4 - Add the Ellipse to the list of figures
 	pManager->AddFigure(E);
 
 	//Step 5 - print new figure info in status bar
 	E->PrintInfo(pGUI);
+}
+
+void ActionAddEllipse::CheckPoint(GUI* pGUI, Point& point, string mssg)
+{
+	while (!(point.y >= UI.ToolBarHeight && point.y < UI.height - UI.StatusBarHeight))
+	{
+		pGUI->PrintTempMessge("You are out of the Drawing Area!!", 2000);
+		pGUI->PrintMessage(mssg);
+		pGUI->GetPointClicked(point.x, point.y);
+	}
 }

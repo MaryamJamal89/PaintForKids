@@ -45,6 +45,7 @@ enum ShapesItem //The items of the Draw menu (you should add more items)
 	ITM_SQUR,		//Square item in menu
 	ITM_ELPS,		//Ellipse item in menu
 	ITM_HEX,		//Hex item in menu
+	ITM_SHAPESBACK,
 
 	Shapes_COUNT
 };
@@ -55,6 +56,7 @@ enum DrawColorItem //The items of the Draw menu (you should add more items)
 	ITM_DEEPSKYBLUE,
 	ITM_LIGHTGREEN,
 	ITM_ORANGE,
+	ITM_COLORBACK,
 
 	Color_COUNT
 };
@@ -85,7 +87,7 @@ struct UI_Info	//User Interface Info.
 	int ToolBarHeight = 50;		//Tool Bar Height (distance from top of window to bottom line of toolbar)
 	int MenuItemWidth = 80;		//Width of each item in toolbar menu
 	
-	bool isFilled = false; 
+	bool isFilled = false;      //current filling status of upcoming figures
 
 	color DrawColor = DEEPSKYBLUE;			//Drawing color
 	color FillColor = LIGHTGREEN;		//Filling color
@@ -95,23 +97,6 @@ struct UI_Info	//User Interface Info.
 	color ToolBarColor = WHITE;			//ToolBarColor
 	color StatusBarColor = MYDARKGRAY;	//Status bar color
 	int PenWidth = 3;				//width of the pen that draws shapes
-
-	// Add more members if needed
-	// GUI_MODE InterfaceMode;
-
-	//  int	width, height,	//Window width and height
-	//	wx, wy,				//Window starting coordinates
-	//	StatusBarHeight,	//Status Bar Height
-	//	ToolBarHeight,		//Tool Bar Height (distance from top of window to bottom line of toolbar)
-	//	MenuItemWidth;		//Width of each item in toolbar menu
-
-	//color DrawColor;		//Drawing color
-	//color FillColor;		//Filling color
-	//color HighlightColor;	//Highlighting color
-	//color MsgColor;		//Messages color
-	//color BkGrndColor;	//Background color
-	//color StatusBarColor;	//Status bar color
-	//int PenWidth;			//width of the pen that draws shapes
 
 }UI;	//create a global object UI
 

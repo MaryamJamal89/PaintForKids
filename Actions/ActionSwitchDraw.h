@@ -3,8 +3,7 @@
 
 #include "Action.h"
 
-
-class ActionSwitchDraw :public Action
+class ActionSwitchDraw : public Action
 {
 public:
 	ActionSwitchDraw(ApplicationManager* pApp);

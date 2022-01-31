@@ -4,6 +4,8 @@
 #include "DEFS.h"
 #include "Figures\CFigure.h"
 
+using namespace std;
+
 class Action;	//Forward Declaration
 
 //Main class that manages everything in the application.
@@ -17,17 +19,28 @@ private:
 	int DORF = 0;		//Draw or fill or backgoround 
 
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
-
+	CFigure* CopyFigList[MaxFigCount];	//copy List of all figures (Array of pointers)
+	int copyArrayLength; // copy number of figures
 	//Pointers to Input and Output classes
 	GUI* pGUI;
 
 public:
+	int validCounter;
+	int invalidCounter;
+	int figType;
+	int startPlay;
+
+	bool inPlayMode;
 	int multiSelect;//enabling multiSelect
+	int playType;
 	int numberOfDuplicatedFilesName;  // this variable to know what number of files that has the same name
 	int ReturnNumberofDulicatedFile(); // this function use to return numberOfDuplicatedFilesName
 	void increamentNumberofDulicatedFile(); //this function use to increament numberOfDuplicatedFilesName
+	
 	ApplicationManager();
 	~ApplicationManager();
+
+	int GetFigCount();    //get number of drawn figures
 
 	void ResetFigList(); //deletes all old figures
 
@@ -45,7 +58,6 @@ public:
 	void InsertFigure(bool isFront);  //change location of selected figure to back or front
 
 	void DeleteSelectedFigures();    //delete selected figures
-
 	void RearrangingFigList();       //remove null refrences from the FigList
 
 	// -- Interface Management Functions	
@@ -55,7 +67,11 @@ public:
 	// Saving function
 	void SaveAll(ofstream& File)const;       //Save All Figures To The File :Asmaa
 
-	void UnSelectFigures() const;
+	void UnSelectFigures(int mul) const;
+
+	void TakeCopyOfFigures();
+
+	void picFigures(CFigure* fig);
 };
 
 #endif

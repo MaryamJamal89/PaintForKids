@@ -1,17 +1,25 @@
 #include "CSquare.h"
 #include<fstream>
+#include <iostream>
 
 int CSquare::SqrCnt = 0;  //static variable to determine the number of objects
 
-CSquare::CSquare(){}
+CSquare::CSquare(){
+	SqrCnt++;
+}
 
-CSquare::CSquare(Point P1, int len, GfxInfo FigureGfxInfo):CFigure(FigureGfxInfo)
+CSquare::CSquare(Point P1, int len, GfxInfo FigureGfxInfo):CFigure(FigureGfxInfo,1)
 {
 	TopLeftCorner = P1;
 	length = len;
 	SqrCnt++;
 }
-	
+
+CSquare::~CSquare() {
+	SqrCnt--;
+	std::cout << "destructor from CSquare" << std::endl;
+}
+
 void CSquare::DrawMe(GUI* pGUI) const
 {
 	//Call Output::DrawRect to draw a Square on the screen	
@@ -67,8 +75,9 @@ void CSquare::PrintInfo(GUI* pGUI)
 	string id = to_string(ID);
 	string x1 = to_string(TopLeftCorner.x);
 	string y1 = to_string(TopLeftCorner.y);
-	string x2 = to_string(TopLeftCorner.x + length);
-	string y2 = to_string(TopLeftCorner.y + length);
+	string len = to_string(length);
+	/*string x2 = to_string(TopLeftCorner.x + length);
+	string y2 = to_string(TopLeftCorner.y + length);*/
 
 	string fillingColor;
 	if (FigGfxInfo.isFilled)
@@ -79,5 +88,21 @@ void CSquare::PrintInfo(GUI* pGUI)
 	{
 		fillingColor = "NO_FILL";
 	}
-	pGUI->PrintMessage("Square / ID:" + id + " Corner1: (" + x1 + ", " + y1 + ") /" + " Corner2: (" + x2 + ", " + y2 + ") /" + " Drawing Color: " + pGUI->ColorToString(FigGfxInfo.DrawClr) + " / Filling Color: " + fillingColor);
+	pGUI->PrintMessage("Square / ID:" + id + " / Top Left Corner: (" + x1 + ", " + y1 + ") /" + " Length: " + len +  " / " + " Drawing Color: " + pGUI->ColorToString(FigGfxInfo.DrawClr) + " / Filling Color: " + fillingColor);
+}
+
+// take a copy of pointer obj without Refernce
+CSquare* CSquare::CloneFig() 
+{
+	//SqrCnt++;
+	return new CSquare(*this);
+}
+
+
+int CSquare::GetCount() {
+	return SqrCnt;
+}
+
+void CSquare::IncCount() {
+	SqrCnt++;
 }
