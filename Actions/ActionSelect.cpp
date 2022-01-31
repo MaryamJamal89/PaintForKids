@@ -41,10 +41,12 @@ void ActionSelect::Execute()
 			fig->SetSelected(true);
 			fig->PrintInfo(pGUI);
 		}
-		if (playType) {
-			pManager->DeleteSelectedFigures();
-			pGUI->ClearDrawArea();
-			pManager->UpdateInterface();
-		}
+	}
+
+	if (playType != 0) {
+		pManager->picFigures(fig);
+		pManager->DeleteSelectedFigures();
+		pGUI->ClearDrawArea();
+		pManager->UpdateInterface();
 	}
 }

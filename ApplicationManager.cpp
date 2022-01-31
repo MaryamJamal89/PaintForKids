@@ -30,6 +30,11 @@ ApplicationManager::ApplicationManager()
 	numberOfDuplicatedFilesName = 1;
 	inPlayMode = false;
 	playType = 0;
+
+	validCounter = 0;
+	invalidCounter = 0;
+	figType = 0;
+	startPlay = 0;
 }
 
 // return numberOfDuplicatedFilesName
@@ -354,8 +359,11 @@ void ApplicationManager::DeleteSelectedFigures()           //delete all selected
 	{
 		if (FigList[i]->IsSelected())
 		{
-			//deleting the figure
-			cout<<"hit" << endl;
+			//  1 = 0 here
+			cout <<"Type   " << FigList[i]->FigType << "   " << FigList[i]-> GetCount() << endl;
+			CFigure* p;
+			p = FigList[i];
+			delete p;
 			FigList[i] = NULL;
 			deletedNum++;
 		}
@@ -379,11 +387,10 @@ void ApplicationManager::TakeCopyOfFigures()
 {
 	//bool inPlayMode = false;
 	if (UI.InterfaceMode == MODE_PLAY) {
-		cout << "122" << endl;
+		//cout << "122" << endl;
 		for (int i = 0; i < FigCount; i++)
 		{
 			CopyFigList[i] = FigList[i]->CloneFig();
-			cout << CopyFigList[i] << " : " << FigList[i] << endl;
 		}
 		copyArrayLength = FigCount;
 		inPlayMode = true;
@@ -393,7 +400,6 @@ void ApplicationManager::TakeCopyOfFigures()
 		if (inPlayMode == true) 
 		{
 			FigCount = copyArrayLength;
-			cout << "133" << endl;
 			for (int i = 0; i < FigCount; i++)
 			{
 				delete FigList[i];
@@ -412,6 +418,58 @@ void ApplicationManager::TakeCopyOfFigures()
 	}
 }
 
+//void picFigures();
+void ApplicationManager::picFigures(CFigure * fig) {
+	if(fig){
+		if (startPlay == 0) {
+			figType = fig->FigType;
+			startPlay = fig->GetCount()-1;
+			switch (figType)
+			{
+			case 1:
+				pGUI->PrintMessage("Choose all Squares");
+				break;
+			case 2:
+				pGUI->PrintMessage("Choose all Ellipse");
+				break;
+			case 3:
+				pGUI->PrintMessage("Choose all Hexagone");
+				break;
+			}
+		}
+		else {
+			if (fig->FigType == figType && startPlay==1) {
+				string msg = /*to_string(--startPlay)+*/" Game Over valid Choises: " + to_string(validCounter+1);
+				string msg2 = " invalid Choises: " + to_string(invalidCounter);
+				
+				pGUI->PrintMessage(msg + msg2);
+
+				//startPlay = 0;
+				playType = 0;
+				validCounter = 0;
+				invalidCounter = 0;
+			}
+			else if (fig->FigType == figType) {
+				validCounter++;
+				startPlay--;
+				string msg = to_string(startPlay)+" Figures => valid Choises: " + to_string(validCounter);
+				string msg2 = " invalid Choises: " + to_string(invalidCounter);
+				pGUI->PrintMessage(msg+msg2);
+			}
+			else {
+				invalidCounter++;
+				string msg = to_string(startPlay)+" figures => valid Choises " + to_string(validCounter);
+				string msg2 = " invalid Choises: " + to_string(invalidCounter);
+				pGUI->PrintMessage(msg + msg2);
+			}
+		}
+	}
+	else {
+		string msg = to_string(startPlay) + " Figures => valid Choises" + to_string(validCounter);
+		string msg2 = " invalid Choises: " + to_string(invalidCounter);
+		pGUI->PrintMessage(msg + msg2);
+	}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////
 //==================================================================================//

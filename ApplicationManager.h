@@ -20,12 +20,16 @@ private:
 
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
 	CFigure* CopyFigList[MaxFigCount];	//copy List of all figures (Array of pointers)
-
+	int copyArrayLength; // copy number of figures
 	//Pointers to Input and Output classes
 	GUI* pGUI;
 
 public:
-	int copyArrayLength;
+	int validCounter;
+	int invalidCounter;
+	int figType;
+	int startPlay;
+
 	bool inPlayMode;
 	int multiSelect;//enabling multiSelect
 	int playType;
@@ -66,6 +70,8 @@ public:
 	void UnSelectFigures(int mul) const;
 
 	void TakeCopyOfFigures();
+
+	void picFigures(CFigure* fig);
 };
 
 #endif
