@@ -25,6 +25,8 @@ public:
 	virtual CSquare* CloneFig();
 
 	virtual int GetCount();
+
+	virtual void IncCount();
 };
 
 #endif

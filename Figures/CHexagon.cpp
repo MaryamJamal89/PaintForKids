@@ -203,10 +203,15 @@ void CHexagon::PrintInfo(GUI* pGUI)
 // take a copy of pointer obj without Refernce
 CHexagon* CHexagon::CloneFig() 
 {
+	//HexCnt++;
 	return new CHexagon(*this);
 }
 
 
 int CHexagon::GetCount() {
 	return HexCnt;
+}
+
+void CHexagon::IncCount() {
+	HexCnt++;
 }

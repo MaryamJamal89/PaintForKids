@@ -32,6 +32,8 @@ public:
 	virtual CHexagon* CloneFig();
 
 	virtual int GetCount();
+
+	virtual void IncCount();
 };
 
 #endif

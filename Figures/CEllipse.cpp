@@ -96,9 +96,14 @@ void CEllipse::PrintInfo(GUI* pGUI)
 // take a copy of pointer obj without Refernce
 CEllipse* CEllipse::CloneFig() 
 {
+	//ElliCnt++;
 	return new CEllipse(*this);
 }
 
 int CEllipse::GetCount() {
 	return ElliCnt;
+}
+
+void CEllipse::IncCount() {
+	ElliCnt++;
 }

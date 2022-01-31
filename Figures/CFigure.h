@@ -49,6 +49,8 @@ public:
 	virtual CFigure * CloneFig(); // to copy figure
 
 	virtual int GetCount();
+
+	virtual void IncCount();
 };
 
 #endif

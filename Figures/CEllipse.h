@@ -28,6 +28,7 @@ public:
 	virtual CEllipse* CloneFig();
 
 	virtual int GetCount();
+	virtual void IncCount();
 };
 
 #endif

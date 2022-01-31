@@ -44,3 +44,6 @@ CFigure* CFigure::CloneFig()
 int CFigure::GetCount() {
 	return 0;
 }
+
+
+void CFigure::IncCount() { return; }
