@@ -406,11 +406,14 @@ void ApplicationManager::TakeCopyOfFigures()
 			}
 			for (int i = 0; i < FigCount; i++)
 			{
+
 				FigList[i] = CopyFigList[i]->CloneFig();
-				cout << CopyFigList[i] << " : " << FigList[i] << endl;
+				FigList[i]->IncCount();
+				cout << CopyFigList[i] << " : " << FigList[i]->GetCount() << endl;
 			}
 			for (int i = 0; i < FigCount; i++)
 			{
+				FigList[i]->IncCount();
 				delete CopyFigList[i];
 				inPlayMode = false;
 			}
@@ -427,30 +430,31 @@ void ApplicationManager::picFigures(CFigure * fig) {
 			startPlay = fig->GetCount()-1;
 			switch (figType)
 			{
-			case 1:
-				figure = "Squares";
-				break;
-			case 2:
-				figure="Ellipse";
-				break;
-			case 3:
-				figure="Hexagone";
-				break;
+				case 1:
+					figure = "Squares";
+					break;
+				case 2:
+					figure="Ellipse";
+					break;
+				case 3:
+					figure="Hexagone";
+					break;
 			}
-			pGUI->PrintMessage("Game Started : Choose all "+figure);
+			pGUI->PrintMessage("Game Started : Choose all "+figure + " count: " + to_string(startPlay));
+
 			if (startPlay == 0) {
 				pGUI->PrintMessage(" Game Over it's just one " + figure);
 				playType = 0;
+				//figType = 0;
 			}
 		}
 		else {
-			if (fig->FigType == figType && startPlay==1) {
+			if (fig->FigType == figType && startPlay == 1) {
 				string msg = to_string(--startPlay)+" Game Over valid Choises: " + to_string(validCounter+1);
 				string msg2 = " invalid Choises: " + to_string(invalidCounter);
 				
 				pGUI->PrintMessage(msg + msg2);
-
-				//startPlay = 0;
+				startPlay = 0;
 				playType = 0;
 				validCounter = 0;
 				invalidCounter = 0;

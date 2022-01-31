@@ -94,10 +94,15 @@ void CSquare::PrintInfo(GUI* pGUI)
 // take a copy of pointer obj without Refernce
 CSquare* CSquare::CloneFig() 
 {
+	//SqrCnt++;
 	return new CSquare(*this);
 }
 
 
 int CSquare::GetCount() {
 	return SqrCnt;
+}
+
+void CSquare::IncCount() {
+	SqrCnt++;
 }
