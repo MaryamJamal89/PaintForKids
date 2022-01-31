@@ -73,6 +73,10 @@ public:
 	
 	void TakeFigOfDrawMode();
 	
+	CFigure* MaxFigTypeCount();
+
+	void picFiguresStatus();
+
 	void picFigures(CFigure* fig);
 };
 
