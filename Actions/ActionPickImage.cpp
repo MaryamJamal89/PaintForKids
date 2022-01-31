@@ -12,5 +12,5 @@ void ActionPickImage::Execute()
 	//Get a Pointer to the Interface
 	GUI* pGUI = pManager->GetGUI();
 	*playType = 1;
-	pGUI->PrintMessage("Select Figur-_-!");
+	pGUI->PrintMessage("You are now playing <Selecting similar Figurs>");
 }

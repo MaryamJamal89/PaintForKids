@@ -8,10 +8,11 @@ class CHexagon : public CFigure
 private:
 	Point Center, P;
 	int length;
-
+	static int HexCnt;//static variable to determine the number of objects
 public:
-	static int HexCnt;									//static variable to determine the number of objects
+										
 	CHexagon();
+	~CHexagon();
 	CHexagon(Point, int, GfxInfo FigureGfxInfo);
 	virtual void DrawMe(GUI* pOut) const;				//draw the figure 
 	virtual void Save(ofstream& file, GUI* pGUI);		// save figure to file
@@ -29,6 +30,8 @@ public:
 
 	// take a copy of pointer obj without Refernce
 	virtual CHexagon* CloneFig();
+
+	virtual int GetCount();
 };
 
 #endif

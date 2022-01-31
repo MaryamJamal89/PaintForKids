@@ -1,18 +1,26 @@
 #include "CHexagon.h"
 #include<fstream>
+#include <iostream>
 
 // Define Infinite (Using INT_MAX caused overflow problems)
 #define INF 10000
 
 int CHexagon::HexCnt = 0;  //static variable to determine the number of objects
 
-CHexagon::CHexagon(){}
+CHexagon::CHexagon(){
+	HexCnt++;
+}
 
-CHexagon::CHexagon(Point C, int len, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo)
+CHexagon::CHexagon(Point C, int len, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo,3)
 {
 	Center = C;
 	length = len;
 	HexCnt++;
+}
+
+CHexagon::~CHexagon() {
+	HexCnt--;
+	std::cout << "destructor from CHexagon" << std::endl;
 }
 
 void CHexagon::DrawMe(GUI* pOut) const
@@ -196,4 +204,9 @@ void CHexagon::PrintInfo(GUI* pGUI)
 CHexagon* CHexagon::CloneFig() 
 {
 	return new CHexagon(*this);
+}
+
+
+int CHexagon::GetCount() {
+	return HexCnt;
 }
