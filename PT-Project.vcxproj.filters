@@ -59,6 +59,7 @@
     <ClCompile Include="Actions\ActionPickColor.cpp" />
     <ClCompile Include="Actions\ActionPickImage_Color.cpp" />
     <ClCompile Include="Actions\ActionDelete.cpp" />
+    <ClCompile Include="Actions\ActionRestartPlay.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\ActionSelect.h" />
@@ -106,5 +107,6 @@
     <ClInclude Include="Actions\ActionPickImage.h" />
     <ClInclude Include="Actions\ActionPickColor.h" />
     <ClInclude Include="Actions\ActionPickImage_Color.h" />
+    <ClInclude Include="Actions\ActionRestartPlay.h" />
   </ItemGroup>
 </Project>

@@ -71,6 +71,8 @@ public:
 
 	void TakeCopyOfFigures();
 
+	void TakeFigOfDrawMode();
+
 	void picFigures(CFigure* fig);
 };
 
