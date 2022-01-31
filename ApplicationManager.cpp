@@ -438,10 +438,14 @@ void ApplicationManager::picFigures(CFigure * fig) {
 				break;
 			}
 			pGUI->PrintMessage("Game Started : Choose all "+figure);
+			if (startPlay == 0) {
+				pGUI->PrintMessage(" Game Over it's just one " + figure);
+				playType = 0;
+			}
 		}
 		else {
-			if (fig->FigType == figType && startPlay<=1) {
-				string msg = /*to_string(--startPlay)+*/" Game Over valid Choises: " + to_string(validCounter+1);
+			if (fig->FigType == figType && startPlay==1) {
+				string msg = to_string(--startPlay)+" Game Over valid Choises: " + to_string(validCounter+1);
 				string msg2 = " invalid Choises: " + to_string(invalidCounter);
 				
 				pGUI->PrintMessage(msg + msg2);
@@ -464,10 +468,6 @@ void ApplicationManager::picFigures(CFigure * fig) {
 				string msg2 = " invalid Choises: " + to_string(invalidCounter);
 				pGUI->PrintMessage(msg + msg2);
 			}
-		}
-		if (startPlay == 0) {
-			pGUI->PrintMessage(" Game Over it's just one "+ figure);
-			playType = 0;
 		}
 	}
 	else {
