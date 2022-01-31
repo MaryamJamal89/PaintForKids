@@ -13,6 +13,7 @@
 #include "Actions/ActionPickImage.h"
 #include "Actions/ActionPickColor.h"
 #include "Actions/ActionPickImage_Color.h"
+#include "Actions/ActionRestartPlay.h"
 #include "Actions/ActionSwitchPlay.h"
 #include "Actions/ActionSwitchDraw.h"
 #include "Actions/ActionDelete.h"
@@ -198,7 +199,9 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 	case TO_PICK_IMAGE_COLOR:
 		newAct = new ActionPickImage_Color(this);
 		break;
-
+	case RESTART:
+		newAct = new ActionRestartPlay(this);
+		break;
 	case TO_PLAY:
 		newAct = new ActionSwitchPlay(this);
 		break;
@@ -420,6 +423,39 @@ void ApplicationManager::TakeCopyOfFigures()
 		}
 	}
 }
+
+/////////////
+ //To Restart Play
+void ApplicationManager::TakeFigOfDrawMode()
+{
+	
+	if(UI.InterfaceMode == MODE_PLAY)
+	{
+		if (inPlayMode == true)
+		{
+			FigCount = copyArrayLength;
+			//copyArrayLength = FigCount;
+			for (int i = 0; i < FigCount; i++)
+			{
+				delete FigList[i];
+			}
+			for (int i = 0; i < FigCount; i++)
+			{
+
+				FigList[i] = CopyFigList[i]->CloneFig();
+				FigList[i]->IncCount();
+				cout << CopyFigList[i] << " : " << FigList[i]->GetCount() << endl;
+			}
+			for (int i = 0; i < FigCount; i++)
+			{
+				FigList[i]->IncCount();
+				delete CopyFigList[i];
+				inPlayMode = false;
+			}
+		}
+	}
+}
+
 
 //void picFigures();
 void ApplicationManager::picFigures(CFigure * fig) {
