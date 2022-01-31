@@ -437,7 +437,7 @@ void ApplicationManager::picFigures(CFigure * fig) {
 				figure="Hexagone";
 				break;
 			}
-			pGUI->PrintMessage(figure);
+			pGUI->PrintMessage("Game Started : Choose all "+figure);
 		}
 		else {
 			if (fig->FigType == figType && startPlay<=1) {
