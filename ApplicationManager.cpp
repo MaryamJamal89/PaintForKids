@@ -425,11 +425,11 @@ void ApplicationManager::TakeCopyOfFigures()
 }
 
 /////////////
-//To Restart Play
+ //To Restart Play
 void ApplicationManager::TakeFigOfDrawMode()
 {
 	
-	if(UI.InterfaceMode == MODE_PLAY) 
+	if(UI.InterfaceMode == MODE_PLAY)
 	{
 		if (inPlayMode == true)
 		{

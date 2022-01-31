@@ -70,9 +70,9 @@ public:
 	void UnSelectFigures(int mul) const;
 
 	void TakeCopyOfFigures();
-
+	
 	void TakeFigOfDrawMode();
-
+	
 	void picFigures(CFigure* fig);
 };
 
