@@ -420,6 +420,7 @@ void ApplicationManager::TakeCopyOfFigures()
 
 //void picFigures();
 void ApplicationManager::picFigures(CFigure * fig) {
+	string figure;
 	if(fig){
 		if (startPlay == 0) {
 			figType = fig->FigType;
@@ -427,18 +428,19 @@ void ApplicationManager::picFigures(CFigure * fig) {
 			switch (figType)
 			{
 			case 1:
-				pGUI->PrintMessage("Choose all Squares");
+				figure = "Squares";
 				break;
 			case 2:
-				pGUI->PrintMessage("Choose all Ellipse");
+				figure="Ellipse";
 				break;
 			case 3:
-				pGUI->PrintMessage("Choose all Hexagone");
+				figure="Hexagone";
 				break;
 			}
+			pGUI->PrintMessage(figure);
 		}
 		else {
-			if (fig->FigType == figType && startPlay==1) {
+			if (fig->FigType == figType && startPlay<=1) {
 				string msg = /*to_string(--startPlay)+*/" Game Over valid Choises: " + to_string(validCounter+1);
 				string msg2 = " invalid Choises: " + to_string(invalidCounter);
 				
@@ -462,6 +464,10 @@ void ApplicationManager::picFigures(CFigure * fig) {
 				string msg2 = " invalid Choises: " + to_string(invalidCounter);
 				pGUI->PrintMessage(msg + msg2);
 			}
+		}
+		if (startPlay == 0) {
+			pGUI->PrintMessage(" Game Over it's just one "+ figure);
+			playType = 0;
 		}
 	}
 	else {
