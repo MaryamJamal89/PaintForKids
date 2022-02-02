@@ -411,15 +411,15 @@ void ApplicationManager::TakeCopyOfFigures()
 	{
 		if (inPlayMode == true) 
 		{
+			// restore the original size of the array
+			FigCount = copyArrayLength;
+
 			cout << "sss" << endl;
 			// delete old pointers first
 			for (int i = 0; i < FigCount; i++)
 			{
 				delete FigList[i];
 			}
-
-			// restore the original size of the array
-			FigCount = copyArrayLength;
 
 			// restore figures from the backup array
 			for (int i = 0; i < FigCount; i++)
@@ -444,6 +444,7 @@ void ApplicationManager::TakeCopyOfFigures()
  //To Restart Play
 void ApplicationManager::TakeFigOfDrawMode()
 {
+	
 	// restore the original size of the array
 	FigCount = copyArrayLength;
 
@@ -456,7 +457,6 @@ void ApplicationManager::TakeFigOfDrawMode()
 	// restore figures from the backup array
 	for (int i = 0; i < FigCount; i++)
 	{
-		cout << "sssss" << endl;
 		FigList[i] = CopyFigList[i]->CloneFig();
 		FigList[i]->IncCount();
 		//cout << CopyFigList[i] << " : " << FigList[i]->GetCount() << endl;
@@ -481,7 +481,7 @@ CFigure* ApplicationManager::GetRandomFigure() {
 void ApplicationManager::UpdateInterface() const
 {
 	for (int i = 0; i < FigCount; i++)
-		FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
+			FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
 }
 
 ////////////////////////////////////////////////////////////////////////////////////

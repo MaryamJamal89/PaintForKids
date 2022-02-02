@@ -3,13 +3,14 @@
 
 CFigure::CFigure() {}
 
-CFigure::CFigure(GfxInfo FigureGfxInfo,int _FigType)
+CFigure::CFigure(GfxInfo FigureGfxInfo)
 { 
 	FigGfxInfo = FigureGfxInfo;	// Default status is non-filled.
 	Selected = true; // Figure is selected after created
 	ID = id++; // Figure ID starts from 1
-	FigType = _FigType;
 }
+//copy constructor
+//CFigure::CFigure(const CFigure & cfig) {}
 ////dstructor
 CFigure::~CFigure() {
 	//ID--;
@@ -21,6 +22,7 @@ void CFigure::SetSelected(bool s)
 
 bool CFigure::IsSelected() const
 {	return Selected; }
+
 
 void CFigure::ChngDrawClr(color Dclr)
 {	FigGfxInfo.DrawClr = Dclr; }
@@ -35,10 +37,10 @@ void CFigure::ChngFillClr(color Fclr)
 int CFigure::id = 1;
 
 // take a copy of pointer obj without Refernce
-CFigure* CFigure::CloneFig() 
-{
-	return NULL;
-}
+//CFigure* CFigure::CloneFig() 
+//{
+//	return NULL;
+//}
 
 
 int CFigure::GetCount() {
@@ -61,4 +63,10 @@ string CFigure::GetFillClr()
 	}
 	else
 		return "NON-FILLED";
+}
+
+
+// figure Name
+string CFigure::FigureName() {
+	return "Parent";
 }

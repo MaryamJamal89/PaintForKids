@@ -8,7 +8,7 @@ CEllipse::CEllipse(){
 	ElliCnt++;
 }
 
-CEllipse::CEllipse(Point C, int len, int hght, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo,2)
+CEllipse::CEllipse(Point C, int len, int hght, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo)
 {
 	Center = C;
 	length = len;
@@ -25,6 +25,11 @@ void CEllipse::DrawMe(GUI* pOut) const
 {
 	//Call Output::DrawEllipse to draw a ellipse on the screen	
 	pOut->DrawEllip(Center, length, height, FigGfxInfo, Selected);
+}
+
+// figure Name
+string CEllipse::FigureName() {
+	return "Ellipse";
 }
 
 //save figure in the file

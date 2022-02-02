@@ -12,7 +12,7 @@ private:
 public:
 										
 	CHexagon();
-	~CHexagon();
+	virtual ~CHexagon();
 	CHexagon(Point, int, GfxInfo FigureGfxInfo);
 	virtual void DrawMe(GUI* pOut) const;				//draw the figure 
 	virtual void Save(ofstream& file, GUI* pGUI);		// save figure to file
@@ -34,6 +34,9 @@ public:
 	virtual int GetCount();
 
 	virtual void IncCount();
+
+	// return Figure Name
+	virtual string FigureName();
 };
 
 #endif

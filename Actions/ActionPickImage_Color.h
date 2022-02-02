@@ -23,7 +23,7 @@ public:
 	ActionPickImage_Color(ApplicationManager* pApp);
 	virtual CFigure* ReadesFigures();
 	virtual void Execute();
-	virtual bool figureMatches(CFigure* figure , CFigure* selectedFigure);
+	virtual bool figureMatches(CFigure * figure , CFigure * selectedFigure);
 	virtual void UpdateStatusBar(CFigure* fig);
 	virtual int MatchedFigsCount(CFigure* fig);
 };
