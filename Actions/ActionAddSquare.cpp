@@ -43,6 +43,12 @@ void ActionAddSquare::Execute()
 	//The square side length would be the longer distance between the two points coordinates
 	int SideLength = max(abs(P1.x - P2.x), abs(P1.y - P2.y));
 
+	if ((P1.y + SideLength) < UI.ToolBarHeight || (P2.y + SideLength) >= (UI.height - UI.StatusBarHeight))
+	{
+		pGUI->PrintTempMessge("Points out of the Drawing Area!", 800);
+		return;
+	}
+
 	//Step 3 - Create a Square with the parameters read from the user
 	CSquare* R = new CSquare(topLeft, SideLength, SqrGfxInfo);
 
