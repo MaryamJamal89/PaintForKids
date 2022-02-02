@@ -11,10 +11,15 @@ CHexagon::CHexagon(){
 	HexCnt++;
 }
 
-CHexagon::CHexagon(Point C, int len, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo,3)
+CHexagon::CHexagon(int Xarr[], int Yarr[], Point C, int len, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo, 3)
 {
 	Center = C;
 	length = len;
+	for (int i=0; i < 6; i++) 
+	{
+		Xpoints[i] = Xarr[i];
+		Ypoints[i] = Yarr[i];
+	}
 	HexCnt++;
 }
 
@@ -26,7 +31,7 @@ CHexagon::~CHexagon() {
 void CHexagon::DrawMe(GUI* pOut) const
 {
 	//Call Output::DrawHex to draw a Hexagon on the screen	
-	pOut->DrawHex(Center, length, FigGfxInfo, Selected);
+	pOut->DrawHex(Xpoints, Ypoints, FigGfxInfo, Selected);
 }
 
 // save figure in the file
@@ -176,8 +181,8 @@ bool CHexagon::InFig(int x, int y)
 	point6.x = Center.x - d / 2;
 	point6.y = Center.y + (d - d / 20 * 3);
 
-	Point points[] = { point1, point2, point3, point4,point5,point6 };
-	return isInside(points, 6, {x,y});
+	Point points[] = { point1, point2, point3, point4, point5, point6 };
+	return isInside(points, 6, {x, y});
 }
 
 // Print to return all info about figure
