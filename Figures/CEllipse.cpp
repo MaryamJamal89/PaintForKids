@@ -1,16 +1,24 @@
 #include "CEllipse.h"
 #include<fstream>
+#include <iostream>
 
 int CEllipse::ElliCnt = 0;  //static variable to determine the number of objects
 
-CEllipse::CEllipse(){}
+CEllipse::CEllipse(){
+	ElliCnt++;
+}
 
-CEllipse::CEllipse(Point C, int len, int hght, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo)
+CEllipse::CEllipse(Point C, int len, int hght, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo,2)
 {
 	Center = C;
 	length = len;
 	height = hght;
 	ElliCnt++;
+}
+
+CEllipse::~CEllipse() {
+	ElliCnt--;
+	std::cout << "destructor from CEllipse" << std::endl;
 }
 
 void CEllipse::DrawMe(GUI* pOut) const
@@ -88,5 +96,14 @@ void CEllipse::PrintInfo(GUI* pGUI)
 // take a copy of pointer obj without Refernce
 CEllipse* CEllipse::CloneFig() 
 {
+	//ElliCnt++;
 	return new CEllipse(*this);
+}
+
+int CEllipse::GetCount() {
+	return ElliCnt;
+}
+
+void CEllipse::IncCount() {
+	ElliCnt++;
 }

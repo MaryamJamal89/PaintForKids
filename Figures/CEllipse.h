@@ -9,10 +9,11 @@ private:
 	Point Center, P;
 	int length;
 	int height;
-
+	static int ElliCnt;//static variable to determine the number of objects
 public:
-	static int ElliCnt; //static variable to determine the number of objects
+	 
 	CEllipse();
+	~CEllipse();
 	CEllipse(Point, int, int, GfxInfo FigureGfxInfo);
 
 	virtual void DrawMe(GUI* pOut) const;				// draw the figure 
@@ -25,6 +26,9 @@ public:
 	virtual void PrintInfo(GUI* pGUI);
 	// take a copy of pointer obj without Refernce
 	virtual CEllipse* CloneFig();
+
+	virtual int GetCount();
+	virtual void IncCount();
 };
 
 #endif

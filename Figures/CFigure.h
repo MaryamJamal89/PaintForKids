@@ -4,7 +4,7 @@
 #include <fstream>
 #include "..\defs.h"
 #include "..\GUI\GUI.h"
-
+#include<string>
 //Base class for all figures
 class CFigure
 {
@@ -17,9 +17,10 @@ protected:
 	// Add more parameters if needed.
 
 public:
+	int FigType;
 	CFigure();
-	CFigure(GfxInfo FigureGfxInfo);
-
+	virtual ~CFigure();
+	CFigure(GfxInfo FigureGfxInfo, int _FigType);
 	void SetSelected(bool );	//select/unselect the figure
 	bool IsSelected() const;	//check whether fig is selected
 
@@ -46,6 +47,12 @@ public:
 	
 	// take a copy of pointer obj without Refernce
 	virtual CFigure * CloneFig(); // to copy figure
+
+	virtual int GetCount();
+
+	virtual void IncCount();
+	//string colorToString(color c); //Convert color to string ***v3.1**
+	string GetFillClr();
 };
 
 #endif

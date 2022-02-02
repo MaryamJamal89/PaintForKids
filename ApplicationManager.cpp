@@ -13,10 +13,16 @@
 #include "Actions/ActionPickImage.h"
 #include "Actions/ActionPickColor.h"
 #include "Actions/ActionPickImage_Color.h"
+#include "Actions/ActionRestartPlay.h"
 #include "Actions/ActionSwitchPlay.h"
 #include "Actions/ActionSwitchDraw.h"
 #include "Actions/ActionDelete.h"
 
+#include <stdio.h>
+#include <stdlib.h>  
+#include <cstdlib>
+#include <iostream>
+#include <chrono>
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -29,6 +35,12 @@ ApplicationManager::ApplicationManager()
 	multiSelect = 0;
 	numberOfDuplicatedFilesName = 1;
 	inPlayMode = false;
+	
+	playType = 0;
+	validCounter = 0;
+	invalidCounter = 0;
+	figType = 0;
+	startPlay = 0;
 }
 
 // return numberOfDuplicatedFilesName
@@ -182,7 +194,7 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 		break;
 
 	case TO_PICK_IMAGE:
-		newAct = new ActionPickImage(this);
+		newAct = new ActionPickImage(this, playType);
 		break;
 
 	case TO_PICK_COLOR:
@@ -192,12 +204,15 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 	case TO_PICK_IMAGE_COLOR:
 		newAct = new ActionPickImage_Color(this);
 		break;
-
+	case RESTART:
+		newAct = new ActionRestartPlay(this);
+		break;
 	case TO_PLAY:
 		newAct = new ActionSwitchPlay(this);
 		break;
 
 	case TO_DRAW:
+		playType = 0;
 		newAct = new ActionSwitchDraw(this);
 		break;
 
@@ -240,6 +255,11 @@ int ApplicationManager::GetFigCount()
 //==================================================================================//
 //multiSelect filed
 //bool ApplicationManager::multiSelect = false;
+
+CFigure* ApplicationManager::getFigByIndex(int i) {
+	return FigList[i];
+}
+
 //Add a figure to the list of figures
 void ApplicationManager::AddFigure(CFigure* pFig)
 {
@@ -352,7 +372,10 @@ void ApplicationManager::DeleteSelectedFigures()           //delete all selected
 	{
 		if (FigList[i]->IsSelected())
 		{
-			//deleting the figure
+
+			/*CFigure* temp;
+			temp = FigList[i];
+			delete temp;*/
 			FigList[i] = NULL;
 			deletedNum++;
 		}
@@ -370,34 +393,46 @@ void ApplicationManager::SaveAll(ofstream& File) const
 	}
 }
 
-//bool ApplicationManager::inPlayMode = false;
-// take copy of Figures
+// Backup FigList
 void ApplicationManager::TakeCopyOfFigures()
 {
 	//bool inPlayMode = false;
 	if (UI.InterfaceMode == MODE_PLAY) {
+		// backup original figures
 		for (int i = 0; i < FigCount; i++)
 		{
+			cout << "s" << endl;
 			CopyFigList[i] = FigList[i]->CloneFig();
-			cout << CopyFigList[i] << " : " << FigList[i] << endl;
 		}
+		copyArrayLength = FigCount;
 		inPlayMode = true;
 	}
 	else
 	{
 		if (inPlayMode == true) 
 		{
+			cout << "sss" << endl;
+			// delete old pointers first
 			for (int i = 0; i < FigCount; i++)
 			{
 				delete FigList[i];
 			}
+
+			// restore the original size of the array
+			FigCount = copyArrayLength;
+
+			// restore figures from the backup array
 			for (int i = 0; i < FigCount; i++)
 			{
 				FigList[i] = CopyFigList[i]->CloneFig();
-				cout << CopyFigList[i] << " : " << FigList[i] << endl;
+				FigList[i]->IncCount();
+				//cout << CopyFigList[i] << " : " << FigList[i]->GetCount() << endl;
 			}
+
+			// delete pointers in the backup array to free ram
 			for (int i = 0; i < FigCount; i++)
 			{
+				FigList[i]->IncCount();
 				delete CopyFigList[i];
 				inPlayMode = false;
 			}
@@ -405,6 +440,37 @@ void ApplicationManager::TakeCopyOfFigures()
 	}
 }
 
+/////////////
+ //To Restart Play
+void ApplicationManager::TakeFigOfDrawMode()
+{
+	// restore the original size of the array
+	FigCount = copyArrayLength;
+
+	// delete old pointers first
+	for (int i = 0; i < FigCount; i++)
+	{
+		delete FigList[i];
+	}
+
+	// restore figures from the backup array
+	for (int i = 0; i < FigCount; i++)
+	{
+		cout << "sssss" << endl;
+		FigList[i] = CopyFigList[i]->CloneFig();
+		FigList[i]->IncCount();
+		//cout << CopyFigList[i] << " : " << FigList[i]->GetCount() << endl;
+	}
+}
+
+CFigure* ApplicationManager::GetRandomFigure() {
+	if (FigCount)
+	{
+		srand(time(NULL));
+		return FigList[rand() % FigCount];
+	}
+	return nullptr;
+}
 
 ////////////////////////////////////////////////////////////////////////////////////
 //==================================================================================//

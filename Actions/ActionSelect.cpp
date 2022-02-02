@@ -21,7 +21,6 @@ void ActionSelect::Execute()
 	if (fig == NULL) {
 		pGUI->PrintMessage("No Figure Selected");
 		pManager->UnSelectFigures(2);
-		//selectedFigures.clear();
 	}
 	else
 	{
@@ -41,4 +40,5 @@ void ActionSelect::Execute()
 			fig->PrintInfo(pGUI);
 		}
 	}
+
 }

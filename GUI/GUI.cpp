@@ -148,6 +148,7 @@ ActionType GUI::MapInputToActionType(int &x,int &y) const
 			case ITM_PICK_IMAGE: return TO_PICK_IMAGE;
 			case ITM_PICK_FILL_COLOR: return TO_PICK_COLOR;
 			case ITM_PICK_IMAGE_COLOR: return TO_PICK_IMAGE_COLOR;
+			case ITM_RESTART: return RESTART;
 			case ITM_DRAW: return TO_DRAW;
 
 
@@ -311,6 +312,7 @@ void GUI::CreatePlayToolBar() const
 	MenuItemImages[ITM_PICK_IMAGE] = "images\\MenuItems\\selectShape-color.jpg";
 	MenuItemImages[ITM_PICK_FILL_COLOR] = "images\\MenuItems\\selectColor-color.jpg";
 	MenuItemImages[ITM_PICK_IMAGE_COLOR] = "images\\MenuItems\\selectAll-color.jpg";
+	MenuItemImages[ITM_RESTART] = "images\\MenuItems\\restart.jpg",
 	MenuItemImages[ITM_DRAW] = "images\\MenuItems\\return-color.jpg";
 
 	//Draw menu item one image at a time

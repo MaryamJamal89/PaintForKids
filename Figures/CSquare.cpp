@@ -1,15 +1,23 @@
 #include "CSquare.h"
 #include<fstream>
+#include <iostream>
 
 int CSquare::SqrCnt = 0;  //static variable to determine the number of objects
 
-CSquare::CSquare(){}
+CSquare::CSquare(){
+	SqrCnt++;
+}
 
-CSquare::CSquare(Point P1, int len, GfxInfo FigureGfxInfo):CFigure(FigureGfxInfo)
+CSquare::CSquare(Point P1, int len, GfxInfo FigureGfxInfo):CFigure(FigureGfxInfo,1)
 {
 	TopLeftCorner = P1;
 	length = len;
 	SqrCnt++;
+}
+
+CSquare::~CSquare() {
+	SqrCnt--;
+	std::cout << "destructor from CSquare" << std::endl;
 }
 
 void CSquare::DrawMe(GUI* pGUI) const
@@ -86,5 +94,15 @@ void CSquare::PrintInfo(GUI* pGUI)
 // take a copy of pointer obj without Refernce
 CSquare* CSquare::CloneFig() 
 {
+	//SqrCnt++;
 	return new CSquare(*this);
+}
+
+
+int CSquare::GetCount() {
+	return SqrCnt;
+}
+
+void CSquare::IncCount() {
+	SqrCnt++;
 }
