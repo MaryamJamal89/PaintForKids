@@ -402,7 +402,7 @@ void ApplicationManager::TakeCopyOfFigures()
 		// backup original figures
 		for (int i = 0; i < FigCount; i++)
 		{
-			cout << "s" << endl;
+			cout << "backup original figures" << endl;
 			CopyFigList[i] = FigList[i]->CloneFig();
 		}
 		copyArrayLength = FigCount;
@@ -412,7 +412,7 @@ void ApplicationManager::TakeCopyOfFigures()
 	{
 		if (inPlayMode == true) 
 		{
-			cout << "sss" << endl;
+			cout << "inPlayMode" << endl;
 			// delete old pointers first
 			for (int i = 0; i < FigCount; i++)
 			{
@@ -457,7 +457,7 @@ void ApplicationManager::TakeFigOfDrawMode()
 	// restore figures from the backup array
 	for (int i = 0; i < FigCount; i++)
 	{
-		cout << "sssss" << endl;
+		cout << "restore figures from the backup array" << endl;
 		FigList[i] = CopyFigList[i]->CloneFig();
 		FigList[i]->IncCount();
 		//cout << CopyFigList[i] << " : " << FigList[i]->GetCount() << endl;
@@ -501,5 +501,4 @@ ApplicationManager::~ApplicationManager()
 	for (int i = 0; i < FigCount; i++)
 		delete FigList[i];
 	delete pGUI;
-
 }
