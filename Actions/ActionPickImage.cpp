@@ -11,10 +11,15 @@ void ActionPickImage::Execute()
 {
 	//Get a Pointer to the Interface
 	GUI* pGUI = pManager->GetGUI();
-	pManager->UnSelectFigures(2);
+	/*pManager->UnSelectFigures(2);
 	pManager->picFiguresStatus();
-	if(pManager->MaxFigTypeCount()){
+	if(pManager->GetRandomFigure()){
 		*playType = 1;
-		pManager->picFigures(pManager->MaxFigTypeCount());
-	}
+		pManager->picFigures(pManager->GetRandomFigure());
+	}*/
+
+
+
+
+
 }

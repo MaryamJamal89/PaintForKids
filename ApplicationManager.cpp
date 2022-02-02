@@ -18,6 +18,11 @@
 #include "Actions/ActionSwitchDraw.h"
 #include "Actions/ActionDelete.h"
 
+#include <stdio.h>
+#include <stdlib.h>  
+#include <cstdlib>
+#include <iostream>
+#include <chrono>
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -220,7 +225,7 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 		break;
 
 	case DRAWING_AREA: //select
-		newAct = new ActionSelect(this, { x, y }, multiSelect, playType);
+		newAct = new ActionSelect(this, { x, y }, multiSelect);
 		break;
 	}
 	return newAct;
@@ -250,6 +255,15 @@ int ApplicationManager::GetFigCount()
 //==================================================================================//
 //multiSelect filed
 //bool ApplicationManager::multiSelect = false;
+
+CFigure* ApplicationManager::getFigByIndex(int i) {
+	
+	if (i > FigCount) {
+		return NULL;
+	}
+	return FigList[i];
+}
+
 //Add a figure to the list of figures
 void ApplicationManager::AddFigure(CFigure* pFig)
 {
@@ -452,87 +466,14 @@ void ApplicationManager::TakeFigOfDrawMode()
 	}
 }
 
-//return type of figures that hav max count
-CFigure* ApplicationManager::MaxFigTypeCount() {
-	int max = 0;
-	if(FigCount){
-		CFigure* fig;
-		for (int i = 0; i < FigCount; i++) {
-			if (FigList[i]->GetCount() > max) {
-				max = FigList[i]->GetCount();
-				fig = FigList[i];
-			}
-		}
-		return fig;
+CFigure* ApplicationManager::GetRandomFigure() {
+	if (FigCount)
+	{
+		srand(time(NULL));
+		return FigList[rand() % FigCount];
 	}
-	return NULL;
+	return nullptr;
 }
-
-void ApplicationManager::picFiguresStatus() {
-	string figure;
-	CFigure* fig;
-	fig = MaxFigTypeCount();
-	if(fig){
-		switch (fig->FigType)
-		{
-		case 1:
-			figure = "Squares";
-			break;
-		case 2:
-			figure = "Ellipse";
-			break;
-		case 3:
-			figure = "Hexagone";
-			break;
-		}
-		pGUI->PrintMessage("Game Started : Choose all " + figure + " count: " + to_string(fig->GetCount()));
-	}
-	else {
-		pGUI->PrintMessage("There are no Figures to play with please draw some Figures or load a file ");
-	}
-}
-
-
-//void picFigures();
-void ApplicationManager::picFigures(CFigure * fig) {
-	string figure;
-	if(fig){
-		if (startPlay == 0) {
-			figType = fig->FigType;
-			startPlay = fig->GetCount();
-		}
-		else {
-			if (fig->FigType == figType && startPlay == 1) {
-				string msg = /*to_string(--startPlay)+*/" Game Over valid Choises: " + to_string(validCounter+1);
-				string msg2 = " invalid Choises: " + to_string(invalidCounter);
-				
-				pGUI->PrintMessage(msg + msg2);
-				startPlay = 0;
-				playType = 0;
-				validCounter = 0;
-				invalidCounter = 0;
-			}
-			else if (fig->FigType == figType) {
-				validCounter++;
-				startPlay--;
-				string msg = /*to_string(startPlay)+*/" Figures => valid Choises: " + to_string(validCounter);
-				string msg2 = " invalid Choises: " + to_string(invalidCounter);
-				pGUI->PrintMessage(msg+msg2);
-			}
-			else {
-				invalidCounter++;
-				string msg = /*to_string(startPlay)+*/" Figures => valid Choises: " + to_string(validCounter);
-				string msg2 = " invalid Choises: " + to_string(invalidCounter);
-				pGUI->PrintMessage(msg + msg2);
-			}
-		}
-	}
-	else {
-		string msg = /*to_string(startPlay) +*/ " Figures => valid Choises: " + to_string(validCounter);
-		string msg2 = " invalid Choises: " + to_string(invalidCounter);
-		pGUI->PrintMessage(msg + msg2);
-	}
-};
 
 ////////////////////////////////////////////////////////////////////////////////////
 //==================================================================================//
