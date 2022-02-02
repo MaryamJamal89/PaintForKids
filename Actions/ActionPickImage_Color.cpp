@@ -40,7 +40,6 @@ void ActionPickImage_Color::Execute()
 			CFigure* selectedFig = pManager->GetFigure(point.x, point.y); 
 			pManager->UnSelectFigures(2);
 			if (selectedFig) {
-				
 				selectedFig->SetSelected(true);
 
 				// Matchs
@@ -48,26 +47,16 @@ void ActionPickImage_Color::Execute()
 				if (Matches) {
 					validCounter++;
 					figCount--;
-					string msg = " valid Choises: " + to_string(validCounter) + " invalid Choises: " + to_string(invalidCounter);
-					pGUI->PrintMessage(msg);
-					pManager->DeleteSelectedFigures();
-					pGUI->ClearDrawArea();
-					pManager->UpdateInterface();
 				}
 				// not Match
 				else {
 					invalidCounter++;
-					string msg = " valid Choises: " + to_string(validCounter) + " invalid Choises: " + to_string(invalidCounter);
-					pGUI->PrintMessage(msg);
-					pManager->DeleteSelectedFigures();
-					pGUI->ClearDrawArea();
-					pManager->UpdateInterface();
 				}
-				//string msg = " valid Choises: " + to_string(validCounter)+ " invalid Choises: " + to_string(invalidCounter);
-				//pGUI->PrintMessage(msg);
-				//pManager->DeleteSelectedFigures();
-				//pGUI->ClearDrawArea();
-				//pManager->UpdateInterface();
+				string msg = " valid Choises: " + to_string(validCounter)+ " invalid Choises: " + to_string(invalidCounter)+"  " ;
+				pGUI->PrintMessage(msg);
+				pManager->DeleteSelectedFigures();
+				pGUI->ClearDrawArea();
+				pManager->UpdateInterface();
 			}
 			else {
 				pGUI->PrintMessage("No Figure Selected");
@@ -95,22 +84,18 @@ void ActionPickImage_Color::Execute()
 // update status 
 void ActionPickImage_Color::UpdateStatusBar(CFigure* fig) {
 	GUI* pGUI = pManager->GetGUI();
-	string figure;
+	//string figure;
 	if (fig) {
-		switch (fig->FigType)
-		{
-		case 1:
-			figure = "Squares";
-			break;
-		case 2:
-			figure = "Ellipse";
-			break;
-		case 3:
-			figure = "Hexagone";
-			break;
-		}
-		// don't forget to make function to get color  
-		pGUI->PrintMessage("Game Started : Choose all " + figure + " with Color "+fig->GetFillClr() + " count: " + to_string(fig->GetCount()));
+		//if (fig->FigureName() == "Sqaure") {
+		//	figure = "Sqaure";
+		//}
+		//else if (fig->FigureName() == "Ellipse") {
+		//	figure = "Ellipse";
+		//}
+		//else {
+		//	figure = "Hexagon";
+		//}
+		pGUI->PrintMessage("Game Started : Choose all " + fig->FigureName() + " with Color "+fig->GetFillClr() + " count: " + to_string(MatchedFigsCount(fig)));
 	}
 	else {
 		pGUI->PrintMessage("There are no Figures to play with please draw some Figures or load a file ");
@@ -118,12 +103,15 @@ void ActionPickImage_Color::UpdateStatusBar(CFigure* fig) {
 }
 
 
-// check if figure Matches or not
+ //check if figure Matches or not
 bool ActionPickImage_Color::figureMatches(CFigure* figure, CFigure* selectedFigure) {
-	if (figure->FigType== selectedFigure->FigType 
-		&& figure->GetFillClr().compare(selectedFigure->GetFillClr())==0) {
-		cout << figure->GetFillClr().compare(selectedFigure->GetFillClr())  << endl;
-		return true;
+	cout << figure->FigureName() << endl;
+	cout << "sss"<<endl;
+	cout<< selectedFigure->FigureName() << endl;
+	if (figure->FigureName().compare( selectedFigure->FigureName())==0) {
+		if (figure->GetFillClr()==selectedFigure->GetFillClr()) {
+			return true;
+		}
 	}
 	return false ;
 }
@@ -137,7 +125,7 @@ int ActionPickImage_Color::MatchedFigsCount(CFigure* fig) {
 	for (int i = 0; i < figCount; i++) {
 		figure = pManager->getFigByIndex(i);
 		if (figure) {
-			if (figureMatches(fig,figure)) {
+			if (figureMatches(figure,fig)) {
 				count++;
 			}
 		}

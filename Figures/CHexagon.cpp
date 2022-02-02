@@ -11,7 +11,7 @@ CHexagon::CHexagon(){
 	HexCnt++;
 }
 
-CHexagon::CHexagon(int Xarr[], int Yarr[], Point C, int len, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo, 3)
+CHexagon::CHexagon(int Xarr[], int Yarr[], Point C, int len, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo)
 {
 	Center = C;
 	length = len;
@@ -25,13 +25,17 @@ CHexagon::CHexagon(int Xarr[], int Yarr[], Point C, int len, GfxInfo FigureGfxIn
 
 CHexagon::~CHexagon() {
 	HexCnt--;
-	std::cout << "destructor from CHexagon" << std::endl;
 }
 
 void CHexagon::DrawMe(GUI* pOut) const
 {
 	//Call Output::DrawHex to draw a Hexagon on the screen	
 	pOut->DrawHex(Xpoints, Ypoints, FigGfxInfo, Selected);
+}
+
+// figure Name
+string CHexagon::FigureName() {
+	return "Hexagon";
 }
 
 // save figure in the file

@@ -17,13 +17,14 @@ protected:
 	// Add more parameters if needed.
 
 public:
+
+	//CFigure(const CFigure& cfig);
 	int FigType;
 	CFigure();
 	virtual ~CFigure();
-	CFigure(GfxInfo FigureGfxInfo, int _FigType);
+	CFigure(GfxInfo FigureGfxInfo);
 	void SetSelected(bool );	//select/unselect the figure
 	bool IsSelected() const;	//check whether fig is selected
-
 	virtual void DrawMe(GUI*) const  = 0 ;		//Draw the figure
 	
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
@@ -46,13 +47,16 @@ public:
 	//virtual void PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar
 	
 	// take a copy of pointer obj without Refernce
-	virtual CFigure * CloneFig(); // to copy figure
+	virtual CFigure * CloneFig()=0; // to copy figure
 
 	virtual int GetCount();
 
 	virtual void IncCount();
 	//string colorToString(color c); //Convert color to string ***v3.1**
 	string GetFillClr();
+
+	// return Figure Name
+	virtual string FigureName();
 };
 
 #endif

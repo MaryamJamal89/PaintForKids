@@ -15,12 +15,8 @@ void ActionRestartPlay::Execute()
 	pGUI->ClearDrawArea();
 
 	// restart game also 
-	pManager->TakeFigOfDrawMode();
+	//pManager->TakeFigOfDrawMode("resturt");
+	pManager->TakeCopyOfFigures();
 	pManager->UpdateInterface();
-	pManager->playType = 0;
-	pManager->validCounter = 0;
-	pManager->invalidCounter = 0;
-	pManager->figType = 0;
-	pManager->startPlay = 0;
 	pGUI->PrintTempMessge("Restart Play!", 1000);
 }
