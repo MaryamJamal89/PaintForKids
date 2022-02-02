@@ -23,6 +23,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <chrono>
+
 //Constructor
 ApplicationManager::ApplicationManager()
 {
