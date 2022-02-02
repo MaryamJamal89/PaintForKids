@@ -41,6 +41,7 @@ enum ActionType //The actions supported (you can add more if needed)
 	TO_PICK_IMAGE,        //to pick Image Edit By 'Mahmoud'
 	TO_PICK_COLOR,  //to pick fill color Edit By 'Mahmoud' 
 	TO_PICK_IMAGE_COLOR,  // to Pick Image And Color Edit By 'Mahmoud'
+	RESTART,			//Restart Play Edit By 'Mahmoud'
 	TO_DRAW,		//Switch interface to Draw mode
 	TO_PLAY			//Switch interface to Play mode
 
