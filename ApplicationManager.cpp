@@ -257,10 +257,6 @@ int ApplicationManager::GetFigCount()
 //bool ApplicationManager::multiSelect = false;
 
 CFigure* ApplicationManager::getFigByIndex(int i) {
-	
-	if (i > FigCount) {
-		return NULL;
-	}
 	return FigList[i];
 }
 
