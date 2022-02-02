@@ -4,7 +4,7 @@
 #include <fstream>
 #include "..\defs.h"
 #include "..\GUI\GUI.h"
-
+#include<string>
 //Base class for all figures
 class CFigure
 {
@@ -51,6 +51,8 @@ public:
 	virtual int GetCount();
 
 	virtual void IncCount();
+	//string colorToString(color c); //Convert color to string ***v3.1**
+	string GetFillClr();
 };
 
 #endif

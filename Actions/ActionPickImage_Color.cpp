@@ -2,6 +2,7 @@
 #include "../ApplicationManager.h"
 #include "../GUI/GUI.h"
 #include <iostream>
+#include<string>
 
 ActionPickImage_Color::ActionPickImage_Color(ApplicationManager* pApp) : Action(pApp)
 {
@@ -35,27 +36,23 @@ void ActionPickImage_Color::Execute()
 			if (selectedFig) {
 				
 				selectedFig->SetSelected(true);
-				pManager->DeleteSelectedFigures();
-				pGUI->ClearDrawArea();
-				pManager->UpdateInterface();
 
 				// Matchs
 				if (figureMatches(fig, selectedFig)) {
 					validCounter++;
 					figCount--;
-					string msg = " valid Choises: " + to_string(validCounter);
-					string msg2 = " invalid Choises: " + to_string(invalidCounter);
-
-					pGUI->PrintMessage(msg + msg2);
 				}
 				// not Match
 				else {
-					invalidCounter++;					
-					string msg = " valid Choises: " + to_string(validCounter);
-					string msg2 = " invalid Choises: " + to_string(invalidCounter);
-
-					pGUI->PrintMessage(msg + msg2);
+					invalidCounter++;									
 				}
+				string msg = " valid Choises: " + to_string(validCounter)+ " invalid Choises: " + to_string(invalidCounter);
+
+				pGUI->PrintMessage(msg);
+
+				pManager->DeleteSelectedFigures();
+				pGUI->ClearDrawArea();
+				pManager->UpdateInterface();
 			}
 			else {
 				pGUI->PrintMessage("No Figure Selected");
@@ -87,7 +84,7 @@ void ActionPickImage_Color::UpdateStatusBar(CFigure* fig) {
 			break;
 		}
 		// don't forget to make function to get color  
-		pGUI->PrintMessage("Game Started : Choose all " + figure + " with Color  count: " + to_string(fig->GetCount()));
+		pGUI->PrintMessage("Game Started : Choose all " + figure + " with Color "+fig->GetFillClr() + " count: " + to_string(fig->GetCount()));
 	}
 	else {
 		pGUI->PrintMessage("There are no Figures to play with please draw some Figures or load a file ");
@@ -96,7 +93,8 @@ void ActionPickImage_Color::UpdateStatusBar(CFigure* fig) {
 
 // check if figure Matches or not
 bool ActionPickImage_Color::figureMatches(CFigure* figure, CFigure* selectedFigure) {
-	if (figure->FigType== selectedFigure->FigType) {
+	if (figure->FigType== selectedFigure->FigType && figure->GetFillClr()== selectedFigure->GetFillClr()) {
+		cout << figure->FigType << selectedFigure->FigType << figure->GetFillClr() << selectedFigure->GetFillClr() <<endl;
 		return true;
 	}
 	return false ;

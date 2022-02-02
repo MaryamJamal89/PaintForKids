@@ -60,6 +60,7 @@
     <ClCompile Include="Actions\ActionPickImage_Color.cpp" />
     <ClCompile Include="Actions\ActionDelete.cpp" />
     <ClCompile Include="Actions\ActionRestartPlay.cpp" />
+    <ClCompile Include="CMUgraphicsLib\colors.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\ActionSelect.h" />

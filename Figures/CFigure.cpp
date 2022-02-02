@@ -47,3 +47,18 @@ int CFigure::GetCount() {
 
 
 void CFigure::IncCount() { return; }
+
+
+string CFigure::GetFillClr()
+{
+	if (FigGfxInfo.isFilled)
+	{
+		color Fillcolor = FigGfxInfo.FillClr;
+		if (Fillcolor == TOMATO) return "TOMATO";
+		else if (Fillcolor == DEEPSKYBLUE) return "DEEPSKYBLUE";
+		else if (Fillcolor == LIGHTGREEN) return "LIGHTGREEN";
+		else  return "ORANGE";
+	}
+	else
+		return "NON-FILLED";
+}

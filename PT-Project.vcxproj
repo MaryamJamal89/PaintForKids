@@ -147,6 +147,7 @@
     <ClCompile Include="Actions\ActionPickImage.cpp" />
     <ClCompile Include="CMUgraphicsLib\auxil.cpp" />
     <ClCompile Include="CMUgraphicsLib\CMUgraphics.cpp" />
+    <ClCompile Include="CMUgraphicsLib\colors.cpp" />
     <ClCompile Include="CMUgraphicsLib\image.cpp" />
     <ClCompile Include="CMUgraphicsLib\jpegload.c" />
     <ClCompile Include="CMUgraphicsLib\keyqueue.cpp" />
