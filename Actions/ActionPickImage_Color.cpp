@@ -48,16 +48,26 @@ void ActionPickImage_Color::Execute()
 				if (Matches) {
 					validCounter++;
 					figCount--;
+					string msg = " valid Choises: " + to_string(validCounter) + " invalid Choises: " + to_string(invalidCounter);
+					pGUI->PrintMessage(msg);
+					pManager->DeleteSelectedFigures();
+					pGUI->ClearDrawArea();
+					pManager->UpdateInterface();
 				}
 				// not Match
 				else {
-					invalidCounter++;									
+					invalidCounter++;
+					string msg = " valid Choises: " + to_string(validCounter) + " invalid Choises: " + to_string(invalidCounter);
+					pGUI->PrintMessage(msg);
+					pManager->DeleteSelectedFigures();
+					pGUI->ClearDrawArea();
+					pManager->UpdateInterface();
 				}
-				string msg = " valid Choises: " + to_string(validCounter)+ " invalid Choises: " + to_string(invalidCounter);
-				pGUI->PrintMessage(msg);
-				pManager->DeleteSelectedFigures();
-				pGUI->ClearDrawArea();
-				pManager->UpdateInterface();
+				//string msg = " valid Choises: " + to_string(validCounter)+ " invalid Choises: " + to_string(invalidCounter);
+				//pGUI->PrintMessage(msg);
+				//pManager->DeleteSelectedFigures();
+				//pGUI->ClearDrawArea();
+				//pManager->UpdateInterface();
 			}
 			else {
 				pGUI->PrintMessage("No Figure Selected");
@@ -118,10 +128,7 @@ bool ActionPickImage_Color::figureMatches(CFigure* figure, CFigure* selectedFigu
 	return false ;
 }
 
-// get matched vigures 
-// getFigsArray
-
-
+// get matched count 
 int ActionPickImage_Color::MatchedFigsCount(CFigure* fig) {
 	int count = 0;
 	int figCount = pManager->GetFigCount();

@@ -372,12 +372,10 @@ void ApplicationManager::DeleteSelectedFigures()           //delete all selected
 	{
 		if (FigList[i]->IsSelected())
 		{
-			//  1 = 0 here
-			//cout <<"Type   " << FigList[i]->FigType << "   " << FigList[i]-> GetCount() << endl;
-			// free memory
-			CFigure* temp;
+
+			/*CFigure* temp;
 			temp = FigList[i];
-			delete temp;
+			delete temp;*/
 			FigList[i] = NULL;
 			deletedNum++;
 		}
@@ -403,6 +401,7 @@ void ApplicationManager::TakeCopyOfFigures()
 		// backup original figures
 		for (int i = 0; i < FigCount; i++)
 		{
+			cout << "s" << endl;
 			CopyFigList[i] = FigList[i]->CloneFig();
 		}
 		copyArrayLength = FigCount;
@@ -412,6 +411,7 @@ void ApplicationManager::TakeCopyOfFigures()
 	{
 		if (inPlayMode == true) 
 		{
+			cout << "sss" << endl;
 			// delete old pointers first
 			for (int i = 0; i < FigCount; i++)
 			{
@@ -456,6 +456,7 @@ void ApplicationManager::TakeFigOfDrawMode()
 	// restore figures from the backup array
 	for (int i = 0; i < FigCount; i++)
 	{
+		cout << "sssss" << endl;
 		FigList[i] = CopyFigList[i]->CloneFig();
 		FigList[i]->IncCount();
 		//cout << CopyFigList[i] << " : " << FigList[i]->GetCount() << endl;
