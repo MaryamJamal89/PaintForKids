@@ -24,6 +24,12 @@ void ActionPickImage_Color::Execute()
 {
 	Point point;
 	GUI* pGUI = pManager->GetGUI();
+
+	//rearange shapes to start game
+	pGUI->ClearDrawArea();
+	pManager->TakeFigOfDrawMode();
+	pManager->UpdateInterface();
+
 	// get Rondom figure
 	fig = pManager->GetRandomFigure();
 	// update status Bar
@@ -84,10 +90,10 @@ void ActionPickImage_Color::Execute()
 			// game over
 			pGUI->PrintMessage("Game Over Your valid Choises : " + to_string(validCounter) + " and invalid Choises : " + to_string(invalidCounter));
 			
-			Sleep(500);
+			//Sleep(500);
 			// restart game also 
-			pManager->TakeFigOfDrawMode();
-			pManager->UpdateInterface();
+			/*pManager->TakeFigOfDrawMode();
+			pManager->UpdateInterface();*/
 		}
 
 		toolBar = false;
