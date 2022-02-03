@@ -447,15 +447,14 @@ void ApplicationManager::TakeCopyOfFigures()
  //To Restart Play
 void ApplicationManager::TakeFigOfDrawMode()
 {
-	
-	// restore the original size of the array
-	FigCount = copyArrayLength;
-
 	// delete old pointers first
 	for (int i = 0; i < FigCount; i++)
 	{
 		delete FigList[i];
 	}
+
+	// restore the original size of the array
+	FigCount = copyArrayLength;
 
 	// restore figures from the backup array
 	for (int i = 0; i < FigCount; i++)
