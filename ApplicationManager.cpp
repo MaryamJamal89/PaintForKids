@@ -1,4 +1,3 @@
-#include <fstream>
 #include "ApplicationManager.h"
 #include "Actions/ActionAddSquare.h"
 #include "Actions/ActionAddEllipse.h"
@@ -23,6 +22,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <chrono>
+#include <fstream>
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -36,7 +36,7 @@ ApplicationManager::ApplicationManager()
 	multiSelect = 0;
 	numberOfDuplicatedFilesName = 1;
 	inPlayMode = false;
-	
+
 	playType = 0;
 	validCounter = 0;
 	invalidCounter = 0;
@@ -275,7 +275,8 @@ void ApplicationManager::UnSelectFigures(int mul) const
 	{
 		return;
 	}
-	for (int i = 0; i < FigCount; i++) {
+	for (int i = 0; i < FigCount; i++)
+	{
 		FigList[i]->SetSelected(false);
 	}
 };
@@ -286,7 +287,8 @@ void ApplicationManager::UnSelectFigures(int mul) const
 CFigure* ApplicationManager::GetFigure(int x, int y) const         //get one selected figure by clicked point indexes
 {
 	// if the point in figure will return Pointer on Figure
-	for (int i = FigCount - 1; i >= 0; i--) {
+	for (int i = FigCount - 1; i >= 0; i--)
+	{
 		if (FigList[i]->InFig(x, y))
 		{
 			return FigList[i];
@@ -333,7 +335,8 @@ void ApplicationManager::InsertFigure(bool isFront)          //insert figure in 
 	{
 		if (isFront)
 		{
-			for (int i = selectedIndex; i < FigCount; i++) {
+			for (int i = selectedIndex; i < FigCount; i++) 
+			{
 				FigList[i] = FigList[i + 1];
 			}
 			FigList[FigCount - 1] = temp;
@@ -341,7 +344,8 @@ void ApplicationManager::InsertFigure(bool isFront)          //insert figure in 
 		}
 		else
 		{
-			for (int i = selectedIndex; i >= 0; i--) {
+			for (int i = selectedIndex; i >= 0; i--) 
+			{
 				FigList[i] = FigList[i - 1];
 			}
 			FigList[0] = temp;
@@ -398,7 +402,8 @@ void ApplicationManager::SaveAll(ofstream& File) const
 void ApplicationManager::TakeCopyOfFigures()
 {
 	//bool inPlayMode = false;
-	if (UI.InterfaceMode == MODE_PLAY) {
+	if (UI.InterfaceMode == MODE_PLAY) 
+	{
 		// backup original figures
 		for (int i = 0; i < FigCount; i++)
 		{
@@ -410,7 +415,7 @@ void ApplicationManager::TakeCopyOfFigures()
 	}
 	else
 	{
-		if (inPlayMode == true) 
+		if (inPlayMode == true)
 		{
 			// restore the original size of the array
 			FigCount = copyArrayLength;
@@ -463,7 +468,8 @@ void ApplicationManager::TakeFigOfDrawMode()
 	}
 }
 
-CFigure* ApplicationManager::GetRandomFigure() {
+CFigure* ApplicationManager::GetRandomFigure() 
+{
 	if (FigCount)
 	{
 		srand(time(NULL));
@@ -501,3 +507,4 @@ ApplicationManager::~ApplicationManager()
 		delete FigList[i];
 	delete pGUI;
 }
+

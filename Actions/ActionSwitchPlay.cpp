@@ -17,4 +17,3 @@ void ActionSwitchPlay::Execute()
 	pManager->multiSelect = 0;
 	pManager->UnSelectFigures(2);
 }
-

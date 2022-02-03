@@ -11,13 +11,13 @@ ActionPickImage_Color::ActionPickImage_Color(ApplicationManager* pApp) : Action(
 } 
 
 // return selected Figure
-CFigure* ActionPickImage_Color::ReadesFigures() {
+CFigure* ActionPickImage_Color::ReadesFigures() 
+{
 	Point point;
 	GUI* pGUI = pManager->GetGUI();
 	pGUI->pWind->WaitMouseClick(point.x, point.y);
 	return  pManager->GetFigure(point.x, point.y);
 }
-
 
 void ActionPickImage_Color::Execute()
 {
@@ -30,26 +30,32 @@ void ActionPickImage_Color::Execute()
 	ActionType ActType;
 	bool Matches;
 	// if fig not null
-	if (fig) {
+	if (fig) 
+  {
 		figCount = MatchedFigsCount(fig);
-		while (figCount) {
+		while (figCount) 
+    {
 			ActType = pGUI->MapInputToActionType(point.x, point.y);
-			if (ActType == RESTART) {
+			if (ActType == RESTART) 
+      {
 				break;
 			}
 			CFigure* selectedFig = pManager->GetFigure(point.x, point.y); 
 			pManager->UnSelectFigures(2);
-			if (selectedFig) {
+			if (selectedFig) 
+      {
 				selectedFig->SetSelected(true);
 
 				// Matchs
 				bool Matches = figureMatches(fig, selectedFig);
-				if (Matches) {
+				if (Matches) 
+        {
 					validCounter++;
 					figCount--;
 				}
 				// not Match
-				else {
+				else 
+				{
 					invalidCounter++;
 				}
 				string msg = " valid Choises: " + to_string(validCounter)+ " invalid Choises: " + to_string(invalidCounter)+"  " ;
@@ -58,7 +64,8 @@ void ActionPickImage_Color::Execute()
 				pGUI->ClearDrawArea();
 				pManager->UpdateInterface();
 			}
-			else {
+			else 
+			{
 				pGUI->PrintMessage("No Figure Selected");
 			}
 		}
@@ -70,22 +77,26 @@ void ActionPickImage_Color::Execute()
 		pManager->TakeFigOfDrawMode();
 		pManager->UpdateInterface();
 
-		if (ActType != RESTART) {
+		if (ActType != RESTART) 
+		{
 			// game over
 			pGUI->PrintMessage("Game Over Your valid Choises : " + to_string(validCounter) + " and invalid Choises : " + to_string(invalidCounter));
 		}
-		else {
+		else 
+		{
 			pGUI->PrintTempMessge("Game Restarted",400);
 		}
 	}
 }
 
-
 // update status 
-void ActionPickImage_Color::UpdateStatusBar(CFigure* fig) {
+void ActionPickImage_Color::UpdateStatusBar(CFigure* fig) 
+{
 	GUI* pGUI = pManager->GetGUI();
+
 	//string figure;
-	if (fig) {
+	if (fig) 
+  {
 		//if (fig->FigureName() == "Sqaure") {
 		//	figure = "Sqaure";
 		//}
@@ -97,19 +108,22 @@ void ActionPickImage_Color::UpdateStatusBar(CFigure* fig) {
 		//}
 		pGUI->PrintMessage("Game Started : Choose all " + fig->FigureName() + " with Color "+fig->GetFillClr() + " count: " + to_string(MatchedFigsCount(fig)));
 	}
-	else {
+	else 
+	{
 		pGUI->PrintMessage("There are no Figures to play with please draw some Figures or load a file ");
 	}
 }
 
-
  //check if figure Matches or not
-bool ActionPickImage_Color::figureMatches(CFigure* figure, CFigure* selectedFigure) {
+bool ActionPickImage_Color::figureMatches(CFigure* figure, CFigure* selectedFigure) 
+{
 	cout << figure->FigureName() << endl;
 	cout << "sss"<<endl;
 	cout<< selectedFigure->FigureName() << endl;
-	if (figure->FigureName().compare( selectedFigure->FigureName())==0) {
-		if (figure->GetFillClr()==selectedFigure->GetFillClr()) {
+	if (figure->FigureName().compare( selectedFigure->FigureName()) == 0) 
+  {
+		if (figure->GetFillClr()==selectedFigure->GetFillClr()) 
+    {
 			return true;
 		}
 	}
@@ -117,15 +131,19 @@ bool ActionPickImage_Color::figureMatches(CFigure* figure, CFigure* selectedFigu
 }
 
 // get matched count 
-int ActionPickImage_Color::MatchedFigsCount(CFigure* fig) {
+int ActionPickImage_Color::MatchedFigsCount(CFigure* fig) 
+{
 	int count = 0;
 	int figCount = pManager->GetFigCount();
 	CFigure* figure;
 	
-	for (int i = 0; i < figCount; i++) {
+	for (int i = 0; i < figCount; i++) 
+	{
 		figure = pManager->getFigByIndex(i);
-		if (figure) {
-			if (figureMatches(figure,fig)) {
+		if (figure) 
+		{
+			if (figureMatches(fig,figure)) 
+			{
 				count++;
 			}
 		}
@@ -173,9 +191,4 @@ int ActionPickImage_Color::MatchedFigsCount(CFigure* fig) {
 //		pGUI->PrintMessage(msg + msg2);
 //	}
 //};
-
-
-
-
-
 
