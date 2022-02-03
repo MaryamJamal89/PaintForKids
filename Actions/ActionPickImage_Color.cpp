@@ -73,19 +73,28 @@ void ActionPickImage_Color::Execute()
 		// to Clear Area
 		pGUI->ClearDrawArea();
 
-		// restart game also 
-		pManager->TakeFigOfDrawMode();
-		pManager->UpdateInterface();
+		
 
 		if (ActType != RESTART) 
 		{
 			// game over
 			pGUI->PrintMessage("Game Over Your valid Choises : " + to_string(validCounter) + " and invalid Choises : " + to_string(invalidCounter));
+			
+			Sleep(500);
+			// restart game also 
+			pManager->TakeFigOfDrawMode();
+			pManager->UpdateInterface();
 		}
 		else 
 		{
 			pGUI->PrintTempMessge("Game Restarted",400);
+			// restart game also 
+			pManager->TakeFigOfDrawMode();
+			pManager->UpdateInterface();
 		}
+		
+		
+
 	}
 }
 

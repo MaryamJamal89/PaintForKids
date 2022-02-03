@@ -213,7 +213,6 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 		break;
 
 	case TO_DRAW:
-		playType = 0;
 		newAct = new ActionSwitchDraw(this);
 		break;
 

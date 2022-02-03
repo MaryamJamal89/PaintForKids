@@ -70,7 +70,7 @@ void CEllipse::Load(ifstream& loadedFile, GUI* pGUI)
 bool CEllipse::InFig(int x, int y)  //Determine the position of the point
 {	
 	// (x - Center.x) ^ 2 / h ^ 2 + (y - Center.y) ^ 2 / l ^ 2 <= 1
-	if (pow(x - Center.x, 2) / pow(height, 2) + pow(y - Center.y, 2) / pow(length, 2) <= 1)
+	if (pow(x - Center.x, 2) / pow(length, 2) + pow(y - Center.y, 2) / pow(height, 2) <= 1)
 	{
 		return true;
 	}
