@@ -8,6 +8,7 @@ ActionPickImage_Color::ActionPickImage_Color(ApplicationManager* pApp) : Action(
 {
 	validCounter = 0;
 	invalidCounter = 0;
+	toolBar = false;
 } 
 
 // return selected Figure
@@ -27,7 +28,7 @@ void ActionPickImage_Color::Execute()
 	fig = pManager->GetRandomFigure();
 	// update status Bar
 	UpdateStatusBar(fig);
-	ActionType ActType;
+	ActionType pAct;
 	bool Matches;
 	// if fig not null
 	if (fig) 
@@ -35,9 +36,12 @@ void ActionPickImage_Color::Execute()
 		figCount = MatchedFigsCount(fig);
 		while (figCount) 
     {
-			ActType = pGUI->MapInputToActionType(point.x, point.y);
-			if (ActType == RESTART) 
-      {
+			pAct = pGUI->MapInputToActionType(point.x, point.y);
+			if (pAct == RESTART || pAct == TO_PICK_IMAGE || pAct == TO_PICK_COLOR || pAct == TO_PICK_IMAGE_COLOR || pAct== TO_DRAW)
+			{
+				toolBar = true;
+				Action* ActType = pManager->CreateAction(pAct);
+				pManager->ExecuteAction(ActType);
 				break;
 			}
 			CFigure* selectedFig = pManager->GetFigure(point.x, point.y); 
@@ -75,7 +79,7 @@ void ActionPickImage_Color::Execute()
 
 		
 
-		if (ActType != RESTART) 
+		if (!toolBar)
 		{
 			// game over
 			pGUI->PrintMessage("Game Over Your valid Choises : " + to_string(validCounter) + " and invalid Choises : " + to_string(invalidCounter));
@@ -85,15 +89,8 @@ void ActionPickImage_Color::Execute()
 			pManager->TakeFigOfDrawMode();
 			pManager->UpdateInterface();
 		}
-		else 
-		{
-			pGUI->PrintTempMessge("Game Restarted",400);
-			// restart game also 
-			pManager->TakeFigOfDrawMode();
-			pManager->UpdateInterface();
-		}
-		
-		
+
+		toolBar = false;
 
 	}
 }

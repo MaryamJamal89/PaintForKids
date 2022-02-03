@@ -11,7 +11,7 @@ private:
 	//void picFiguresStatus();
 	CFigure* fig;
 	Point point;
-
+	bool toolBar; // did he pressed any btn or not
 
 	/*playType = 0;*/
 	int validCounter;
