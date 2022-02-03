@@ -5,14 +5,6 @@
 ActionPickColor::ActionPickColor(ApplicationManager* pApp) : ActionPickImage_Color(pApp)
 {}
 
-//void ActionPickColor::Execute()
-//{
-//	//Get a Pointer to the Interface
-//	GUI* pGUI = pManager->GetGUI();
-//	pManager->playType = 2;
-//	pGUI->PrintMessage("Select Figur To Pick Color!");
-//}
-
 bool ActionPickColor::figureMatches(CFigure* figure, CFigure* selectedFigure)
 {
 	if (figure->GetFillClr() == selectedFigure->GetFillClr())

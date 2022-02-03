@@ -195,7 +195,7 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 		break;
 
 	case TO_PICK_IMAGE:
-		newAct = new ActionPickImage(this, playType);
+		newAct = new ActionPickImage(this);
 		break;
 
 	case TO_PICK_COLOR:
