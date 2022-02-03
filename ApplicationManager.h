@@ -78,7 +78,7 @@ public:
 	
 	void TakeFigOfDrawMode();
 	
-	CFigure* GetRandomFigure();
+	 CFigure* GetRandomFigure();
 
 	CFigure* getFigByIndex(int i);
 };
