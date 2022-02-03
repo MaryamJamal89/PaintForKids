@@ -109,5 +109,15 @@
     <ClInclude Include="Actions\ActionPickColor.h" />
     <ClInclude Include="Actions\ActionPickImage_Color.h" />
     <ClInclude Include="Actions\ActionRestartPlay.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="images\Icon.ico" />
+    <Image Include="images\color-palette.png" />
+    <Image Include="icon1.ico" />
+    <Image Include="images\color-palette.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="PT Project.rc" />
   </ItemGroup>
 </Project>

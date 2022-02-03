@@ -11,13 +11,13 @@ ActionPickImage_Color::ActionPickImage_Color(ApplicationManager* pApp) : Action(
 } 
 
 // return selected Figure
-CFigure* ActionPickImage_Color::ReadesFigures() {
+CFigure* ActionPickImage_Color::ReadesFigures() 
+{
 	Point point;
 	GUI* pGUI = pManager->GetGUI();
 	pGUI->pWind->WaitMouseClick(point.x, point.y);
 	return  pManager->GetFigure(point.x, point.y);
 }
-
 
 void ActionPickImage_Color::Execute()
 {
@@ -55,7 +55,8 @@ void ActionPickImage_Color::Execute()
 					pManager->UpdateInterface();
 				}
 				// not Match
-				else {
+				else 
+				{
 					invalidCounter++;
 					string msg = " valid Choises: " + to_string(validCounter) + " invalid Choises: " + to_string(invalidCounter);
 					pGUI->PrintMessage(msg);
@@ -69,7 +70,8 @@ void ActionPickImage_Color::Execute()
 				//pGUI->ClearDrawArea();
 				//pManager->UpdateInterface();
 			}
-			else {
+			else 
+			{
 				pGUI->PrintMessage("No Figure Selected");
 			}
 		}
@@ -81,22 +83,25 @@ void ActionPickImage_Color::Execute()
 		pManager->TakeFigOfDrawMode();
 		pManager->UpdateInterface();
 
-		if (ActType != RESTART) {
+		if (ActType != RESTART) 
+		{
 			// game over
 			pGUI->PrintMessage("Game Over Your valid Choises : " + to_string(validCounter) + " and invalid Choises : " + to_string(invalidCounter));
 		}
-		else {
+		else 
+		{
 			pGUI->PrintTempMessge("Game Restarted",400);
 		}
 	}
 }
 
-
 // update status 
-void ActionPickImage_Color::UpdateStatusBar(CFigure* fig) {
+void ActionPickImage_Color::UpdateStatusBar(CFigure* fig) 
+{
 	GUI* pGUI = pManager->GetGUI();
 	string figure;
-	if (fig) {
+	if (fig) 
+	{
 		switch (fig->FigType)
 		{
 		case 1:
@@ -112,32 +117,38 @@ void ActionPickImage_Color::UpdateStatusBar(CFigure* fig) {
 		// don't forget to make function to get color  
 		pGUI->PrintMessage("Game Started : Choose all " + figure + " with Color "+fig->GetFillClr() + " count: " + to_string(fig->GetCount()));
 	}
-	else {
+	else 
+	{
 		pGUI->PrintMessage("There are no Figures to play with please draw some Figures or load a file ");
 	}
 }
 
-
 // check if figure Matches or not
-bool ActionPickImage_Color::figureMatches(CFigure* figure, CFigure* selectedFigure) {
+bool ActionPickImage_Color::figureMatches(CFigure* figure, CFigure* selectedFigure) 
+{
 	if (figure->FigType== selectedFigure->FigType 
-		&& figure->GetFillClr().compare(selectedFigure->GetFillClr())==0) {
-		cout << figure->GetFillClr().compare(selectedFigure->GetFillClr())  << endl;
+		&& figure->GetFillClr().compare(selectedFigure->GetFillClr()) == 0) 
+	{
+		cout << figure->GetFillClr().compare(selectedFigure->GetFillClr()) << endl;
 		return true;
 	}
 	return false ;
 }
 
 // get matched count 
-int ActionPickImage_Color::MatchedFigsCount(CFigure* fig) {
+int ActionPickImage_Color::MatchedFigsCount(CFigure* fig) 
+{
 	int count = 0;
 	int figCount = pManager->GetFigCount();
 	CFigure* figure;
 	
-	for (int i = 0; i < figCount; i++) {
+	for (int i = 0; i < figCount; i++) 
+	{
 		figure = pManager->getFigByIndex(i);
-		if (figure) {
-			if (figureMatches(fig,figure)) {
+		if (figure) 
+		{
+			if (figureMatches(fig,figure)) 
+			{
 				count++;
 			}
 		}
@@ -185,9 +196,4 @@ int ActionPickImage_Color::MatchedFigsCount(CFigure* fig) {
 //		pGUI->PrintMessage(msg + msg2);
 //	}
 //};
-
-
-
-
-
 
