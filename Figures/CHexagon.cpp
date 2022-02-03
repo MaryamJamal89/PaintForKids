@@ -164,7 +164,7 @@ bool CHexagon::isInside(Point polygon[], int n, Point p)
  //InFig return boolian to check point inside Figure 
 bool CHexagon::InFig(int x, int y)
 {
-	int d = length;
+	/*int d = length;
 
 	Point point1;
 	point1.x = Center.x - d;
@@ -183,9 +183,14 @@ bool CHexagon::InFig(int x, int y)
 	point5.y = Center.y + (d - d / 20 * 3);
 	Point point6;
 	point6.x = Center.x - d / 2;
-	point6.y = Center.y + (d - d / 20 * 3);
+	point6.y = Center.y + (d - d / 20 * 3);*/
+	Point points[6];
+	for (int i = 0; i < 6; i++)
+	{
+		points[i].x=Xpoints[i];
+		points[i].y=Ypoints[i];
+	}
 
-	Point points[] = { point1, point2, point3, point4, point5, point6 };
 	return isInside(points, 6, {x, y});
 }
 

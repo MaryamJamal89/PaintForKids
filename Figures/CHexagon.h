@@ -8,8 +8,8 @@ class CHexagon : public CFigure
 private:
 	Point Center, P;
 	int length;
-	int* Xpoints = new int(6);
-	int* Ypoints = new int(6);
+	int* Xpoints = new int[6];
+	int* Ypoints = new int[6];
 	static int HexCnt;//static variable to determine the number of objects
 
 public:								
