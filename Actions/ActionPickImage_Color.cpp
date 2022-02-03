@@ -105,16 +105,7 @@ void ActionPickImage_Color::UpdateStatusBar(CFigure* fig)
 
 	//string figure;
 	if (fig) 
-  {
-		//if (fig->FigureName() == "Sqaure") {
-		//	figure = "Sqaure";
-		//}
-		//else if (fig->FigureName() == "Ellipse") {
-		//	figure = "Ellipse";
-		//}
-		//else {
-		//	figure = "Hexagon";
-		//}
+	{
 		pGUI->PrintMessage("Game Started : Choose all " + fig->FigureName() + " with Color "+fig->GetFillClr() + " count: " + to_string(MatchedFigsCount(fig)));
 	}
 	else 
@@ -126,9 +117,6 @@ void ActionPickImage_Color::UpdateStatusBar(CFigure* fig)
  //check if figure Matches or not
 bool ActionPickImage_Color::figureMatches(CFigure* figure, CFigure* selectedFigure) 
 {
-	cout << figure->FigureName() << endl;
-	cout << "sss"<<endl;
-	cout<< selectedFigure->FigureName() << endl;
 	if (figure->FigureName().compare( selectedFigure->FigureName()) == 0) 
   {
 		if (figure->GetFillClr()==selectedFigure->GetFillClr()) 
