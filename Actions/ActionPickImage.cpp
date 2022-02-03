@@ -2,24 +2,31 @@
 #include "../ApplicationManager.h"
 #include "../GUI/GUI.h"
 
-ActionPickImage::ActionPickImage(ApplicationManager* pApp,int & _playType) : Action(pApp)
+ActionPickImage::ActionPickImage(ApplicationManager* pApp) : ActionPickImage_Color(pApp)
 {
-	playType = & _playType;
 }
 
-void ActionPickImage::Execute()
+
+bool ActionPickImage::figureMatches(CFigure* figure, CFigure* selectedFigure)
 {
-	//Get a Pointer to the Interface
+	if (figure->FigureName() == selectedFigure->FigureName())
+	{
+		return true;
+	}
+	return false;
+}
+
+void ActionPickImage::UpdateStatusBar(CFigure* fig)
+{
 	GUI* pGUI = pManager->GetGUI();
-	/*pManager->UnSelectFigures(2);
-	pManager->picFiguresStatus();
-	if(pManager->GetRandomFigure()){
-		*playType = 1;
-		pManager->picFigures(pManager->GetRandomFigure());
-	}*/
 
-
-
-
-
+	//string figure;
+	if (fig)
+	{
+		pGUI->PrintMessage("Game Started : Choose all  " + fig->FigureName() + " count: " + to_string(MatchedFigsCount(fig)));
+	}
+	else
+	{
+		pGUI->PrintMessage("There are no Figures to play with please draw some Figures or load a file ");
+	}
 }
