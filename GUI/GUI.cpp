@@ -67,18 +67,19 @@ ActionType GUI::MapInputToActionType(int &x,int &y) const
 
 			switch (ClickedItemOrder)
 			{
-				case ITM_SHAPES: return DRAW_SHAPES;
-				case ITM_MULSELECT: return MUL_SELECT;
-				case ITM_DEL: return DEL;
-				case ITM_BACK: return SEND_BACK;
-				case ITM_FRONT: return BRNG_FRNT;
-				case ITM_DROWCLR: return CHNG_DRAW_CLR;
-				case ITM_FILLCLR: return CHNG_FILL_CLR;
-				case ITM_BGCLR: return CHNG_BK_CLR;
-				case ITM_SAVE: return SAVE;
-				case ITM_LOAD: return LOAD;
-				case ITM_PLAY: return TO_PLAY;
-				case ITM_EXIT: return EXIT;
+			case ITM_SHAPES: return DRAW_SHAPES;
+			case ITM_MULSELECT: return MUL_SELECT;
+			case ITM_DEL: return DEL;
+			case ITM_BACK: return SEND_BACK;
+			case ITM_FRONT: return BRNG_FRNT;
+			case ITM_DROWCLR: return CHNG_DRAW_CLR;
+			case ITM_FILLCLR: return CHNG_FILL_CLR;
+			case ITM_BGCLR: return CHNG_BK_CLR;
+			case ITM_RESIZE: return RESIZE;
+			case ITM_SAVE: return SAVE;
+			case ITM_LOAD: return LOAD;
+			case ITM_PLAY: return TO_PLAY;
+			case ITM_EXIT: return EXIT;
 			
 				default: return EMPTY;	//A click on empty place in desgin toolbar
 			}
@@ -121,6 +122,25 @@ ActionType GUI::MapInputToActionType(int &x,int &y) const
 				case ITM_ELPS: return DRAW_ELPS;
 				case ITM_HEX: return DRAW_HEX;
 				case ITM_SHAPESBACK: return TO_DRAW;
+			}
+		}
+		if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)
+		{
+			return DRAWING_AREA;
+		}
+	}
+	else if (UI.InterfaceMode == MODE_RESIZE)
+	{
+		if (y >= 0 && y < UI.ToolBarHeight)
+		{
+			int ClickedItemOrder = (x / UI.MenuItemWidth);
+			switch (ClickedItemOrder)
+			{
+				case ITM_QUARTER: return RESIZE_QUARTER;
+				case ITM_HALF: return RESIZE_HALF;
+				case ITM_DOUBLE: return RESIZE_DOUBLE;
+				case ITM_QUADRUPLE: return RESIZE_QUADRUPLE;
+				case ITM_RESIZEBACK: return TO_DRAW;
 			}
 		}
 		if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)
@@ -244,6 +264,7 @@ void GUI::CreateDrawToolBar() const
 	MenuItemImages[ITM_DEL] = "images\\MenuItems\\delete-color.jpg";
 	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\save-color.jpg";
 	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\load-color.jpg";
+	MenuItemImages[ITM_RESIZE] = "images\\MenuItems\\load-color.jpg";
 	MenuItemImages[ITM_PLAY] = "images\\MenuItems\\playmood4-color.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\exit-color.jpg";
 
@@ -278,6 +299,28 @@ void GUI::CreateShapesBar() const {
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
+
+void GUI::CreateResizeBar() const {
+	CreateToolBar();
+	UI.InterfaceMode = MODE_RESIZE;
+
+	string DrawResizeItem[ITEMS_COUNT];
+
+	DrawResizeItem[ITM_QUARTER] = "images\\MenuItems\\quarter.jpg";
+	DrawResizeItem[ITM_HALF] = "images\\MenuItems\\half.jpg";
+	DrawResizeItem[ITM_DOUBLE] = "images\\MenuItems\\double.jpg";
+	DrawResizeItem[ITM_QUADRUPLE] = "images\\MenuItems\\quadruple.jpg";
+	DrawResizeItem[ITM_RESIZEBACK] = "images\\MenuItems\\return-color.jpg";
+
+	//Draw menu item one image at a time
+	for (int i = 0; i < ITEMS_COUNT; i++)
+		pWind->DrawImage(DrawResizeItem[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+
+	pWind->SetPen(MYDARKBLACK, 3);
+	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////
 
 void GUI::CreateDrawColorBar() const {
 

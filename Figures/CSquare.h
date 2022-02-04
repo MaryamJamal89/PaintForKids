@@ -30,6 +30,8 @@ public:
 
 	// return Figure Name
 	virtual string FigureName();
+
+	int Resize(double scale);
 };
 
 #endif

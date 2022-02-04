@@ -16,6 +16,7 @@
 #include "Actions/ActionSwitchPlay.h"
 #include "Actions/ActionSwitchDraw.h"
 #include "Actions/ActionDelete.h"
+#include "Actions/ActionResize.h"
 
 #include <stdio.h>
 #include <stdlib.h>  
@@ -214,6 +215,10 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 
 	case EXIT:
 		newAct = new ActionExit(this);
+		break;
+
+	case RESIZE:
+		newAct = new ActionResize(this);
 		break;
 
 	case STATUS:	//a click on the status bar ==> no action

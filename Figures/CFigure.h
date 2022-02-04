@@ -57,6 +57,9 @@ public:
 
 	// return Figure Name
 	virtual string FigureName();
+
+	//yasser  Resize
+	virtual int Resize(double scale)=0;
 };
 
 #endif
