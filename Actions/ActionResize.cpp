@@ -17,30 +17,40 @@ void ActionResize::Execute()
 	pGUI->PrintMessage("Yasser here");
 
 	////This action needs to read some parameters first
-	//if (ReadActionParameters())
-	//{
-	//	GUI* pGUI = pManager->GetGUI();
-	//	int SCount = pManager->GetFigCount();
+	if (ReadActionParameters())
+	{
+		GUI* pGUI = pManager->GetGUI();
+	int SCount = pManager->GetFigCount();
 	//	CFigure* SList = pManager->getSelectedFigures();
+	CFigure *selectedFigures[200];
+	int selectedCount = 0;
+	for (int i = 0; i < SCount; i++)
+	{
+		if(pManager->getFigByIndex(i)->IsSelected()){
+			selectedFigures[i] = pManager->getFigByIndex(i);
+			selectedCount++;
+		}
+	}
 
+		if (selectedFigures[0] != NULL)    //if There was a Selected Figure Resize it 
+		{
+			for (int i = 0; i < selectedCount; i++){
+			selectedFigures[i]->Resize(Scale);
 
-	//	if (SList[0] != NULL)    //if There was a Selected Figure Resize it 
-	//	{
-	//		for (int i = 0; i < SCount; i++)
-	//			SList[i]->Resize(Scale);
+			}
 
-	//		pGUI->ClearDrawArea();
-
-	//		for (int i = 0; i < SCount; i++)
-	//			if (SList[i]->IsLastSelected())
-	//			{
-	//				SList[i]->printinfo(pOut);
-	//				break;
-	//			}
-	//	}
-	//	else
-	//		pGUI->PrintMessage("Select Figure at First");
-	//}
+			pGUI->ClearDrawArea();
+			pManager->UpdateInterface();
+			/*for (int i = 0; i < SCount; i++)
+				if (selectedFigures[i]->IsLastSelected())
+				{
+					SList[i]->printinfo(pGUI);
+					break;
+				}*/
+		}
+		else
+			pGUI->PrintMessage("Select Figure at First");
+	}
 }
 
 
