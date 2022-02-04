@@ -33,7 +33,7 @@ public:
 	// return Figure Name
 	virtual string FigureName();
 
-	virtual void Resize(double scale);
+	int Resize(double scale);
 };
 
 #endif

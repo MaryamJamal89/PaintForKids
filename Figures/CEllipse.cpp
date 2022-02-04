@@ -113,7 +113,27 @@ void CEllipse::IncCount() {
 	ElliCnt++;
 }
 
-void CEllipse::Resize(double scale) {
-	length = length * scale;
-	height = height * scale;
+int CEllipse::Resize(double scale) {
+	if (!(Center.x + length * scale >= 1300 || Center.x - length * scale <= 0 || Center.y + height * scale >= 650 || Center.y - height * scale <= 50)) {
+		if (scale * length >= 20 && scale * height >= 20)
+		{
+			length = length * scale;
+			height = height * scale;
+			return 0;
+		}
+		else if (scale * length <= 20 && scale * height <= 20) {
+			return -1;
+		}
+		else {
+			if (scale * length >= 20) {
+				length = length * scale;
+			}
+			else {
+				height = height * scale;
+			}			
+			return 0;
+		}
+	}
+
+	return 1;
 }

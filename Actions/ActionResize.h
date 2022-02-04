@@ -10,6 +10,7 @@ class ActionResize :public Action
 	Point P;
 	ActionType SCALE;
 	double Scale;
+	bool anySelected;
 public:
 	ActionResize(ApplicationManager* pApp);
 

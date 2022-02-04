@@ -137,11 +137,11 @@ ActionType GUI::MapInputToActionType(int &x,int &y) const
 			int ClickedItemOrder = (x / UI.MenuItemWidth);
 			switch (ClickedItemOrder)
 			{
-			case ITM_QUARTER: return RESIZE_QUARTER;
-			case ITM_HALF: return RESIZE_HALF;
-			case ITM_DOUBLE: return RESIZE_DOUBLE;
-			case ITM_QUADRUPLE: return RESIZE_QUADRUPLE;
-			case ITM_RESIZEBACK: return TO_DRAW;
+				case ITM_QUARTER: return RESIZE_QUARTER;
+				case ITM_HALF: return RESIZE_HALF;
+				case ITM_DOUBLE: return RESIZE_DOUBLE;
+				case ITM_QUADRUPLE: return RESIZE_QUADRUPLE;
+				case ITM_RESIZEBACK: return TO_DRAW;
 			}
 		}
 		if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)

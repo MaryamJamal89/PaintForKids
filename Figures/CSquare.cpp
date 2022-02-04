@@ -114,7 +114,20 @@ void CSquare::IncCount() {
 	SqrCnt++;
 }
 
-void CSquare::Resize(double scale) {
-	length = scale * length;
+// make it return  1 or -1 or 0 
+// if 1  size is  very big
+// if 0  nothing it will resize 
+// if -1 can't resize size is very smal 
 
+int CSquare::Resize(double scale) {	
+	if (TopLeftCorner.x + length * scale >= 1300 || TopLeftCorner.y + length * scale >= 700) {
+		return 1;
+	}
+	else if (scale * length <= 20) {
+		return -1;
+	}
+	else {
+		length = scale * length;
+		return 0;
+	}
 }
