@@ -4,6 +4,11 @@
 #include "DEFS.h"
 #include "Figures\CFigure.h"
 
+#include <stdio.h>
+#include <stdlib.h>  
+#include <cstdlib>
+#include <iostream>
+
 using namespace std;
 
 class Action;	//Forward Declaration
@@ -73,11 +78,9 @@ public:
 	
 	void TakeFigOfDrawMode();
 	
-	CFigure* MaxFigTypeCount();
+	 CFigure* GetRandomFigure();
 
-	void picFiguresStatus();
-
-	void picFigures(CFigure* fig);
+	CFigure* getFigByIndex(int i);
 };
 
 #endif

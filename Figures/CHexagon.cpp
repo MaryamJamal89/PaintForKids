@@ -11,22 +11,31 @@ CHexagon::CHexagon(){
 	HexCnt++;
 }
 
-CHexagon::CHexagon(Point C, int len, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo,3)
+CHexagon::CHexagon(int Xarr[], int Yarr[], Point C, int len, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo)
 {
 	Center = C;
 	length = len;
+	for (int i=0; i < 6; i++) 
+	{
+		Xpoints[i] = Xarr[i];
+		Ypoints[i] = Yarr[i];
+	}
 	HexCnt++;
 }
 
 CHexagon::~CHexagon() {
 	HexCnt--;
-	std::cout << "destructor from CHexagon" << std::endl;
 }
 
 void CHexagon::DrawMe(GUI* pOut) const
 {
 	//Call Output::DrawHex to draw a Hexagon on the screen	
-	pOut->DrawHex(Center, length, FigGfxInfo, Selected);
+	pOut->DrawHex(Xpoints, Ypoints, FigGfxInfo, Selected);
+}
+
+// figure Name
+string CHexagon::FigureName() {
+	return "Hexagon";
 }
 
 // save figure in the file
@@ -155,7 +164,7 @@ bool CHexagon::isInside(Point polygon[], int n, Point p)
  //InFig return boolian to check point inside Figure 
 bool CHexagon::InFig(int x, int y)
 {
-	int d = length;
+	/*int d = length;
 
 	Point point1;
 	point1.x = Center.x - d;
@@ -174,10 +183,15 @@ bool CHexagon::InFig(int x, int y)
 	point5.y = Center.y + (d - d / 20 * 3);
 	Point point6;
 	point6.x = Center.x - d / 2;
-	point6.y = Center.y + (d - d / 20 * 3);
+	point6.y = Center.y + (d - d / 20 * 3);*/
+	Point points[6];
+	for (int i = 0; i < 6; i++)
+	{
+		points[i].x=Xpoints[i];
+		points[i].y=Ypoints[i];
+	}
 
-	Point points[] = { point1, point2, point3, point4,point5,point6 };
-	return isInside(points, 6, {x,y});
+	return isInside(points, 6, {x, y});
 }
 
 // Print to return all info about figure

@@ -10,7 +10,7 @@ private:
 	int length;
 	static int SqrCnt;//static variable to determine the number of objects
 public:
-	
+	//CSquare(const CSquare& csq);
 	CSquare();
 	virtual ~CSquare();
 	CSquare(Point , int, GfxInfo FigureGfxInfo );
@@ -27,6 +27,9 @@ public:
 	virtual int GetCount();
 
 	virtual void IncCount();
+
+	// return Figure Name
+	virtual string FigureName();
 };
 
 #endif

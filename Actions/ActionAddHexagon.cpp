@@ -31,12 +31,45 @@ void ActionAddHexagon::Execute()
 
 	pGUI->ClearStatusBar();
 
-	//Step 2 - prepare Ellipse data
+	//Step 2 - prepare Hexagon data
 	//Calcuate hexagon Side Length
 	int SideLength = max(abs(C.x - P1.x), abs(C.y - P1.y));
 
+	int d = SideLength;
+
+	Point point1;
+	point1.x = C.x - d;
+	point1.y = C.y;
+	Point point2;
+	point2.x = C.x - d / 2;
+	point2.y = C.y - (d - d / 20 * 3);
+	Point point3;
+	point3.x = C.x + d / 2;
+	point3.y = C.y - (d - d / 20 * 3);
+	Point point4;
+	point4.x = C.x + d;
+	point4.y = C.y;
+	Point point5;
+	point5.x = C.x + d / 2;
+	point5.y = C.y + (d - d / 20 * 3);
+	Point point6;
+	point6.x = C.x - d / 2;
+	point6.y = C.y + (d - d / 20 * 3);
+
+	int Xpoints[6] = { point1.x, point2.x, point3.x, point4.x, point5.x, point6.x };
+	int Ypoints[6] = { point1.y, point2.y, point3.y, point4.y, point5.y, point6.y };
+
+	for (int i = 0; i < 6; i++)
+	{
+		if (Ypoints[i] < UI.ToolBarHeight || Ypoints[i] >= (UI.height - UI.StatusBarHeight))
+		{
+			pGUI->PrintTempMessge("Points out of the Drawing Area!", 800);
+			return;
+		}
+	}
+
 	//Step 3 - Create a Hexagon with the parameters read from the user
-	CHexagon* H = new CHexagon(C, SideLength, HexGfxInfo);
+	CHexagon* H = new CHexagon(Xpoints, Ypoints, C, SideLength, HexGfxInfo);
 
 	//and unselect All Previous Figures
 	pManager->UnSelectFigures(1);

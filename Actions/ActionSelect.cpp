@@ -3,11 +3,10 @@
 
 using namespace std;
 
-ActionSelect::ActionSelect(ApplicationManager* pApp, Point _P, bool _multiSelect,int _playType) :Action(pApp)
+ActionSelect::ActionSelect(ApplicationManager* pApp, Point _P, bool _multiSelect) :Action(pApp)
 {
 	multiSelect = _multiSelect;
 	P = _P;
-	playType = _playType;
 }
 
 void ActionSelect::Execute()
@@ -19,10 +18,10 @@ void ActionSelect::Execute()
 	//and return selected figure or null 
 	CFigure* fig = pManager->GetFigure(P.x, P.y);
 	// no figure selected
-	if (fig == NULL) {
+	if (fig == NULL) 
+	{
 		pGUI->PrintMessage("No Figure Selected");
 		pManager->UnSelectFigures(2);
-		//selectedFigures.clear();
 	}
 	else
 	{
@@ -41,12 +40,5 @@ void ActionSelect::Execute()
 			fig->SetSelected(true);
 			fig->PrintInfo(pGUI);
 		}
-	}
-
-	if (playType != 0) {
-		pManager->picFigures(fig);
-		pManager->DeleteSelectedFigures();
-		pGUI->ClearDrawArea();
-		pManager->UpdateInterface();
 	}
 }

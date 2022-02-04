@@ -8,12 +8,13 @@ CSquare::CSquare(){
 	SqrCnt++;
 }
 
-CSquare::CSquare(Point P1, int len, GfxInfo FigureGfxInfo):CFigure(FigureGfxInfo,1)
+CSquare::CSquare(Point P1, int len, GfxInfo FigureGfxInfo):CFigure(FigureGfxInfo)
 {
 	TopLeftCorner = P1;
 	length = len;
 	SqrCnt++;
 }
+
 
 CSquare::~CSquare() {
 	SqrCnt--;
@@ -24,6 +25,11 @@ void CSquare::DrawMe(GUI* pGUI) const
 {
 	//Call Output::DrawRect to draw a Square on the screen	
 	pGUI->DrawSquare(TopLeftCorner, length, FigGfxInfo, Selected);
+}
+
+// figure Name
+string CSquare::FigureName(){
+	return "Sqaure";
 }
 
 // save figure in the file
