@@ -18,7 +18,6 @@
 #include "Actions/ActionDelete.h"
 #include "Actions/ActionResize.h"
 
-
 #include <stdio.h>
 #include <stdlib.h>  
 #include <cstdlib>
@@ -98,15 +97,12 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 		case DRAW_SQUARE:
 			newAct = new ActionAddSquare(this);
 			break;
-
 		case DRAW_ELPS:
 			newAct = new ActionAddEllipse(this);
 			break;
-
 		case DRAW_HEX:
 			newAct = new ActionAddHexagon(this);
 			break;
-
 		case DRAW_SHAPES:
 			pGUI->ClearToolBar();
 			pGUI->CreateShapesBar();
@@ -130,7 +126,6 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 		case SEND_BACK:
 			newAct = new ActionChangeLocation(this, false);
 			break;
-
 		case BRNG_FRNT:
 			newAct = new ActionChangeLocation(this, true);
 			break;
@@ -141,21 +136,18 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			pGUI->ClearToolBar();
 			pGUI->CreateDrawToolBar();
 			break;
-
 		case COLOR_DEEPSKYBLUE:
 			figure = GetSelectedFigureByFlag(selectedIndex, selectedNum);
 			newAct = new ActionChangeColor(this, DEEPSKYBLUE, DORF, figure);
 			pGUI->ClearToolBar();
 			pGUI->CreateDrawToolBar();
 			break;
-
 		case COLOR_LIGHTGREEN:
 			figure = GetSelectedFigureByFlag(selectedIndex, selectedNum);
 			newAct = new ActionChangeColor(this, LIGHTGREEN, DORF, figure);
 			pGUI->ClearToolBar();
 			pGUI->CreateDrawToolBar();
 			break;
-
 		case COLOR_ORANGE:
 			figure = GetSelectedFigureByFlag(selectedIndex, selectedNum);
 			newAct = new ActionChangeColor(this, ORANGE, DORF, figure);
@@ -169,14 +161,12 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			pGUI->CreateDrawColorBar();
 			pGUI->PrintTempMessge("Select drawing color!", 1000);
 			break;
-
 		case CHNG_FILL_CLR:
 			DORF = 2;
 			pGUI->ClearToolBar();
 			pGUI->CreateDrawColorBar();
 			pGUI->PrintTempMessge("Select filling color!", 1000);
 			break;
-
 		case CHNG_BK_CLR:
 			DORF = 3;
 			pGUI->ClearToolBar();
@@ -187,7 +177,6 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 		case SAVE:
 			newAct = new ActionSave(this);
 			break;
-
 		case LOAD:
 			newAct = new ActionLoad(this);
 			break;
@@ -195,11 +184,9 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 		case TO_PICK_IMAGE:
 			newAct = new ActionPickImage(this);
 			break;
-
 		case TO_PICK_COLOR:
 			newAct = new ActionPickColor(this);
 			break;
-
 		case TO_PICK_IMAGE_COLOR:
 			newAct = new ActionPickImage_Color(this);
 			break;
@@ -217,7 +204,6 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 		case EXIT:
 			newAct = new ActionExit(this);
 			break;
-
 
 		case RESIZE:
 			pGUI->CreateResizeBar();

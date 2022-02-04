@@ -4,7 +4,8 @@
 
 int CSquare::SqrCnt = 0;  //static variable to determine the number of objects
 
-CSquare::CSquare(){
+CSquare::CSquare()
+{
 	SqrCnt++;
 }
 
@@ -15,9 +16,8 @@ CSquare::CSquare(Point P1, int len, GfxInfo FigureGfxInfo):CFigure(FigureGfxInfo
 	SqrCnt++;
 }
 
-
-
-CSquare::~CSquare() {
+CSquare::~CSquare() 
+{
 	SqrCnt--;
 	std::cout << "destructor from CSquare" << std::endl;
 }
@@ -29,7 +29,8 @@ void CSquare::DrawMe(GUI* pGUI) const
 }
 
 // figure Name
-string CSquare::FigureName(){
+string CSquare::FigureName()
+{
 	return "Sqaure";
 }
 
@@ -119,12 +120,15 @@ void CSquare::IncCount() {
 // if 0  nothing it will resize 
 // if -1 can't resize size is very smal 
 
-int CSquare::Resize(double scale) {	
+int CSquare::Resize(double scale) 
+{	
 	if (TopLeftCorner.x + length * scale >= 1300 || TopLeftCorner.y + length * scale >= 650
-		|| scale * length <= 20) {
+		|| scale * length <= 20) 
+	{
 		return 1;
 	}
-	else {
+	else 
+	{
 		length = scale * length;
 		return 0;
 	}
