@@ -35,12 +35,18 @@ enum ActionType //The actions supported (you can add more if needed)
 	LOAD,			//Load a graph from a file
 	EXIT,			//Exit the application
 
+	RESIZE_QUARTER,
+	RESIZE_HALF,
+	RESIZE_DOUBLE,
+	RESIZE_QUADRUPLE,
+
 	DRAWING_AREA,	//A click on the drawing area
 	STATUS,			//A click on the status bar
 	EMPTY,			//A click on empty place in the toolbar
 	TO_PICK_IMAGE,        //to pick Image Edit By 'Mahmoud'
 	TO_PICK_COLOR,  //to pick fill color Edit By 'Mahmoud' 
 	TO_PICK_IMAGE_COLOR,  // to Pick Image And Color Edit By 'Mahmoud'
+	RESTART,			//Restart Play Edit By 'Mahmoud'
 	TO_DRAW,		//Switch interface to Draw mode
 	TO_PLAY			//Switch interface to Play mode
 

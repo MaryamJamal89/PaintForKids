@@ -1,4 +1,5 @@
 #include "CFigure.h"
+#include <iostream>
 
 CFigure::CFigure() {}
 
@@ -8,13 +9,20 @@ CFigure::CFigure(GfxInfo FigureGfxInfo)
 	Selected = true; // Figure is selected after created
 	ID = id++; // Figure ID starts from 1
 }
-
+//copy constructor
+//CFigure::CFigure(const CFigure & cfig) {}
+////dstructor
+CFigure::~CFigure() {
+	//ID--;
+	std::cout << "from base" << std::endl;
+}
 //CFigure::Selected = true;
 void CFigure::SetSelected(bool s)
 {	Selected = s; }
 
 bool CFigure::IsSelected() const
 {	return Selected; }
+
 
 void CFigure::ChngDrawClr(color Dclr)
 {	FigGfxInfo.DrawClr = Dclr; }
@@ -25,11 +33,40 @@ void CFigure::ChngFillClr(color Fclr)
 	FigGfxInfo.FillClr = Fclr; 
 }
 
-//static value to give Figure ID it's start Value   
+// static value to give Figure ID it's start Value   
 int CFigure::id = 1;
 
 // take a copy of pointer obj without Refernce
-CFigure* CFigure::CloneFig() 
+//CFigure* CFigure::CloneFig() 
+//{
+//	return NULL;
+//}
+
+
+int CFigure::GetCount() {
+	return 0;
+}
+
+
+void CFigure::IncCount() { return; }
+
+
+string CFigure::GetFillClr()
 {
-	return NULL;
+	if (FigGfxInfo.isFilled)
+	{
+		color Fillcolor = FigGfxInfo.FillClr;
+		if (Fillcolor == TOMATO) return "TOMATO";
+		else if (Fillcolor == DEEPSKYBLUE) return "DEEPSKYBLUE";
+		else if (Fillcolor == LIGHTGREEN) return "LIGHTGREEN";
+		else  return "ORANGE";
+	}
+	else
+		return "NON-FILLED";
+}
+
+
+// figure Name
+string CFigure::FigureName() {
+	return "Parent";
 }

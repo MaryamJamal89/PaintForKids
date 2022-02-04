@@ -1,24 +1,41 @@
 #include "CHexagon.h"
 #include<fstream>
+#include <iostream>
 
 // Define Infinite (Using INT_MAX caused overflow problems)
 #define INF 10000
 
 int CHexagon::HexCnt = 0;  //static variable to determine the number of objects
 
-CHexagon::CHexagon(){}
+CHexagon::CHexagon(){
+	HexCnt++;
+}
 
-CHexagon::CHexagon(Point C, int len, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo)
+CHexagon::CHexagon(int Xarr[], int Yarr[], Point C, int len, GfxInfo FigureGfxInfo) : CFigure(FigureGfxInfo)
 {
 	Center = C;
 	length = len;
+	for (int i=0; i < 6; i++) 
+	{
+		Xpoints[i] = Xarr[i];
+		Ypoints[i] = Yarr[i];
+	}
 	HexCnt++;
+}
+
+CHexagon::~CHexagon() {
+	HexCnt--;
 }
 
 void CHexagon::DrawMe(GUI* pOut) const
 {
 	//Call Output::DrawHex to draw a Hexagon on the screen	
-	pOut->DrawHex(Center, length, FigGfxInfo, Selected);
+	pOut->DrawHex(Xpoints, Ypoints, FigGfxInfo, Selected);
+}
+
+// figure Name
+string CHexagon::FigureName() {
+	return "Hexagon";
 }
 
 // save figure in the file
@@ -147,29 +164,14 @@ bool CHexagon::isInside(Point polygon[], int n, Point p)
  //InFig return boolian to check point inside Figure 
 bool CHexagon::InFig(int x, int y)
 {
-	int d = length;
+	Point points[6];
+	for (int i = 0; i < 6; i++)
+	{
+		points[i].x=Xpoints[i];
+		points[i].y=Ypoints[i];
+	}
 
-	Point point1;
-	point1.x = Center.x - d;
-	point1.y = Center.y;
-	Point point2;
-	point2.x = Center.x - d / 2;
-	point2.y = Center.y - (d - d / 20 * 3);
-	Point point3;
-	point3.x = Center.x + d / 2;
-	point3.y = Center.y - (d - d / 20 * 3);
-	Point point4;
-	point4.x = Center.x + d;
-	point4.y = Center.y;
-	Point point5;
-	point5.x = Center.x + d / 2;
-	point5.y = Center.y + (d - d / 20 * 3);
-	Point point6;
-	point6.x = Center.x - d / 2;
-	point6.y = Center.y + (d - d / 20 * 3);
-
-	Point points[] = { point1, point2, point3, point4,point5,point6 };
-	return isInside(points, 6, {x,y});
+	return isInside(points, 6, {x, y});
 }
 
 // Print to return all info about figure
@@ -195,5 +197,51 @@ void CHexagon::PrintInfo(GUI* pGUI)
 // take a copy of pointer obj without Refernce
 CHexagon* CHexagon::CloneFig() 
 {
+	//HexCnt++;
 	return new CHexagon(*this);
+}
+
+
+int CHexagon::GetCount() {
+	return HexCnt;
+}
+
+void CHexagon::IncCount() {
+	HexCnt++;
+}
+
+int CHexagon::Resize(double scale) {
+	for (int i = 0; i < 6; i++)
+	{
+		if (Ypoints[i]*scale < UI.ToolBarHeight || Ypoints[i] * scale >= (UI.height - UI.StatusBarHeight))
+		{
+			return 1;
+		}
+	}
+	for (int i = 0; i < 6; i++)
+	{
+		if (Ypoints[i] * scale <= 20 || Xpoints[i] * scale <= 20)
+		{
+			return -1;
+		}
+	}
+
+		int d = length* scale;
+		
+		Xpoints[0] = Center.x - d;
+		Ypoints[0] = Center.y;
+		Xpoints[1]= Center.x - d / 2;
+		Ypoints[1]= Center.y - (d - d / 20 * 3);
+		Xpoints[2]= Center.x + d / 2;
+		Ypoints[2]= Center.y - (d - d / 20 * 3);
+		Xpoints[3] = Center.x + d;
+		Ypoints[3] = Center.y;
+		Xpoints[4]= Center.x + d / 2;
+		Ypoints[4] = Center.y + (d - d / 20 * 3);
+		Xpoints[5] = Center.x - d / 2;
+		Ypoints[5] = Center.y + (d - d / 20 * 3);
+		return 0;
+		
+	
+
 }

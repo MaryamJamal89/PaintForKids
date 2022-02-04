@@ -13,8 +13,7 @@ void ActionSwitchPlay::Execute()
 	pGUI->CreatePlayToolBar();
 	pGUI->PrintTempMessge("Welcome to Play mode!", 1000);
 	// to take a copy of the original array
-	//pManager->TakeCopyOfFigures();
+	pManager->TakeCopyOfFigures();
 	pManager->multiSelect = 0;
 	pManager->UnSelectFigures(2);
 }
-

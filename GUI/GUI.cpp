@@ -75,6 +75,7 @@ ActionType GUI::MapInputToActionType(int &x,int &y) const
 			case ITM_DROWCLR: return CHNG_DRAW_CLR;
 			case ITM_FILLCLR: return CHNG_FILL_CLR;
 			case ITM_BGCLR: return CHNG_BK_CLR;
+			case ITM_RESIZE: return RESIZE;
 			case ITM_SAVE: return SAVE;
 			case ITM_LOAD: return LOAD;
 			case ITM_PLAY: return TO_PLAY;
@@ -129,6 +130,25 @@ ActionType GUI::MapInputToActionType(int &x,int &y) const
 			return DRAWING_AREA;
 		}
 	}
+	else if (UI.InterfaceMode == MODE_RESIZE)
+	{
+		if (y >= 0 && y < UI.ToolBarHeight)
+		{
+			int ClickedItemOrder = (x / UI.MenuItemWidth);
+			switch (ClickedItemOrder)
+			{
+				case ITM_QUARTER: return RESIZE_QUARTER;
+				case ITM_HALF: return RESIZE_HALF;
+				case ITM_DOUBLE: return RESIZE_DOUBLE;
+				case ITM_QUADRUPLE: return RESIZE_QUADRUPLE;
+				case ITM_RESIZEBACK: return TO_DRAW;
+			}
+		}
+		if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)
+		{
+			return DRAWING_AREA;
+		}
+	}
 	else	//GUI is in PLAY mode
 	{
 		///TODO:
@@ -148,6 +168,7 @@ ActionType GUI::MapInputToActionType(int &x,int &y) const
 			case ITM_PICK_IMAGE: return TO_PICK_IMAGE;
 			case ITM_PICK_FILL_COLOR: return TO_PICK_COLOR;
 			case ITM_PICK_IMAGE_COLOR: return TO_PICK_IMAGE_COLOR;
+			case ITM_RESTART: return RESTART;
 			case ITM_DRAW: return TO_DRAW;
 
 
@@ -245,6 +266,7 @@ void GUI::CreateDrawToolBar() const
 	MenuItemImages[ITM_DEL] = "images\\MenuItems\\delete-color.jpg";
 	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\save-color.jpg";
 	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\load-color.jpg";
+	MenuItemImages[ITM_RESIZE] = "images\\MenuItems\\load-color.jpg";
 	MenuItemImages[ITM_PLAY] = "images\\MenuItems\\playmood4-color.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\exit-color.jpg";
 
@@ -280,6 +302,28 @@ void GUI::CreateShapesBar() const {
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
+void GUI::CreateResizeBar() const {
+	CreateToolBar();
+	UI.InterfaceMode = MODE_RESIZE;
+
+	string DrawResizeItem[ITEMS_COUNT];
+
+	DrawResizeItem[ITM_QUARTER] = "images\\MenuItems\\quarter.jpg";
+	DrawResizeItem[ITM_HALF] = "images\\MenuItems\\half.jpg";
+	DrawResizeItem[ITM_DOUBLE] = "images\\MenuItems\\double.jpg";
+	DrawResizeItem[ITM_QUADRUPLE] = "images\\MenuItems\\quadruple.jpg";
+	DrawResizeItem[ITM_RESIZEBACK] = "images\\MenuItems\\return-color.jpg";
+
+	//Draw menu item one image at a time
+	for (int i = 0; i < ITEMS_COUNT; i++)
+		pWind->DrawImage(DrawResizeItem[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+
+	pWind->SetPen(MYDARKBLACK, 3);
+	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////
+
 void GUI::CreateDrawColorBar() const {
 
 	UI.InterfaceMode = MODE_COLOR;
@@ -311,6 +355,7 @@ void GUI::CreatePlayToolBar() const
 	MenuItemImages[ITM_PICK_IMAGE] = "images\\MenuItems\\selectShape-color.jpg";
 	MenuItemImages[ITM_PICK_FILL_COLOR] = "images\\MenuItems\\selectColor-color.jpg";
 	MenuItemImages[ITM_PICK_IMAGE_COLOR] = "images\\MenuItems\\selectAll-color.jpg";
+	MenuItemImages[ITM_RESTART] = "images\\MenuItems\\restart.jpg",
 	MenuItemImages[ITM_DRAW] = "images\\MenuItems\\return-color.jpg";
 
 	//Draw menu item one image at a time
@@ -453,10 +498,10 @@ void GUI::DrawEllip(Point center, int length, int height, GfxInfo ElliGfxInfo, b
 	else
 		style = FRAME;
 
-	pWind->DrawEllipse(center.x - height, center.y - length, center.x + height, center.y + length, style);
+	pWind->DrawEllipse(center.x - length, center.y - height, center.x + length, center.y + height, style);
 }
 
-void GUI::DrawHex(Point center, int length, GfxInfo HexGfxInfo, bool selected) const
+void GUI::DrawHex(int Xpoints[], int Ypoints[], GfxInfo HexGfxInfo, bool selected) const
 {
 	color DrawingClr;
 	if (selected)

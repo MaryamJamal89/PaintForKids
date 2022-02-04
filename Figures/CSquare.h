@@ -8,10 +8,11 @@ class CSquare : public CFigure
 private:
 	Point TopLeftCorner;	
 	int length;
-
+	static int SqrCnt;//static variable to determine the number of objects
 public:
-	static int SqrCnt;
+	//CSquare(const CSquare& csq);
 	CSquare();
+	virtual ~CSquare();
 	CSquare(Point , int, GfxInfo FigureGfxInfo );
 	//CSquare(const CSquare  & old);//copy constructor
 	virtual void DrawMe(GUI* pOut) const;
@@ -22,6 +23,15 @@ public:
 	virtual void PrintInfo(GUI* pGUI);
 	// take a copy of pointer obj without Refernce
 	virtual CSquare* CloneFig();
+
+	virtual int GetCount();
+
+	virtual void IncCount();
+
+	// return Figure Name
+	virtual string FigureName();
+
+	int Resize(double scale);
 };
 
 #endif

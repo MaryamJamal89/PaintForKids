@@ -28,6 +28,7 @@ public:
 	void CreateDrawToolBar() const;	//creates Draw mode toolbar & menu
 	void CreateDrawColorBar() const; //creates color mode toolbar & menu
 	void CreateShapesBar() const;
+	void CreateResizeBar() const;
 	void CreatePlayToolBar() const;	//creates Play mode toolbar & menu
 	void CreateStatusBar() const;	//create the status bar
 
@@ -40,7 +41,7 @@ public:
 	// -- Figures Drawing functions
 	void DrawSquare(Point P1, int length, GfxInfo RectGfxInfo, bool selected = false) const;	//Draw a Square
 	void DrawEllip(Point P1, int length, int height, GfxInfo ElliGfxInfo, bool selected = false) const;		//Draw a Ellipse
-	void DrawHex(Point center, int length, GfxInfo HexGfxInfo, bool selected = false) const;	//Draw a Hex
+	void DrawHex(int[], int[], GfxInfo HexGfxInfo, bool selected = false) const;	//Draw a Hex
 	
 	void PrintMessage(string msg) const;	//Print a message on Status bar
 

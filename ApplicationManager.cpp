@@ -1,4 +1,3 @@
-#include <fstream>
 #include "ApplicationManager.h"
 #include "Actions/ActionAddSquare.h"
 #include "Actions/ActionAddEllipse.h"
@@ -13,9 +12,18 @@
 #include "Actions/ActionPickImage.h"
 #include "Actions/ActionPickColor.h"
 #include "Actions/ActionPickImage_Color.h"
+#include "Actions/ActionRestartPlay.h"
 #include "Actions/ActionSwitchPlay.h"
 #include "Actions/ActionSwitchDraw.h"
 #include "Actions/ActionDelete.h"
+#include "Actions/ActionResize.h"
+
+#include <stdio.h>
+#include <stdlib.h>  
+#include <cstdlib>
+#include <iostream>
+#include <chrono>
+#include <fstream>
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -28,6 +36,13 @@ ApplicationManager::ApplicationManager()
 
 	multiSelect = 0;
 	numberOfDuplicatedFilesName = 1;
+	inPlayMode = false;
+
+	playType = 0;
+	validCounter = 0;
+	invalidCounter = 0;
+	figType = 0;
+	startPlay = 0;
 }
 
 // return numberOfDuplicatedFilesName
@@ -191,7 +206,9 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 	case TO_PICK_IMAGE_COLOR:
 		newAct = new ActionPickImage_Color(this);
 		break;
-
+	case RESTART:
+		newAct = new ActionRestartPlay(this);
+		break;
 	case TO_PLAY:
 		newAct = new ActionSwitchPlay(this);
 		break;
@@ -202,6 +219,10 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 
 	case EXIT:
 		newAct = new ActionExit(this);
+		break;
+
+	case RESIZE:
+		newAct = new ActionResize(this);
 		break;
 
 	case STATUS:	//a click on the status bar ==> no action
@@ -239,6 +260,11 @@ int ApplicationManager::GetFigCount()
 //==================================================================================//
 //multiSelect filed
 //bool ApplicationManager::multiSelect = false;
+
+CFigure* ApplicationManager::getFigByIndex(int i) {
+	return FigList[i];
+}
+
 //Add a figure to the list of figures
 void ApplicationManager::AddFigure(CFigure* pFig)
 {
@@ -247,13 +273,14 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 }
 
 //unSelect Figures
-void ApplicationManager::UnSelectFigures(int mul) const 
+void ApplicationManager::UnSelectFigures(int mul) const
 {
 	if (mul == 1 && multiSelect)
 	{
 		return;
 	}
-	for (int i = 0; i < FigCount; i++) {
+	for (int i = 0; i < FigCount; i++)
+	{
 		FigList[i]->SetSelected(false);
 	}
 };
@@ -264,7 +291,8 @@ void ApplicationManager::UnSelectFigures(int mul) const
 CFigure* ApplicationManager::GetFigure(int x, int y) const         //get one selected figure by clicked point indexes
 {
 	// if the point in figure will return Pointer on Figure
-	for (int i = FigCount - 1; i >= 0; i--) {
+	for (int i = FigCount - 1; i >= 0; i--)
+	{
 		if (FigList[i]->InFig(x, y))
 		{
 			return FigList[i];
@@ -311,7 +339,8 @@ void ApplicationManager::InsertFigure(bool isFront)          //insert figure in 
 	{
 		if (isFront)
 		{
-			for (int i = selectedIndex; i < FigCount; i++) {
+			for (int i = selectedIndex; i < FigCount; i++) 
+			{
 				FigList[i] = FigList[i + 1];
 			}
 			FigList[FigCount - 1] = temp;
@@ -319,7 +348,8 @@ void ApplicationManager::InsertFigure(bool isFront)          //insert figure in 
 		}
 		else
 		{
-			for (int i = selectedIndex; i >= 0; i--) {
+			for (int i = selectedIndex; i >= 0; i--) 
+			{
 				FigList[i] = FigList[i - 1];
 			}
 			FigList[0] = temp;
@@ -327,6 +357,7 @@ void ApplicationManager::InsertFigure(bool isFront)          //insert figure in 
 		}
 	}
 }
+
 
 void ApplicationManager::RearrangingFigList()         //removing null refrences from FigList
 {
@@ -350,7 +381,10 @@ void ApplicationManager::DeleteSelectedFigures()           //delete all selected
 	{
 		if (FigList[i]->IsSelected())
 		{
-			//deleting the figure
+
+			/*CFigure* temp;
+			temp = FigList[i];
+			delete temp;*/
 			FigList[i] = NULL;
 			deletedNum++;
 		}
@@ -368,24 +402,84 @@ void ApplicationManager::SaveAll(ofstream& File) const
 	}
 }
 
+// Backup FigList
+void ApplicationManager::TakeCopyOfFigures()
+{
+	//bool inPlayMode = false;
+	if (UI.InterfaceMode == MODE_PLAY) 
+	{
+		// backup original figures
+		for (int i = 0; i < FigCount; i++)
+		{
+			cout << "backup original figures" << endl;
+			CopyFigList[i] = FigList[i]->CloneFig();
+		}
+		copyArrayLength = FigCount;
+		inPlayMode = true;
+	}
+	else
+	{
+		if (inPlayMode == true)
+		{
+			// restore the original size of the array
+			FigCount = copyArrayLength;
+			// delete old pointers first
+			for (int i = 0; i < FigCount; i++)
+			{
+				delete FigList[i];
+			}
 
-//// take copy of Figures
-//void ApplicationManager::TakeCopyOfFigures() 
-//{
-//	if (UI.InterfaceMode == MODE_PLAY) {
-//		for (int i = 0; i < FigCount; i++)
-//			CopyFigList[i]= FigList[i]->CloneFig();
-//	}
-//	else 
-//  {
-//		for (int i = 0; i < FigCount; i++)
-//			FigList[i] = CopyFigList[i]->CloneFig();
-//
-//		for (int i = 0; i < FigCount; i++)
-//			delete CopyFigList[i];
-//	}
-//}
+			// restore figures from the backup array
+			for (int i = 0; i < FigCount; i++)
+			{
+				FigList[i] = CopyFigList[i]->CloneFig();
+				FigList[i]->IncCount();
+				//cout << CopyFigList[i] << " : " << FigList[i]->GetCount() << endl;
+			}
 
+			// delete pointers in the backup array to free ram
+			for (int i = 0; i < FigCount; i++)
+			{
+				FigList[i]->IncCount();
+				delete CopyFigList[i];
+				inPlayMode = false;
+			}
+		}
+	}
+}
+
+/////////////
+ //To Restart Play
+void ApplicationManager::TakeFigOfDrawMode()
+{
+	// delete old pointers first
+	for (int i = 0; i < FigCount; i++)
+	{
+		delete FigList[i];
+	}
+
+	// restore the original size of the array
+	FigCount = copyArrayLength;
+
+	// restore figures from the backup array
+	for (int i = 0; i < FigCount; i++)
+	{
+		cout << "restore figures from the backup array" << endl;
+		FigList[i] = CopyFigList[i]->CloneFig();
+		FigList[i]->IncCount();
+		//cout << CopyFigList[i] << " : " << FigList[i]->GetCount() << endl;
+	}
+}
+
+CFigure* ApplicationManager::GetRandomFigure() 
+{
+	if (FigCount)
+	{
+		srand(time(NULL));
+		return FigList[rand() % FigCount];
+	}
+	return nullptr;
+}
 
 ////////////////////////////////////////////////////////////////////////////////////
 //==================================================================================//
@@ -394,9 +488,9 @@ void ApplicationManager::SaveAll(ofstream& File) const
 
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
-{	
-	for(int i = 0; i<FigCount; i++)
-		FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
+{
+	for (int i = 0; i < FigCount; i++)
+			FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -415,5 +509,5 @@ ApplicationManager::~ApplicationManager()
 	for (int i = 0; i < FigCount; i++)
 		delete FigList[i];
 	delete pGUI;
-	
 }
+
