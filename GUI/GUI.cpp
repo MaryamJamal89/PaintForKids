@@ -51,7 +51,7 @@ string GUI::GetSrting() const
 //This function reads the position where the user clicks to determine the desired action
 ActionType GUI::MapInputToActionType(int &x,int &y) const
 {	
-	//int x,y;
+
 	pWind->WaitMouseClick(x, y);	//Get the coordinates of the user click
 
 	if(UI.InterfaceMode == MODE_DRAW)	//GUI in the DRAW mode
@@ -67,19 +67,19 @@ ActionType GUI::MapInputToActionType(int &x,int &y) const
 
 			switch (ClickedItemOrder)
 			{
-			case ITM_SHAPES: return DRAW_SHAPES;
-			case ITM_MULSELECT: return MUL_SELECT;
-			case ITM_DEL: return DEL;
-			case ITM_BACK: return SEND_BACK;
-			case ITM_FRONT: return BRNG_FRNT;
-			case ITM_DROWCLR: return CHNG_DRAW_CLR;
-			case ITM_FILLCLR: return CHNG_FILL_CLR;
-			case ITM_BGCLR: return CHNG_BK_CLR;
-			case ITM_RESIZE: return RESIZE;
-			case ITM_SAVE: return SAVE;
-			case ITM_LOAD: return LOAD;
-			case ITM_PLAY: return TO_PLAY;
-			case ITM_EXIT: return EXIT;
+				case ITM_SHAPES: return DRAW_SHAPES;
+				case ITM_MULSELECT: return MUL_SELECT;
+				case ITM_DEL: return DEL;
+				case ITM_BACK: return SEND_BACK;
+				case ITM_FRONT: return BRNG_FRNT;
+				case ITM_DROWCLR: return CHNG_DRAW_CLR;
+				case ITM_FILLCLR: return CHNG_FILL_CLR;
+				case ITM_BGCLR: return CHNG_BK_CLR;
+				case ITM_RESIZE: return RESIZE;
+				case ITM_SAVE: return SAVE;
+				case ITM_LOAD: return LOAD;
+				case ITM_PLAY: return TO_PLAY;
+				case ITM_EXIT: return EXIT;
 			
 				default: return EMPTY;	//A click on empty place in desgin toolbar
 			}
