@@ -264,7 +264,7 @@ void GUI::CreateDrawToolBar() const
 	MenuItemImages[ITM_DEL] = "images\\MenuItems\\delete-color.jpg";
 	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\save-color.jpg";
 	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\load-color.jpg";
-	MenuItemImages[ITM_RESIZE] = "images\\MenuItems\\load-color.jpg";
+	MenuItemImages[ITM_RESIZE] = "images\\MenuItems\\resize.jpg";
 	MenuItemImages[ITM_PLAY] = "images\\MenuItems\\playmood4-color.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\exit-color.jpg";
 

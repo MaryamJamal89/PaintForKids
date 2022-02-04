@@ -6,30 +6,31 @@
 ActionResize::ActionResize(ApplicationManager* pApp,double _Scale) :Action(pApp)
 {
 	Scale = _Scale;
-	anySelected = false;
+	anyFigSelected = false;
 }
 
 void ActionResize::Execute()
 {
 	GUI* pGUI = pManager->GetGUI();
-	pGUI->PrintMessage("Yasser here");
-	int SCount = pManager->GetFigCount();
+	pGUI->PrintMessage("Resize figure - Choose the scale");
+	int figuresCount = pManager->GetFigCount();
+	int resized;
 
-	////This action needs to read some parameters first
-	for (int i = 0; i < SCount; i++){
+	for (int i = 0; i < figuresCount; i++){
 		if (pManager->getFigByIndex(i)->IsSelected()) {
-			int resize = pManager->getFigByIndex(i)->Resize(Scale);
-			if (resize == 0) {
+			resized = pManager->getFigByIndex(i)->Resize(Scale);
+
+			if (resized == 0) {
 				pGUI->PrintMessage("Figure Resized :"+ pManager->getFigByIndex(i)->FigureName());
 			}
 			else {
 				pGUI->PrintMessage("Can't Resize :" + pManager->getFigByIndex(i)->FigureName());
 			}
-			anySelected = true;
+			anyFigSelected = true;
 		}
 	}
-	if (!anySelected) {
-		pGUI->PrintMessage("No Figure Selected");
+	if (!anyFigSelected) {
+		pGUI->PrintMessage("No figure selected");
 	}
 
 	pGUI->ClearDrawArea();

@@ -219,26 +219,20 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			break;
 
 
+		case RESIZE:
+			pGUI->CreateResizeBar();
+			break;
+		case RESIZE_QUARTER:
+			newAct = new ActionResize(this, 0.25);
+			break;
+		case RESIZE_HALF:
+			newAct = new ActionResize(this, 0.5);
+			break;
 		case RESIZE_DOUBLE:
 			newAct = new ActionResize(this,2);
 			break;
-
 		case RESIZE_QUADRUPLE:
 			newAct = new ActionResize(this,4);
-			break;
-
-		case RESIZE_HALF:
-			newAct = new ActionResize(this,0.5);
-			break;
-
-		case RESIZE_QUARTER:
-
-			newAct = new ActionResize(this,0.25);
-			break;
-
-		case RESIZE:
-			pGUI->CreateResizeBar();
-			pGUI->PrintMessage("Yasser here");
 			break;
 
 		case STATUS:	//a click on the status bar ==> no action

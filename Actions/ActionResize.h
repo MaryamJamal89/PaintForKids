@@ -8,7 +8,7 @@
 class ActionResize :public Action
 {
 	double Scale;
-	bool anySelected;
+	bool anyFigSelected;
 
 public:
 	ActionResize(ApplicationManager* pApp,double _Scale);

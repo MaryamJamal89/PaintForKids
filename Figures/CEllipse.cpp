@@ -117,34 +117,17 @@ void CEllipse::IncCount() {
 
 int CEllipse::Resize(double scale) {
 
-	//int SideHeight = max(abs(Center.x - P1.x), abs(Center.y - P1.y));
-	//int SideLength = max(abs(Center.x - P2.x), abs(Center.y - P2.y));
 
-	//if ((C.y - SideHeight) < UI.ToolBarHeight || (C.y + SideHeight) >= (UI.height - UI.StatusBarHeight))
-	//{
-	//	//pGUI->PrintTempMessge("Points out of the Drawing Area!", 800);
-	//	return;
-	//}
-	if (!(Center.x + length * scale >= 1300 || Center.x - length * scale <= 0 || Center.y + height * scale >= 650 || Center.y - height * scale <= 50)) {
-		if (scale * length >= 20 && scale * height >= 20)
+	if (!(Center.x + length * scale >= 1300 || Center.x - length * scale <= 0 
+		|| Center.y + height * scale >= 650 || Center.y - height * scale <= 50)) {
+		if (scale * length >= 20 && scale * height >= 10)
 		{
 			length = length * scale;
 			height = height * scale;
 			return 0;
 		}
-		else if (scale * length <= 20 && scale * height <= 20) {
-			return -1;
-		}
-		else {
-			if (scale * length >= 20) {
-				length = length * scale;
-			}
-			else {
-				height = height * scale;
-			}			
-			return 0;
-		}
+		else
+			return 1;
 	}
-
 	return 1;
 }
