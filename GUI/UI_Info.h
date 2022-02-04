@@ -12,6 +12,7 @@ enum GUI_MODE	//Graphical user interface mode
 	MODE_DRAW,	//Drawing mode (startup mode)
 	MODE_COLOR,
 	MODE_SHAPES,
+	MODE_RESIZE,
 	MODE_PLAY	//Playing mode
 };
 
@@ -33,7 +34,7 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	
 	ITM_SAVE,       //save item
 	ITM_LOAD,       //Load item
-
+	ITM_RESIZE,
 	ITM_PLAY,       //Switch Play Item Edit By 'Mahmoud'
 	ITM_EXIT,		//Exit item
 	
@@ -59,6 +60,16 @@ enum DrawColorItem //The items of the Draw menu (you should add more items)
 	ITM_COLORBACK,
 
 	Color_COUNT
+};
+enum DrawResizeItems
+{
+	ITM_QUARTER,
+	ITM_HALF,
+	ITM_DOUBLE,
+	ITM_QUADRUPLE,
+	ITM_RESIZEBACK,
+
+	ITEMS_COUNT
 };
 
 enum PlayMenuItem //The items of the Play menu (you should add more items)
