@@ -12,7 +12,7 @@ ActionResize::ActionResize(ApplicationManager* pApp) :Action(pApp)
 void ActionResize::Execute()
 {
 	GUI* pGUI = pManager->GetGUI();
-	pGUI->ClearDrawArea();
+	//pGUI->ClearDrawArea();
 	pGUI->CreateResizeBar();
 	pGUI->PrintMessage("Yasser here");
 
