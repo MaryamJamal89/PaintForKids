@@ -21,8 +21,7 @@ void ActionExit::Execute()
 			//save
 			Action* save = new ActionSave(pManager);
 			save->Execute();
-			//delete save;
+			delete save;
 		}
 	}
 }
-

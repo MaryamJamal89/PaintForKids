@@ -6,7 +6,7 @@
 
 int CEllipse::ElliCnt = 0;  //static variable to determine the number of objects
 
-CEllipse::CEllipse(){
+CEllipse::CEllipse() {
 	ElliCnt++;
 }
 
@@ -20,7 +20,6 @@ CEllipse::CEllipse(Point C, int len, int hght, GfxInfo FigureGfxInfo) : CFigure(
 
 CEllipse::~CEllipse() {
 	ElliCnt--;
-	std::cout << "destructor from CEllipse" << std::endl;
 }
 
 void CEllipse::DrawMe(GUI* pOut) const
@@ -37,7 +36,7 @@ string CEllipse::FigureName() {
 //save figure in the file
 void CEllipse::Save(ofstream& file, GUI* pGUI)
 {
-	file << "ELPS " << ID << " " << Center.x << " " << Center.y << " " << length << " "<< height<<" "<< pGUI->ColorToString(FigGfxInfo.DrawClr) << " ";
+	file << "ELPS " << ID << " " << Center.x << " " << Center.y << " " << length << " " << height << " " << pGUI->ColorToString(FigGfxInfo.DrawClr) << " ";
 
 	if (FigGfxInfo.isFilled == true)
 	{
@@ -67,10 +66,9 @@ void CEllipse::Load(ifstream& loadedFile, GUI* pGUI)
 	CEllipse::SetSelected(false);
 }
 
-
 // InFig return boolian to check point inside Figure 
 bool CEllipse::InFig(int x, int y)  //Determine the position of the point
-{	
+{
 	// (x - Center.x) ^ 2 / h ^ 2 + (y - Center.y) ^ 2 / l ^ 2 <= 1
 	if (pow(x - Center.x, 2) / pow(length, 2) + pow(y - Center.y, 2) / pow(height, 2) <= 1)
 	{
@@ -101,7 +99,7 @@ void CEllipse::PrintInfo(GUI* pGUI)
 }
 
 // take a copy of pointer obj without Refernce
-CEllipse* CEllipse::CloneFig() 
+CEllipse* CEllipse::CloneFig()
 {
 	//ElliCnt++;
 	return new CEllipse(*this);
@@ -118,7 +116,7 @@ void CEllipse::IncCount() {
 int CEllipse::Resize(double scale) {
 
 
-	if (!(Center.x + length * scale >= 1300 || Center.x - length * scale <= 0 
+	if (!(Center.x + length * scale >= 1300 || Center.x - length * scale <= 0
 		|| Center.y + height * scale >= 650 || Center.y - height * scale <= 50)) {
 		if (scale * length >= 20 && scale * height >= 10)
 		{

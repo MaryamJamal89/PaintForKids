@@ -22,28 +22,28 @@ void ActionSave::Execute()
 	int copyNumber = pManager->ReturnNumberofDulicatedFile();
 
 	GUI* pGUI = pManager->GetGUI();
-    
+
 	file_name = pGUI->ReadFileName("Save: Enter file name to save...");
-	if (fileNames.size() == 0) 
+	if (fileNames.size() == 0)
 	{
 		fileNames.push_back(file_name);
 	}
-	else 
+	else
 	{
 		// condition to check if user want to over ride exist file of make new file
-		for (size_t i = 0; i < fileNames.size(); i++) 
+		for (size_t i = 0; i < fileNames.size(); i++)
 		{
-			if (file_name.compare(fileNames[i]) == 0) 
-			{	 
+			if (file_name.compare(fileNames[i]) == 0)
+			{
 				//ask user to create new file
 				string response = pGUI->Confirm("Sorry,This file is already exit .Do you want to make new copy (Y/N)?");
 				if (response == "Y" || response == "y")
 				{
-					file_name = file_name + " [" +to_string(copyNumber) + "]"; 
+					file_name = file_name + " [" + to_string(copyNumber) + "]";
 					pManager->increamentNumberofDulicatedFile();
 				}
 			}
-			else 
+			else
 			{
 				break;
 			}
@@ -62,9 +62,9 @@ void ActionSave::Execute()
 		file << "NO_FILL" << " ";
 	}
 	file << pGUI->ColorToString(UI.BkGrndColor) << endl;
-    pManager->SaveAll(file);
+	pManager->SaveAll(file);
 
-    file.close();
+	file.close();
 
 	pGUI->PrintTempMessge("File Saved Successfully", 1000);
 }

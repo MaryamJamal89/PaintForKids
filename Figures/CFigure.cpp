@@ -4,46 +4,43 @@
 CFigure::CFigure() {}
 
 CFigure::CFigure(GfxInfo FigureGfxInfo)
-{ 
+{
 	FigGfxInfo = FigureGfxInfo;	// Default status is non-filled.
 	Selected = true; // Figure is selected after created
 	ID = id++; // Figure ID starts from 1
 }
-//copy constructor
-//CFigure::CFigure(const CFigure & cfig) {}
-////dstructor
-CFigure::~CFigure() {
-	//ID--;
-	std::cout << "from base" << std::endl;
-}
-//CFigure::Selected = true;
+
+CFigure::~CFigure(){}
+
 void CFigure::SetSelected(bool s)
-{	Selected = s; }
+{
+	Selected = s;
+}
 
 bool CFigure::IsSelected() const
-{	return Selected; }
-
+{
+	return Selected;
+}
 
 void CFigure::ChngDrawClr(color Dclr)
-{	FigGfxInfo.DrawClr = Dclr; }
+{
+	FigGfxInfo.DrawClr = Dclr;
+}
 
 void CFigure::ChngFillClr(color Fclr)
-{	
+{
 	FigGfxInfo.isFilled = true;
-	FigGfxInfo.FillClr = Fclr; 
+	FigGfxInfo.FillClr = Fclr;
 }
 
 // static value to give Figure ID it's start Value   
 int CFigure::id = 1;
 
-
 int CFigure::GetCount() {
 	return 0;
 }
 
-
 void CFigure::IncCount() { return; }
-
 
 string CFigure::GetFillClr()
 {
@@ -58,7 +55,6 @@ string CFigure::GetFillClr()
 	else
 		return "NON-FILLED";
 }
-
 
 // figure Name
 string CFigure::FigureName() {

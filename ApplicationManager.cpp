@@ -95,148 +95,154 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
 	{
-		case DRAW_SQUARE:
-			newAct = new ActionAddSquare(this);
-			break;
+	case DRAW_SQUARE:
+		newAct = new ActionAddSquare(this);
+		break;
 
-		case DRAW_ELPS:
-			newAct = new ActionAddEllipse(this);
-			break;
+	case DRAW_ELPS:
+		newAct = new ActionAddEllipse(this);
+		break;
 
-		case DRAW_HEX:
-			newAct = new ActionAddHexagon(this);
-			break;
+	case DRAW_HEX:
+		newAct = new ActionAddHexagon(this);
+		break;
 
-		case DRAW_SHAPES:
-			pGUI->ClearToolBar();
-			pGUI->CreateShapesBar();
-			pGUI->PrintTempMessge("Select a figure to draw!", 1000);
-			break;
+	case DRAW_SHAPES:
+		pGUI->ClearToolBar();
+		pGUI->CreateShapesBar();
+		pGUI->PrintTempMessge("Select a figure to draw!", 1000);
+		break;
 
-		case MUL_SELECT:
-			newAct = new ActionMultiSelect(this, multiSelect);
-			break;
+	case MUL_SELECT:
+		newAct = new ActionMultiSelect(this, multiSelect);
+		break;
 
-		case DEL:
-			newAct = new ActionDelete(this);
-			break;
+	case DEL:
+		newAct = new ActionDelete(this);
+		break;
 
-		case SEND_BACK:
-			newAct = new ActionChangeLocation(this, false);
-			break;
+	case SEND_BACK:
+		newAct = new ActionChangeLocation(this, false);
+		break;
 
-		case BRNG_FRNT:
-			newAct = new ActionChangeLocation(this, true);
-			break;
+	case BRNG_FRNT:
+		newAct = new ActionChangeLocation(this, true);
+		break;
 
-		case COLOR_TOMATO:
-			figure = GetSelectedFigureByFlag(selectedIndex, selectedNum);
-			newAct = new ActionChangeColor(this, TOMATO, DORF, figure);
-			pGUI->ClearToolBar();
-			pGUI->CreateDrawToolBar();
-			break;
+	case COLOR_TOMATO:
+		figure = GetSelectedFigureByFlag(selectedIndex, selectedNum);
+		newAct = new ActionChangeColor(this, TOMATO, DORF, figure);
+		pGUI->ClearToolBar();
+		pGUI->CreateDrawToolBar();
+		break;
 
-		case COLOR_DEEPSKYBLUE:
-			figure = GetSelectedFigureByFlag(selectedIndex, selectedNum);
-			newAct = new ActionChangeColor(this, DEEPSKYBLUE, DORF, figure);
-			pGUI->ClearToolBar();
-			pGUI->CreateDrawToolBar();
-			break;
+	case COLOR_DEEPSKYBLUE:
+		figure = GetSelectedFigureByFlag(selectedIndex, selectedNum);
+		newAct = new ActionChangeColor(this, DEEPSKYBLUE, DORF, figure);
+		pGUI->ClearToolBar();
+		pGUI->CreateDrawToolBar();
+		break;
 
-		case COLOR_LIGHTGREEN:
-			figure = GetSelectedFigureByFlag(selectedIndex, selectedNum);
-			newAct = new ActionChangeColor(this, LIGHTGREEN, DORF, figure);
-			pGUI->ClearToolBar();
-			pGUI->CreateDrawToolBar();
-			break;
+	case COLOR_LIGHTGREEN:
+		figure = GetSelectedFigureByFlag(selectedIndex, selectedNum);
+		newAct = new ActionChangeColor(this, LIGHTGREEN, DORF, figure);
+		pGUI->ClearToolBar();
+		pGUI->CreateDrawToolBar();
+		break;
 
-		case COLOR_ORANGE:
-			figure = GetSelectedFigureByFlag(selectedIndex, selectedNum);
-			newAct = new ActionChangeColor(this, ORANGE, DORF, figure);
-			pGUI->ClearToolBar();
-			pGUI->CreateDrawToolBar();
-			break;
+	case COLOR_ORANGE:
+		figure = GetSelectedFigureByFlag(selectedIndex, selectedNum);
+		newAct = new ActionChangeColor(this, ORANGE, DORF, figure);
+		pGUI->ClearToolBar();
+		pGUI->CreateDrawToolBar();
+		break;
 
-		case CHNG_DRAW_CLR:
-			DORF = 1;
-			pGUI->ClearToolBar();
-			pGUI->CreateDrawColorBar();
-			pGUI->PrintTempMessge("Select drawing color!", 1000);
-			break;
+	case CHNG_DRAW_CLR:
+		DORF = 1;
+		pGUI->ClearToolBar();
+		pGUI->CreateDrawColorBar();
+		pGUI->PrintTempMessge("Select drawing color!", 1000);
+		break;
 
-		case CHNG_FILL_CLR:
-			DORF = 2;
-			pGUI->ClearToolBar();
-			pGUI->CreateDrawColorBar();
-			pGUI->PrintTempMessge("Select filling color!", 1000);
-			break;
+	case CHNG_FILL_CLR:
+		DORF = 2;
+		pGUI->ClearToolBar();
+		pGUI->CreateDrawColorBar();
+		pGUI->PrintTempMessge("Select filling color!", 1000);
+		break;
 
-		case CHNG_BK_CLR:
-			DORF = 3;
-			pGUI->ClearToolBar();
-			pGUI->CreateDrawColorBar();
-			pGUI->PrintTempMessge("Select background color!", 1000);
-			break;
+	case CHNG_BK_CLR:
+		DORF = 3;
+		pGUI->ClearToolBar();
+		pGUI->CreateDrawColorBar();
+		pGUI->PrintTempMessge("Select background color!", 1000);
+		break;
 
-		case SAVE:
-			newAct = new ActionSave(this);
-			break;
+	case SAVE:
+		newAct = new ActionSave(this);
+		break;
 
-		case LOAD:
-			newAct = new ActionLoad(this);
-			break;
+	case LOAD:
+		newAct = new ActionLoad(this);
+		break;
 
-		case TO_PICK_IMAGE:
-			newAct = new ActionPickImage(this);
-			break;
+	case TO_PICK_IMAGE:
+		newAct = new ActionPickImage(this);
+		break;
 
-		case TO_PICK_COLOR:
-			newAct = new ActionPickColor(this);
-			break;
+	case TO_PICK_COLOR:
+		newAct = new ActionPickColor(this);
+		break;
 
-		case TO_PICK_IMAGE_COLOR:
-			newAct = new ActionPickImage_Color(this);
-			break;
-		case RESTART:
-			newAct = new ActionRestartPlay(this);
-			break;
-		case TO_PLAY:
-			newAct = new ActionSwitchPlay(this);
-			break;
+	case TO_PICK_IMAGE_COLOR:
+		newAct = new ActionPickImage_Color(this);
+		break;
 
-		case TO_DRAW:
-			newAct = new ActionSwitchDraw(this);
-			break;
+	case RESTART:
+		newAct = new ActionRestartPlay(this);
+		break;
 
-		case EXIT:
-			newAct = new ActionExit(this);
-			break;
+	case TO_PLAY:
+		newAct = new ActionSwitchPlay(this);
+		break;
 
-		case RESIZE:
-			pGUI->CreateResizeBar();
-			break;
-		case RESIZE_QUARTER:
-			newAct = new ActionResize(this, 0.25);
-			break;
-		case RESIZE_HALF:
-			newAct = new ActionResize(this, 0.5);
-			break;
-		case RESIZE_DOUBLE:
-			newAct = new ActionResize(this,2);
-			break;
-		case RESIZE_QUADRUPLE:
-			newAct = new ActionResize(this,4);
-			break;
+	case TO_DRAW:
+		newAct = new ActionSwitchDraw(this);
+		break;
 
-		case STATUS:	//a click on the status bar ==> no action
-			return NULL;
-			break;
+	case EXIT:
+		newAct = new ActionExit(this);
+		break;
 
-		case DRAWING_AREA: //select
-			newAct = new ActionSelect(this, { x, y }, multiSelect);
-			break;
-		}
-		return newAct;
+	case RESIZE:
+		pGUI->CreateResizeBar();
+		break;
+
+	case RESIZE_QUARTER:
+		newAct = new ActionResize(this, 0.25);
+		break;
+
+	case RESIZE_HALF:
+		newAct = new ActionResize(this, 0.5);
+		break;
+
+	case RESIZE_DOUBLE:
+		newAct = new ActionResize(this, 2);
+		break;
+
+	case RESIZE_QUADRUPLE:
+		newAct = new ActionResize(this, 4);
+		break;
+
+	case STATUS:	//a click on the status bar ==> no action
+		return NULL;
+		break;
+
+	case DRAWING_AREA: //select
+		newAct = new ActionSelect(this, { x, y }, multiSelect);
+		break;
+	}
+	return newAct;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -340,21 +346,21 @@ void ApplicationManager::InsertFigure(bool isFront)          //insert figure in 
 	{
 		if (isFront)
 		{
-			for (int i = selectedIndex; i < FigCount; i++) 
+			for (int i = selectedIndex; i < FigCount; i++)
 			{
 				FigList[i] = FigList[i + 1];
 			}
 			FigList[FigCount - 1] = temp;
-			pGUI->PrintTempMessge("Figure brought to front!", 1000);
+			pGUI->PrintMessage("Figure brought to front!");
 		}
 		else
 		{
-			for (int i = selectedIndex; i >= 0; i--) 
+			for (int i = selectedIndex; i >= 0; i--)
 			{
 				FigList[i] = FigList[i - 1];
 			}
 			FigList[0] = temp;
-			pGUI->PrintTempMessge("Figure sent to back!", 1000);
+			pGUI->PrintMessage("Figure sent to back!");
 		}
 	}
 }
@@ -367,7 +373,7 @@ void ApplicationManager::RearrangingFigList()         //removing null refrences 
 		if (FigList[i] == NULL)
 		{
 			//shifting all upcoming figures to remove the null refrenece
-			for (int j = i; j < FigCount-1; j++)
+			for (int j = i; j < FigCount - 1; j++)
 			{
 				FigList[j] = FigList[j + 1];
 			}
@@ -404,7 +410,7 @@ void ApplicationManager::SaveAll(ofstream& File) const
 void ApplicationManager::TakeCopyOfFigures()
 {
 	//bool inPlayMode = false;
-	if (UI.InterfaceMode == MODE_PLAY) 
+	if (UI.InterfaceMode == MODE_PLAY)
 	{
 		// backup original figures
 		for (int i = 0; i < FigCount; i++)
@@ -432,7 +438,7 @@ void ApplicationManager::TakeCopyOfFigures()
 	}
 }
 
-/////////////
+////////////////////////////////////////////////////////////////////////////
  //To Restart Play
 void ApplicationManager::TakeFigOfDrawMode()
 {
@@ -454,7 +460,7 @@ void ApplicationManager::TakeFigOfDrawMode()
 	}
 }
 
-CFigure* ApplicationManager::GetRandomFigure() 
+CFigure* ApplicationManager::GetRandomFigure()
 {
 	if (FigCount)
 	{

@@ -29,7 +29,7 @@ void ActionLoad::Execute()
 			//saving curreng graph
 			Action* save = new ActionSave(pManager);
 			save->Execute();
-			//delete save;
+			delete save;
 		}
 		//deleting old figures
 		pManager->ResetFigList();
@@ -44,7 +44,7 @@ void ActionLoad::Execute()
 	loadedFile.open("Saves\\" + fileName + ".txt");
 	if (loadedFile.fail())
 	{
-		pGUI->PrintTempMessge("File '" +fileName+ "' does not exist!", 1000);
+		pGUI->PrintTempMessge("File '" + fileName + "' does not exist!", 1000);
 	}
 	else
 	{
@@ -55,6 +55,7 @@ void ActionLoad::Execute()
 		//changing window drawing color
 		Action* changeDrawColor = new ActionChangeColor(pManager, pGUI->StringToColor(drawColor), 1, figure);
 		changeDrawColor->Execute();
+		delete changeDrawColor;
 
 		if (fillColor != "NO_FILL")
 		{
@@ -62,6 +63,7 @@ void ActionLoad::Execute()
 			//changing window filling color if it was set
 			Action* changeFillColor = new ActionChangeColor(pManager, pGUI->StringToColor(fillColor), 2, figure);
 			changeFillColor->Execute();
+			delete changeFillColor;
 		}
 		else
 		{
@@ -70,6 +72,7 @@ void ActionLoad::Execute()
 		//changing window background color
 		Action* changeBgColor = new ActionChangeColor(pManager, pGUI->StringToColor(bgColor), 3, figure);
 		changeBgColor->Execute();
+		delete changeBgColor;
 
 		loadedFile >> figsNum;
 		//loading figures

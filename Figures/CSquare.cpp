@@ -4,22 +4,19 @@
 
 int CSquare::SqrCnt = 0;  //static variable to determine the number of objects
 
-CSquare::CSquare(){
+CSquare::CSquare() {
 	SqrCnt++;
 }
 
-CSquare::CSquare(Point P1, int len, GfxInfo FigureGfxInfo):CFigure(FigureGfxInfo)
+CSquare::CSquare(Point P1, int len, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
 	TopLeftCorner = P1;
 	length = len;
 	SqrCnt++;
 }
 
-
-
 CSquare::~CSquare() {
 	SqrCnt--;
-	std::cout << "destructor from CSquare" << std::endl;
 }
 
 void CSquare::DrawMe(GUI* pGUI) const
@@ -29,7 +26,7 @@ void CSquare::DrawMe(GUI* pGUI) const
 }
 
 // figure Name
-string CSquare::FigureName(){
+string CSquare::FigureName() {
 	return "Sqaure";
 }
 
@@ -37,7 +34,7 @@ string CSquare::FigureName(){
 void CSquare::Save(ofstream& file, GUI* pGUI)
 {
 	file << "SQR " << ID << " " << TopLeftCorner.x << " " << TopLeftCorner.y << " " << length << " " << pGUI->ColorToString(FigGfxInfo.DrawClr) << " ";
-	
+
 	if (FigGfxInfo.isFilled == true)
 	{
 		file << pGUI->ColorToString(FigGfxInfo.FillClr) << endl;
@@ -47,7 +44,6 @@ void CSquare::Save(ofstream& file, GUI* pGUI)
 		file << "NO_FILL" << endl;
 	}
 }
-
 
 void CSquare::Load(ifstream& loadedFile, GUI* pGUI)
 {
@@ -83,8 +79,6 @@ void CSquare::PrintInfo(GUI* pGUI)
 	string x1 = to_string(TopLeftCorner.x);
 	string y1 = to_string(TopLeftCorner.y);
 	string len = to_string(length);
-	/*string x2 = to_string(TopLeftCorner.x + length);
-	string y2 = to_string(TopLeftCorner.y + length);*/
 
 	string fillingColor;
 	if (FigGfxInfo.isFilled)
@@ -95,13 +89,12 @@ void CSquare::PrintInfo(GUI* pGUI)
 	{
 		fillingColor = "NO_FILL";
 	}
-	pGUI->PrintMessage("Square / ID:" + id + " / Top Left Corner: (" + x1 + ", " + y1 + ") /" + " Length: " + len +  " / " + " Drawing Color: " + pGUI->ColorToString(FigGfxInfo.DrawClr) + " / Filling Color: " + fillingColor);
+	pGUI->PrintMessage("Square / ID:" + id + " / Top Left Corner: (" + x1 + ", " + y1 + ") /" + " Length: " + len + " / " + " Drawing Color: " + pGUI->ColorToString(FigGfxInfo.DrawClr) + " / Filling Color: " + fillingColor);
 }
 
 // take a copy of pointer obj without Refernce
-CSquare* CSquare::CloneFig() 
+CSquare* CSquare::CloneFig()
 {
-	//SqrCnt++;
 	return new CSquare(*this);
 }
 
@@ -119,7 +112,7 @@ void CSquare::IncCount() {
 // if 0  nothing it will resize 
 // if -1 can't resize size is very smal 
 
-int CSquare::Resize(double scale) {	
+int CSquare::Resize(double scale) {
 	if (TopLeftCorner.x + length * scale >= 1300 || TopLeftCorner.y + length * scale >= 650
 		|| scale * length <= 20) {
 		return 1;

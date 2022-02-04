@@ -7,7 +7,7 @@
 
 int CHexagon::HexCnt = 0;  //static variable to determine the number of objects
 
-CHexagon::CHexagon(){
+CHexagon::CHexagon() {
 	HexCnt++;
 }
 
@@ -15,7 +15,7 @@ CHexagon::CHexagon(int Xarr[], int Yarr[], Point C, int len, GfxInfo FigureGfxIn
 {
 	Center = C;
 	length = len;
-	for (int i=0; i < 6; i++) 
+	for (int i = 0; i < 6; i++)
 	{
 		Xpoints[i] = Xarr[i];
 		Ypoints[i] = Yarr[i];
@@ -42,7 +42,7 @@ string CHexagon::FigureName() {
 void CHexagon::Save(ofstream& file, GUI* pGUI)
 {
 	file << "HEX " << ID << " " << Center.x << " " << Center.y << " " << length << " ";
-	
+
 	for (int i = 0; i < 6; i++) {
 		file << Xpoints[i] << " " << Ypoints[i] << " ";
 	}
@@ -171,17 +171,17 @@ bool CHexagon::isInside(Point polygon[], int n, Point p)
 	return count & 1; // Same as (count%2 == 1)
 }
 
- //InFig return boolian to check point inside Figure 
+//InFig return boolian to check point inside Figure 
 bool CHexagon::InFig(int x, int y)
 {
 	Point points[6];
 	for (int i = 0; i < 6; i++)
 	{
-		points[i].x=Xpoints[i];
-		points[i].y=Ypoints[i];
+		points[i].x = Xpoints[i];
+		points[i].y = Ypoints[i];
 	}
 
-	return isInside(points, 6, {x, y});
+	return isInside(points, 6, { x, y });
 }
 
 // Print to return all info about figure
@@ -201,11 +201,11 @@ void CHexagon::PrintInfo(GUI* pGUI)
 	{
 		fillingColor = "NO_FILL";
 	}
-	pGUI->PrintMessage("Hexagon / ID: " + id + " / Center: (" + x + ", " + y + ") / Length: " + len +" / Drawing Color:" + pGUI->ColorToString(FigGfxInfo.DrawClr) + " / Filling Color: " + fillingColor);
+	pGUI->PrintMessage("Hexagon / ID: " + id + " / Center: (" + x + ", " + y + ") / Length: " + len + " / Drawing Color:" + pGUI->ColorToString(FigGfxInfo.DrawClr) + " / Filling Color: " + fillingColor);
 }
 
 // take a copy of pointer obj without Refernce
-CHexagon* CHexagon::CloneFig() 
+CHexagon* CHexagon::CloneFig()
 {
 	//HexCnt++;
 	return new CHexagon(*this);
@@ -236,22 +236,20 @@ int CHexagon::Resize(double scale) {
 		}
 	}
 
-		int d = length* scale;
-		
-		Xpoints[0] = Center.x - d;
-		Ypoints[0] = Center.y;
-		Xpoints[1]= Center.x - d / 2;
-		Ypoints[1]= Center.y - (d - d / 20 * 3);
-		Xpoints[2]= Center.x + d / 2;
-		Ypoints[2]= Center.y - (d - d / 20 * 3);
-		Xpoints[3] = Center.x + d;
-		Ypoints[3] = Center.y;
-		Xpoints[4]= Center.x + d / 2;
-		Ypoints[4] = Center.y + (d - d / 20 * 3);
-		Xpoints[5] = Center.x - d / 2;
-		Ypoints[5] = Center.y + (d - d / 20 * 3);
-		return 0;
-		
-	
+	int d = length * scale;
 
+	Xpoints[0] = Center.x - d;
+	Ypoints[0] = Center.y;
+	Xpoints[1] = Center.x - d / 2;
+	Ypoints[1] = Center.y - (d - d / 20 * 3);
+	Xpoints[2] = Center.x + d / 2;
+	Ypoints[2] = Center.y - (d - d / 20 * 3);
+	Xpoints[3] = Center.x + d;
+	Ypoints[3] = Center.y;
+	Xpoints[4] = Center.x + d / 2;
+	Ypoints[4] = Center.y + (d - d / 20 * 3);
+	Xpoints[5] = Center.x - d / 2;
+	Ypoints[5] = Center.y + (d - d / 20 * 3);
+
+	return 0;
 }
