@@ -18,6 +18,7 @@
 #include "Actions/ActionDelete.h"
 #include "Actions/ActionResize.h"
 
+
 #include <stdio.h>
 #include <stdlib.h>  
 #include <cstdlib>
@@ -38,11 +39,7 @@ ApplicationManager::ApplicationManager()
 	numberOfDuplicatedFilesName = 1;
 	inPlayMode = false;
 
-	playType = 0;
-	validCounter = 0;
-	invalidCounter = 0;
 	figType = 0;
-	startPlay = 0;
 }
 
 // return numberOfDuplicatedFilesName
@@ -98,142 +95,155 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
 	{
-	case DRAW_SQUARE:
-		newAct = new ActionAddSquare(this);
-		break;
+		case DRAW_SQUARE:
+			newAct = new ActionAddSquare(this);
+			break;
 
-	case DRAW_ELPS:
-		newAct = new ActionAddEllipse(this);
-		break;
+		case DRAW_ELPS:
+			newAct = new ActionAddEllipse(this);
+			break;
 
-	case DRAW_HEX:
-		newAct = new ActionAddHexagon(this);
-		break;
+		case DRAW_HEX:
+			newAct = new ActionAddHexagon(this);
+			break;
 
-	case DRAW_SHAPES:
-		pGUI->ClearToolBar();
-		pGUI->CreateShapesBar();
-		pGUI->PrintTempMessge("Select a figure to draw!", 1000);
-		break;
+		case DRAW_SHAPES:
+			pGUI->ClearToolBar();
+			pGUI->CreateShapesBar();
+			pGUI->PrintTempMessge("Select a figure to draw!", 1000);
+			break;
 
-	case MUL_SELECT:
-		/*if (multiSelect) {
-			multiSelect = 0;
+		case MUL_SELECT:
+			/*if (multiSelect) {
+				multiSelect = 0;
+			}
+			else {
+				multiSelect = 1;
+			}*/
+			newAct = new ActionMultiSelect(this, multiSelect);
+			break;
+
+		case DEL:
+			newAct = new ActionDelete(this);
+			break;
+
+		case SEND_BACK:
+			newAct = new ActionChangeLocation(this, false);
+			break;
+
+		case BRNG_FRNT:
+			newAct = new ActionChangeLocation(this, true);
+			break;
+
+		case COLOR_TOMATO:
+			figure = GetSelectedFigureByFlag(selectedIndex, selectedNum);
+			newAct = new ActionChangeColor(this, TOMATO, DORF, figure);
+			pGUI->ClearToolBar();
+			pGUI->CreateDrawToolBar();
+			break;
+
+		case COLOR_DEEPSKYBLUE:
+			figure = GetSelectedFigureByFlag(selectedIndex, selectedNum);
+			newAct = new ActionChangeColor(this, DEEPSKYBLUE, DORF, figure);
+			pGUI->ClearToolBar();
+			pGUI->CreateDrawToolBar();
+			break;
+
+		case COLOR_LIGHTGREEN:
+			figure = GetSelectedFigureByFlag(selectedIndex, selectedNum);
+			newAct = new ActionChangeColor(this, LIGHTGREEN, DORF, figure);
+			pGUI->ClearToolBar();
+			pGUI->CreateDrawToolBar();
+			break;
+
+		case COLOR_ORANGE:
+			figure = GetSelectedFigureByFlag(selectedIndex, selectedNum);
+			newAct = new ActionChangeColor(this, ORANGE, DORF, figure);
+			pGUI->ClearToolBar();
+			pGUI->CreateDrawToolBar();
+			break;
+
+		case CHNG_DRAW_CLR:
+			DORF = 1;
+			pGUI->ClearToolBar();
+			pGUI->CreateDrawColorBar();
+			pGUI->PrintTempMessge("Select drawing color!", 1000);
+			break;
+
+		case CHNG_FILL_CLR:
+			DORF = 2;
+			pGUI->ClearToolBar();
+			pGUI->CreateDrawColorBar();
+			pGUI->PrintTempMessge("Select filling color!", 1000);
+			break;
+
+		case CHNG_BK_CLR:
+			DORF = 3;
+			pGUI->ClearToolBar();
+			pGUI->CreateDrawColorBar();
+			pGUI->PrintTempMessge("Select background color!", 1000);
+			break;
+
+		case SAVE:
+			newAct = new ActionSave(this);
+			break;
+
+		case LOAD:
+			newAct = new ActionLoad(this);
+			break;
+
+		case TO_PICK_IMAGE:
+			newAct = new ActionPickImage(this);
+			break;
+
+		case TO_PICK_COLOR:
+			newAct = new ActionPickColor(this);
+			break;
+
+		case TO_PICK_IMAGE_COLOR:
+			newAct = new ActionPickImage_Color(this);
+			break;
+		case RESTART:
+			newAct = new ActionRestartPlay(this);
+			break;
+		case TO_PLAY:
+			newAct = new ActionSwitchPlay(this);
+			break;
+
+		case TO_DRAW:
+			newAct = new ActionSwitchDraw(this);
+			break;
+
+		case EXIT:
+			newAct = new ActionExit(this);
+			break;
+
+
+		case RESIZE:
+			pGUI->CreateResizeBar();
+			break;
+		case RESIZE_QUARTER:
+			newAct = new ActionResize(this, 0.25);
+			break;
+		case RESIZE_HALF:
+			newAct = new ActionResize(this, 0.5);
+			break;
+		case RESIZE_DOUBLE:
+			newAct = new ActionResize(this,2);
+			break;
+		case RESIZE_QUADRUPLE:
+			newAct = new ActionResize(this,4);
+			break;
+
+		case STATUS:	//a click on the status bar ==> no action
+			return NULL;
+			break;
+
+		case DRAWING_AREA: //select
+			newAct = new ActionSelect(this, { x, y }, multiSelect);
+			break;
 		}
-		else {
-			multiSelect = 1;
-		}*/
-		newAct = new ActionMultiSelect(this, multiSelect);
-		break;
-
-	case DEL:
-		newAct = new ActionDelete(this);
-		break;
-
-	case SEND_BACK:
-		newAct = new ActionChangeLocation(this, false);
-		break;
-
-	case BRNG_FRNT:
-		newAct = new ActionChangeLocation(this, true);
-		break;
-
-	case COLOR_TOMATO:
-		figure = GetSelectedFigureByFlag(selectedIndex, selectedNum);
-		newAct = new ActionChangeColor(this, TOMATO, DORF, figure);
-		pGUI->ClearToolBar();
-		pGUI->CreateDrawToolBar();
-		break;
-
-	case COLOR_DEEPSKYBLUE:
-		figure = GetSelectedFigureByFlag(selectedIndex, selectedNum);
-		newAct = new ActionChangeColor(this, DEEPSKYBLUE, DORF, figure);
-		pGUI->ClearToolBar();
-		pGUI->CreateDrawToolBar();
-		break;
-
-	case COLOR_LIGHTGREEN:
-		figure = GetSelectedFigureByFlag(selectedIndex, selectedNum);
-		newAct = new ActionChangeColor(this, LIGHTGREEN, DORF, figure);
-		pGUI->ClearToolBar();
-		pGUI->CreateDrawToolBar();
-		break;
-
-	case COLOR_ORANGE:
-		figure = GetSelectedFigureByFlag(selectedIndex, selectedNum);
-		newAct = new ActionChangeColor(this, ORANGE, DORF, figure);
-		pGUI->ClearToolBar();
-		pGUI->CreateDrawToolBar();
-		break;
-
-	case CHNG_DRAW_CLR:
-		DORF = 1;
-		pGUI->ClearToolBar();
-		pGUI->CreateDrawColorBar();
-		pGUI->PrintTempMessge("Select drawing color!", 1000);
-		break;
-
-	case CHNG_FILL_CLR:
-		DORF = 2;
-		pGUI->ClearToolBar();
-		pGUI->CreateDrawColorBar();
-		pGUI->PrintTempMessge("Select filling color!", 1000);
-		break;
-
-	case CHNG_BK_CLR:
-		DORF = 3;
-		pGUI->ClearToolBar();
-		pGUI->CreateDrawColorBar();
-		pGUI->PrintTempMessge("Select background color!", 1000);
-		break;
-
-	case SAVE:
-		newAct = new ActionSave(this);
-		break;
-
-	case LOAD:
-		newAct = new ActionLoad(this);
-		break;
-
-	case TO_PICK_IMAGE:
-		newAct = new ActionPickImage(this);
-		break;
-
-	case TO_PICK_COLOR:
-		newAct = new ActionPickColor(this);
-		break;
-
-	case TO_PICK_IMAGE_COLOR:
-		newAct = new ActionPickImage_Color(this);
-		break;
-	case RESTART:
-		newAct = new ActionRestartPlay(this);
-		break;
-	case TO_PLAY:
-		newAct = new ActionSwitchPlay(this);
-		break;
-
-	case TO_DRAW:
-		newAct = new ActionSwitchDraw(this);
-		break;
-
-	case EXIT:
-		newAct = new ActionExit(this);
-		break;
-
-	case RESIZE:
-		newAct = new ActionResize(this);
-		break;
-
-	case STATUS:	//a click on the status bar ==> no action
-		return NULL;
-		break;
-
-	case DRAWING_AREA: //select
-		newAct = new ActionSelect(this, { x, y }, multiSelect);
-		break;
-	}
-	return newAct;
+		return newAct;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -381,10 +391,12 @@ void ApplicationManager::DeleteSelectedFigures()           //delete all selected
 	{
 		if (FigList[i]->IsSelected())
 		{
-
-			/*CFigure* temp;
-			temp = FigList[i];
-			delete temp;*/
+			if (UI.InterfaceMode != MODE_PLAY)
+			{
+				CFigure* temp;
+				temp = FigList[i];
+				delete temp;
+			}
 			FigList[i] = NULL;
 			deletedNum++;
 		}
@@ -422,20 +434,21 @@ void ApplicationManager::TakeCopyOfFigures()
 		if (inPlayMode == true)
 		{
 			// restore the original size of the array
-			FigCount = copyArrayLength;
-			// delete old pointers first
-			for (int i = 0; i < FigCount; i++)
-			{
-				delete FigList[i];
-			}
+			//FigCount = copyArrayLength;
+			//// delete old pointers first
+			//for (int i = 0; i < FigCount; i++)
+			//{
+			//	delete FigList[i];
+			//}
 
-			// restore figures from the backup array
-			for (int i = 0; i < FigCount; i++)
-			{
-				FigList[i] = CopyFigList[i]->CloneFig();
-				FigList[i]->IncCount();
-				//cout << CopyFigList[i] << " : " << FigList[i]->GetCount() << endl;
-			}
+			//// restore figures from the backup array
+			//for (int i = 0; i < FigCount; i++)
+			//{
+			//	FigList[i] = CopyFigList[i]->CloneFig();
+			//	FigList[i]->IncCount();
+			//	//cout << CopyFigList[i] << " : " << FigList[i]->GetCount() << endl;
+			//}
+			TakeFigOfDrawMode();
 
 			// delete pointers in the backup array to free ram
 			for (int i = 0; i < FigCount; i++)
@@ -462,12 +475,11 @@ void ApplicationManager::TakeFigOfDrawMode()
 	FigCount = copyArrayLength;
 
 	// restore figures from the backup array
+	cout << "restore figures from the backup array" << endl;
 	for (int i = 0; i < FigCount; i++)
 	{
-		cout << "restore figures from the backup array" << endl;
 		FigList[i] = CopyFigList[i]->CloneFig();
 		FigList[i]->IncCount();
-		//cout << CopyFigList[i] << " : " << FigList[i]->GetCount() << endl;
 	}
 }
 
@@ -490,7 +502,7 @@ CFigure* ApplicationManager::GetRandomFigure()
 void ApplicationManager::UpdateInterface() const
 {
 	for (int i = 0; i < FigCount; i++)
-			FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
+		FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -508,6 +520,7 @@ ApplicationManager::~ApplicationManager()
 {
 	for (int i = 0; i < FigCount; i++)
 		delete FigList[i];
+	for (int i = 0; i < copyArrayLength; i++)
+		delete CopyFigList[i];
 	delete pGUI;
 }
-

@@ -1,6 +1,8 @@
 #include "CEllipse.h"
 #include<fstream>
 #include <iostream>
+#include <algorithm>
+#include <chrono>
 
 int CEllipse::ElliCnt = 0;  //static variable to determine the number of objects
 
@@ -114,26 +116,18 @@ void CEllipse::IncCount() {
 }
 
 int CEllipse::Resize(double scale) {
-	if (!(Center.x + length * scale >= 1300 || Center.x - length * scale <= 0 || Center.y + height * scale >= 650 || Center.y - height * scale <= 50)) {
-		if (scale * length >= 20 && scale * height >= 20)
+
+
+	if (!(Center.x + length * scale >= 1300 || Center.x - length * scale <= 0 
+		|| Center.y + height * scale >= 650 || Center.y - height * scale <= 50)) {
+		if (scale * length >= 20 && scale * height >= 10)
 		{
 			length = length * scale;
 			height = height * scale;
 			return 0;
 		}
-		else if (scale * length <= 20 && scale * height <= 20) {
-			return -1;
-		}
-		else {
-			if (scale * length >= 20) {
-				length = length * scale;
-			}
-			else {
-				height = height * scale;
-			}			
-			return 0;
-		}
+		else
+			return 1;
 	}
-
 	return 1;
 }

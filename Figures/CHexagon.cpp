@@ -213,7 +213,7 @@ void CHexagon::IncCount() {
 int CHexagon::Resize(double scale) {
 	for (int i = 0; i < 6; i++)
 	{
-		if (Ypoints[i]*scale < UI.ToolBarHeight || Ypoints[i] * scale >= (UI.height - UI.StatusBarHeight))
+		if (Ypoints[i] * scale < UI.ToolBarHeight || Ypoints[i] * scale >= (UI.height - UI.StatusBarHeight))
 		{
 			return 1;
 		}
