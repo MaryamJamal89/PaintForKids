@@ -6,7 +6,8 @@
 
 int CEllipse::ElliCnt = 0;  //static variable to determine the number of objects
 
-CEllipse::CEllipse(){
+CEllipse::CEllipse()
+{
 	ElliCnt++;
 }
 
@@ -18,7 +19,8 @@ CEllipse::CEllipse(Point C, int len, int hght, GfxInfo FigureGfxInfo) : CFigure(
 	ElliCnt++;
 }
 
-CEllipse::~CEllipse() {
+CEllipse::~CEllipse() 
+{
 	ElliCnt--;
 	std::cout << "destructor from CEllipse" << std::endl;
 }
@@ -30,7 +32,8 @@ void CEllipse::DrawMe(GUI* pOut) const
 }
 
 // figure Name
-string CEllipse::FigureName() {
+string CEllipse::FigureName() 
+{
 	return "Ellipse";
 }
 
@@ -107,19 +110,21 @@ CEllipse* CEllipse::CloneFig()
 	return new CEllipse(*this);
 }
 
-int CEllipse::GetCount() {
+int CEllipse::GetCount() 
+{
 	return ElliCnt;
 }
 
-void CEllipse::IncCount() {
+void CEllipse::IncCount() 
+{
 	ElliCnt++;
 }
 
-int CEllipse::Resize(double scale) {
-
-
+int CEllipse::Resize(double scale) 
+{
 	if (!(Center.x + length * scale >= 1300 || Center.x - length * scale <= 0 
-		|| Center.y + height * scale >= 650 || Center.y - height * scale <= 50)) {
+		|| Center.y + height * scale >= 650 || Center.y - height * scale <= 50)) 
+	{
 		if (scale * length >= 20 && scale * height >= 10)
 		{
 			length = length * scale;
@@ -131,3 +136,4 @@ int CEllipse::Resize(double scale) {
 	}
 	return 1;
 }
+
