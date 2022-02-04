@@ -81,7 +81,7 @@ ActionType GUI::MapInputToActionType(int &x,int &y) const
 			case ITM_PLAY: return TO_PLAY;
 			case ITM_EXIT: return EXIT;
 			
-			default: return EMPTY;	//A click on empty place in desgin toolbar
+				default: return EMPTY;	//A click on empty place in desgin toolbar
 			}
 		}
 
@@ -100,11 +100,11 @@ ActionType GUI::MapInputToActionType(int &x,int &y) const
 			int ClickedItemOrder = (x / UI.MenuItemWidth);
 			switch (ClickedItemOrder)
 			{
-			case ITM_TOMATO: return COLOR_TOMATO;
-			case ITM_DEEPSKYBLUE: return COLOR_DEEPSKYBLUE;
-			case ITM_LIGHTGREEN: return COLOR_LIGHTGREEN;
-			case ITM_ORANGE: return COLOR_ORANGE;
-			case ITM_COLORBACK: return TO_DRAW;
+				case ITM_TOMATO: return COLOR_TOMATO;
+				case ITM_DEEPSKYBLUE: return COLOR_DEEPSKYBLUE;
+				case ITM_LIGHTGREEN: return COLOR_LIGHTGREEN;
+				case ITM_ORANGE: return COLOR_ORANGE;
+				case ITM_COLORBACK: return TO_DRAW;
 			}
 		}
 		if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)
@@ -118,11 +118,10 @@ ActionType GUI::MapInputToActionType(int &x,int &y) const
 			int ClickedItemOrder = (x / UI.MenuItemWidth);
 			switch (ClickedItemOrder)
 			{
-			case ITM_SQUR: return DRAW_SQUARE;
-			case ITM_ELPS: return DRAW_ELPS;
-			case ITM_HEX: return DRAW_HEX;
-			case ITM_SHAPESBACK: return TO_DRAW;
-
+				case ITM_SQUR: return DRAW_SQUARE;
+				case ITM_ELPS: return DRAW_ELPS;
+				case ITM_HEX: return DRAW_HEX;
+				case ITM_SHAPESBACK: return TO_DRAW;
 			}
 		}
 		if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)
@@ -165,14 +164,13 @@ ActionType GUI::MapInputToActionType(int &x,int &y) const
 
 			switch (ClickedItemOrder)
 			{
-			case ITM_PICK_IMAGE: return TO_PICK_IMAGE;
-			case ITM_PICK_FILL_COLOR: return TO_PICK_COLOR;
-			case ITM_PICK_IMAGE_COLOR: return TO_PICK_IMAGE_COLOR;
-			case ITM_RESTART: return RESTART;
-			case ITM_DRAW: return TO_DRAW;
+				case ITM_PICK_IMAGE: return TO_PICK_IMAGE;
+				case ITM_PICK_FILL_COLOR: return TO_PICK_COLOR;
+				case ITM_PICK_IMAGE_COLOR: return TO_PICK_IMAGE_COLOR;
+				case ITM_RESTART: return RESTART;
+				case ITM_DRAW: return TO_DRAW;
 
-
-			default: return EMPTY;	//A click on empty place in desgin toolbar
+				default: return EMPTY;	//A click on empty place in desgin toolbar
 			}
 		}
 		if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)

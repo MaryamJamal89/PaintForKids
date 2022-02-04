@@ -28,16 +28,12 @@ private:
 	int copyArrayLength; // copy number of figures
 	//Pointers to Input and Output classes
 	GUI* pGUI;
-
-public:
-	int validCounter;
-	int invalidCounter;
-	int figType;
-	int startPlay;
-
+	
 	bool inPlayMode;
+public:
+
 	int multiSelect;//enabling multiSelect
-	int playType;
+	int figType;
 	int numberOfDuplicatedFilesName;  // this variable to know what number of files that has the same name
 	int ReturnNumberofDulicatedFile(); // this function use to return numberOfDuplicatedFilesName
 	void increamentNumberofDulicatedFile(); //this function use to increament numberOfDuplicatedFilesName
@@ -78,7 +74,7 @@ public:
 	
 	void TakeFigOfDrawMode();
 	
-	 CFigure* GetRandomFigure();
+	CFigure* GetRandomFigure();
 
 	CFigure* getFigByIndex(int i);
 };

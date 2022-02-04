@@ -17,7 +17,7 @@ This file was last modified on 05.16.1999
 windowinput* wipInput = NULL;
 
 static LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
-	
+	//Action* pManagr;
 	switch(msg) {
 	case WM_PAINT:
 		std::cout <<"NEED TO PAINT"<< std::endl;

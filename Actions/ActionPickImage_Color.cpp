@@ -28,6 +28,7 @@ void ActionPickImage_Color::Execute()
 	//rearange shapes to start game
 	pGUI->ClearDrawArea();
 	pManager->TakeFigOfDrawMode();
+	pManager->UnSelectFigures(2);
 	pManager->UpdateInterface();
 
 	// get Rondom figure
@@ -89,11 +90,6 @@ void ActionPickImage_Color::Execute()
 		{
 			// game over
 			pGUI->PrintMessage("Game Over Your valid Choises : " + to_string(validCounter) + " and invalid Choises : " + to_string(invalidCounter));
-			
-			//Sleep(500);
-			// restart game also 
-			/*pManager->TakeFigOfDrawMode();
-			pManager->UpdateInterface();*/
 		}
 
 		toolBar = false;
