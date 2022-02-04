@@ -517,38 +517,6 @@ void GUI::DrawHex(int Xpoints[], int Ypoints[], GfxInfo HexGfxInfo, bool selecte
 	else
 		style = FRAME;
 
-	int d = length;
-
-	Point point1;
-	point1.x = center.x - d;             
-	point1.y = center.y;
-	Point point2;
-	point2.x = center.x - d / 2;
-	point2.y = center.y - (d - d / 20 * 3);
-	Point point3;
-	point3.x = center.x + d / 2;
-	point3.y = center.y - (d - d / 20 * 3);
-	Point point4;
-	point4.x = center.x + d;
-	point4.y = center.y;
-	Point point5;
-	point5.x = center.x + d / 2;
-	point5.y = center.y + (d - d / 20 * 3);
-	Point point6;
-	point6.x = center.x - d / 2;
-	point6.y = center.y + (d - d / 20 * 3);
-
-	int Xpoints[6] = { point1.x, point2.x, point3.x, point4.x, point5.x, point6.x };
-	int Ypoints[6] = { point1.y, point2.y, point3.y, point4.y, point5.y, point6.y };
-
-	for (int i = 0; i < 6; i++)
-	{
-		if (Ypoints[i] < UI.ToolBarHeight || Ypoints[i] >= (UI.height - UI.StatusBarHeight))
-		{
-			PrintTempMessge("Points out of the Drawing Area!", 800);
-			return;
-		}
-	}
 
 	// Draw the polygon.
 	pWind->DrawPolygon(Xpoints, Ypoints, 6, style);
