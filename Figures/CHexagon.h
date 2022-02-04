@@ -38,6 +38,11 @@ public:
 
 	// return Figure Name
 	virtual string FigureName();
+	
+	 void Resize(double scale);
+
+
 };
+
 
 #endif

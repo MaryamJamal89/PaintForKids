@@ -229,3 +229,7 @@ int CHexagon::GetCount() {
 void CHexagon::IncCount() {
 	HexCnt++;
 }
+
+void CHexagon::Resize(double scale) {
+
+}
