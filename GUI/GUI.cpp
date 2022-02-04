@@ -264,8 +264,8 @@ void GUI::CreateDrawToolBar() const
 	MenuItemImages[ITM_DEL] = "images\\MenuItems\\delete-color.jpg";
 	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\save-color.jpg";
 	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\load-color.jpg";
-	MenuItemImages[ITM_RESIZE] = "images\\MenuItems\\resize.jpg";
-	MenuItemImages[ITM_PLAY] = "images\\MenuItems\\playmood4-color.jpg";
+	MenuItemImages[ITM_RESIZE] = "images\\MenuItems\\resizeMenu\\resize.jpg";
+	MenuItemImages[ITM_PLAY] = "images\\MenuItems\\playmoodMenu\\playmood4-color.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\exit-color.jpg";
 
 	//Draw menu item one image at a time
@@ -306,10 +306,10 @@ void GUI::CreateResizeBar() const {
 
 	string DrawResizeItem[ITEMS_COUNT];
 
-	DrawResizeItem[ITM_QUARTER] = "images\\MenuItems\\quarter.jpg";
-	DrawResizeItem[ITM_HALF] = "images\\MenuItems\\half.jpg";
-	DrawResizeItem[ITM_DOUBLE] = "images\\MenuItems\\double.jpg";
-	DrawResizeItem[ITM_QUADRUPLE] = "images\\MenuItems\\quadruple.jpg";
+	DrawResizeItem[ITM_QUARTER] = "images\\MenuItems\\resizeMenu\\quarter.jpg";
+	DrawResizeItem[ITM_HALF] = "images\\MenuItems\\resizeMenu\\half.jpg";
+	DrawResizeItem[ITM_DOUBLE] = "images\\MenuItems\\resizeMenu\\double.jpg";
+	DrawResizeItem[ITM_QUADRUPLE] = "images\\MenuItems\\resizeMenu\\quadruple.jpg";
 	DrawResizeItem[ITM_RESIZEBACK] = "images\\MenuItems\\return-color.jpg";
 
 	//Draw menu item one image at a time
@@ -350,10 +350,10 @@ void GUI::CreatePlayToolBar() const
 	CreateToolBar();
 	UI.InterfaceMode = MODE_PLAY;
 	string MenuItemImages[PLAY_ITM_COUNT];
-	MenuItemImages[ITM_PICK_IMAGE] = "images\\MenuItems\\selectShape-color.jpg";
-	MenuItemImages[ITM_PICK_FILL_COLOR] = "images\\MenuItems\\selectColor-color.jpg";
-	MenuItemImages[ITM_PICK_IMAGE_COLOR] = "images\\MenuItems\\selectAll-color.jpg";
-	MenuItemImages[ITM_RESTART] = "images\\MenuItems\\restart.jpg",
+	MenuItemImages[ITM_PICK_IMAGE] = "images\\MenuItems\\playmoodMenu\\selectShape-color.jpg";
+	MenuItemImages[ITM_PICK_FILL_COLOR] = "images\\MenuItems\\playmoodMenu\\selectColor-color.jpg";
+	MenuItemImages[ITM_PICK_IMAGE_COLOR] = "images\\MenuItems\\playmoodMenu\\selectAll-color.jpg";
+	MenuItemImages[ITM_RESTART] = "images\\MenuItems\\playmoodMenu\\restart.jpg",
 	MenuItemImages[ITM_DRAW] = "images\\MenuItems\\return-color.jpg";
 
 	//Draw menu item one image at a time
