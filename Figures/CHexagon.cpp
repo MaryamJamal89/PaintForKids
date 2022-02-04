@@ -231,5 +231,5 @@ void CHexagon::IncCount() {
 }
 
 void CHexagon::Resize(double scale) {
-	cout << "Hamada";
+
 }

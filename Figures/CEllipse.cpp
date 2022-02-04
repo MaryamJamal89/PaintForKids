@@ -114,5 +114,6 @@ void CEllipse::IncCount() {
 }
 
 void CEllipse::Resize(double scale) {
-	cout << "Hamada";
+	length = length * scale;
+	height = height * scale;
 }
