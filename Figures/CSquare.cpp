@@ -16,6 +16,7 @@ CSquare::CSquare(Point P1, int len, GfxInfo FigureGfxInfo):CFigure(FigureGfxInfo
 }
 
 
+
 CSquare::~CSquare() {
 	SqrCnt--;
 	std::cout << "destructor from CSquare" << std::endl;
@@ -111,4 +112,9 @@ int CSquare::GetCount() {
 
 void CSquare::IncCount() {
 	SqrCnt++;
+}
+
+void CSquare::Resize(double scale) {
+	length = scale * length;
+
 }

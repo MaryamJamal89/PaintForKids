@@ -61,6 +61,7 @@
     <ClCompile Include="Actions\ActionDelete.cpp" />
     <ClCompile Include="Actions\ActionRestartPlay.cpp" />
     <ClCompile Include="CMUgraphicsLib\colors.cpp" />
+    <ClCompile Include="Actions\ActionResize.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\ActionSelect.h" />
@@ -110,6 +111,7 @@
     <ClInclude Include="Actions\ActionPickImage_Color.h" />
     <ClInclude Include="Actions\ActionRestartPlay.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Actions\ActionResize.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="images\Icon.ico" />

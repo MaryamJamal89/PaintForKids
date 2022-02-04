@@ -131,6 +131,7 @@
   <ItemGroup>
     <ClCompile Include="Actions\ActionPickColor.cpp" />
     <ClCompile Include="Actions\ActionPickImage_Color.cpp" />
+    <ClCompile Include="Actions\ActionResize.cpp" />
     <ClCompile Include="Actions\ActionRestartPlay.cpp" />
     <ClCompile Include="Actions\ActionSwitchDraw.cpp" />
     <ClCompile Include="Actions\ActionSwitchPlay.cpp" />
@@ -193,6 +194,7 @@
   <ItemGroup>
     <ClInclude Include="Actions\ActionPickImage.h" />
     <ClInclude Include="Actions\ActionPickImage_Color.h" />
+    <ClInclude Include="Actions\ActionResize.h" />
     <ClInclude Include="Actions\ActionRestartPlay.h" />
     <ClInclude Include="Actions\ActionSwitchDraw.h" />
     <ClInclude Include="Actions\ActionSwitchPlay.h" />

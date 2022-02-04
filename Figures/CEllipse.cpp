@@ -112,3 +112,8 @@ int CEllipse::GetCount() {
 void CEllipse::IncCount() {
 	ElliCnt++;
 }
+
+void CEllipse::Resize(double scale) {
+	length = length * scale;
+	height = height * scale;
+}

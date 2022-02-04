@@ -28,6 +28,7 @@ public:
 	void CreateDrawToolBar() const;	//creates Draw mode toolbar & menu
 	void CreateDrawColorBar() const; //creates color mode toolbar & menu
 	void CreateShapesBar() const;
+	void CreateResizeBar() const;
 	void CreatePlayToolBar() const;	//creates Play mode toolbar & menu
 	void CreateStatusBar() const;	//create the status bar
 

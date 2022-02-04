@@ -35,6 +35,11 @@ enum ActionType //The actions supported (you can add more if needed)
 	LOAD,			//Load a graph from a file
 	EXIT,			//Exit the application
 
+	RESIZE_QUARTER,
+	RESIZE_HALF,
+	RESIZE_DOUBLE,
+	RESIZE_QUADRUPLE,
+
 	DRAWING_AREA,	//A click on the drawing area
 	STATUS,			//A click on the status bar
 	EMPTY,			//A click on empty place in the toolbar
