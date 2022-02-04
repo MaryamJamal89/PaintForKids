@@ -41,7 +41,13 @@ string CHexagon::FigureName() {
 // save figure in the file
 void CHexagon::Save(ofstream& file, GUI* pGUI)
 {
-	file << "HEX " << ID << " " << Center.x << " " << Center.y << " " << length << " " << pGUI->ColorToString(FigGfxInfo.DrawClr) << " ";
+	file << "HEX " << ID << " " << Center.x << " " << Center.y << " " << length << " ";
+	
+	for (int i = 0; i < 6; i++) {
+		file << Xpoints[i] << " " << Ypoints[i] << " ";
+	}
+
+	file << pGUI->ColorToString(FigGfxInfo.DrawClr) << " ";
 
 	if (FigGfxInfo.isFilled == true)
 	{
@@ -56,7 +62,11 @@ void CHexagon::Save(ofstream& file, GUI* pGUI)
 void CHexagon::Load(ifstream& loadedFile, GUI* pGUI)
 {
 	string drawColor, fillColor;
-	loadedFile >> ID >> Center.x >> Center.y >> length >> drawColor >> fillColor;
+	loadedFile >> ID >> Center.x >> Center.y >> length;
+	for (int i = 0; i < 6; i++) {
+		loadedFile >> Xpoints[i] >> Ypoints[i];
+	}
+	loadedFile >> drawColor >> fillColor;
 	FigGfxInfo.DrawClr = pGUI->StringToColor(drawColor);
 	if (fillColor == "NO_FILL")
 	{

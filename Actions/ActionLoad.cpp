@@ -29,6 +29,7 @@ void ActionLoad::Execute()
 			//saving curreng graph
 			Action* save = new ActionSave(pManager);
 			save->Execute();
+			//delete save;
 		}
 		//deleting old figures
 		pManager->ResetFigList();
@@ -57,9 +58,14 @@ void ActionLoad::Execute()
 
 		if (fillColor != "NO_FILL")
 		{
+			UI.isFilled = true;
 			//changing window filling color if it was set
 			Action* changeFillColor = new ActionChangeColor(pManager, pGUI->StringToColor(fillColor), 2, figure);
 			changeFillColor->Execute();
+		}
+		else
+		{
+			UI.isFilled = false;
 		}
 		//changing window background color
 		Action* changeBgColor = new ActionChangeColor(pManager, pGUI->StringToColor(bgColor), 3, figure);

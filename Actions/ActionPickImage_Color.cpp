@@ -32,7 +32,7 @@ void ActionPickImage_Color::Execute()
 	pManager->UpdateInterface();
 
 	// get Rondom figure
-	fig = pManager->GetRandomFigure();
+	fig = pManager->GetRandomFigure()->CloneFig();
 	// update status Bar
 	UpdateStatusBar(fig);
 	ActionType pAct;
@@ -146,45 +146,3 @@ int ActionPickImage_Color::MatchedFigsCount(CFigure* fig)
 	}
 	return count;
 }
-
-// void picFigures();
-//void ActionPickImage_Color::picFigures(CFigure* fig) {
-//	string figure;
-//	if (fig) {
-//		if (startPlay == 0) {
-//			figType = fig->FigType;
-//			startPlay = fig->GetCount();
-//		}
-//		else {
-//			if (fig->FigType == figType && startPlay == 1) {
-//				string msg = /*to_string(--startPlay)+*/" Game Over valid Choises: " + to_string(validCounter + 1);
-//				string msg2 = " invalid Choises: " + to_string(invalidCounter);
-//
-//				pGUI->PrintMessage(msg + msg2);
-//				startPlay = 0;
-//				playType = 0;
-//				validCounter = 0;
-//				invalidCounter = 0;
-//			}
-//			else if (fig->FigType == figType) {
-//				validCounter++;
-//				startPlay--;
-//				string msg = /*to_string(startPlay)+*/" Figures => valid Choises: " + to_string(validCounter);
-//				string msg2 = " invalid Choises: " + to_string(invalidCounter);
-//				pGUI->PrintMessage(msg + msg2);
-//			}
-//			else {
-//				invalidCounter++;
-//				string msg = /*to_string(startPlay)+*/" Figures => valid Choises: " + to_string(validCounter);
-//				string msg2 = " invalid Choises: " + to_string(invalidCounter);
-//				pGUI->PrintMessage(msg + msg2);
-//			}
-//		}
-//	}
-//	else {
-//		string msg = /*to_string(startPlay) +*/ " Figures => valid Choises: " + to_string(validCounter);
-//		string msg2 = " invalid Choises: " + to_string(invalidCounter);
-//		pGUI->PrintMessage(msg + msg2);
-//	}
-//};
-

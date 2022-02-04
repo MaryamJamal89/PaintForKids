@@ -52,7 +52,16 @@ void ActionSave::Execute()
 
 	file.open("Saves\\" + file_name + ".txt", ios::out);
 
-	file << pGUI->ColorToString( UI.DrawColor) << " " << pGUI->ColorToString(UI.FillColor) << "  " << pGUI->ColorToString(UI.BkGrndColor )<< endl;
+	file << pGUI->ColorToString(UI.DrawColor) << " ";
+	if (UI.isFilled)
+	{
+		file << pGUI->ColorToString(UI.FillColor) << "  ";
+	}
+	else
+	{
+		file << "NO_FILL" << " ";
+	}
+	file << pGUI->ColorToString(UI.BkGrndColor) << endl;
     pManager->SaveAll(file);
 
     file.close();

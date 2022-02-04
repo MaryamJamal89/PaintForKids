@@ -114,12 +114,6 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			break;
 
 		case MUL_SELECT:
-			/*if (multiSelect) {
-				multiSelect = 0;
-			}
-			else {
-				multiSelect = 1;
-			}*/
 			newAct = new ActionMultiSelect(this, multiSelect);
 			break;
 
@@ -218,7 +212,6 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			newAct = new ActionExit(this);
 			break;
 
-
 		case RESIZE:
 			pGUI->CreateResizeBar();
 			break;
@@ -268,8 +261,6 @@ int ApplicationManager::GetFigCount()
 //==================================================================================//
 //						Figures Management Functions								//
 //==================================================================================//
-//multiSelect filed
-//bool ApplicationManager::multiSelect = false;
 
 CFigure* ApplicationManager::getFigByIndex(int i) {
 	return FigList[i];
@@ -376,7 +367,7 @@ void ApplicationManager::RearrangingFigList()         //removing null refrences 
 		if (FigList[i] == NULL)
 		{
 			//shifting all upcoming figures to remove the null refrenece
-			for (int j = i; j < FigCount; j++)
+			for (int j = i; j < FigCount-1; j++)
 			{
 				FigList[j] = FigList[j + 1];
 			}
@@ -391,12 +382,7 @@ void ApplicationManager::DeleteSelectedFigures()           //delete all selected
 	{
 		if (FigList[i]->IsSelected())
 		{
-			if (UI.InterfaceMode != MODE_PLAY)
-			{
-				CFigure* temp;
-				temp = FigList[i];
-				delete temp;
-			}
+			delete FigList[i];
 			FigList[i] = NULL;
 			deletedNum++;
 		}
@@ -433,21 +419,6 @@ void ApplicationManager::TakeCopyOfFigures()
 	{
 		if (inPlayMode == true)
 		{
-			// restore the original size of the array
-			//FigCount = copyArrayLength;
-			//// delete old pointers first
-			//for (int i = 0; i < FigCount; i++)
-			//{
-			//	delete FigList[i];
-			//}
-
-			//// restore figures from the backup array
-			//for (int i = 0; i < FigCount; i++)
-			//{
-			//	FigList[i] = CopyFigList[i]->CloneFig();
-			//	FigList[i]->IncCount();
-			//	//cout << CopyFigList[i] << " : " << FigList[i]->GetCount() << endl;
-			//}
 			TakeFigOfDrawMode();
 
 			// delete pointers in the backup array to free ram
