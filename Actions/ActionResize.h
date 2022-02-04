@@ -7,18 +7,11 @@
 
 class ActionResize :public Action
 {
-	Point P;
-	ActionType SCALE;
 	double Scale;
 	bool anySelected;
+
 public:
-	ActionResize(ApplicationManager* pApp);
-
-
-	virtual bool ReadActionParameters();
-
-	bool GetScale(ActionType S);
-
+	ActionResize(ApplicationManager* pApp,double _Scale);
 	virtual void Execute();
 
 };
