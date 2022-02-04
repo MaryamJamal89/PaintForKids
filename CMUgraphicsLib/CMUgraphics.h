@@ -19,6 +19,8 @@ This file was last modified on 05.16.1999
 #include "colors.h"
 #include "version.h"
 
+
+
 // Aproximate value of Pi, used in some calculations
 const double cdPi = 3.141592653589793238462643383279;
 
@@ -31,6 +33,7 @@ const char ccDefWindClassName[] = "CMUgraphics Library";
 const char ccDefWindTitle[] = "Graphics Window";
 
 const int ciDefBrushSize = 1;
+
 
 enum drawstyle {
 	NONE,

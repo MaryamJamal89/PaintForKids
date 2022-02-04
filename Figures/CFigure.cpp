@@ -36,12 +36,6 @@ void CFigure::ChngFillClr(color Fclr)
 // static value to give Figure ID it's start Value   
 int CFigure::id = 1;
 
-// take a copy of pointer obj without Refernce
-//CFigure* CFigure::CloneFig() 
-//{
-//	return NULL;
-//}
-
 
 int CFigure::GetCount() {
 	return 0;
