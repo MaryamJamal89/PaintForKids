@@ -246,7 +246,7 @@ int CHexagon::Resize(double scale)
 
 	for (int i = 0; i < 6; i++)
 	{
-		if (ypoints[i]  < UI.ToolBarHeight || ypoints[i] >= (UI.height - UI.StatusBarHeight))
+		if (ypoints[i]  < UI.ToolBarHeight || ypoints[i] >= (UI.height - UI.StatusBarHeight) || length<10)
 		{
 			return 1;
 		}
