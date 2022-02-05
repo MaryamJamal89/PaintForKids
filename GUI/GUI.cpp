@@ -517,6 +517,7 @@ void GUI::DrawHex(int Xpoints[], int Ypoints[], GfxInfo HexGfxInfo, bool selecte
 	else
 		style = FRAME;
 
+
 	// Draw the polygon.
 	pWind->DrawPolygon(Xpoints, Ypoints, 6, style);
 }

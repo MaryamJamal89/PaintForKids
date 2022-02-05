@@ -225,35 +225,39 @@ void CHexagon::IncCount()
 
 int CHexagon::Resize(double scale)
 {
+	int d = length * scale;
+
+	int xpoints[6];
+	int ypoints[6];
+
+	xpoints[0] = Center.x - d;
+	ypoints[0] = Center.y;
+	xpoints[1] = Center.x - d / 2;
+	ypoints[1] = Center.y - (d - d / 20 * 3);
+	xpoints[2] = Center.x + d / 2;
+	ypoints[2] = Center.y - (d - d / 20 * 3);
+	xpoints[3] = Center.x + d;
+	ypoints[3] = Center.y;
+	xpoints[4] = Center.x + d / 2;
+	ypoints[4] = Center.y + (d - d / 20 * 3);
+	xpoints[5] = Center.x - d / 2;
+	ypoints[5] = Center.y + (d - d / 20 * 3);
+
+
 	for (int i = 0; i < 6; i++)
 	{
-		if (Ypoints[i] * scale < UI.ToolBarHeight || Ypoints[i] * scale >= (UI.height - UI.StatusBarHeight))
+		if (ypoints[i]  < UI.ToolBarHeight || ypoints[i] >= (UI.height - UI.StatusBarHeight))
 		{
 			return 1;
 		}
 	}
-	for (int i = 0; i < 6; i++)
-	{
-		if (Ypoints[i] * scale <= 20 || Xpoints[i] * scale <= 20)
-		{
-			return -1;
-		}
+
+	for (int i = 0; i < 6; i++) {
+
+		Xpoints[i] = xpoints[i];
+		Ypoints[i] = ypoints[i];
 	}
 
-	int d = length * scale;
-
-	Xpoints[0] = Center.x - d;
-	Ypoints[0] = Center.y;
-	Xpoints[1] = Center.x - d / 2;
-	Ypoints[1] = Center.y - (d - d / 20 * 3);
-	Xpoints[2] = Center.x + d / 2;
-	Ypoints[2] = Center.y - (d - d / 20 * 3);
-	Xpoints[3] = Center.x + d;
-	Ypoints[3] = Center.y;
-	Xpoints[4] = Center.x + d / 2;
-	Ypoints[4] = Center.y + (d - d / 20 * 3);
-	Xpoints[5] = Center.x - d / 2;
-	Ypoints[5] = Center.y + (d - d / 20 * 3);
 	return 0;
 }
 
