@@ -18,7 +18,6 @@ void ActionPickColor::UpdateStatusBar(CFigure* fig)
 {
 	GUI* pGUI = pManager->GetGUI();
 
-	//string figure;
 	if (fig)
 	{
 		pGUI->PrintMessage("Game Started : Choose all Shapes with Color " + fig->GetFillClr() + " count: " + to_string(MatchedFigsCount(fig)));

@@ -9,7 +9,7 @@ ActionDelete::ActionDelete(ApplicationManager* pApp) :Action(pApp)
 void ActionDelete::Execute()
 {
 	GUI* pGUI = pManager->GetGUI();
-	
+
 	//check if there were any selected figures to delete
 	if (pManager->GetFigCount() == 0)
 	{
