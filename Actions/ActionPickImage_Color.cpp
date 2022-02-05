@@ -23,12 +23,7 @@ CFigure* ActionPickImage_Color::ReadesFigures()
 void ActionPickImage_Color::Execute()
 {
 	GUI* pGUI = pManager->GetGUI();
-	if (pManager->GetFigCount() == 0)
-	{
-		pGUI->PrintMessage("Draw some figures to play!");
-	}
-	else
-	{
+
 		Point point;
 
 		// rearange shapes to start game
@@ -43,6 +38,8 @@ void ActionPickImage_Color::Execute()
 
 		// get Rondom figure
 		fig = pManager->GetRandomFigure()->CloneFig();
+
+		
 		// update status Bar
 		UpdateStatusBar(fig);
 		ActionType pAct;
@@ -108,7 +105,7 @@ void ActionPickImage_Color::Execute()
 		}
 		// delete random figure pointer
 		delete fig;
-	}
+	
 }
 
 // update status 
