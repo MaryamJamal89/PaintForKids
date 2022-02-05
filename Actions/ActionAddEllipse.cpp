@@ -37,7 +37,7 @@ void ActionAddEllipse::Execute()
 
 	//Step 2 - prepare Ellipse data
 	//Calcuate ellipse legnth and height
-	int SideHeight = max(abs(C.x - P1.x), abs(C.y - P1.y)); 
+	int SideHeight = max(abs(C.x - P1.x), abs(C.y - P1.y));
 	int SideLength = max(abs(C.x - P2.x), abs(C.y - P2.y));
 
 	if ((C.y - SideHeight) < UI.ToolBarHeight || (C.y + SideHeight) >= (UI.height - UI.StatusBarHeight))

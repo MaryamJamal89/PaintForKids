@@ -2,7 +2,7 @@
 #include "../ApplicationManager.h"
 #include "../GUI/GUI.h"
 
-ActionMultiSelect::ActionMultiSelect(ApplicationManager* pApp, int & _multiSelect) :Action(pApp)
+ActionMultiSelect::ActionMultiSelect(ApplicationManager* pApp, int& _multiSelect) :Action(pApp)
 {
 	this->multiSelect = &_multiSelect;
 };
@@ -10,12 +10,12 @@ ActionMultiSelect::ActionMultiSelect(ApplicationManager* pApp, int & _multiSelec
 void ActionMultiSelect::Execute() {
 	GUI* pGUI = pManager->GetGUI();
 
-	if (*multiSelect) 
+	if (*multiSelect)
 	{
 		*multiSelect = 0;
 		pGUI->PrintTempMessge("Multiselect mode off!", 1000);
 	}
-	else 
+	else
 	{
 		*multiSelect = 1;
 		pGUI->PrintTempMessge("Multiselect mode on!", 1000);

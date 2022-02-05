@@ -517,6 +517,7 @@ void GUI::DrawHex(int Xpoints[], int Ypoints[], GfxInfo HexGfxInfo, bool selecte
 	else
 		style = FRAME;
 
+
 	// Draw the polygon.
 	pWind->DrawPolygon(Xpoints, Ypoints, 6, style);
 }
@@ -533,12 +534,12 @@ string GUI::Confirm(string msg)          //get yes or no response
 {
 	PrintMessage(msg);
 
-	string response;
-	do {
-		response = GetSrting();
+	string response = GetSrting();
+	while (!(response == "N" || response == "n" || response == "Y" || response == "y"))
+	{
 		PrintMessage("Please enter (Y/N)?");
-	} while (!(response == "N" || response == "n" || response == "Y" || response == "y"));
-
+		response = GetSrting();
+	}
 	return response;
 }
 

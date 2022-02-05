@@ -12,7 +12,7 @@ private:
 public:
 	//CSquare(const CSquare& csq);
 	CSquare();
-	virtual ~CSquare();
+	~CSquare();
 	CSquare(Point , int, GfxInfo FigureGfxInfo );
 	//CSquare(const CSquare  & old);//copy constructor
 	virtual void DrawMe(GUI* pOut) const;

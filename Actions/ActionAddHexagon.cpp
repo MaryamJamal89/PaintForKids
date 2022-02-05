@@ -81,12 +81,12 @@ void ActionAddHexagon::Execute()
 	H->PrintInfo(pGUI);
 }
 
-void ActionAddHexagon::CheckPoint(GUI* pGUI, Point &point, string mssg)
+void ActionAddHexagon::CheckPoint(GUI* pGUI, Point& point, string mssg)
 {
 	while (!(point.y >= UI.ToolBarHeight && point.y < UI.height - UI.StatusBarHeight))
 	{
 		pGUI->PrintTempMessge("You are out of the Drawing Area!!", 2000);
 		pGUI->PrintMessage(mssg);
 		pGUI->GetPointClicked(point.x, point.y);
-	} 
+	}
 }
