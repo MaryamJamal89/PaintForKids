@@ -225,23 +225,23 @@ void CHexagon::IncCount()
 
 int CHexagon::Resize(double scale)
 {
-	int d = length * scale;
+	 length *= scale;
 
 	int xpoints[6];
 	int ypoints[6];
 
-	xpoints[0] = Center.x - d;
+	xpoints[0] = Center.x - length;
 	ypoints[0] = Center.y;
-	xpoints[1] = Center.x - d / 2;
-	ypoints[1] = Center.y - (d - d / 20 * 3);
-	xpoints[2] = Center.x + d / 2;
-	ypoints[2] = Center.y - (d - d / 20 * 3);
-	xpoints[3] = Center.x + d;
+	xpoints[1] = Center.x - length / 2;
+	ypoints[1] = Center.y - (length - length / 20 * 3);
+	xpoints[2] = Center.x + length / 2;
+	ypoints[2] = Center.y - (length - length / 20 * 3);
+	xpoints[3] = Center.x + length;
 	ypoints[3] = Center.y;
-	xpoints[4] = Center.x + d / 2;
-	ypoints[4] = Center.y + (d - d / 20 * 3);
-	xpoints[5] = Center.x - d / 2;
-	ypoints[5] = Center.y + (d - d / 20 * 3);
+	xpoints[4] = Center.x + length / 2;
+	ypoints[4] = Center.y + (length - length / 20 * 3);
+	xpoints[5] = Center.x - length / 2;
+	ypoints[5] = Center.y + (length - length / 20 * 3);
 
 
 	for (int i = 0; i < 6; i++)
