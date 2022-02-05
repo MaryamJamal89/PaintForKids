@@ -13,7 +13,7 @@ private:
 public:
 	 
 	CEllipse();
-	virtual ~CEllipse();
+	~CEllipse();
 	CEllipse(Point, int, int, GfxInfo FigureGfxInfo);
 
 	virtual void DrawMe(GUI* pOut) const;				// draw the figure 

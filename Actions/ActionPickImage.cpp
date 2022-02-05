@@ -20,7 +20,6 @@ void ActionPickImage::UpdateStatusBar(CFigure* fig)
 {
 	GUI* pGUI = pManager->GetGUI();
 
-	//string figure;
 	if (fig)
 	{
 		pGUI->PrintMessage("Game Started : Choose all  " + fig->FigureName() + " count: " + to_string(MatchedFigsCount(fig)));

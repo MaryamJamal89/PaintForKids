@@ -18,14 +18,14 @@ void ActionSelect::Execute()
 	//and return selected figure or null 
 	CFigure* fig = pManager->GetFigure(P.x, P.y);
 	// no figure selected
-	if (fig == NULL) 
+	if (fig == NULL)
 	{
 		pGUI->PrintMessage("No Figure Selected");
 		pManager->UnSelectFigures(2);
 	}
 	else
 	{
-		if (fig->IsSelected()) 
+		if (fig->IsSelected())
 		{
 			fig->SetSelected(false);
 			pGUI->ClearStatusBar();
@@ -33,7 +33,7 @@ void ActionSelect::Execute()
 		else
 		{
 			// IF Multiple select Enabled
-			if (!multiSelect) 
+			if (!multiSelect)
 			{
 				pManager->UnSelectFigures(2);
 			}
