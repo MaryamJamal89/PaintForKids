@@ -215,9 +215,8 @@ void CHexagon::IncCount()
 
 int CHexagon::Resize(double scale)
 {
-
-
 	int d = length * scale;
+
 	int xpoints[6];
 	int ypoints[6];
 
@@ -238,10 +237,6 @@ int CHexagon::Resize(double scale)
 	for (int i = 0; i < 6; i++)
 	{
 		if (ypoints[i]  < UI.ToolBarHeight || ypoints[i] >= (UI.height - UI.StatusBarHeight))
-		{
-			return 1;
-		}
-		if (ypoints[i] <= 20 || xpoints[i] <= 20)
 		{
 			return 1;
 		}
