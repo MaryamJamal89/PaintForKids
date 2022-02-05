@@ -1,5 +1,4 @@
-﻿
-#include "ApplicationManager.h"
+﻿#include "ApplicationManager.h"
 #include "GUI/GUI.h"
 
 int main()

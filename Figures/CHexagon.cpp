@@ -7,7 +7,8 @@
 
 int CHexagon::HexCnt = 0;  //static variable to determine the number of objects
 
-CHexagon::CHexagon() {
+CHexagon::CHexagon()
+{
 	HexCnt++;
 }
 
@@ -34,7 +35,8 @@ void CHexagon::DrawMe(GUI* pOut) const
 }
 
 // figure Name
-string CHexagon::FigureName() {
+string CHexagon::FigureName()
+{
 	return "Hexagon";
 }
 
@@ -79,7 +81,6 @@ void CHexagon::Load(ifstream& loadedFile, GUI* pGUI)
 	}
 	CHexagon::SetSelected(false);
 }
-
 
 // https://www.geeksforgeeks.org/how-to-check-if-a-given-point-lies-inside-a-polygon/?ref=gcse
 // Given three collinear points p, q, r, the function checks if
@@ -212,15 +213,18 @@ CHexagon* CHexagon::CloneFig()
 }
 
 
-int CHexagon::GetCount() {
+int CHexagon::GetCount()
+{
 	return HexCnt;
 }
 
-void CHexagon::IncCount() {
+void CHexagon::IncCount()
+{
 	HexCnt++;
 }
 
-int CHexagon::Resize(double scale) {
+int CHexagon::Resize(double scale)
+{
 	for (int i = 0; i < 6; i++)
 	{
 		if (Ypoints[i] * scale < UI.ToolBarHeight || Ypoints[i] * scale >= (UI.height - UI.StatusBarHeight))
@@ -250,6 +254,6 @@ int CHexagon::Resize(double scale) {
 	Ypoints[4] = Center.y + (d - d / 20 * 3);
 	Xpoints[5] = Center.x - d / 2;
 	Ypoints[5] = Center.y + (d - d / 20 * 3);
-
 	return 0;
 }
+

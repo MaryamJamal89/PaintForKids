@@ -18,7 +18,6 @@
 #include "Actions/ActionDelete.h"
 #include "Actions/ActionResize.h"
 
-
 #include <stdio.h>
 #include <stdlib.h>  
 #include <cstdlib>
