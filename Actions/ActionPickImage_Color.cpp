@@ -22,81 +22,93 @@ CFigure* ActionPickImage_Color::ReadesFigures()
 
 void ActionPickImage_Color::Execute()
 {
-	Point point;
 	GUI* pGUI = pManager->GetGUI();
-
-	//rearange shapes to start game
-	pGUI->ClearDrawArea();
-	pManager->TakeFigOfDrawMode();
-	pManager->UnSelectFigures(2);
-	pManager->UpdateInterface();
-
-	// get Rondom figure
-	fig = pManager->GetRandomFigure()->CloneFig();
-	// update status Bar
-	UpdateStatusBar(fig);
-	ActionType pAct;
-	bool Matches;
-	// if fig not null
-	if (fig)
+	if (pManager->GetFigCount() == 0)
 	{
-		figCount = MatchedFigsCount(fig);
-		while (figCount)
-		{
-			pAct = pGUI->MapInputToActionType(point.x, point.y);
-			if (pAct == RESTART || pAct == TO_PICK_IMAGE || pAct == TO_PICK_COLOR || pAct == TO_PICK_IMAGE_COLOR || pAct == TO_DRAW)
-			{
-				toolBar = true;
-				Action* ActType = pManager->CreateAction(pAct);
-				pManager->ExecuteAction(ActType);
-				delete ActType;
-				break;
-			}
-			CFigure* selectedFig = pManager->GetFigure(point.x, point.y);
-			pManager->UnSelectFigures(2);
-			if (selectedFig)
-			{
-				selectedFig->SetSelected(true);
+		pGUI->PrintMessage("Draw some figures to play!");
+	}
+	else
+	{
+		Point point;
 
-				// Matchs
-				bool Matches = figureMatches(fig, selectedFig);
-				if (Matches)
+		// rearange shapes to start game
+		// clear Area
+		pGUI->ClearDrawArea();
+		// take backup
+		pManager->TakeFigOfDrawMode();
+		// un select all figures 
+		pManager->UnSelectFigures(2);
+		// draw shapes again
+		pManager->UpdateInterface();
+
+		// get Rondom figure
+		fig = pManager->GetRandomFigure()->CloneFig();
+		// update status Bar
+		UpdateStatusBar(fig);
+		ActionType pAct;
+		bool Matches;
+		// if fig not null
+		if (fig)
+		{
+			figCount = MatchedFigsCount(fig);
+			while (figCount)
+			{
+				pAct = pGUI->MapInputToActionType(point.x, point.y);
+				if (pAct == RESTART || pAct == TO_PICK_IMAGE || pAct == TO_PICK_COLOR || pAct == TO_PICK_IMAGE_COLOR || pAct == TO_DRAW)
 				{
-					validCounter++;
-					figCount--;
+					toolBar = true;
+					Action* ActType = pManager->CreateAction(pAct);
+					pManager->ExecuteAction(ActType);
+					delete ActType;
+					break;
 				}
-				// not Match
+				CFigure* selectedFig = pManager->GetFigure(point.x, point.y);
+				pManager->UnSelectFigures(2);
+				if (selectedFig)
+				{
+					selectedFig->SetSelected(true);
+
+					// Matchs
+					bool Matches = figureMatches(fig, selectedFig);
+					if (Matches)
+					{
+						validCounter++;
+						figCount--;
+					}
+					// not Match
+					else
+					{
+						invalidCounter++;
+					}
+					string msg = " valid Choises: " + to_string(validCounter) + " invalid Choises: " + to_string(invalidCounter) + "  ";
+					pGUI->PrintMessage(msg);
+					pManager->DeleteSelectedFigures();
+					pGUI->ClearDrawArea();
+					pManager->UpdateInterface();
+				}
 				else
 				{
-					invalidCounter++;
+					pGUI->PrintMessage("No Figure Selected");
 				}
-				string msg = " valid Choises: " + to_string(validCounter) + " invalid Choises: " + to_string(invalidCounter) + "  ";
-				pGUI->PrintMessage(msg);
-				pManager->DeleteSelectedFigures();
-				pGUI->ClearDrawArea();
-				pManager->UpdateInterface();
 			}
-			else
+
+			// to Clear Area
+			pGUI->ClearDrawArea();
+
+
+			// if user pressed restart 
+			if (!toolBar)
 			{
-				pGUI->PrintMessage("No Figure Selected");
+				// game over
+				pGUI->PrintMessage("Game Over Your valid Choises : " + to_string(validCounter) + " and invalid Choises : " + to_string(invalidCounter));
 			}
+
+			toolBar = false;
+
 		}
-
-		// to Clear Area
-		pGUI->ClearDrawArea();
-
-
-
-		if (!toolBar)
-		{
-			// game over
-			pGUI->PrintMessage("Game Over Your valid Choises : " + to_string(validCounter) + " and invalid Choises : " + to_string(invalidCounter));
-		}
-
-		toolBar = false;
-
+		// delete random figure pointer
+		delete fig;
 	}
-	delete fig;
 }
 
 // update status 
