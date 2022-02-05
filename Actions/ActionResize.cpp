@@ -35,4 +35,3 @@ void ActionResize::Execute()
 
 	pGUI->ClearDrawArea();
 }
-
