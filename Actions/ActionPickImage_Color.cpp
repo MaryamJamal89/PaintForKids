@@ -31,11 +31,15 @@ void ActionPickImage_Color::Execute()
 	{
 		Point point;
 
-		//rearange shapes to start game
-		pGUI->ClearDrawArea();
-		pManager->TakeFigOfDrawMode();
-		pManager->UnSelectFigures(2);
-		pManager->UpdateInterface();
+	// rearange shapes to start game
+	// clear Area
+	pGUI->ClearDrawArea();
+	// take backup
+	pManager->TakeFigOfDrawMode();
+	// un select all figures 
+	pManager->UnSelectFigures(2);
+	// draw shapes again
+	pManager->UpdateInterface();
 
 		// get Rondom figure
 		fig = pManager->GetRandomFigure()->CloneFig();
@@ -91,15 +95,18 @@ void ActionPickImage_Color::Execute()
 			// to Clear Area
 			pGUI->ClearDrawArea();
 
-			if (!toolBar)
-			{
-				// game over
-				pGUI->PrintMessage("Game Over Your valid Choises : " + to_string(validCounter) + " and invalid Choises : " + to_string(invalidCounter));
-			}
+
+		// if user pressed restart 
+		if (!toolBar)
+		{
+			// game over
+			pGUI->PrintMessage("Game Over Your valid Choises : " + to_string(validCounter) + " and invalid Choises : " + to_string(invalidCounter));
+		}
 
 			toolBar = false;
 
 		}
+		// delete random figure pointer
 		delete fig;
 	}
 }
