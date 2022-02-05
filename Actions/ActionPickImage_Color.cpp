@@ -25,10 +25,14 @@ void ActionPickImage_Color::Execute()
 	Point point;
 	GUI* pGUI = pManager->GetGUI();
 
-	//rearange shapes to start game
+	// rearange shapes to start game
+	// clear Area
 	pGUI->ClearDrawArea();
+	// take backup
 	pManager->TakeFigOfDrawMode();
+	// un select all figures 
 	pManager->UnSelectFigures(2);
+	// draw shapes again
 	pManager->UpdateInterface();
 
 	// get Rondom figure
@@ -43,22 +47,28 @@ void ActionPickImage_Color::Execute()
 		figCount = MatchedFigsCount(fig);
 		while (figCount)
 		{
+			// check if user pressed in tool bar
 			pAct = pGUI->MapInputToActionType(point.x, point.y);
 			if (pAct == RESTART || pAct == TO_PICK_IMAGE || pAct == TO_PICK_COLOR || pAct == TO_PICK_IMAGE_COLOR || pAct == TO_DRAW)
 			{
 				toolBar = true;
+				// execute the action from tool bar 
 				Action* ActType = pManager->CreateAction(pAct);
 				pManager->ExecuteAction(ActType);
+
+				// delete the pointer
 				delete ActType;
 				break;
 			}
+			// select figuer 
 			CFigure* selectedFig = pManager->GetFigure(point.x, point.y);
 			pManager->UnSelectFigures(2);
+			// if figure selected
 			if (selectedFig)
 			{
 				selectedFig->SetSelected(true);
 
-				// Matchs
+				// Matchs : if selected figuer match the random figure or not 
 				bool Matches = figureMatches(fig, selectedFig);
 				if (Matches)
 				{
@@ -71,13 +81,19 @@ void ActionPickImage_Color::Execute()
 					invalidCounter++;
 				}
 				string msg = " valid Choises: " + to_string(validCounter) + " invalid Choises: " + to_string(invalidCounter) + "  ";
+				// print message in status bar 
 				pGUI->PrintMessage(msg);
+				// delete selected figure
 				pManager->DeleteSelectedFigures();
+				// clear area
 				pGUI->ClearDrawArea();
+				// draw figures again 
 				pManager->UpdateInterface();
 			}
+			// if no figure selected
 			else
 			{
+				// print message in status bar 
 				pGUI->PrintMessage("No Figure Selected");
 			}
 		}
@@ -86,7 +102,7 @@ void ActionPickImage_Color::Execute()
 		pGUI->ClearDrawArea();
 
 
-
+		// if user pressed restart 
 		if (!toolBar)
 		{
 			// game over
@@ -96,6 +112,7 @@ void ActionPickImage_Color::Execute()
 		toolBar = false;
 
 	}
+	// delete random figure pointer
 	delete fig;
 }
 
