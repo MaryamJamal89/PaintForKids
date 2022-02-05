@@ -14,7 +14,7 @@ private:
 
 public:								
 	CHexagon();
-	virtual ~CHexagon();
+	~CHexagon();
 	CHexagon(int*, int*, Point, int, GfxInfo FigureGfxInfo);
 	virtual void DrawMe(GUI* pOut) const;				//draw the figure 
 	virtual void Save(ofstream& file, GUI* pGUI);		// save figure to file
