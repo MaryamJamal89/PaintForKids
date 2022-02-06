@@ -8,6 +8,7 @@ CFigure::CFigure(GfxInfo FigureGfxInfo)
 	FigGfxInfo = FigureGfxInfo;	// Default status is non-filled.
 	Selected = true; // Figure is selected after created
 	ID = id++; // Figure ID starts from 1
+	hide = false;
 }
 
 CFigure::~CFigure(){}
@@ -59,4 +60,15 @@ string CFigure::GetFillClr()
 // figure Name
 string CFigure::FigureName() {
 	return "Parent";
+}
+
+
+// Hide 
+void CFigure::Hide(bool _hide) {
+	hide = _hide;
+}
+
+// isHide 
+bool CFigure::isHide() {
+	return hide;
 }

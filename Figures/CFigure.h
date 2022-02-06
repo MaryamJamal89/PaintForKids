@@ -13,7 +13,7 @@ protected:
 	int static id;
 	bool Selected;		//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
-	
+	bool hide;
 	// Add more parameters if needed.
 
 public:
@@ -60,6 +60,14 @@ public:
 
 	//yasser  Resize
 	virtual int Resize(double scale)=0;
+
+	// isHide
+	bool isHide() ;
+
+	// Hide 
+	void Hide(bool _hide) ;
+
+	
 };
 
 #endif

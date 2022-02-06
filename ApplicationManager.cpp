@@ -299,7 +299,8 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const         //get one sel
 	// if the point in figure will return Pointer on Figure
 	for (int i = FigCount - 1; i >= 0; i--)
 	{
-		if (FigList[i]->InFig(x, y))
+		// point in Figure and Figure not hide
+		if (FigList[i]->InFig(x, y)&& !FigList[i]->isHide())
 		{
 			return FigList[i];
 		}
@@ -405,6 +406,14 @@ void ApplicationManager::SaveAll(ofstream& File) const
 	}
 }
 
+// Show All Figures
+void ApplicationManager::ShowAllFigures() {
+	for (int i = 0; i < FigCount; i++) {
+		FigList[i]->Hide(false);
+	}
+}
+
+
 // Backup FigList
 void ApplicationManager::TakeCopyOfFigures()
 {
@@ -478,7 +487,11 @@ CFigure* ApplicationManager::GetRandomFigure()
 void ApplicationManager::UpdateInterface() const
 {
 	for (int i = 0; i < FigCount; i++)
-		FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
+	{
+		if (!FigList[i]->isHide()) {
+			FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
+		}
+	}
 }
 
 ////////////////////////////////////////////////////////////////////////////////////

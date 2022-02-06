@@ -68,6 +68,9 @@ public:
 	// Saving function
 	void SaveAll(ofstream& File)const;       //Save All Figures To The File :Asmaa
 
+	// Show Figures
+	void ShowAllFigures();
+
 	void UnSelectFigures(int mul) const;
 
 	void TakeCopyOfFigures();
@@ -77,6 +80,8 @@ public:
 	CFigure* GetRandomFigure();
 
 	CFigure* getFigByIndex(int i);
+
+	
 };
 
 #endif

@@ -30,14 +30,17 @@ void ActionPickImage_Color::Execute()
 		// clear Area
 		pGUI->ClearDrawArea();
 		// take backup
-		pManager->TakeFigOfDrawMode();
+		//pManager->TakeFigOfDrawMode();
+		pManager->ShowAllFigures();
 		// un select all figures 
 		pManager->UnSelectFigures(2);
 		// draw shapes again
 		pManager->UpdateInterface();
 
 		// get Rondom figure
-		fig = pManager->GetRandomFigure()->CloneFig();
+		//fig = pManager->GetRandomFigure()->CloneFig();
+		fig = pManager->GetRandomFigure();
+
 
 		
 		// update status Bar
@@ -64,7 +67,6 @@ void ActionPickImage_Color::Execute()
 				if (selectedFig)
 				{
 					selectedFig->SetSelected(true);
-
 					// Matchs
 					bool Matches = figureMatches(fig, selectedFig);
 					if (Matches)
@@ -79,7 +81,8 @@ void ActionPickImage_Color::Execute()
 					}
 					string msg = " valid Choises: " + to_string(validCounter) + " invalid Choises: " + to_string(invalidCounter) + "  ";
 					pGUI->PrintMessage(msg);
-					pManager->DeleteSelectedFigures();
+					//pManager->DeleteSelectedFigures();
+					selectedFig->Hide(true);
 					pGUI->ClearDrawArea();
 					pManager->UpdateInterface();
 				}
@@ -104,7 +107,7 @@ void ActionPickImage_Color::Execute()
 
 		}
 		// delete random figure pointer
-		delete fig;
+		//delete fig;
 	
 }
 
